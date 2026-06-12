@@ -178,17 +178,17 @@
         "phone": "+1-555-4001",
         "status": "active",
         "address": {
-          "street": "500 Park Avenue, Floor 42",
-          "city": "New York",
-          "state": "NY",
-          "zip": "10022",
+          "street": "100 Congress Ave, Suite 2000",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78701",
           "country": "US"
         },
         "machineCount": 30000,
         "deviceCount": 35000,
         "settings": {
           "currency": "USD",
-          "timezone": "America/New_York",
+          "timezone": "America/Chicago",
           "language": "en"
         },
         "createdAt": "2021-06-01T10:00:00Z",
