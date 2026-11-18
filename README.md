@@ -632,7 +632,7 @@ go build -o simulator .
 
 ```bash
 cd go/l8
-docker build --no-cache --platform=linux/amd64 -t saichler/opensim-web:latest .
+docker build --no-cache --platform=linux/amd64 -t registry.layer-8.dev:44443/opensim/opensim-web:latest .
 ```
 
 ### Kubernetes Deployment
