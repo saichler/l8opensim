@@ -1,0 +1,115 @@
+{
+  "flavor": "code_app",
+  "mode": "tanto",
+  "validators": [
+    "code"
+  ],
+  "expect_tools": [],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "go-rest",
+      "params": {
+        "entity": [
+          "tasks",
+          "books",
+          "contacts",
+          "products",
+          "notes"
+        ]
+      },
+      "turns": [
+        "Write a simple REST API in Go that manages {{entity}} in memory (list, get, create, delete).",
+        "Add unit tests for it."
+      ]
+    },
+    {
+      "id": "python-cli",
+      "params": {},
+      "turns": [
+        "Write a Python CLI that converts units (length, weight, temperature)."
+      ]
+    },
+    {
+      "id": "tip-calc",
+      "params": {},
+      "turns": [
+        "Write a simple HTML+JS tip calculator in one file."
+      ]
+    },
+    {
+      "id": "flask-shortener",
+      "params": {},
+      "turns": [
+        "Write a simple URL shortener web app in Python Flask."
+      ]
+    },
+    {
+      "id": "go-cli-wc",
+      "params": {},
+      "turns": [
+        "Write a Go program that counts lines, words and characters in files, like wc."
+      ]
+    },
+    {
+      "id": "todo-react",
+      "params": {},
+      "turns": [
+        "Write a simple React todo list component with add, complete and delete."
+      ]
+    },
+    {
+      "id": "bash-backup",
+      "params": {},
+      "turns": [
+        "Write a bash script that backs up a directory to a timestamped tar.gz and keeps the last 7 backups."
+      ]
+    },
+    {
+      "id": "go-worker-pool",
+      "params": {},
+      "turns": [
+        "Implement a worker pool in Go that processes jobs from a channel with a configurable number of workers."
+      ]
+    },
+    {
+      "id": "python-csv-stats",
+      "params": {},
+      "turns": [
+        "Write a Python script that reads a CSV file and prints the min, max and average of each numeric column."
+      ]
+    },
+    {
+      "id": "node-api",
+      "params": {
+        "entity": [
+          "tasks",
+          "books",
+          "contacts",
+          "products",
+          "notes"
+        ]
+      },
+      "turns": [
+        "Write a simple Express.js API for {{entity}} with an in-memory store.",
+        "Add a Dockerfile for it."
+      ]
+    },
+    {
+      "id": "go-ping",
+      "params": {},
+      "turns": [
+        "Write a Go program that pings a list of hosts concurrently and reports which are down."
+      ]
+    },
+    {
+      "id": "sql-schema",
+      "params": {},
+      "turns": [
+        "Write the SQL schema and a Go repository layer for a simple inventory app with devices and sites."
+      ]
+    }
+  ]
+}

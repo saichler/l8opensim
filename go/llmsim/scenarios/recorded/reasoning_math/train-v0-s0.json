@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/train/v0/s0",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:10:37Z",
+  "turns": [
+    {
+      "user_message": "If a train leaves at 9:00 going 80 km/h and another leaves at 10:00 from the same station going 120 km/h, when does the second catch up?",
+      "steps": [
+        {
+          "reasoning": "We need to answer a math word problem. No need for tools. Compute relative speed: second train faster {{int:96:144}} vs {{int:64:96}} = {{int:32:48}} km/h relative. First train has a 1 hour head start, traveling {{int:64:96}} km in that hour. So distance gap {{int:64:96}} km. Time to close gap at {{int:32:48}} km/h = 80/40 = 2 hours. Starting from 10:00, after 2 hours =\u003e 12:00. So answer: at 12:00.",
+          "text": "The first train gets a one‑hour head start, so by {{int:8:12}} am it is already {{int:64:96}} km ahead.\n\nThe second train travels {{int:96:144}} km/h while the first continues at {{int:64:96}} km/h, giving a relative speed of  \n\n\\({{int:96:144}} \\text{km/h} - {{int:64:96}} \\text{km/h} = {{int:32:48}} \\text{km/h}\\).\n\nTo close the {{int:64:96}} km gap:\n\n\\[\n\\text{time} = \\frac{{{int:64:96}}\\ \\text{km}}{{{int:32:48}}\\ \\text{km/h}} = 2\\ \\text{hours}.\n\\]\n\nStarting from its departure at 10:00 am, the second train catches up 2 hours later, i.e. at **12:00 pm**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1826,
+            "completion_tokens": 277
+          },
+          "chars": 811
+        }
+      ]
+    }
+  ]
+}

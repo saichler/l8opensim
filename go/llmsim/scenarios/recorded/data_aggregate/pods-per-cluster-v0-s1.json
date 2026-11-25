@@ -1,0 +1,63 @@
+{
+  "id": "data_aggregate/pods-per-cluster/v0/s1",
+  "flavor": "data_aggregate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:34:09Z",
+  "turns": [
+    {
+      "user_message": "How many pods are running per cluster?",
+      "steps": [
+        {
+          "reasoning": "We need to answer: number of pods per cluster. Model likely K8SPod with a field referencing cluster maybe clusterId or something. Need to inspect model fields.\n\nWe need to describe_model for K8SPod and maybe K8SCluster.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SPod"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"key\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"namespace\",\"type\":\"string\"},{\"path\":\"ready.count\",\"type\":\"int\"},{\"path\":\"ready.outof\",\"type\":\"int\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"restarts.count\",\"type\":\"int\"},{\"path\":\"restarts.ago\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"ip\",\"type\":\"string\"},{\"path\":\"node\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SPod\",\"primaryKey\":\"key\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 82
+          },
+          "chars": 251
+        },
+        {
+          "reasoning": "We need pods count per cluster. Use aggregate: select clusterName, count(*) from K8SPod group-by clusterName.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select clusterName,count(*) from K8SPod group-by clusterName"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"count(*)\":18,\"group\":{\"clusterName\":\"prod-east\"}},{\"count(*)\":23,\"group\":{\"clusterName\":\"prod-west\"}},{\"count(*)\":19,\"group\":{\"clusterName\":\"staging\"}}],\"model\":\"K8SPod\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1977,
+            "completion_tokens": 64
+          },
+          "chars": 188
+        },
+        {
+          "text": "Here’s the number of Pods currently running in each Kubernetes cluster:\n\n| Cluster | Pods Running |\n|---------|--------------|\n| prod‑east | {{int:14:22}} |\n| prod‑west | {{int:18:28}} |\n| staging | {{int:15:23}} |\n\nLet me know if you need any further details or a CSV export of this data.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2086,
+            "completion_tokens": 67
+          },
+          "chars": 262
+        }
+      ]
+    }
+  ]
+}

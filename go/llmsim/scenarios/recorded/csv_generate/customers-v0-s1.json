@@ -1,0 +1,74 @@
+{
+  "id": "csv_generate/customers/v0/s1",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:28:57Z",
+  "csv": [
+    {
+      "header": [
+        "id",
+        "first_name",
+        "last_name",
+        "city",
+        "signup_date"
+      ],
+      "columns": [
+        {
+          "kind": "seq",
+          "min": 1
+        },
+        {
+          "kind": "first"
+        },
+        {
+          "kind": "last"
+        },
+        {
+          "kind": "city"
+        },
+        {
+          "kind": "date"
+        }
+      ],
+      "rows": 30
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Generate sample customer data as CSV: 30 rows with id, first name, last name, city, signup date. It is synthetic test data for a demo, not records from the system: attach it as customers.csv.",
+      "steps": [
+        {
+          "reasoning": "We need to generate synthetic CSV data, not from system. Use create_file to make a CSV content with {{int:24:36}} rows. Provide header: id,first_name,last_name,city,signup_date. Generate sample values. Provide file.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "id,first_name,last_name,city,signup_date\n{{csv:0}}",
+                "file_name": "customers.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1154,\"file_name\":\"customers.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1832,
+            "completion_tokens": 581
+          },
+          "chars": 1441
+        },
+        {
+          "text": "Attached `customers.csv` with {{int:24:36}} rows of synthetic customer data.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2386,
+            "completion_tokens": 18
+          },
+          "chars": 65
+        }
+      ]
+    }
+  ]
+}

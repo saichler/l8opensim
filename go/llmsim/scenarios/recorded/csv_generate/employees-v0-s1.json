@@ -1,0 +1,138 @@
+{
+  "id": "csv_generate/employees/v0/s1",
+  "flavor": "csv_generate",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T21:28:13Z",
+  "params": {
+    "rows": [
+      "20",
+      "50"
+    ]
+  },
+  "csv": [
+    {
+      "header": [
+        "id",
+        "name",
+        "email",
+        "department",
+        "salary",
+        "hire_date"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "EMP001",
+            "EMP002",
+            "EMP003",
+            "EMP004",
+            "EMP005",
+            "EMP006",
+            "EMP007",
+            "EMP008",
+            "EMP009",
+            "EMP010",
+            "EMP011",
+            "EMP012",
+            "EMP013",
+            "EMP014",
+            "EMP015",
+            "EMP016",
+            "EMP017",
+            "EMP018",
+            "EMP019",
+            "EMP020"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Alice Chen",
+            "Brian Patel",
+            "Carla Gomez",
+            "David Kim",
+            "Elena Rossi",
+            "Frank O'Neil",
+            "Grace Liu",
+            "Henry Zhang",
+            "Irene Schmidt",
+            "James Wilson",
+            "Karen Nguyen",
+            "Luis Martinez",
+            "Maya Singh",
+            "Nathan Brooks",
+            "Olivia Taylor",
+            "Paul Anderson",
+            "Quinn Foster",
+            "Rachel Green",
+            "Samir Khan",
+            "Tina Lopez"
+          ]
+        },
+        {
+          "kind": "email"
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Engineering",
+            "Sales",
+            "Marketing",
+            "HR",
+            "Finance",
+            "Operations"
+          ]
+        },
+        {
+          "kind": "int",
+          "min": 64000,
+          "max": 112000
+        },
+        {
+          "kind": "date"
+        }
+      ],
+      "rows": 20
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Generate a CSV of 20 fictitious employees with id, name, email, department, salary and hire date. It is synthetic test data for a demo, not records from the system: attach it as employees.csv.",
+      "steps": [
+        {
+          "reasoning": "Generate a CSV of {{int:16:24}} fictitious employees with id, name, email, department, salary and hire date. It is synthetic test data for a demo, not records from the system: attach it as employees.csv.\n\nWe need to generate CSV of {{int:16:24}} fictitious employees. Synthetic test data for demo, not records from system. Attach as employees.csv.\n\nWe cannot create records in system because Employee model not listed. Models available: NetworkDevice, GpuDevice, K8SCluster, K8SNode, K8SPod, K8SDeployment, Alarm, EventRecord, L8PTarget.\n\nEmployee model not in list. So we cannot create records. User wants synthetic test data, not records from system. So we should just create a file with create_file containing CSV content.\n\nWe should generate {{int:16:24}} fictitious employees with id, name, email, department, salary and hire date.\n\nWe can use create_file with file_name employees.csv and content with header and {{int:16:24}} rows.\n\nEnsure CSV format.\n\nNo need to query.\n\nWe should follow policy: generate synthetic data. That's fine.\n\nPotential concern: no employee model, so cannot export_csv. Use create_file.\n\nWe should ensure columns: id, name, email, department, salary, hire date.\n\nLet's generate plausible data.\n\nUse create_file.\n\nNo need to check models.\n\nWe might just output file.\n\nMake sure file name employees.csv.\n\nCreate content.\n\nLet's produce {{int:16:24}} rows.\n\nWe'll create IDs like EMP001 etc.\n\nName, email, department, salary, hire date.\n\nMake sure CSV proper.\n\nUse create_file.\n\n",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "id,name,email,department,salary,hire_date\n{{csv:0}}",
+                "file_name": "employees.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1431,\"file_name\":\"employees.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2467,
+            "completion_tokens": 896
+          },
+          "chars": 2958
+        },
+        {
+          "reasoning": "Generate a CSV of {{int:16:24}} fictitious employees with id, name, email, department, salary and hire date. It is synthetic test data for a demo, not records from the system: attach it as employees.csv.\n\nWe need to generate CSV of {{int:16:24}} fictitious employees with id, name, email, department, salary and hire date. Synthetic test data, attach as employees.csv.\n\nThe user asked generate CSV. We should create file. We used create_file. The file content seems to have some formatting issues: row 2 has department,salary? Actually \"{{name:1}},brian.patel@example.com,Sales,{{int:57600:86400}},{{date:1}}\" but CSV header id,name,email,department,salary,hire_date. That is 5 fields after id? Let's count: id EMP002, name {{name:1}}, email brian.patel@example.com, department Sales, salary {{int:57600:86400}}, hire_date {{date:1}}. That's correct but the line shows \"EMP002,{{name:1}},brian.patel@example.com,Sales,{{int:57600:86400}},{{date:1}}\". That's fine. Wait the content shows \"EMP002,{{name:1}},brian.patel@example.com,Sales,{{int:57600:86400}},{{date:1}}\". Good.\n\nBut earlier I typed \"EMP002,{{name:1}},brian.patel@example.com,Sales,{{int:57600:86400}},{{date:1}}\". The content string includes a comma in department? No.\n\nActually the content has line: EMP002,{{name:1}},brian.patel@example.com,Sales,{{int:57600:86400}},{{date:1}}. OK.\n\nPotential issue: the create_file output attached true. Done.\n\nWe should respond with confirmation.\n\nPossibly the user expects synthetic data. Could be okay.\n\nNo need to query models.\n\nWe could also just say attached.\n\nLet's respond briefly what file contains.\n\n",
+          "text": "Attached employees.csv with {{int:16:24}} synthetic employee records.\n\nThe file contains the columns id, name, email, department, salary and hire_date, with {{int:16:24}} fictitious demo rows (EMP001-EMP020) for Engineering, Sales, Marketing, HR, Finance and Operations.\n",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 3074,
+            "completion_tokens": 443
+          },
+          "chars": 1760
+        }
+      ]
+    }
+  ]
+}

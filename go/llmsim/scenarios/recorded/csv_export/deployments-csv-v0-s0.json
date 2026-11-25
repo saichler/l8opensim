@@ -1,0 +1,69 @@
+{
+  "id": "csv_export/deployments-csv/v0/s0",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:26:05Z",
+  "turns": [
+    {
+      "user_message": "Export all deployments with their ready counts to a CSV file.",
+      "steps": [
+        {
+          "reasoning": "We need to export all deployments with their ready counts to CSV. Need to know model fields. Likely K8SDeployment has fields like name, readyCount, etc. Let's describe model K8SDeployment.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SDeployment"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"key\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"namespace\",\"type\":\"string\"},{\"path\":\"ready\",\"type\":\"string\"},{\"path\":\"upToDate\",\"type\":\"string\"},{\"path\":\"available\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SDeployment\",\"primaryKey\":\"key\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1799,
+            "completion_tokens": 74
+          },
+          "chars": 227
+        },
+        {
+          "reasoning": "We need to export all deployments with their ready counts to a CSV. The fields include ready (string). Probably we want columns: name, namespace, ready, upToDate, available, age, clusterName? The user asks \"their ready counts\" maybe just ready column. But we can export all fields, include ready. Use export_csv with query select * from K8SDeployment. No limit needed. Provide columns maybe include name, namespace, ready. Provide file name deployments.csv.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "columns": [
+                  "name",
+                  "namespace",
+                  "ready"
+                ],
+                "file_name": "deployments.csv",
+                "query": "select * from K8SDeployment"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"name\",\"namespace\",\"ready\"],\"file_name\":\"deployments.csv\",\"rows\":20}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1935,
+            "completion_tokens": 156
+          },
+          "chars": 575
+        },
+        {
+          "text": "Here is the CSV file you requested.\n\n**Attached:** `deployments.csv` – {{int:16:24}} deployment records with the columns **name**, **namespace**, and **ready**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2022,
+            "completion_tokens": 39
+          },
+          "chars": 151
+        }
+      ]
+    }
+  ]
+}

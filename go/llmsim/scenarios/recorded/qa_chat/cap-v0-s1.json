@@ -1,0 +1,39 @@
+{
+  "id": "qa_chat/cap/v0/s1",
+  "flavor": "qa_chat",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:04:16Z",
+  "turns": [
+    {
+      "user_message": "Tell me about the CAP theorem.",
+      "steps": [
+        {
+          "reasoning": "User asks about CAP theorem, which is a conceptual question not involving data. According to rules, we can answer directly without using tools. So provide explanation.",
+          "text": "**CAP Theorem Overview**\n\nThe CAP theorem, also known as Brewer’s theorem, is a fundamental principle in distributed systems that describes a trade‑off among three desirable properties:\n\n| Property | Meaning |\n|----------|---------|\n| **Consistency (C)** | Every read receives the most recent write (or an error). All nodes see the same data at the same logical point in time. |\n| **Availability (A)** | Every request receives a (non‑error) response, regardless of the state of any individual node. The system remains operational and returns a result. |\n| **Partition Tolerance (P)** | The system continues to operate despite arbitrary network partitions (communication failures) between nodes. Nodes can’t rely on perfect, always‑available links. |\n\n### Core Insight\n- In a **distributed system** where network partitions can occur (which is inevitable in real‑world networks), you can only guarantee **two** of the three properties at the same time.\n- This is often phrased as “*You can have at most two of Consistency, Availability, and Partition tolerance*.”\n\n### Practical Implications\n| Desired Combination | Typical Use‑Case | Example Systems |\n|---------------------|-----------------|-----------------|\n| **CP (Consistency + Partition tolerance)** | Strong correctness is critical; temporary unavailability is acceptable. | Relational databases with synchronous replication (e.g., Google Spanner, HBase). |\n| **AP (Availability + Partition tolerance)** | System must stay up even when some nodes can’t talk to each other; eventual consistency is tolerated. | NoSQL stores like Cassandra, DynamoDB, Riak. |\n| **CA (Consistency + Availability)** | Only possible when there are **no partitions** (i.e., in a single‑node or tightly coupled environment). | Traditional single‑server databases, some in‑memory caches. |\n\n### Why Partition Tolerance Is Non‑Negotiable\n- In any networked system, partitions (lost or delayed messages) can and do happen. Therefore, real‑world distributed systems must design for **P** and then choose between **C** and **A** based on business requirements.\n\n### “Eventual Consistency”\n- AP systems often settle on *eventual consistency*: after a partition heals, all replicas converge to the same state. This offers high availability but may return stale data during partitions.\n\n### Misconceptions\n- **CAP is not a strict rule for every scenario** – it’s a high‑level guide. Some systems use techniques (e.g., quorum reads/writes) to provide *tunable* consistency, effectively navigating a spectrum between C and A.\n- **Latency vs. consistency**: The theorem doesn’t speak directly about performance, but the trade‑off often impacts response time (e.g., waiting for quorum can increase latency).\n\n### Bottom Line\nWhen designing or evaluating a distributed system, ask:\n\n1. **Can I tolerate stale data?** → Favor Availability (AP).  \n2. **Is it critical that every read be up‑to‑date?** → Favor Consistency (CP).  \n3. **Do I truly need to handle network partitions?** → In practice, yes; design for Partition tolerance and then decide between C and A.\n\nUnderstanding CAP helps you pick the right technology stack and configure it to meet your application’s reliability and performance goals.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 724
+          },
+          "chars": 3447
+        }
+      ]
+    },
+    {
+      "user_message": "Which one does etcd choose?",
+      "steps": [
+        {
+          "reasoning": "User asks which CAP property etcd chooses. Need to answer based on knowledge: etcd is a distributed key-value store that uses the Raft consensus algorithm, providing strong consistency. It sacrifices availability under partition (i.e., it is CP). So answer: etcd is CP (consistency + partition tolerance) – it will become unavailable if it cannot reach quorum. Provide explanation.",
+          "text": "**etcd’s position in the CAP triangle**\n\n| CAP property | etcd’s behavior |\n|--------------|-----------------|\n| **Consistency** | **Yes** – etcd uses the Raft consensus algorithm, which guarantees that all reads and writes are performed on a quorum of nodes. Every client that can talk to the leader sees the latest committed state. |\n| **Availability** | **No (not guaranteed)** – If a majority (quorum) of etcd members cannot communicate (e.g., a network partition or loss of the leader), the cluster will stop serving reads and writes until a new leader can be elected and a quorum is restored. |\n| **Partition tolerance** | **Yes** – etcd continues to operate correctly in the presence of network partitions; it simply refuses to serve requests that cannot be safely replicated to a quorum. |\n\n### Verdict\n**etcd is a CP system** (Consistency + Partition tolerance).  \nIt prioritizes strong consistency over availability: when a partition prevents a quorum, etcd becomes unavailable rather than risking divergent data.\n\n### What that means for you\n- **Strong guarantees:** Any read after a successful write reflects that write (linearizable consistency).  \n- **Potential downtime:** In a split‑brain scenario, the minority side will reject client operations until it can re‑join the majority or a new quorum forms.  \n- **Operational tip:** Ensure you run an odd number of etcd members (typically 3 or 5) and place them in locations with reliable network connectivity to minimize the chance of losing quorum.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2493,
+            "completion_tokens": 405
+          },
+          "chars": 1913
+        }
+      ]
+    }
+  ]
+}

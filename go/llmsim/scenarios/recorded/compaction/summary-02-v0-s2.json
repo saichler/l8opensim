@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-02/v0/s2",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:16:56Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\n\nNext part of the conversation:\nUser: How many GPUs do we have?\n\nAssistant: There are 64 GPUs across 8 servers (sum of deviceInfo.gpuCount).\n\nUser: Which servers run driver 535?\n\nAssistant: gpu-node-02 and gpu-node-05 run driver 535.183.01.\n\nUser: Please export those to CSV.\n\nAssistant: Attached gpu_driver_535.csv with 2 servers.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce updated summary, keeping facts, decisions, entities, IDs, user preferences, constraints, open questions, any L8Query that produced result the user cares about.\n\nCurrent summary is empty? Actually \"Current summary:\" is blank. We need to create new summary with the facts from conversation.\n\nFacts:\n\n- There are {{int:51:77}} GPUs across 8 servers (sum of deviceInfo.gpuCount). So total GPU count and server count.\n\n- Servers running driver 535: gpu-node-02 and gpu-node-05 run driver 535.183.01.\n\n- User requested export to CSV; assistant attached gpu_driver_535.csv with 2 servers.\n\nThus summary should contain: total GPUs {{int:51:77}}, total servers 8, driver version 535.183.01, servers gpu-node-02 and gpu-node-05 have that driver, CSV exported.\n\nWe need to keep placeholder tokens if any, but none.\n\nWrite plain text summary.",
+          "text": "- Total GPUs: {{int:51:77}} across 8 servers (sum of deviceInfo.gpuCount).  \n- Driver version 535.183.01 is installed on servers: gpu-node-02, gpu-node-05.  \n- User requested export of these servers; assistant provided gpu_driver_535.csv containing the two servers.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 309,
+            "completion_tokens": 267
+          },
+          "chars": 1081
+        }
+      ]
+    }
+  ]
+}

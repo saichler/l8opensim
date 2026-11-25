@@ -1,0 +1,112 @@
+{
+  "id": "csv_generate/transactions/v0/s1",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:31:12Z",
+  "csv": [
+    {
+      "header": [
+        "date",
+        "description",
+        "amount",
+        "balance"
+      ],
+      "columns": [
+        {
+          "kind": "date"
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Opening Deposit",
+            "ATM Withdrawal",
+            "Salary Deposit",
+            "Coffee Shop",
+            "Utility Bill",
+            "Groceries",
+            "Restaurant",
+            "Online Shopping",
+            "Interest Credit",
+            "Gas Station",
+            "Phone Bill",
+            "Bookstore",
+            "Gym Membership",
+            "Car Repair",
+            "Dividend",
+            "Movie Ticket",
+            "Insurance Premium",
+            "Gift Received",
+            "Charity Donation",
+            "Travel Refund",
+            "Hotel Stay",
+            "Flight Ticket",
+            "Parking Fee",
+            "Freelance Payment",
+            "Internet Bill",
+            "Music Subscription",
+            "Medical Expense",
+            "Tax Refund",
+            "Pet Supplies",
+            "Electric Bill",
+            "Online Course",
+            "Gift Sent",
+            "Car Fuel",
+            "Bonus"
+          ]
+        },
+        {
+          "kind": "float",
+          "min": -400,
+          "max": 2500,
+          "decimals": 2
+        },
+        {
+          "kind": "float",
+          "min": 800,
+          "max": 7271.41,
+          "decimals": 2
+        }
+      ],
+      "rows": 41
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Create sample bank transactions as CSV: 40 rows with date, description, amount, balance. It is synthetic test data for a demo, not records from the system: attach it as transactions.csv.",
+      "steps": [
+        {
+          "reasoning": "We need to create a CSV file with {{int:32:48}} rows of synthetic bank transactions: fields date, description, amount, balance. Use create_file tool to attach a .csv file. We need to generate content. We can generate dates, descriptions, amounts, and balances. Since synthetic, we can just make up values. Ensure {{int:32:48}} rows. Provide file name transactions.csv. Then attach via create_file.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "date,description,amount,balance\n{{csv:0}}",
+                "file_name": "transactions.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1646,\"file_name\":\"transactions.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1827,
+            "completion_tokens": 904
+          },
+          "chars": 2118
+        },
+        {
+          "reasoning": "User requested \"Create sample bank transactions as CSV: {{int:32:48}} rows with date, description, amount, balance. It is synthetic test data for a demo, not records from the system: attach it as transactions.csv.\"\n\nWe already created file with {{int:32:48}} rows? Let's count: lines after header: start {{date:1}} to {{date:2}}. That appears {{int:32:48}} rows. Good.\n\nNow respond with brief description.",
+          "text": "Attached **transactions.csv** containing {{int:32:48}} synthetic bank transaction rows with columns: date, description, amount, and balance.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2670,
+            "completion_tokens": 124
+          },
+          "chars": 501
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/bandwidth/v0/s1",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:08:42Z",
+  "turns": [
+    {
+      "user_message": "Step by step: how long would it take to copy 4 TB over a 10 Gbps link at 70% efficiency?",
+      "steps": [
+        {
+          "reasoning": "We need to calculate time: 4 TB = terabytes. {{int:8:12}} Gbps link (gigabits per second). Efficiency 70% means effective bandwidth = {{int:8:12}} Gbps * 0.7 = 7 Gbps.\n\nConvert 4 TB to bits: 1 byte = 8 bits. 1 TB = {{int:8:12}}^{{int:9:15}} bytes? Usually TB is 1,024 GB = 1,024^4? For network, maybe use decimal TB ({{int:8:12}}^{{int:9:15}}). Use typical: 4 TB = 4 * 8 * {{int:8:12}}^{{int:9:15}} bits = {{int:25:39}} *{{int:8:12}}^{{int:9:15}} bits = {{int:25:39}} Tb (terabits). At 7 Gbps, time = 32,000 Gbits / 7 Gbps = approx 4571.4 seconds = 76.19 minutes = about 1.27 hours. Wait compute: {{int:25:39}} Tb = 32,000 Gb (since 1 Tb = {{int:800:1200}} Gb). Actually 1 TB = 8,000 Gb (since 1 byte = 8 bits). So 4 TB = 32,000 Gb. At 7 Gbps =\u003e 32,000 / 7 = 4571.4 seconds = 76.19 minutes = 1.27 hours.\n\nThus answer: about 1 hour {{int:12:20}} minutes. Provide step by step.\n\nNo need to use tools.",
+          "text": "**Step‑by‑step calculation**\n\n| Step | What we do | Numbers |\n|------|------------|---------|\n| 1. Convert the data size to **bits** | 1 byte = 8 bits, 1 TB = {{int:8:12}}¹² bytes (decimal) → 1 TB = 8 × {{int:8:12}}¹² bits = 8 Tb (terabits) | 4 TB = 4 × 8 Tb = **{{int:25:39}} Tb** |\n| 2. Convert the link speed to **bits per second** | {{int:8:12}} Gbps (gigabits per second) | {{int:8:12}} Gbps |\n| 3. Apply the **efficiency factor** ({{int:56:84}} %) | Effective throughput = {{int:8:12}} Gbps × 0.70 | **7 Gbps** |\n| 4. Compute the transfer time (seconds) | Time = Data / Throughput | {{int:25:39}} Tb / 7 Gbps = {{int:25:39}} 000 Gb / 7 Gbps ≈ **4 {{int:456:686}} seconds** |\n| 5. Convert seconds to more familiar units | 4 {{int:456:686}} s ÷ {{int:48:72}} = 76.2 min → ÷ {{int:48:72}} = 1.27 h | **≈ 1 hour {{int:12:20}} minutes** |\n\n**Result**\n\n- **Approximately 1 hour {{int:12:20}} minutes** (or about **1.3 hours**) to copy 4 TB over a {{int:8:12}} Gbps link operating at {{int:56:84}} % efficiency.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1814,
+            "completion_tokens": 634
+          },
+          "chars": 1692
+        }
+      ]
+    }
+  ]
+}

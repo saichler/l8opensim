@@ -1,0 +1,24 @@
+{
+  "id": "csv_analyze/sales-trend/v0/s2",
+  "flavor": "csv_analyze",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:20:06Z",
+  "turns": [
+    {
+      "user_message": "Which region grew the most from Jan to Feb in this CSV?\n```csv\nregion,month,units,revenue\nNorth,Jan,120,24000\nNorth,Feb,95,19000\nSouth,Jan,200,41000\nSouth,Feb,15,2900\nEast,Jan,130,26500\nEast,Feb,140,28000\nWest,Jan,90,18200\nWest,Feb,310,61000\n```",
+      "steps": [
+        {
+          "reasoning": "We need to determine which region grew the most from Jan to Feb. Growth could be in units or revenue? The user asks \"grew the most\" ambiguous; likely units. Could compute difference in units Feb - Jan per region.\n\nData provided in CSV; we can parse manually. Regions:\n\nNorth: Jan {{int:96:144}}, Feb {{int:76:114}} =\u003e change -25 (decrease)\nSouth: Jan {{int:160:240}}, Feb {{int:12:18}} =\u003e -185\nEast: Jan {{int:104:156}}, Feb {{int:112:168}} =\u003e +{{int:8:12}}\nWest: Jan {{int:72:108}}, Feb {{int:248:372}} =\u003e +{{int:176:264}}\n\nSo West grew the most (units increase {{int:176:264}}). If revenue: West Jan {{int:14560:21840}}, Feb {{int:48800:73200}} increase {{int:34240:51360}}, also biggest. So answer: West. Provide explanation.",
+          "text": "The CSV shows the following changes from **January → February**:\n\n| Region | Units Jan | Units Feb | Δ Units | Revenue Jan | Revenue Feb | Δ Revenue |\n|--------|----------|----------|---------|-------------|-------------|-----------|\n| North  | {{int:96:144}}      | {{int:76:114}}       | **‑{{int:20:30}}** | {{int:19:29}} 000      | {{int:15:23}} 000      | ‑5 000 |\n| South  | {{int:160:240}}      | {{int:12:18}}       | **‑{{int:148:222}}**| {{int:32:50}} 000      | 2 {{int:720:1080}}       | ‑{{int:30:46}} {{int:80:120}} |\n| East   | {{int:104:156}}      | {{int:112:168}}      | **+{{int:8:12}}**| {{int:20:32}} {{int:400:600}}      | {{int:22:34}} 000      | +1 {{int:400:600}} |\n| West   | {{int:72:108}}       | {{int:248:372}}      | **+{{int:176:264}}**| {{int:14:22}} {{int:160:240}}      | {{int:48:74}} 000      | +{{int:33:51}} {{int:640:960}} |\n\nBoth the unit count and the revenue increased most for **West** (units +{{int:176:264}}, revenue +{{int:33:51}} {{int:640:960}}).  \n\n**Answer:** The **West** region grew the most from January to February.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1884,
+            "completion_tokens": 400
+          },
+          "chars": 1335
+        }
+      ]
+    }
+  ]
+}

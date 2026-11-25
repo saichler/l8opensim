@@ -1,0 +1,95 @@
+{
+  "flavor": "compaction",
+  "mode": "compaction",
+  "validators": [],
+  "expect_tools": [],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.0,
+  "messages": [
+    {
+      "id": "summary-01",
+      "params": {},
+      "turns": [
+        "Current summary:\nThe user is reviewing network health in Austin.\n\nNext part of the conversation:\nUser: Which devices in Austin are offline?\n\nAssistant: Two devices are offline in Austin: core-rtr-03 and core-rtr-07.\n\nUser: Any alarms on them?\n\nAssistant: core-rtr-03 has an active critical 'Interface Down' alarm; core-rtr-07 has a major 'Power Supply Failure' alarm.\n\nUser: Thanks. Only show me critical things from now on.\n\nAssistant: Understood, I will focus on critical items.\n\n"
+      ]
+    },
+    {
+      "id": "summary-02",
+      "params": {},
+      "turns": [
+        "Current summary:\n\nNext part of the conversation:\nUser: How many GPUs do we have?\n\nAssistant: There are 64 GPUs across 8 servers (sum of deviceInfo.gpuCount).\n\nUser: Which servers run driver 535?\n\nAssistant: gpu-node-02 and gpu-node-05 run driver 535.183.01.\n\nUser: Please export those to CSV.\n\nAssistant: Attached gpu_driver_535.csv with 2 servers.\n\n"
+      ]
+    },
+    {
+      "id": "summary-03",
+      "params": {},
+      "turns": [
+        "Current summary:\nThe user, [NAME_AB12CD], manages the prod-east cluster.\n\nNext part of the conversation:\nUser: Which pods are failing in prod-east?\n\nAssistant: 3 pods are failing: billing-7f9c, search-1a2b and worker-9d8e.\n\nUser: Why is billing failing?\n\nAssistant: Its restarts count is 18 and the status is FAILED; the logs are not available to me.\n\nUser: Ok, remind me tomorrow to check it.\n\nAssistant: I can't set reminders, but you can ask me again tomorrow.\n\n"
+      ]
+    },
+    {
+      "id": "summary-04",
+      "params": {},
+      "turns": [
+        "Current summary:\nThe user asked for a weekly report.\n\nNext part of the conversation:\nUser: Write the weekly network report as markdown.\n\nAssistant: Attached weekly_report.md with device status, alarms and top issues.\n\nUser: Add the alarm counts per severity.\n\nAssistant: Updated: critical 4, major 9, minor 6, warning 11.\n\n"
+      ]
+    },
+    {
+      "id": "summary-05",
+      "params": {},
+      "turns": [
+        "Current summary:\n\nNext part of the conversation:\nUser: Hi\n\nAssistant: Hello! How can I help?\n\nUser: Show me Cisco devices\n\nAssistant: There are 4 Cisco devices: core-rtr-01, core-rtr-10, core-rtr-14 and core-rtr-19, all online.\n\nUser: and Juniper?\n\nAssistant: 3 Juniper devices: core-rtr-02, core-rtr-11 and core-rtr-15; core-rtr-11 is in warning state.\n\n"
+      ]
+    },
+    {
+      "id": "summary-06",
+      "params": {},
+      "turns": [
+        "Current summary:\nThe user is planning a maintenance window in Dallas on Saturday.\n\nNext part of the conversation:\nUser: List the devices in Dallas.\n\nAssistant: Dallas has 3 devices: core-rtr-04, core-rtr-08 and core-rtr-16.\n\nUser: Draft the maintenance email.\n\nAssistant: Here is the draft email announcing maintenance on Saturday 22:00-02:00 for the three Dallas devices.\n\nUser: Change the time to 23:00.\n\nAssistant: Updated the email to 23:00-03:00.\n\n"
+      ]
+    },
+    {
+      "id": "summary-07",
+      "params": {},
+      "turns": [
+        "Current summary:\nThe user prefers answers as tables.\n\nNext part of the conversation:\nUser: How many alarms per site?\n\nAssistant: | Site | Alarms |\n|---|---|\n| Austin | 7 |\n| Dallas | 5 |\n| Seattle | 4 |\n\nUser: Which alarm is the most frequent?\n\nAssistant: 'Link Flapping' with 42 occurrences.\n\n"
+      ]
+    },
+    {
+      "id": "summary-08",
+      "params": {},
+      "turns": [
+        "Current summary:\n\nNext part of the conversation:\nUser: Delete the down polling targets.\n\nAssistant: There are 4 down targets: tgt-005, tgt-010, tgt-015, tgt-020. Do you want me to delete them?\n\nUser: Yes.\n\nAssistant: Deleted 4 polling targets.\n\nUser: Thanks.\n\nAssistant: You're welcome.\n\n"
+      ]
+    },
+    {
+      "id": "summary-09",
+      "params": {},
+      "turns": [
+        "Current summary:\nThe user is comparing Kubernetes versions across clusters.\n\nNext part of the conversation:\nUser: Which version does each cluster run?\n\nAssistant: prod-east v1.30.4, prod-west v1.29.6, staging v1.31.1.\n\nUser: Which nodes in prod-west are not ready?\n\nAssistant: worker-06 and worker-12 are not ready.\n\nUser: I'll upgrade prod-west next week, only nodes that are ready first.\n\nAssistant: Noted: upgrade prod-west next week, ready nodes first.\n\n"
+      ]
+    },
+    {
+      "id": "summary-10",
+      "params": {},
+      "turns": [
+        "Current summary:\nThe user is writing code with Tanto.\n\nNext part of the conversation:\nUser: Write a Go REST API for tasks.\n\nAssistant: Here is a Go REST API with list, get, create and delete endpoints using an in-memory map.\n\nUser: Add tests.\n\nAssistant: Added table-driven tests using httptest for every endpoint.\n\n"
+      ]
+    },
+    {
+      "id": "summary-11",
+      "params": {},
+      "turns": [
+        "Current summary:\nThe user asked about GPU temperatures earlier; the hottest server was gpu-node-07.\n\nNext part of the conversation:\nUser: Is gpu-node-07 still the hottest?\n\nAssistant: Yes, it has the highest health warning level among GPU servers.\n\nUser: Create a report file about it.\n\nAssistant: Attached gpu_node_07_report.md.\n\n"
+      ]
+    },
+    {
+      "id": "summary-12",
+      "params": {},
+      "turns": [
+        "Current summary:\n\nNext part of the conversation:\nUser: @web what is the latest Kubernetes release?\n\nAssistant: Kubernetes v1.31 is the latest release according to kubernetes.io.\n\nUser: Are our clusters up to date?\n\nAssistant: Only staging runs v1.31.1; prod-east and prod-west are behind.\n\n"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "code_debug/go-json/v0/s1",
+  "flavor": "code_debug",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:01:53Z",
+  "turns": [
+    {
+      "user_message": "My Go struct marshals to `{}` with encoding/json:\n```go\ntype user struct {\n    name string\n    age  int\n}\n```\nWhy is it empty?",
+      "steps": [
+        {
+          "reasoning": "We need to answer question: In Go, struct fields need to be exported (capitalized) to be marshaled to JSON. The fields are unexported (lowercase) so they are omitted, resulting in {}. Also need to mention struct tags and using exported fields, and maybe using json:\"name\". Provide explanation.",
+          "text": "`encoding/json` only serialises **exported** struct fields.  \nIn Go a name is exported when it starts with an upper‑case letter.  \n\nYour struct is declared as\n\n```go\ntype user struct {\n    name string\n    age  int\n}\n```\n\nBoth `name` and `age` start with a lower‑case letter, so they are **unexported** (private) to any other package, including the `encoding/json` package. When the JSON encoder walks the struct it sees no exported fields, so it produces an empty JSON object `{}`.\n\n### How to fix it\n\nMake the fields exported (capitalise the first letter) and, if you want specific JSON keys, add struct tags:\n\n```go\ntype User struct {\n    Name string `json:\"name\"` // exported, will appear as \"name\"\n    Age  int    `json:\"age\"`  // exported, will appear as \"age\"\n}\n```\n\nNow:\n\n```go\nu := User{Name: \"Alice\", Age: 30}\nb, _ := json.Marshal(u)\nfmt.Println(string(b)) // {\"name\":\"Alice\",\"age\":30}\n```\n\n### Quick checklist\n\n| Issue | Fix |\n|-------|-----|\n| Fields are lower‑case (unexported) | Capitalise them (`Name`, `Age`) |\n| Want different JSON key names | Add `json:\"keyName\"` tags |\n| Need to keep the original type name | The type name itself can stay lower‑case if you never need to refer to it from another package, but the fields must be exported for JSON. |\n\nOnce the fields are exported (and optionally tagged), `json.Marshal` will produce the expected JSON representation.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1823,
+            "completion_tokens": 429
+          },
+          "chars": 1685
+        }
+      ]
+    }
+  ]
+}

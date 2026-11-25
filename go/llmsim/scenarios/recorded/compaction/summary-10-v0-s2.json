@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-10/v0/s2",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:18:28Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user is writing code with Tanto.\n\nNext part of the conversation:\nUser: Write a Go REST API for tasks.\n\nAssistant: Here is a Go REST API with list, get, create and delete endpoints using an in-memory map.\n\nUser: Add tests.\n\nAssistant: Added table-driven tests using httptest for every endpoint.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce updated summary. The current summary says \"The user is writing code with Tanto.\" New conversation: user wants a Go REST API for tasks; assistant provided; user asks to add tests; assistant added tests.\n\nWe should capture facts: user wants Go REST API for tasks, includes list/get/create/delete endpoints, uses in-memory map. Added table-driven tests using httptest for each endpoint.\n\nWe need to keep placeholder tokens none. So final summary: user is building Go REST API for tasks with endpoints list, get, create, delete using in-memory map; also wants tests; assistant added table-driven httptest tests for each endpoint.\n\nWe drop greetings, etc. Provide summary.",
+          "text": "User is developing a Go REST API for managing tasks. The API includes list, get, create, and delete endpoints implemented with an in‑memory map. The user requested tests, and table‑driven tests using httptest were added for each endpoint.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 289,
+            "completion_tokens": 200
+          },
+          "chars": 928
+        }
+      ]
+    }
+  ]
+}

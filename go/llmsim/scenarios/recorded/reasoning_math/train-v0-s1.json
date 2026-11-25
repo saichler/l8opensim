@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/train/v0/s1",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:10:44Z",
+  "turns": [
+    {
+      "user_message": "If a train leaves at 9:00 going 80 km/h and another leaves at 10:00 from the same station going 120 km/h, when does the second catch up?",
+      "steps": [
+        {
+          "reasoning": "We need to answer a word problem. No data needed. Compute when second catches up.\n\nFirst train leaves at 9:00 at {{int:64:96}} km/h. At 10:00, it has been traveling 1 hour, distance = {{int:64:96}} km. Second train starts at 10:00 at {{int:96:144}} km/h. We need time t after 10:00 when distances equal.\n\nLet t be hours after 10:00. Distance of second = {{int:96:144}} t. Distance of first = {{int:64:96}} km (head start) + {{int:64:96}} t (since continues). Set equal: {{int:96:144}} t = {{int:64:96}} + {{int:64:96}} t =\u003e 120t - 80t = {{int:64:96}} =\u003e 40t = {{int:64:96}} =\u003e t = 2 hours.\n\nThus second catches up at 10:00 + 2h = 12:00 (noon). Answer.",
+          "text": "The first train has a 1‑hour head start.  \n- At 10:00 it is \\({{int:64:96}} \\text{ km}\\) ahead ( \\({{int:64:96}} \\text{ km/h} \\times 1\\text{ h}\\) ).  \n- From 10:00 onward both trains travel, so let \\(t\\) be the hours after 10:00 when they meet.\n\nSet their distances equal:\n\n\\[\n\\begin{aligned}\n\\text{Second train distance} \u0026= 120t \\\\\n\\text{First train distance} \u0026= {{int:64:96}} + 80t\n\\end{aligned}\n\\]\n\n\\[\n120t = {{int:64:96}} + 80t \\;\\Longrightarrow\\; 40t = {{int:64:96}} \\;\\Longrightarrow\\; t = 2 \\text{ hours}\n\\]\n\nSo the second train catches up **2 hours after 10:00**, i.e., at **12:00 PM**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1826,
+            "completion_tokens": 383
+          },
+          "chars": 1075
+        }
+      ]
+    }
+  ]
+}

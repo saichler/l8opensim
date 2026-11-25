@@ -1,0 +1,159 @@
+{
+  "id": "csv_generate/sensors/v0/s0",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:28:09Z",
+  "csv": [
+    {
+      "header": [
+        "timestamp",
+        "sensor_id",
+        "temperature",
+        "humidity"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "2023-01-01T00:00:00Z",
+            "2023-01-01T00:01:00Z",
+            "2023-01-01T00:02:00Z",
+            "2023-01-01T00:03:00Z",
+            "2023-01-01T00:04:00Z",
+            "2023-01-01T00:05:00Z",
+            "2023-01-01T00:06:00Z",
+            "2023-01-01T00:07:00Z",
+            "2023-01-01T00:08:00Z",
+            "2023-01-01T00:09:00Z",
+            "2023-01-01T00:10:00Z",
+            "2023-01-01T00:11:00Z",
+            "2023-01-01T00:12:00Z",
+            "2023-01-01T00:13:00Z",
+            "2023-01-01T00:14:00Z",
+            "2023-01-01T00:15:00Z",
+            "2023-01-01T00:16:00Z",
+            "2023-01-01T00:17:00Z",
+            "2023-01-01T00:18:00Z",
+            "2023-01-01T00:19:00Z",
+            "2023-01-01T00:20:00Z",
+            "2023-01-01T00:21:00Z",
+            "2023-01-01T00:22:00Z",
+            "2023-01-01T00:23:00Z",
+            "2023-01-01T00:24:00Z",
+            "2023-01-01T00:25:00Z",
+            "2023-01-01T00:26:00Z",
+            "2023-01-01T00:27:00Z",
+            "2023-01-01T00:28:00Z",
+            "2023-01-01T00:29:00Z",
+            "2023-01-01T00:30:00Z",
+            "2023-01-01T00:31:00Z",
+            "2023-01-01T00:32:00Z",
+            "2023-01-01T00:33:00Z",
+            "2023-01-01T00:34:00Z",
+            "2023-01-01T00:35:00Z",
+            "2023-01-01T00:36:00Z",
+            "2023-01-01T00:37:00Z",
+            "2023-01-01T00:38:00Z",
+            "2023-01-01T00:39:00Z"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "sensor-001",
+            "sensor-002",
+            "sensor-003",
+            "sensor-004",
+            "sensor-005",
+            "sensor-006",
+            "sensor-007",
+            "sensor-008",
+            "sensor-009",
+            "sensor-010",
+            "sensor-011",
+            "sensor-012",
+            "sensor-013",
+            "sensor-014",
+            "sensor-015",
+            "sensor-016",
+            "sensor-017",
+            "sensor-018",
+            "sensor-019",
+            "sensor-020",
+            "sensor-021",
+            "sensor-022",
+            "sensor-023",
+            "sensor-024",
+            "sensor-025",
+            "sensor-026",
+            "sensor-027",
+            "sensor-028",
+            "sensor-029",
+            "sensor-030",
+            "sensor-031",
+            "sensor-032",
+            "sensor-033",
+            "sensor-034",
+            "sensor-035",
+            "sensor-036",
+            "sensor-037",
+            "sensor-038",
+            "sensor-039",
+            "sensor-040"
+          ]
+        },
+        {
+          "kind": "float",
+          "min": 22.5,
+          "max": 26.4,
+          "decimals": 1
+        },
+        {
+          "kind": "float",
+          "min": 37.5,
+          "max": 45.2,
+          "decimals": 1
+        }
+      ],
+      "rows": 40
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Make a CSV with 40 rows of fictitious temperature sensor readings: timestamp, sensor id, temperature, humidity. It is synthetic test data for a demo, not records from the system: attach it as sensor_readings.csv.",
+      "steps": [
+        {
+          "reasoning": "The user wants a CSV with {{int:32:48}} rows of fictitious sensor readings: timestamp, sensor id, temperature, humidity. This data is synthetic, not from system, so we cannot use export_csv (which pulls from system). We need to generate a file ourselves using create_file with CSV content. We must not fabricate records from system, but it's allowed to create synthetic test data. So we will generate CSV content with {{int:32:48}} rows. Provide as file sensor_readings.csv.\n\nWe need to ensure format: header line: timestamp,sensor_id,temperature,humidity\n\nRows: generate timestamps maybe ISO strings, sensor ids like sensor-001 etc, temperature values maybe random within range, humidity values random. We'll produce {{int:32:48}} rows.\n\nWe should create file via create_file tool.\n\nProceed.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "timestamp,sensor_id,temperature,humidity\n{{csv:0}}",
+                "file_name": "sensor_readings.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1720,\"file_name\":\"sensor_readings.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1833,
+            "completion_tokens": 1243
+          },
+          "chars": 2578
+        },
+        {
+          "text": "Attached is **sensor_readings.csv** containing {{int:32:48}} rows of synthetic temperature sensor data (timestamp, sensor_id, temperature, humidity).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2941,
+            "completion_tokens": 31
+          },
+          "chars": 138
+        }
+      ]
+    }
+  ]
+}

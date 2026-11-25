@@ -1,0 +1,275 @@
+{
+  "flavor": "conversation",
+  "mode": "tanto",
+  "validators": [],
+  "expect_tools": [],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "noc-morning-check",
+      "params": { "site": ["Austin", "Dallas", "Houston", "Seattle", "Denver", "Chicago"] },
+      "turns": [
+        "Good morning. Are there any critical alarms right now?",
+        "Which devices are they on?",
+        "Show me the details of the first one.",
+        "Are there other devices down in {{site}}?",
+        "How many devices do we have in {{site}} in total?",
+        "Export the {{site}} devices to a CSV file.",
+        "Add a note to the critical alarm on that first device: 'Investigating, field team notified'.",
+        "Thanks. Write a short status update I can paste into the team channel."
+      ]
+    },
+    {
+      "id": "outage-investigation",
+      "params": { "n": ["04", "07", "11", "15"] },
+      "turns": [
+        "core-rtr-{{n}} looks unreachable. What do you have on it?",
+        "What alarms are open on it?",
+        "Show me the recent events for that device.",
+        "Are other devices from the same vendor having problems?",
+        "What could cause a router to stop answering SNMP but still forward traffic?",
+        "Acknowledge the alarms on core-rtr-{{n}}.",
+        "Yes, go ahead.",
+        "Draft an incident summary email for management about this outage.",
+        "Make it shorter and less technical."
+      ]
+    },
+    {
+      "id": "k8s-triage",
+      "params": { "cluster": ["prod-east", "prod-west", "staging"] },
+      "turns": [
+        "How healthy is the {{cluster}} cluster?",
+        "Which pods are not running?",
+        "Why would a pod be stuck in CrashLoopBackOff?",
+        "Are any nodes in {{cluster}} not ready?",
+        "How many pods run on each node?",
+        "Write a kubectl command to describe the failing pods.",
+        "Put a summary of the cluster state into a markdown report file."
+      ]
+    },
+    {
+      "id": "gpu-capacity",
+      "params": { "site": ["Austin", "Dallas", "Seattle", "Chicago"] },
+      "turns": [
+        "What GPU servers do we have?",
+        "How many are in {{site}}?",
+        "Which ones have the highest GPU utilization?",
+        "What is the average GPU temperature?",
+        "Are any of them over 80 degrees?",
+        "Export the GPU list to CSV.",
+        "What would it take to add MIG partitioning to these GPUs?",
+        "Summarize this conversation in three bullets for my manager."
+      ]
+    },
+    {
+      "id": "inventory-audit",
+      "params": { "vendor": ["Cisco", "Juniper", "Arista", "Nokia"] },
+      "turns": [
+        "I need to audit our network inventory. What data do you have about devices?",
+        "How many devices per vendor?",
+        "List all {{vendor}} devices with their firmware versions.",
+        "Which of those are on old firmware?",
+        "Export them to a CSV called {{vendor}}-firmware-audit.csv.",
+        "Write a Python script that reads that CSV and prints devices grouped by firmware version.",
+        "Add error handling for a missing file.",
+        "Thanks, that's all."
+      ]
+    },
+    {
+      "id": "alarm-cleanup",
+      "params": {},
+      "turns": [
+        "How many alarms are open right now?",
+        "Break them down by severity.",
+        "Show me the minor ones.",
+        "Which of them are older than a week?",
+        "Clear the 'Fan Failure' alarms.",
+        "Yes, go ahead.",
+        "How many open alarms are left now?"
+      ]
+    },
+    {
+      "id": "build-dashboard-tool",
+      "params": { "lang": ["Go", "Python"] },
+      "turns": [
+        "I want to build a small tool that shows device status. Which models hold that data?",
+        "What fields does NetworkDevice have?",
+        "Write a simple {{lang}} program that reads a JSON list of devices from a file and prints a table of name, IP and status.",
+        "Add a flag to filter by status.",
+        "Can you review that code for bugs?",
+        "Add unit tests.",
+        "Write a short README for it."
+      ]
+    },
+    {
+      "id": "capacity-planning",
+      "params": { "cluster": ["prod-east", "prod-west"] },
+      "turns": [
+        "We are planning capacity for next quarter. How many Kubernetes nodes do we have per cluster?",
+        "What is the CPU and memory usage on {{cluster}}?",
+        "How many deployments run in {{cluster}}?",
+        "If traffic grows 40% and usage grows linearly, how many more nodes do we need?",
+        "Show the calculation step by step.",
+        "Write that as a short proposal for the infrastructure team.",
+        "Save it as a markdown file."
+      ]
+    },
+    {
+      "id": "csv-workflow",
+      "params": { "rows": ["15", "20", "30"] },
+      "turns": [
+        "Generate a sample CSV of {{rows}} fictitious network maintenance tickets with id, device, opened date, priority and status. It is synthetic test data for a demo: attach it as tickets.csv.",
+        "Add an owner column with fictitious names.",
+        "Which priority has the most open tickets in that data?",
+        "Write a SQL table definition that matches this CSV.",
+        "And a query that returns the open high-priority tickets.",
+        "Thanks!"
+      ]
+    },
+    {
+      "id": "code-review-session",
+      "params": {},
+      "turns": [
+        "Can you review this Go function?\n\n```go\nfunc LoadConfig(path string) *Config {\n\tdata, _ := os.ReadFile(path)\n\tvar c Config\n\tjson.Unmarshal(data, &c)\n\treturn &c\n}\n```",
+        "How should I report the errors?",
+        "Rewrite it with proper error handling.",
+        "Add support for environment variable overrides.",
+        "Write a table-driven test for it.",
+        "What else would you check in a code review of a config loader?"
+      ]
+    },
+    {
+      "id": "debug-session",
+      "params": {},
+      "turns": [
+        "My Python service crashes with KeyError: 'status' when it processes device updates. Why?",
+        "Here is the code:\n\n```python\ndef handle(update):\n    if update['status'] == 'down':\n        alert(update['name'])\n```",
+        "How do I make it safe when the field is missing?",
+        "What if status can also be None?",
+        "Write a unit test for these cases with pytest.",
+        "Great, how do I run just that test?"
+      ]
+    },
+    {
+      "id": "events-forensics",
+      "params": { "n": ["03", "08", "12"] },
+      "turns": [
+        "Show me the 10 most recent events.",
+        "Which device appears most in them?",
+        "Show me all events for core-rtr-{{n}}.",
+        "Is there a pattern in the timing?",
+        "What alarms are related?",
+        "Create a report file of this investigation.",
+        "What should we monitor to catch this earlier next time?"
+      ]
+    },
+    {
+      "id": "onboarding-new-engineer",
+      "params": {},
+      "turns": [
+        "Hi Tanto, I'm new on the team. What can you help me with?",
+        "What kind of data can you show me?",
+        "What is the difference between an alarm and an event?",
+        "Show me an example of a critical alarm.",
+        "How do polling targets work?",
+        "List the polling targets that are down.",
+        "Explain SNMP v3 in simple terms.",
+        "Thanks, this was really helpful!"
+      ]
+    },
+    {
+      "id": "change-management",
+      "params": { "site": ["Austin", "Houston", "Denver"] },
+      "turns": [
+        "We are moving core-rtr-11 to the {{site}} datacenter. Show me its current details.",
+        "Change its location to {{site}}.",
+        "Yes, do it.",
+        "Are there open alarms on it?",
+        "Write a change-request description for the move.",
+        "Add a rollback plan to it.",
+        "Draft a short announcement email to the NOC about the maintenance window."
+      ]
+    },
+    {
+      "id": "vendor-comparison",
+      "params": {},
+      "turns": [
+        "How many devices do we have from each vendor?",
+        "Which vendor has the most open alarms?",
+        "What is the alarm rate per device for each vendor?",
+        "Show that as a markdown table.",
+        "What are the general strengths and weaknesses of Cisco vs Juniper routers?",
+        "Write a recommendation paragraph for our next hardware purchase based on this.",
+        "Export the per-vendor numbers to CSV."
+      ]
+    },
+    {
+      "id": "pod-restart-loop",
+      "params": { "cluster": ["prod-east", "staging"] },
+      "turns": [
+        "Which pods in {{cluster}} restarted the most?",
+        "Show me the details of the top one.",
+        "Which deployment does it belong to?",
+        "How many replicas does that deployment have?",
+        "Write a Dockerfile healthcheck that would detect this service hanging.",
+        "And a Kubernetes liveness probe for the same thing.",
+        "Explain the difference between liveness and readiness probes.",
+        "Summarize what we found."
+      ]
+    },
+    {
+      "id": "weekly-report",
+      "params": {},
+      "turns": [
+        "I need to write the weekly operations report. How many alarms were raised this week?",
+        "Break them down by severity.",
+        "Which devices had the most alarms?",
+        "How many devices are down right now?",
+        "What is the overall device availability percentage?",
+        "Write the weekly report with these numbers.",
+        "Add a section on recommended actions.",
+        "Save it as weekly-report.md.",
+        "Thanks."
+      ]
+    },
+    {
+      "id": "scripting-help",
+      "params": {},
+      "turns": [
+        "Write a bash script that pings a list of hosts from a file and prints the ones that don't answer.",
+        "Make it run the pings in parallel.",
+        "Add a timeout of 2 seconds per host.",
+        "Now write the same thing in Go.",
+        "Which version would you use in production and why?",
+        "Add logging to the Go version."
+      ]
+    },
+    {
+      "id": "mixed-day",
+      "params": { "vendor": ["Cisco", "Arista", "Juniper"] },
+      "turns": [
+        "List all {{vendor}} devices with their IP addresses and status.",
+        "Which of them are down?",
+        "What is BGP flapping and how do I detect it?",
+        "Write a regex that matches a BGP neighbor down syslog line.",
+        "Generate a fictitious CSV of 10 syslog lines for testing that regex. It is synthetic test data: attach it as syslog-sample.csv.",
+        "Count how many lines in that sample would match.",
+        "Thanks, last thing: how many {{vendor}} devices do we have in total?"
+      ]
+    },
+    {
+      "id": "short-chatty",
+      "params": {},
+      "turns": [
+        "hey",
+        "any problems today?",
+        "show me the critical ones",
+        "ok what about k8s?",
+        "anything failing in prod-east?",
+        "cool thanks"
+      ]
+    }
+  ]
+}

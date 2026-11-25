@@ -1,0 +1,54 @@
+{
+  "id": "qa_chat/greeting/v0/s0",
+  "flavor": "qa_chat",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:06:14Z",
+  "turns": [
+    {
+      "user_message": "Hi Tanto!",
+      "steps": [
+        {
+          "reasoning": "We need to greet the user. Probably ask what they need.",
+          "text": "Hello! How can I help you today?",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1790,
+            "completion_tokens": 32
+          },
+          "chars": 87
+        }
+      ]
+    },
+    {
+      "user_message": "What can you do?",
+      "steps": [
+        {
+          "reasoning": "We need to explain capabilities: querying, creating, updating records, exporting CSV, creating reports, etc. Should be concise.",
+          "text": "I can work with the data stored in **Probler**, the datacenter‑management system. Here’s a quick rundown of what I’m able to do for you:\n\n| What you can ask me to do | How I do it |\n|---|---|\n| **View records** – e.g., list network devices, GPU servers, Kubernetes clusters, alarms, events, polling targets | I run an **L8Query** (the system’s query language) and return the matching rows, or export them as a CSV file you can download. |\n| **Summarize data** – counts, totals, averages, min/max, grouped statistics | I use aggregate functions (`count(*)`, `sum(field)`, `avg(field)`, `min(field)`, `max(field)`) directly in the query, so the calculation is done by the database. |\n| **Filter \u0026 sort** – any field you need, with `where` clauses, `sort‑by`, and limits up to {{int:80:120}} rows for preview | I build the query using the exact field names from the model’s schema. |\n| **Create new records** – add a network device, GPU server, K8s object, alarm, etc. | I call **create_record** with the fields you provide. |\n| **Update existing records** – change status, hostname, configuration, etc. | I call **update_record** (you must give the primary‑key value). |\n| **Delete records** – only after you explicitly confirm the deletion | I call **delete_record** with a query that selects the rows to remove. |\n| **Export large result sets** – up to {{int:8:12}} 000 rows | I use **export_csv**; you’ll get a downloadable CSV file (I never paste raw rows into the chat). |\n| **Generate custom reports** – markdown, plain‑text, JSON, HTML, etc. | I create a file with **create_file** and attach it to the reply. |\n| **Explore the data model** – see which models exist and what fields each has | I can run **list_modules** and **describe_model** to show you the schema. |\n\nAll actions respect your own permissions, so I can only see or modify the data you’re allowed to access. Let me know what you’d like to do!",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1814,
+            "completion_tokens": 509
+          },
+          "chars": 2061
+        }
+      ]
+    },
+    {
+      "user_message": "Thanks, bye.",
+      "steps": [
+        {
+          "reasoning": "The user says goodbye. We should respond politely.",
+          "text": "You’re welcome! If you need anything else later, just let me know. Have a great day!",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2302,
+            "completion_tokens": 41
+          },
+          "chars": 136
+        }
+      ]
+    }
+  ]
+}

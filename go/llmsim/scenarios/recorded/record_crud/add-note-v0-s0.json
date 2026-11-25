@@ -1,0 +1,70 @@
+{
+  "id": "record_crud/add-note/v0/s0",
+  "flavor": "record_crud",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:12:51Z",
+  "params": {
+    "device": [
+      "core-rtr-02",
+      "core-rtr-09"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Add a note to the alarm on core-rtr-02: 'Waiting for the field team'.",
+      "steps": [
+        {
+          "reasoning": "We need to add a note to an alarm on {{p:device}}. We need to find the Alarm record for device {{p:device}}. Probably Alarm model has a field like deviceName or target? We need to inspect model. Use describe_model for Alarm.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "Alarm"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"alarmId\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"description\",\"type\":\"string\"},{\"path\":\"state\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"nodeId\",\"type\":\"string\"},{\"path\":\"nodeName\",\"type\":\"string\"},{\"path\":\"location\",\"type\":\"string\"},{\"path\":\"firstOccurrence\",\"type\":\"int\"},{\"path\":\"lastOccurrence\",\"type\":\"int\"},{\"path\":\"occurrenceCount\",\"type\":\"int\"},{\"path\":\"isRootCause\",\"type\":\"bool\"},{\"path\":\"acknowledgedBy\",\"type\":\"string\"}],\"model\":\"Alarm\",\"primaryKey\":\"alarmId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1807,
+            "completion_tokens": 83
+          },
+          "chars": 253
+        },
+        {
+          "reasoning": "We need to add a note to the alarm on {{p:device}}. The Alarm model fields include description. Likely a note can be added to description? But not sure. Perhaps there is a field like \"notes\" not listed. Only fields are listed. There is description; maybe we should update description with appended note. The request: \"Add a note to the alarm on {{p:device}}: 'Waiting for the field team'.\" We need to find the alarm record where nodeName = {{p:device}}? Or nodeId? Use update_record. We need to know primary key alarmId. We first need to find the alarm. Let's query Alarm where nodeName='{{p:device}}'.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select alarmId,description from Alarm where nodeName='{{p:device}}'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":1,\"model\":\"Alarm\",\"records\":[{\"alarmId\":\"alm-002\",\"description\":\"Repeated state changes detected\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1997,
+            "completion_tokens": 188
+          },
+          "chars": 683
+        },
+        {
+          "reasoning": "We need to add a note to the alarm on {{p:device}}. The Alarm model fields include description, but note field? Not listed. Possibly there is a field for notes, but not in description. The user wants to add a note. There is no explicit 'note' field. Could use description? Or maybe there is a field not described. Since we only have fields listed, no note. We might need to update the description? But better to ask the user for clarification: where to store note? Might be a custom field? Could be 'description' is the note, but there's already description. Could append? Probably we can update description to include note. However we shouldn't overwrite existing description without user confirmation. Ask user: do you want to append note to description?",
+          "text": "I see an alarm on **core‑rtr‑02** (alarm ID alm‑002) with the current description “Repeated state changes detected”.  \n\nThe Alarm model does not have a dedicated “note” field, only a description field. Would you like me to update the description to include the note “Waiting for the field team” (e.g., appending it to the existing text), or would you prefer a different approach? Please let me know how you’d like to proceed.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2076,
+            "completion_tokens": 270
+          },
+          "chars": 1204
+        }
+      ]
+    }
+  ]
+}

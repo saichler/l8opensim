@@ -1,0 +1,24 @@
+{
+  "id": "code_app/bash-backup/v0/s1",
+  "flavor": "code_app",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T18:45:39Z",
+  "turns": [
+    {
+      "user_message": "Write a bash script that backs up a directory to a timestamped tar.gz and keeps the last 7 backups.",
+      "steps": [
+        {
+          "reasoning": "We need to respond with a bash script. No need to query data. Just produce script. Should we attach? Not needed. Provide script text. Ensure explanation brief.",
+          "text": "Here’s a simple Bash script that:\n\n1. Takes a source directory (the folder you want to back up) and a destination directory (where the backup files will be stored).  \n2. Creates a `tar.gz` archive named with the current timestamp.  \n3. Keeps only the newest 7 backups in the destination directory, deleting older ones.\n\n```bash\n#!/usr/bin/env bash\n\n# ------------------------------------------------------------------\n# backup.sh – Backup a directory to a timestamped tar.gz and retain\n#            only the last 7 backups.\n#\n# Usage: ./backup.sh /path/to/source /path/to/destination\n#\n# Example:\n#   ./backup.sh /data/www /backup/www\n# ------------------------------------------------------------------\n\nset -euo pipefail\n\n# ---- Configurable parameters --------------------------------------\n# Number of backups to keep (change if you need a different retention)\nRETENTION_COUNT=7\n\n# ---- Input validation ---------------------------------------------\nif [[ $# -ne 2 ]]; then\n    echo \"Usage: $0 \u003csource_dir\u003e \u003cbackup_dir\u003e\"\n    exit 1\nfi\n\nSRC_DIR=$1\nBACKUP_DIR=$2\n\n# Ensure source exists\nif [[ ! -d \"$SRC_DIR\" ]]; then\n    echo \"Error: Source directory '$SRC_DIR' does not exist.\"\n    exit 1\nfi\n\n# Ensure backup directory exists (create if needed)\nmkdir -p \"$BACKUP_DIR\"\n\n# ---- Create timestamped backup ------------------------------------\nTIMESTAMP=$(date +\"%Y%m%d-%H%M%S\")\nBASE_NAME=$(basename \"$SRC_DIR\")\nARCHIVE_NAME=\"${BASE_NAME}_${TIMESTAMP}.tar.gz\"\nARCHIVE_PATH=\"${BACKUP_DIR}/${ARCHIVE_NAME}\"\n\necho \"Creating backup: $ARCHIVE_PATH\"\ntar -czf \"$ARCHIVE_PATH\" -C \"$(dirname \"$SRC_DIR\")\" \"$BASE_NAME\"\n\necho \"Backup created successfully.\"\n\n# ---- Prune old backups ---------------------------------------------\n# List backups for this source, sorted newest first\n# (Assumes the naming pattern \u003cbasename\u003e_YYYYMMDD-HHMMSS.tar.gz)\nBACKUPS=($(ls -1t \"${BACKUP_DIR}/${BASE_NAME}\"_*.tar.gz 2\u003e/dev/null || true))\n\n# Delete everything beyond the retention count\nif (( ${#BACKUPS[@]} \u003e RETENTION_COUNT )); then\n    echo \"Pruning old backups, keeping the latest $RETENTION_COUNT...\"\n    for (( i=RETENTION_COUNT; i\u003c${#BACKUPS[@]}; i++ )); do\n        echo \"Removing ${BACKUPS[i]}\"\n        rm -f \"${BACKUPS[i]}\"\n    done\nelse\n    echo \"No old backups to prune.\"\nfi\n\necho \"Done.\"\n```\n\n### How to use\n\n1. Save the script to a file, e.g. `backup.sh`.\n2. Make it executable:  \n   ```bash\n   chmod +x backup.sh\n   ```\n3. Run it, providing the source and backup directories:  \n   ```bash\n   ./backup.sh /path/to/source /path/to/backup\n   ```\n\nThe script will create a file like `source_20231124-143210.tar.gz` in the backup directory and automatically delete older archives so that only the most recent seven remain. Adjust `RETENTION_COUNT` if you need a different retention window.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1810,
+            "completion_tokens": 722
+          },
+          "chars": 2934
+        }
+      ]
+    }
+  ]
+}

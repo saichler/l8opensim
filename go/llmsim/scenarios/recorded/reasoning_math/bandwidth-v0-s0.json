@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/bandwidth/v0/s0",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:08:08Z",
+  "turns": [
+    {
+      "user_message": "Step by step: how long would it take to copy 4 TB over a 10 Gbps link at 70% efficiency?",
+      "steps": [
+        {
+          "reasoning": "We need to compute time = data size / effective throughput. Data: 4 TB. Link speed: {{int:8:12}} Gbps. Efficiency: 70% means effective throughput = {{int:8:12}} Gbps * 0.7 = 7 Gbps.\n\nConvert 4 TB to bits. 4 TB = 4 * ({{int:819:1229}}^4?) Usually TB = terabytes, could be decimal ({{int:8:12}}^{{int:9:15}}) or binary (2^{{int:32:48}}). We'll assume decimal? Provide both? Provide step-by-step. Compute: 4 TB = 4 * {{int:8:12}}^{{int:9:15}} bytes = 4 * 8 *{{int:8:12}}^{{int:9:15}} bits = {{int:25:39}} *{{int:8:12}}^{{int:9:15}} bits = {{int:25:39}} Tb (terabits). Effective throughput 7 Gbps = 7 *{{int:8:12}}^9 bits/s. Time = {{int:25:39}}*{{int:8:12}}^{{int:9:15}} / 7*{{int:8:12}}^9 = (32/7)*{{int:8:12}}^3 seconds ≈ 4.5714 *{{int:8:12}}^3 seconds = {{int:3656:5486}} seconds ≈ 76.2 minutes ≈ 1 hour {{int:12:20}} minutes.\n\nIf using binary: 4 TiB = 4 * 2^{{int:32:48}} bytes = 4 * 1,099,511,627,776 = 4,398,046,511,104 bytes = bits = *8 = 35,184,372,088,832 bits ≈ 35.18 Tb. Divide by 7 Gbps = 7e9 bits/s gives ~{{int:4020:6032}} seconds = 83.8 minutes ≈ 1 hr {{int:19:29}} min.\n\nWill present step-by-step.",
+          "text": "**Step‑by‑step calculation**\n\n| Step | What we do | Numbers used |\n|------|------------|--------------|\n| 1️⃣  | Convert the amount of data (4 TB) to **bits**. | 1 byte = 8 bits. 4 TB = 4 × {{int:8:12}}¹² bytes (decimal) → 4 × {{int:8:12}}¹² × 8 = {{int:25:39}} × {{int:8:12}}¹² bits = **{{int:25:39}} Tb** (terabits).  *(If you prefer binary TB (TiB): 4 TiB = 4 × 2⁴⁰ bytes ≈ 4.398 × {{int:8:12}}¹² bytes → ≈ 35.18 Tb.)* |\n| 2️⃣  | Determine the **effective throughput** of the link. | Link speed = {{int:8:12}} Gbps. Efficiency = {{int:56:84}} % → {{int:8:12}} Gbps × 0.70 = **7 Gbps** (7 × {{int:8:12}}⁹ bits / s). |\n| 3️⃣  | Compute the raw transfer time (seconds). | Time = Data / Throughput = {{int:25:39}} × {{int:8:12}}¹² bits ÷ 7 × {{int:8:12}}⁹ bits / s ≈ **4 {{int:456:686}} s**. |\n| 4️⃣  **Convert seconds to more familiar units** | 1 hour = 3 {{int:480:720}} s, 1 minute = {{int:48:72}} s. | 4 {{int:456:686}} s ÷ 3 {{int:480:720}} ≈ 1.27 h → **1 hour + 0.27 h**. 0.27 h × {{int:48:72}} ≈ {{int:12:20}} min. |\n| 5️⃣  **Result (decimal TB)** | 4 TB over a {{int:8:12}} Gbps link at {{int:56:84}} % efficiency takes about **1 hour {{int:12:20}} minutes** (≈ {{int:60:92}} minutes). |\n| 6️⃣  **Result (binary TiB, optional)** | Using 4 TiB gives 35.18 Tb ÷ 7 Gbps ≈ **5 {{int:17:27}} s** → **1 hour {{int:19:29}} minutes** (≈ {{int:67:101}} minutes). |\n\n---\n\n### Summary\n\n- **Using the common “decimal” TB definition (4 × {{int:8:12}}¹² bytes)**:  \n  **≈ 1 hour {{int:12:20}} minutes** (≈ {{int:60:92}} minutes) to copy 4 TB at {{int:56:84}} % efficiency on a {{int:8:12}} Gbps link.\n\n- **If you work with binary TiB** (4 × 2⁴⁰ bytes):  \n  **≈ 1 hour {{int:19:29}} minutes** (≈ {{int:67:101}} minutes).\n\nThe steps above show exactly how the numbers are derived, so you can adjust the size or efficiency and recalculate in the same way.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1814,
+            "completion_tokens": 975
+          },
+          "chars": 2677
+        }
+      ]
+    }
+  ]
+}

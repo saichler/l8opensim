@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-12/v0/s2",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:18:47Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\n\nNext part of the conversation:\nUser: @web what is the latest Kubernetes release?\n\nAssistant: Kubernetes v1.31 is the latest release according to kubernetes.io.\n\nUser: Are our clusters up to date?\n\nAssistant: Only staging runs v1.31.1; prod-east and prod-west are behind.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce updated summary: combine prior summary (not given) with new info. Since we only have current summary (empty? It says \"Current summary:\" but then next part). Probably we need to create summary containing facts from conversation: latest Kubernetes release is v1.31 (maybe v1.31.x). Staging cluster runs v1.31.1, prod-east and prod-west are behind (i.e., not up to date). Keep entities: clusters: staging, prod-east, prod-west. No IDs given. No user preferences beyond that.\n\nThus summary: latest Kubernetes release v1.31 (latest release per kubernetes.io). Staging cluster version v1.31.1 (up to date). Prod-east and prod-west are not up to date (running older version). No other info. We'll write succinct.",
+          "text": "Latest Kubernetes release: v1.31 (as per kubernetes.io).  \nCluster versions:  \n- **staging** – running v1.31.1 (up‑to‑date).  \n- **prod-east** – running an older version, behind the latest release.  \n- **prod-west** – running an older version, behind the latest release.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 288,
+            "completion_tokens": 257
+          },
+          "chars": 1004
+        }
+      ]
+    }
+  ]
+}

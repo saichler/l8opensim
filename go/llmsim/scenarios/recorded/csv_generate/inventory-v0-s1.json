@@ -1,0 +1,142 @@
+{
+  "id": "csv_generate/inventory/v0/s1",
+  "flavor": "csv_generate",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T22:11:01Z",
+  "csv": [
+    {
+      "header": [
+        "item_id",
+        "name",
+        "quantity",
+        "location",
+        "reorder_level"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "ITEM001",
+            "ITEM002",
+            "ITEM003",
+            "ITEM004",
+            "ITEM005",
+            "ITEM006",
+            "ITEM007",
+            "ITEM008",
+            "ITEM009",
+            "ITEM010",
+            "ITEM011",
+            "ITEM012",
+            "ITEM013",
+            "ITEM014",
+            "ITEM015",
+            "ITEM016",
+            "ITEM017",
+            "ITEM018",
+            "ITEM019",
+            "ITEM020",
+            "ITEM021",
+            "ITEM022",
+            "ITEM023",
+            "ITEM024",
+            "ITEM025",
+            "ITEM026",
+            "ITEM027",
+            "ITEM028",
+            "ITEM029",
+            "ITEM030"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Steel Bolts M8",
+            "Aluminum Sheets 2mm",
+            "Copper Wire 10m",
+            "Plastic Brackets",
+            "Rubber Gaskets",
+            "LED Bulbs 12W",
+            "Network Cables Cat6",
+            "Power Adapters 65W",
+            "Thermal Paste",
+            "SSD 1TB NVMe",
+            "RAM 32GB DDR4",
+            "GPU Cooler Bracket",
+            "Server Rack Screws",
+            "Patch Panels 24port",
+            "UPS Battery 12V",
+            "Keyboard Mechanical",
+            "Mouse Wireless",
+            "Monitor Stand",
+            "Ethernet Switch 8port",
+            "Fiber Optic Patch",
+            "Cable Ties 100pk",
+            "Velcro Straps",
+            "Heat Sink Paste",
+            "PCIe Riser Cable",
+            "SSD Heatsink",
+            "Network Patch Box",
+            "Power Strip 6outlet",
+            "Label Printer Rolls",
+            "Anti-Static Bags",
+            "Tool Kit Basic"
+          ]
+        },
+        {
+          "kind": "int",
+          "min": 23,
+          "max": 890
+        },
+        {
+          "kind": "city"
+        },
+        {
+          "kind": "int",
+          "min": 15,
+          "max": 200
+        }
+      ],
+      "rows": 30
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Generate a CSV of 30 warehouse inventory items with item id, name, quantity, location and reorder level. It is synthetic test data for a demo, not records from the system: attach it as inventory.csv.",
+      "steps": [
+        {
+          "reasoning": "Generate a CSV of {{int:24:36}} warehouse inventory items with item id, name, quantity, location and reorder level. It is synthetic test data for a demo, not records from the system: attach it as inventory.csv.\n\nWe need to generate synthetic test data, not records from system. Attach as inventory.csv. So we need to create_file with content CSV. Could use create_file.\n\nWe should ensure CSV has columns item id, name, quantity, location, reorder level. {{int:24:36}} rows.\n\nWe can generate synthetic data. Probably just create file.\n\nNo need to query. Use create_file with file_name inventory.csv, content with header and {{int:24:36}} rows.\n\nMake sure to generate plausible data.\n\nWe must not fabricate data from system. This is synthetic, allowed.\n\nWe can create file directly.\n\nPossibly also ensure item id unique.\n\nLet's generate.\n\nWe can do simple items: ITEM001 ... ITEM030.\n\nNames: Widget A, etc.\n\nQuantity random 10-500.\n\nLocation: Warehouse A, B, etc.\n\nReorder level 20-100.\n\nLet's produce CSV.\n\nWe should attach file. Use create_file.\n\nNo need to query models.\n\nWe must follow rules: to give user text file you write, call create_file. The file is attached.\n\nWe can produce content.\n\nLet's create.\n\nMaybe also ensure header exactly: item id, name, quantity, location, reorder level. Could use item_id.\n\nBetter use item_id,name,quantity,location,reorder_level.\n\nThe request says item id, name, quantity, location and reorder level. Could use spaces. CSV header probably with underscores. Use exactly names.\n\nWe'll do item_id,name,quantity,location,reorder_level.\n\nGenerate {{int:24:36}} rows.\n\nLet's produce.\n\nWe could generate programmatically but manually write {{int:24:36}} lines.\n\nLet's do items 1-30.\n\nWe'll make names varied.\n\nOkay.\n\nProceed to create_file.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "item_id,name,quantity,location,reorder_level\n{{csv:0}}",
+                "file_name": "inventory.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1591,\"file_name\":\"inventory.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2467,
+            "completion_tokens": 1036
+          },
+          "chars": 3394
+        },
+        {
+          "reasoning": "Generate a CSV of {{int:24:36}} warehouse inventory items with item id, name, quantity, location and reorder level. It is synthetic test data for a demo, not records from the system: attach it as inventory.csv.\n\nWe have created file. Should respond with brief what file contains.\n\nWe need to comply with policy. Synthetic data is allowed. We used create_file.\n\nOutput confirmation.\n\n",
+          "text": "Attached inventory.csv with {{int:24:36}} synthetic warehouse inventory items.\n\nThe file contains columns: item_id, name, quantity, location, reorder_level — {{int:24:36}} demo rows (ITEM001 to ITEM030) for use in your demo.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 3154,
+            "completion_tokens": 131
+          },
+          "chars": 576
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "flavor": "explore_models",
+  "mode": "tanto",
+  "validators": [],
+  "expect_tools": [],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "what-data",
+      "params": {},
+      "turns": [
+        "What data can you show me?"
+      ]
+    },
+    {
+      "id": "gpu-fields",
+      "params": {},
+      "turns": [
+        "What fields does a GPU server have?"
+      ]
+    },
+    {
+      "id": "which-models",
+      "params": {},
+      "turns": [
+        "Which models can I query?"
+      ]
+    },
+    {
+      "id": "alarm-fields",
+      "params": {},
+      "turns": [
+        "What information do you have about alarms?"
+      ]
+    },
+    {
+      "id": "k8s-data",
+      "params": {},
+      "turns": [
+        "What kind of Kubernetes data do you have?"
+      ]
+    },
+    {
+      "id": "device-fields",
+      "params": {},
+      "turns": [
+        "Describe the network device model for me."
+      ]
+    },
+    {
+      "id": "events-vs-alarms",
+      "params": {},
+      "turns": [
+        "What is the difference between events and alarms in this system?"
+      ]
+    },
+    {
+      "id": "targets",
+      "params": {},
+      "turns": [
+        "What are polling targets and what fields do they have?"
+      ]
+    },
+    {
+      "id": "pod-fields",
+      "params": {},
+      "turns": [
+        "Which fields can I filter pods by?"
+      ]
+    },
+    {
+      "id": "help",
+      "params": {},
+      "turns": [
+        "What can you help me with?"
+      ]
+    },
+    {
+      "id": "query-help",
+      "params": {},
+      "turns": [
+        "How do I ask you for counts and totals?"
+      ]
+    },
+    {
+      "id": "followup-describe",
+      "params": {},
+      "turns": [
+        "List the models you can use.",
+        "Describe the K8SNode model."
+      ]
+    }
+  ]
+}

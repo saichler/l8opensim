@@ -1,0 +1,131 @@
+{
+  "id": "csv_generate/servers/v0/s1",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:29:21Z",
+  "csv": [
+    {
+      "header": [
+        "hostname",
+        "ip",
+        "cpu_cores",
+        "memory_gb",
+        "os",
+        "location"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "server01",
+            "server02",
+            "server03",
+            "server04",
+            "server05",
+            "server06",
+            "server07",
+            "server08",
+            "server09",
+            "server10",
+            "server11",
+            "server12",
+            "server13",
+            "server14",
+            "server15",
+            "server16",
+            "server17",
+            "server18",
+            "server19",
+            "server20"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "192.168.1.101",
+            "192.168.1.102",
+            "192.168.1.103",
+            "192.168.1.104",
+            "192.168.1.105",
+            "192.168.1.106",
+            "192.168.1.107",
+            "192.168.1.108",
+            "192.168.1.109",
+            "192.168.1.110",
+            "192.168.1.111",
+            "192.168.1.112",
+            "192.168.2.101",
+            "192.168.2.102",
+            "192.168.2.103",
+            "192.168.2.104",
+            "192.168.2.105",
+            "192.168.2.106",
+            "192.168.2.107",
+            "192.168.2.108"
+          ]
+        },
+        {
+          "kind": "int",
+          "min": 4,
+          "max": 32
+        },
+        {
+          "kind": "int",
+          "min": 32,
+          "max": 256
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Ubuntu 20.04",
+            "CentOS 7",
+            "Debian 11",
+            "Windows Server 2019"
+          ]
+        },
+        {
+          "kind": "city"
+        }
+      ],
+      "rows": 20
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Create a CSV of 20 fictitious servers with hostname, ip, cpu cores, memory GB, os and location. It is synthetic test data for a demo, not records from the system: attach it as servers.csv.",
+      "steps": [
+        {
+          "reasoning": "The user wants a CSV of {{int:16:24}} fictitious servers with specified fields. This is synthetic data, not from the system, so we must create a file ourselves using create_file (or export_csv?). Since data is not from system, we cannot use export_csv. We should generate synthetic rows and attach as a CSV file. We need to create a CSV file with headers: hostname, ip, cpu_cores, memory_gb, os, location (or similar). Provide {{int:16:24}} rows. Since we need to generate synthetic data, we can just create content manually.\n\nWe must use create_file tool, providing file_name \"servers.csv\" and content with CSV rows.\n\nLet's craft {{int:16:24}} entries:\n\nhostnames: server01 to server20.\nIPs: 192.168.1.x or 10.0.0.x.\nCPU cores: random 4,8,16,32.\nMemory GB: 32,64,128,256.\nOS: Ubuntu 20.04, CentOS 7, Windows Server 2019, Debian {{int:8:14}}.\nLocation: \"{{city:1}}\", \"{{city:2}}\", \"{{city:3}}\", \"{{city:4}}\".\n\nWe'll vary.\n\nNow produce CSV content.\n\nLet's generate.\n\nWill create header line: hostname,ip,cpu_cores,memory_gb,os,location\n\nThen rows.\n\nLet's do:\n\nserver01,192.168.1.101,8,64,Ubuntu 20.04,{{city:1}}\nserver02,192.168.1.102,16,128,CentOS 7,{{city:2}}\nserver03,192.168.1.103,4,32,Debian {{int:8:14}},{{city:3}}\nserver04,192.168.1.104,32,256,Windows Server 2019,{{city:4}}\nserver05,192.168.1.105,8,64,Ubuntu 20.04,{{city:2}}\nserver06,192.168.1.106,16,128,CentOS 7,{{city:1}}\nserver07,192.168.1.107,4,32,Debian {{int:8:14}},{{city:4}}\nserver08,192.168.1.108,32,256,Windows Server 2019,{{city:3}}\nserver09,192.168.1.109,8,64,Ubuntu 20.04,{{city:3}}\nserver10,192.168.1.110,16,128,CentOS 7,{{city:4}}\nserver11,192.168.1.111,4,32,Debian {{int:8:14}},{{city:2}}\nserver12,192.168.1.112,32,256,Windows Server 2019,{{city:1}}\nserver13,192.168.2.101,8,64,Ubuntu 20.04,{{city:1}}\nserver14,192.168.2.102,16,128,CentOS 7,{{city:2}}\nserver15,192.168.2.103,4,32,Debian {{int:8:14}},{{city:3}}\nserver16,192.168.2.104,32,256,Windows Server 2019,{{city:4}}\nserver17,192.168.2.105,8,64,Ubuntu 20.04,{{city:2}}\nserver18,192.168.2.106,16,128,CentOS 7,{{city:1}}\nserver19,192.168.2.107,4,32,Debian {{int:8:14}},{{city:4}}\nserver20,192.168.2.108,32,256,Windows Server 2019,{{city:3}}\n\nThat should be fine.\n\nNow use create_file with file_name \"servers.csv\".",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "hostname,ip,cpu_cores,memory_gb,os,location\n{{csv:0}}",
+                "file_name": "servers.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1028,\"file_name\":\"servers.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1832,
+            "completion_tokens": 1245
+          },
+          "chars": 3157
+        },
+        {
+          "text": "Attached `servers.csv` containing {{int:16:24}} synthetic server records with hostname, IP, CPU cores, memory (GB), OS, and location.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2358,
+            "completion_tokens": 32
+          },
+          "chars": 122
+        }
+      ]
+    }
+  ]
+}

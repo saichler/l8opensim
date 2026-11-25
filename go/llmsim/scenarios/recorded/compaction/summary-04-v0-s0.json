@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-04/v0/s0",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:17:11Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user asked for a weekly report.\n\nNext part of the conversation:\nUser: Write the weekly network report as markdown.\n\nAssistant: Attached weekly_report.md with device status, alarms and top issues.\n\nUser: Add the alarm counts per severity.\n\nAssistant: Updated: critical 4, major 9, minor 6, warning 11.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce a new summary that replaces the current one. Keep facts, decisions, entities, preferences, constraints, open questions, any L8Query that produced a result the user cares about. The current summary is just \"The user asked for a weekly report.\"\n\nNow conversation: user wants weekly network report as markdown. Assistant attached weekly_report.md with device status, alarms, top issues. Then user wants to add alarm counts per severity. Assistant updates with counts: critical 4, major 9, minor 6, warning {{int:8:14}}.\n\nSo summary should capture that user requested a weekly network report in markdown, includes device status, alarms, top issues, and now alarm counts per severity: critical 4, major 9, minor 6, warning {{int:8:14}}. No IDs or placeholders.\n\nThus final summary:\n\nUser requested weekly network report in markdown. Assistant provided weekly_report.md containing device status, alarms, top issues. User asked to include alarm counts per severity. Assistant added counts: critical 4, major 9, minor 6, warning {{int:8:14}}.\n\nWe drop greetings. No open questions. No L8Query. So just summary.",
+          "text": "User requested a weekly network report in markdown. Assistant provided weekly_report.md containing device status, alarms, and top issues. User asked to add alarm counts per severity; assistant updated the report with counts: critical 4, major 9, minor 6, warning {{int:8:14}}.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 292,
+            "completion_tokens": 299
+          },
+          "chars": 1365
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-08/v0/s0",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:17:57Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\n\nNext part of the conversation:\nUser: Delete the down polling targets.\n\nAssistant: There are 4 down targets: tgt-005, tgt-010, tgt-015, tgt-020. Do you want me to delete them?\n\nUser: Yes.\n\nAssistant: Deleted 4 polling targets.\n\nUser: Thanks.\n\nAssistant: You're welcome.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce a new summary replacing current one. The current summary is empty? The prompt shows \"Current summary:\" blank, then next part. So we need to produce summary capturing facts: user wants to delete down polling targets. Assistant identified down targets: tgt-005, tgt-010, tgt-015, tgt-020. User confirmed deletion. Assistant deleted 4 polling targets. So summary should include that these four polling targets were deleted.\n\nWe should keep facts, decisions, entities and IDs. No greetings. So summary: Down polling targets tgt-005, tgt-010, tgt-015, tgt-020 were deleted per user request.\n\nWrite plain text.",
+          "text": "The user requested deletion of down polling targets. The assistant identified four down targets: tgt-005, tgt-010, tgt-015, and tgt-020. The user confirmed, and all four polling targets were deleted.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 292,
+            "completion_tokens": 191
+          },
+          "chars": 822
+        }
+      ]
+    }
+  ]
+}

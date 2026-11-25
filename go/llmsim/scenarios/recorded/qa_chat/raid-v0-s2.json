@@ -1,0 +1,23 @@
+{
+  "id": "qa_chat/raid/v0/s2",
+  "flavor": "qa_chat",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T22:32:56Z",
+  "turns": [
+    {
+      "user_message": "What is the difference between RAID 5 and RAID 10?",
+      "steps": [
+        {
+          "text": "RAID 5 and RAID {{int:8:12}} differ in **architecture, fault tolerance, performance, and capacity efficiency**:\n\n### **RAID 5**\n* **Structure**: Data is striped across ≥3 disks with distributed parity.\n* **Fault tolerance**: Can survive **1 disk failure** (parity rebuilds missing data).\n* **Capacity efficiency**: (n-1) disks usable (1 disk worth of capacity used for parity).\n* **Performance**:\n  * Good for sequential reads.\n  * Writes are slower because parity must be calculated and written (read-modify-write penalty).\n  * Rebuilds are I/O intensive and slow on large disks.\n* **Use case**: Read-heavy workloads where cost per TB matters and some redundancy is enough.\n\n### **RAID {{int:8:12}}** (RAID 1+0)\n* **Structure**: Data is mirrored (RAID 1) then striped (RAID 0). Minimum 4 disks, disks work in mirrored pairs.\n* **Fault tolerance**: Can survive **multiple disk failures** *as long as no more than one disk fails per mirrored pair*. In practice, much safer than RAID 5.\n* **Capacity efficiency**: 50% of raw capacity usable (1:1 mirroring).\n* **Performance**:\n  * Excellent read and write speeds.\n  * Rebuilds are fast because it’s just a mirror copy.\n* **Use case**: Write-heavy or performance-sensitive workloads (databases, virtualization) where uptime matters more than capacity efficiency.\n\n---\n\n**Summary difference**:\nRAID 5 trades capacity for economy with single-disk redundancy but slower writes/rebuilds. RAID {{int:8:12}} trades capacity for speed and stronger redundancy.\n\nWould you like me to pull current disk/RAID configurations from your Probler inventory to see which arrays you have running today?",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2437,
+            "completion_tokens": 371
+          },
+          "chars": 1605
+        }
+      ]
+    }
+  ]
+}

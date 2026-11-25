@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-08/v0/s1",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:18:03Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\n\nNext part of the conversation:\nUser: Delete the down polling targets.\n\nAssistant: There are 4 down targets: tgt-005, tgt-010, tgt-015, tgt-020. Do you want me to delete them?\n\nUser: Yes.\n\nAssistant: Deleted 4 polling targets.\n\nUser: Thanks.\n\nAssistant: You're welcome.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary that replaces current one. Current summary is empty? It shows \"Current summary:\" then blank. We need to create summary containing facts: there are down polling targets: IDs tgt-005, tgt-010, tgt-015, tgt-020, and user asked to delete them, assistant did. So summary should capture that these four down polling targets have been deleted. Also perhaps note that the user wanted deletion of down polling targets. No other info. Write plain text.",
+          "text": "User requested deletion of all down polling targets. Assistant identified four down targets (tgt-005, tgt-010, tgt-015, tgt-020) and, after user confirmation, deleted all four. The down polling targets have been removed.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 292,
+            "completion_tokens": 161
+          },
+          "chars": 693
+        }
+      ]
+    }
+  ]
+}

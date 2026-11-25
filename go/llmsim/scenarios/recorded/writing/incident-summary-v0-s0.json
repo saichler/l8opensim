@@ -1,0 +1,44 @@
+{
+  "id": "writing/incident-summary/v0/s0",
+  "flavor": "writing",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:52:20Z",
+  "turns": [
+    {
+      "user_message": "Write an incident summary for customers about a 25-minute outage of the login service caused by an expired certificate.",
+      "steps": [
+        {
+          "reasoning": "The user wants an incident summary for customers about a 25-minute outage of the login service caused by an expired certificate. This is a textual task, no data needed. We need to produce a report. Use create_file to attach the summary as a .md or .txt. Probably .md.\n\nWe need to write a concise incident summary: include what happened, when, duration, cause, impact, resolution, steps to prevent.\n\nWe can just create file with content.\n\nWe need to call create_file with file_name \"incident_summary_login_service.md\" and appropriate content.\n\nLet's do that.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "# Incident Summary: Login Service Outage\n\n**Date:** [Insert Date]\n**Duration:** {{int:20:30}} minutes\n**Start Time:** [Insert Start Time]\n**End Time:** [Insert End Time]\n\n## Overview\nOn [Insert Date], our login service experienced a service interruption lasting approximately {{int:20:30}} minutes. The outage prevented users from authenticating and accessing their accounts.\n\n## Cause\nThe root cause was an **expired SSL/TLS certificate** used by the login service. The certificate expiration was not detected by our monitoring system in time, leading to the service rejecting secure connections.\n\n## Impact\n- Users were unable to log in to the platform.\n- All services that require authentication were inaccessible during the outage.\n- No data loss occurred; the impact was limited to authentication failures.\n\n## Resolution\n1. **Certificate Renewal:** The expired certificate was promptly renewed and installed.\n2. **Service Restart:** The login service was restarted to apply the new certificate.\n3. **Verification:** Post‑restart tests confirmed that authentication was functioning correctly.\n\nThe service was fully restored within {{int:20:30}} minutes of the initial impact.\n\n## Preventive Measures\n- **Automated Certificate Monitoring:** Implement automated alerts for upcoming certificate expirations.\n- **Certificate Management Process:** Establish a documented process for regular certificate review and renewal.\n- **Redundant Authentication Path:** Deploy a secondary authentication endpoint to provide failover capability.\n\nWe apologize for any inconvenience this outage may have caused and appreciate your understanding as we continue to improve the reliability of our services.\n\n---\n*If you have any questions or require further assistance, please contact our support team.*",
+                "file_name": "incident_summary_login_service.md"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1758,\"file_name\":\"incident_summary_login_service.md\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1809,
+            "completion_tokens": 504
+          },
+          "chars": 2421
+        },
+        {
+          "text": "I’ve prepared an incident summary for the {{int:20:30}}‑minute login‑service outage caused by an expired certificate. You can download it below.\n\n**File:** incident_summary_login_service.md (Markdown)",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2217,
+            "completion_tokens": 43
+          },
+          "chars": 195
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "csv_analyze/uptime/v0/s0",
+  "flavor": "csv_analyze",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:21:36Z",
+  "turns": [
+    {
+      "user_message": "Which services had the worst availability in this CSV?\n```csv\nservice,uptime_pct,incidents\napi,99.95,1\ndb,99.2,4\ncache,99.99,0\nqueue,98.7,6\nweb,99.9,2\n```",
+      "steps": [
+        {
+          "reasoning": "The user provides a CSV with services, uptime_pct, incidents. They ask \"Which services had the worst availability in this CSV?\" We need to interpret worst availability meaning lowest uptime_pct. From data: queue 98.7, db 99.2, api 99.95, web 99.9, cache 99.99. So worst is queue (98.7). Next worst is db (99.2). Could mention both. Provide answer. No need to use tools because data given.",
+          "text": "The service with the lowest availability (lowest `uptime_pct`) in the CSV is **`queue`** at **98.7 %**. The next‑lowest is **`db`** at **99.2 %**. All other services have higher uptime percentages.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1850,
+            "completion_tokens": 173
+          },
+          "chars": 593
+        }
+      ]
+    }
+  ]
+}

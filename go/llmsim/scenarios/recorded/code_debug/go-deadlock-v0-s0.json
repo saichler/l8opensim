@@ -1,0 +1,24 @@
+{
+  "id": "code_debug/go-deadlock/v0/s0",
+  "flavor": "code_debug",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T18:56:14Z",
+  "turns": [
+    {
+      "user_message": "fatal error: all goroutines are asleep - deadlock!\n```go\nfunc main() {\n    ch := make(chan int)\n    ch \u003c- 1\n    fmt.Println(\u003c-ch)\n}\n```\nWhy?",
+      "steps": [
+        {
+          "reasoning": "We need to explain deadlock. The code creates unbuffered channel, then tries to send before any receiver, causing deadlock. Provide explanation.",
+          "text": "The program dead‑locks because it tries to **send on an unbuffered channel before there is a receiver**.\n\n```go\nch := make(chan int)   // unbuffered channel (capacity 0)\nch \u003c- 1                 // \u003c-- blocks here, waiting for a receiver\nfmt.Println(\u003c-ch)      // this line is never reached\n```\n\n* In Go, an **unbuffered channel** can transfer a value only when **both** a sender and a receiver are ready at the same time.\n* The statement `ch \u003c- 1` blocks the goroutine (the only goroutine in this program) until another goroutine receives from `ch`.\n* Because there is no other goroutine, the program never reaches the `fmt.Println(\u003c-ch)` line that would receive the value, so the sender blocks forever.\n* When the main goroutine is blocked and no other goroutine can make progress, the Go runtime detects that **all goroutines are asleep** and panics with the “fatal error: all goroutines are asleep - deadlock!” message.\n\n### How to fix it\n\n1. **Make the channel buffered** so the send can succeed without an immediate receiver:\n\n   ```go\n   func main() {\n       ch := make(chan int, 1) // buffer size 1\n       ch \u003c- 1                  // now succeeds immediately\n       fmt.Println(\u003c-ch)       // receives the value\n   }\n   ```\n\n2. **Or launch a separate goroutine** that receives (or sends) the value:\n\n   ```go\n   func main() {\n       ch := make(chan int)\n\n       go func() {\n           fmt.Println(\u003c-ch) // receiver runs in its own goroutine\n       }()\n\n       ch \u003c- 1 // sender can now proceed because the receiver is ready\n   }\n   ```\n\nBoth approaches ensure that a sender and a receiver are ready simultaneously, eliminating the deadlock.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1831,
+            "completion_tokens": 437
+          },
+          "chars": 1797
+        }
+      ]
+    }
+  ]
+}

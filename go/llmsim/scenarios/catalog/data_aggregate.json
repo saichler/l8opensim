@@ -1,0 +1,102 @@
+{
+  "flavor": "data_aggregate",
+  "mode": "tanto",
+  "validators": [],
+  "expect_tools": [
+    "l8query"
+  ],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "devices-per-vendor",
+      "params": {},
+      "turns": [
+        "How many network devices do we have per vendor?"
+      ]
+    },
+    {
+      "id": "status-breakdown",
+      "params": {},
+      "turns": [
+        "Give me a breakdown of device status across the network."
+      ]
+    },
+    {
+      "id": "total-gpus",
+      "params": {},
+      "turns": [
+        "How many GPUs do we have in total, and on how many servers?"
+      ]
+    },
+    {
+      "id": "pods-per-cluster",
+      "params": {},
+      "turns": [
+        "How many pods are running per cluster?"
+      ]
+    },
+    {
+      "id": "alarms-by-severity",
+      "params": {},
+      "turns": [
+        "Count the active alarms by severity."
+      ]
+    },
+    {
+      "id": "avg-interfaces",
+      "params": {},
+      "turns": [
+        "What is the average number of interfaces per device, per vendor?"
+      ]
+    },
+    {
+      "id": "restarts-per-namespace",
+      "params": {
+        "cluster": [
+          "prod-east",
+          "prod-west"
+        ]
+      },
+      "turns": [
+        "What is the total number of pod restarts per namespace in {{cluster}}?"
+      ]
+    },
+    {
+      "id": "devices-per-site",
+      "params": {},
+      "turns": [
+        "How many devices are there per site?"
+      ]
+    },
+    {
+      "id": "events-by-type",
+      "params": {},
+      "turns": [
+        "Show the distribution of events by type."
+      ]
+    },
+    {
+      "id": "gpu-models",
+      "params": {},
+      "turns": [
+        "How many GPU servers do we have of each model?"
+      ]
+    },
+    {
+      "id": "cluster-summary",
+      "params": {},
+      "turns": [
+        "Summarize each Kubernetes cluster: nodes, ready nodes, pods and failed pods."
+      ]
+    },
+    {
+      "id": "alarm-occurrences",
+      "params": {},
+      "turns": [
+        "Which alarm names have the highest total occurrence count?"
+      ]
+    }
+  ]
+}

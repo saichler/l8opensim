@@ -1,0 +1,24 @@
+{
+  "id": "code_review/go-sql/v0/s2",
+  "flavor": "code_review",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T21:05:45Z",
+  "turns": [
+    {
+      "user_message": "Review this code for bugs and security issues:\n```go\nfunc GetUser(db *sql.DB, id string) (*User, error) {\n    rows, _ := db.Query(\"SELECT id, name, email FROM users WHERE id = '\" + id + \"'\")\n    var u User\n    for rows.Next() {\n        rows.Scan(\u0026u.ID, \u0026u.Name, \u0026u.Email)\n    }\n    return \u0026u, nil\n}\n```",
+      "steps": [
+        {
+          "reasoning": "Review this code for bugs and security issues:\n```go\nfunc GetUser(db *sql.DB, id string) (*User, error) {\n    rows, _ := db.Query(\"SELECT id, name, email FROM users WHERE id = '\" + id + \"'\")\n    var u User\n    for rows.Next() {\n        rows.Scan(\u0026u.ID, \u0026u.Name, \u0026u.Email)\n    }\n    return \u0026u, nil\n}\n```\n\nWe need review code for bugs and security issues. The user asks to review code. No tools needed? Could be just analysis. Probably no need for tools. Just respond with bugs: SQL injection, ignoring error, rows.Next loop without scan error check, not closing rows, returning pointer to zero value if no rows, not checking rows.Next error, using string concatenation.\n\nMaybe also not using prepared statements, no context timeout, no rows.Close(), error ignored for Query and Scan, potential panic if scan fails, returning nil error always.\n\nSecurity issues: SQL injection, maybe information leakage.\n\nWe can respond directly.\n\nNo tool needed. The instructions about tools are general. Might just answer.\n\nProbably provide list.\n\nCould also mention that rows.Scan should be inside loop but if no rows, u is zero value.\n\nAlso ignoring error from db.Query and rows.Next and rows.Scan.\n\nBest practice: use parameterized query.\n\nNo need for L8Query.\n\nReturn answer.\n\nPossibly ask if they want fixed code.\n\nProceed.",
+          "text": "This code has both security and correctness bugs.\n\n**Security issues**\n\n1. **SQL Injection**\n```go\ndb.Query(\"SELECT id, name, email FROM users WHERE id = '\" + id + \"'\")\n```\n`id` is concatenated directly into the SQL string. An attacker can pass e.g. ` ' OR '1'='1` and read all users, or worse.  \nUse a prepared statement / parameterized query.\n\n2. **Error suppression hides failures**\n```go\nrows, _ := db.Query(...)\n```\nThe error from `Query` is discarded. A DB error, bad connection, syntax error etc will be silently ignored and the function will continue with `rows == nil`.\n\n**Bugs / reliability issues**\n\n3. **Rows not closed**\n`rows` is never closed with `defer rows.Close()`. This leaks DB connections.\n\n4. **Errors from iteration and Scan are ignored**\n```go\nfor rows.Next() {\n    rows.Scan(\u0026u.ID, \u0026u.Name, \u0026u.Email)\n}\n```\n* `rows.Next()` returns an error which is never checked.\n* `rows.Scan()` can fail and its error is ignored. If Scan fails, `u` will contain partial / zero values.\n\n5. **Return value is wrong when no row is found**\nIf the query returns zero rows, the loop never runs, `u` stays zero-valued and the function returns `\u0026u, nil` as if it succeeded. It should return `nil, sql.ErrNoRows` or similar.\n\n6. **Always returns non-nil error value**\nThe function signature returns `error` but it always returns `nil`. Callers can never distinguish success from failure.\n\n7. **Unnecessary loop**\nThe query is by primary key `id`, so at most one row is expected. Using `Query` + loop is wasteful; `QueryRow` is the correct API.\n\nA safe pattern:\n\n```go\nfunc GetUser(db *sql.DB, id string) (*User, error) {\n    const q = `SELECT id, name, email FROM users WHERE id = ?`\n    row := db.QueryRow(q, id)\n\n    var u User\n    err := row.Scan(\u0026u.ID, \u0026u.Name, \u0026u.Email)\n    if err != nil {\n        if errors.Is(err, sql.ErrNoRows) {\n            return nil, nil // or return nil, sql.ErrNoRows\n        }\n        return nil, err\n    }\n    return \u0026u, nil\n}\n```\n\nKey fixes:\n* Parameterized query prevents SQL injection\n* Errors from `QueryRow`/`Scan` are checked and propagated\n* No resource leak, no zero-value false positive\n* No string concatenation for SQL",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2515,
+            "completion_tokens": 857
+          },
+          "chars": 3474
+        }
+      ]
+    }
+  ]
+}

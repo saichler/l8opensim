@@ -1,0 +1,177 @@
+{
+  "id": "explore_models/k8s-data/v0/s2",
+  "flavor": "explore_models",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T22:23:25Z",
+  "turns": [
+    {
+      "user_message": "What kind of Kubernetes data do you have?",
+      "steps": [
+        {
+          "reasoning": "What kind of Kubernetes data do you have?\n\nWe need to answer what kind of Kubernetes data do you have? Probably describe models: K8SCluster, K8SNode, K8SPod, K8SDeployment, etc. Use list_modules to see models, describe_model for each Kubernetes model.\n\nWe should list modules first.",
+          "tool_calls": [
+            {
+              "name": "list_modules",
+              "arguments": {}
+            }
+          ],
+          "tool_results": [
+            "{\"models\":[{\"area\":\"Inventory\",\"model\":\"NetworkDevice\",\"primaryKey\":\"id\",\"service\":\"NetDev\"},{\"area\":\"Inventory\",\"model\":\"GpuDevice\",\"primaryKey\":\"id\",\"service\":\"GpuDev\"},{\"area\":\"Kubernetes\",\"model\":\"K8SCluster\",\"primaryKey\":\"name\",\"service\":\"K8sClstr\"},{\"area\":\"Kubernetes\",\"model\":\"K8SNode\",\"primaryKey\":\"name\",\"service\":\"K8sNode\"},{\"area\":\"Kubernetes\",\"model\":\"K8SPod\",\"primaryKey\":\"key\",\"service\":\"K8sPod\"},{\"area\":\"Kubernetes\",\"model\":\"K8SDeployment\",\"primaryKey\":\"key\",\"service\":\"K8sDeploy\"},{\"area\":\"Alarms\",\"model\":\"Alarm\",\"primaryKey\":\"alarmId\",\"service\":\"Alarm\"},{\"area\":\"Alarms\",\"model\":\"EventRecord\",\"primaryKey\":\"eventId\",\"service\":\"Events\"},{\"area\":\"Collection\",\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\",\"service\":\"Targets\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2433,
+            "completion_tokens": 103
+          },
+          "chars": 296
+        },
+        {
+          "reasoning": "What kind of Kubernetes data do you have?\n\nWe have models: K8SCluster, K8SNode, K8SPod, K8SDeployment. Need to describe data.\n\nWe should describe_model for each to see fields.\n\n",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SCluster"
+              }
+            },
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SNode"
+              }
+            },
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SPod"
+              }
+            },
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SDeployment"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"k8sVersion\",\"type\":\"string\"},{\"path\":\"platform\",\"type\":\"string\"},{\"path\":\"summary.totalNodes\",\"type\":\"int\"},{\"path\":\"summary.readyNodes\",\"type\":\"int\"},{\"path\":\"summary.totalPods\",\"type\":\"int\"},{\"path\":\"summary.runningPods\",\"type\":\"int\"},{\"path\":\"summary.failedPods\",\"type\":\"int\"},{\"path\":\"summary.pendingPods\",\"type\":\"int\"},{\"path\":\"summary.totalDeployments\",\"type\":\"int\"},{\"path\":\"summary.availableDeployments\",\"type\":\"int\"},{\"path\":\"summary.totalNamespaces\",\"type\":\"int\"},{\"path\":\"summary.warningEvents\",\"type\":\"int\"}],\"model\":\"K8SCluster\",\"primaryKey\":\"name\"}",
+            "{\"fields\":[{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"roles\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"version\",\"type\":\"string\"},{\"path\":\"internalIp\",\"type\":\"string\"},{\"path\":\"osImage\",\"type\":\"string\"},{\"path\":\"kernelVersion\",\"type\":\"string\"},{\"path\":\"containerRuntime\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SNode\",\"primaryKey\":\"name\"}",
+            "{\"fields\":[{\"path\":\"key\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"namespace\",\"type\":\"string\"},{\"path\":\"ready.count\",\"type\":\"int\"},{\"path\":\"ready.outof\",\"type\":\"int\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"restarts.count\",\"type\":\"int\"},{\"path\":\"restarts.ago\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"ip\",\"type\":\"string\"},{\"path\":\"node\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SPod\",\"primaryKey\":\"key\"}",
+            "{\"fields\":[{\"path\":\"key\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"namespace\",\"type\":\"string\"},{\"path\":\"ready\",\"type\":\"string\"},{\"path\":\"upToDate\",\"type\":\"string\"},{\"path\":\"available\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SDeployment\",\"primaryKey\":\"key\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2679,
+            "completion_tokens": 248
+          },
+          "chars": 317
+        },
+        {
+          "reasoning": "What kind of Kubernetes data do you have?\n\nWe need answer what kind of Kubernetes data. Use describe. We have models K8SCluster, K8SNode, K8SPod, K8SDeployment. Provide summary of fields.\n\nProbably give overview. Maybe also query count? The question is what kind of Kubernetes data do you have. Could give description of fields and maybe sample counts.\n\nWe should maybe query counts to show data existence. Could do count(*) for each.\n\nLet's do l8query for counts.\n\n",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select count(*) from K8SCluster"
+              }
+            },
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select count(*) from K8SNode"
+              }
+            },
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select count(*) from K8SPod"
+              }
+            },
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select count(*) from K8SDeployment"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"count(*)\":3}],\"model\":\"K8SCluster\"}",
+            "{\"aggregates\":[{\"count(*)\":12}],\"model\":\"K8SNode\"}",
+            "{\"aggregates\":[{\"count(*)\":60}],\"model\":\"K8SPod\"}",
+            "{\"aggregates\":[{\"count(*)\":20}],\"model\":\"K8SDeployment\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 3393,
+            "completion_tokens": 325
+          },
+          "chars": 662
+        },
+        {
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select * from K8SCluster limit 5"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":3,\"model\":\"K8SCluster\",\"records\":[{\"k8sVersion\":\"v1.30.4\",\"name\":\"prod-east\",\"platform\":\"EKS\",\"summary\":{\"availableDeployments\":72,\"failedPods\":4,\"pendingPods\":0,\"readyNodes\":4,\"runningPods\":367,\"totalDeployments\":35,\"totalNamespaces\":16,\"totalNodes\":10,\"totalPods\":264,\"warningEvents\":11}},{\"k8sVersion\":\"v1.29.6\",\"name\":\"prod-west\",\"platform\":\"GKE\",\"summary\":{\"availableDeployments\":39,\"failedPods\":0,\"pendingPods\":4,\"readyNodes\":9,\"runningPods\":85,\"totalDeployments\":62,\"totalNamespaces\":23,\"totalNodes\":9,\"totalPods\":124,\"warningEvents\":29}},{\"k8sVersion\":\"v1.31.1\",\"name\":\"staging\",\"platform\":\"kubeadm\",\"summary\":{\"availableDeployments\":49,\"failedPods\":1,\"pendingPods\":4,\"readyNodes\":5,\"runningPods\":186,\"totalDeployments\":21,\"totalNamespaces\":7,\"totalNodes\":6,\"totalPods\":316,\"warningEvents\":9}}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 3757,
+            "completion_tokens": 54
+          },
+          "chars": 51
+        },
+        {
+          "reasoning": "We need to answer what kind of Kubernetes data do you have. Provide summary of models, fields, counts, sample.\n\nProbably also show a sample node, pod, deployment.\n\nLet's get sample nodes.\n\n",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select * from K8SNode limit 5"
+              }
+            },
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select * from K8SPod limit 5"
+              }
+            },
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select * from K8SDeployment limit 5"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":12,\"model\":\"K8SNode\",\"records\":[{\"age\":\"285d\",\"clusterName\":\"prod-east\",\"containerRuntime\":\"containerd://1.7.18\",\"internalIp\":\"10.0.1.1\",\"kernelVersion\":\"5.15.0-105-generic\",\"name\":\"worker-01\",\"osImage\":\"Ubuntu 22.04.4 LTS\",\"roles\":\"worker\",\"status\":\"K8S_NODE_STATUS_READY\",\"version\":\"v1.30.4\"},{\"age\":\"40d\",\"clusterName\":\"staging\",\"containerRuntime\":\"containerd://1.7.18\",\"internalIp\":\"10.0.1.2\",\"kernelVersion\":\"5.15.0-105-generic\",\"name\":\"worker-02\",\"osImage\":\"Ubuntu 22.04.4 LTS\",\"roles\":\"worker\",\"status\":\"K8S_NODE_STATUS_NOT_READY\",\"version\":\"v1.30.4\"},{\"age\":\"171d\",\"clusterName\":\"prod-west\",\"containerRuntime\":\"containerd://1.7.18\",\"internalIp\":\"10.0.1.3\",\"kernelVersion\":\"5.15.0-105-generic\",\"name\":\"worker-03\",\"osImage\":\"Flatcar 3815.2.5\",\"roles\":\"worker\",\"status\":\"K8S_NODE_STATUS_READY\",\"version\":\"v1.31.1\"},{\"age\":\"172d\",\"clusterName\":\"staging\",\"containerRuntime\":\"containerd://1.7.18\",\"internalIp\":\"10.0.1.4\",\"kernelVersion\":\"5.15.0-105-generic\",\"name\":\"worker-04\",\"osImage\":\"Flatcar 3815.2.5\",\"roles\":\"control-plane\",\"status\":\"K8S_NODE_STATUS_NOT_READY\",\"version\":\"v1.31.1\"},{\"age\":\"30d\",\"clusterName\":\"prod-east\",\"containerRuntime\":\"containerd://1.7.22\",\"internalIp\":\"10.0.1.5\",\"kernelVersion\":\"6.6.30-flatcar\",\"name\":\"worker-05\",\"osImage\":\"Ubuntu 22.04.4 LTS\",\"roles\":\"worker\",\"status\":\"K8S_NODE_STATUS_READY\",\"version\":\"v1.30.4\"}]}",
+            "{\"count\":60,\"model\":\"K8SPod\",\"records\":[{\"age\":\"230d\",\"clusterName\":\"staging\",\"ip\":\"10.244.3.1\",\"key\":\"pod-001\",\"name\":\"billing-c777-nw9\",\"namespace\":\"kube-system\",\"node\":\"worker-01\",\"ready\":{\"count\":1,\"outof\":3},\"restarts\":{\"ago\":\"\",\"count\":5},\"status\":\"K8S_POD_STATUS_RUNNING\"},{\"age\":\"91d\",\"clusterName\":\"staging\",\"ip\":\"10.244.3.2\",\"key\":\"pod-002\",\"name\":\"billing-564f-yrf\",\"namespace\":\"monitoring\",\"node\":\"worker-02\",\"ready\":{\"count\":1,\"outof\":1},\"restarts\":{\"ago\":\"\",\"count\":1},\"status\":\"K8S_POD_STATUS_RUNNING\"},{\"age\":\"105d\",\"clusterName\":\"prod-west\",\"ip\":\"10.244.3.3\",\"key\":\"pod-003\",\"name\":\"api-5abc-wqi\",\"namespace\":\"payments\",\"node\":\"worker-03\",\"ready\":{\"count\":0,\"outof\":1},\"restarts\":{\"ago\":\"2m\",\"count\":3},\"status\":\"K8S_POD_STATUS_PENDING\"},{\"age\":\"90d\",\"clusterName\":\"prod-east\",\"ip\":\"10.244.3.4\",\"key\":\"pod-004\",\"name\":\"billing-4ff1-jof\",\"namespace\":\"web\",\"node\":\"worker-04\",\"ready\":{\"count\":2,\"outof\":2},\"restarts\":{\"ago\":\"3h\",\"count\":20},\"status\":\"K8S_POD_STATUS_PENDING\"},{\"age\":\"97d\",\"clusterName\":\"prod-east\",\"ip\":\"10.244.3.5\",\"key\":\"pod-005\",\"name\":\"web-eadd-pyj\",\"namespace\":\"payments\",\"node\":\"worker-05\",\"ready\":{\"count\":1,\"outof\":2},\"restarts\":{\"ago\":\"1d\",\"count\":16},\"status\":\"K8S_POD_STATUS_RUNNING\"}]}",
+            "{\"count\":20,\"model\":\"K8SDeployment\",\"records\":[{\"age\":\"256d\",\"available\":\"2\",\"clusterName\":\"prod-east\",\"key\":\"dep-001\",\"name\":\"reports\",\"namespace\":\"data\",\"ready\":\"2/2\",\"upToDate\":\"3\"},{\"age\":\"152d\",\"available\":\"2\",\"clusterName\":\"prod-west\",\"key\":\"dep-002\",\"name\":\"web\",\"namespace\":\"default\",\"ready\":\"3/3\",\"upToDate\":\"3\"},{\"age\":\"213d\",\"available\":\"0\",\"clusterName\":\"prod-east\",\"key\":\"dep-003\",\"name\":\"api\",\"namespace\":\"default\",\"ready\":\"2/3\",\"upToDate\":\"3\"},{\"age\":\"223d\",\"available\":\"3\",\"clusterName\":\"staging\",\"key\":\"dep-004\",\"name\":\"search\",\"namespace\":\"payments\",\"ready\":\"2/3\",\"upToDate\":\"3\"},{\"age\":\"100d\",\"available\":\"2\",\"clusterName\":\"prod-west\",\"key\":\"dep-005\",\"name\":\"billing\",\"namespace\":\"web\",\"ready\":\"1/1\",\"upToDate\":\"3\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 4077,
+            "completion_tokens": 212
+          },
+          "chars": 338
+        },
+        {
+          "reasoning": "What kind of Kubernetes data do you have? We have listed modules and described models and counts. Provide summary.\n\nWe should give overview: 3 clusters, {{int:9:15}} nodes, {{int:48:72}} pods, {{int:16:24}} deployments. Provide details of fields. Possibly give sample.\n\nUser asks what kind of Kubernetes data do you have. Provide summary of models and sample data.\n\nNo need to export. Could provide summary.\n\nMake sure to respond with helpful summary.\n\nProbably mention fields.\n\nProvide answer.\n\n",
+          "text": "Here’s the Kubernetes data I can access in Probler:\n\n**Models available**\n\n* **K8SCluster** – 3 clusters\n  Fields: `name`, `k8sVersion`, `platform`, and summary aggregates:\n  `summary.totalNodes`, `summary.readyNodes`, `summary.totalPods`, `summary.runningPods`, `summary.failedPods`, `summary.pendingPods`, `summary.totalDeployments`, `summary.availableDeployments`, `summary.totalNamespaces`, `summary.warningEvents`\n\n  Examples:\n  * `prod-east` – v1.30.4, EKS – {{int:8:12}} nodes / 4 ready, {{int:211:317}} pods / {{int:293:441}} running*, {{int:28:42}} deployments / {{int:57:87}} available, {{int:12:20}} namespaces, {{int:8:14}} warningEvents\n  * `prod-west` – v1.29.6, GKE – 9 nodes / 9 ready, {{int:99:149}} pods / {{int:68:102}} running, {{int:49:75}} deployments / {{int:31:47}} available, {{int:18:28}} namespaces, {{int:23:35}} warningEvents\n  * `staging` – v1.31.1, kubeadm – 6 nodes / 5 ready, {{int:252:380}} pods / {{int:148:224}} running, {{int:16:26}} deployments / {{int:39:59}} available, 7 namespaces, 9 warningEvents\n  *\\* summary numbers are cluster-level aggregates stored in the cluster record.*\n\n* **K8SNode** – {{int:9:15}} nodes\n  Fields: `name`, `status`, `roles`, `age`, `version`, `internalIp`, `osImage`, `kernelVersion`, `containerRuntime`, `clusterName`\n  Sample: `worker-01` in `prod-east`, status `K8S_NODE_STATUS_READY`, roles `worker`, v1.30.4, containerd://1.7.18, Ubuntu 22.04.4 LTS, internalIp 10.0.1.1, age 285d\n\n* **K8SPod** – {{int:48:72}} pods\n  Fields: `key`, `name`, `namespace`, `ready.count`, `ready.outof`, `status`, `restarts.count`, `restarts.ago`, `age`, `ip`, `node`, `clusterName`\n  Sample: `pod-001` `billing-c777-nw9` in `staging` / `kube-system` on `worker-01`, status `K8S_POD_STATUS_RUNNING`, ready 1/3, restarts 5\n\n* **K8SDeployment** – {{int:16:24}} deployments\n  Fields: `key`, `name`, `namespace`, `ready`, `upToDate`, `available`, `age`, `clusterName`\n  Sample: `dep-001` `reports` in `prod-east` / `data`, ready 2/2, upToDate 3, available 2, age 256d\n\nYou can query these for counts, status breakdowns, per-cluster summaries, node health, pod readiness/restarts, and deployment availability. Want me to export the full tables or run a specific aggregation, e.g., pods by status per cluster?\n",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 5377,
+            "completion_tokens": 735
+          },
+          "chars": 2522
+        }
+      ]
+    }
+  ]
+}

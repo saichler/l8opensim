@@ -1,0 +1,140 @@
+{
+  "flavor": "data_query",
+  "mode": "tanto",
+  "validators": [],
+  "expect_tools": [
+    "l8query"
+  ],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "devices-down",
+      "params": {},
+      "turns": [
+        "Which network devices are down right now?"
+      ]
+    },
+    {
+      "id": "gpus-at-site",
+      "params": {
+        "site": [
+          "Austin",
+          "Dallas",
+          "Houston",
+          "Seattle",
+          "Denver",
+          "Chicago"
+        ]
+      },
+      "turns": [
+        "Show me the GPU servers in {{site}}."
+      ]
+    },
+    {
+      "id": "critical-alarms",
+      "params": {},
+      "turns": [
+        "List the active critical alarms."
+      ]
+    },
+    {
+      "id": "vendor-devices",
+      "params": {
+        "vendor": [
+          "Cisco",
+          "Juniper",
+          "Arista",
+          "Nokia"
+        ]
+      },
+      "turns": [
+        "List all {{vendor}} devices with their IP addresses and status."
+      ]
+    },
+    {
+      "id": "pods-failing",
+      "params": {
+        "cluster": [
+          "prod-east",
+          "prod-west",
+          "staging"
+        ]
+      },
+      "turns": [
+        "Which pods are failing or pending in the {{cluster}} cluster?"
+      ]
+    },
+    {
+      "id": "nodes-not-ready",
+      "params": {},
+      "turns": [
+        "Are any Kubernetes nodes not ready?"
+      ]
+    },
+    {
+      "id": "device-detail",
+      "params": {
+        "n": [
+          "01",
+          "05",
+          "12"
+        ]
+      },
+      "turns": [
+        "Show me the details of device core-rtr-{{n}}."
+      ]
+    },
+    {
+      "id": "recent-events",
+      "params": {},
+      "turns": [
+        "Show me the 10 most recent events."
+      ]
+    },
+    {
+      "id": "gpu-drivers",
+      "params": {},
+      "turns": [
+        "Which GPU servers run a driver older than 550?"
+      ]
+    },
+    {
+      "id": "restarting-pods",
+      "params": {},
+      "turns": [
+        "Which pods restarted more than 10 times?"
+      ]
+    },
+    {
+      "id": "alarms-at-site",
+      "params": {
+        "site": [
+          "Austin",
+          "Dallas",
+          "Houston",
+          "Seattle",
+          "Denver",
+          "Chicago"
+        ]
+      },
+      "turns": [
+        "Show the alarms for devices in {{site}}."
+      ]
+    },
+    {
+      "id": "followup-filter",
+      "params": {
+        "vendor": [
+          "Cisco",
+          "Juniper"
+        ]
+      },
+      "turns": [
+        "List the routers that are online.",
+        "Now only the {{vendor}} ones, and add their software version."
+      ]
+    }
+  ]
+}

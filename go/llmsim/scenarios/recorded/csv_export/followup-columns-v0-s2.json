@@ -1,0 +1,104 @@
+{
+  "id": "csv_export/followup-columns/v0/s2",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:26:50Z",
+  "turns": [
+    {
+      "user_message": "Export all network devices to CSV.",
+      "steps": [
+        {
+          "reasoning": "The user wants to export all network devices to CSV. Use export_csv with query select * from NetworkDevice (no limit). Provide file name maybe network_devices.csv. Need to call export_csv.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "network_devices.csv",
+                "query": "select * from NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"id\",\"equipmentinfo.vendor\",\"equipmentinfo.model\",\"equipmentinfo.series\",\"equipmentinfo.sysName\",\"equipmentinfo.ipAddress\",\"equipmentinfo.serialNumber\",\"equipmentinfo.version\",\"equipmentinfo.firmwareVersion\",\"equipmentinfo.location\",\"equipmentinfo.deviceType\",\"equipmentinfo.deviceStatus\",\"equipmentinfo.uptime\",\"equipmentinfo.lastSeen\",\"equipmentinfo.interfaceCount\"],\"file_name\":\"network_devices.csv\",\"rows\":19}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 81
+          },
+          "chars": 271
+        },
+        {
+          "text": "Attached network_devices.csv with {{int:15:23}} network device records.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1929,
+            "completion_tokens": 15
+          },
+          "chars": 60
+        }
+      ]
+    },
+    {
+      "user_message": "Export it again with only the hostname, IP address and uptime columns.",
+      "steps": [
+        {
+          "reasoning": "We need to export CSV with selected columns: hostname, IP address, uptime. Need to know field paths for these columns in NetworkDevice model. Use describe_model first.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1829,
+            "completion_tokens": 63
+          },
+          "chars": 206
+        },
+        {
+          "reasoning": "We need to export CSV with specific columns: hostname, IP address, uptime. The fields likely are equipmentinfo.sysName (hostname?), equipmentinfo.ipAddress, equipmentinfo.uptime. Use export_csv with columns array.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "columns": [
+                  "equipmentinfo.sysName",
+                  "equipmentinfo.ipAddress",
+                  "equipmentinfo.uptime"
+                ],
+                "file_name": "network_devices_host_ip_uptime.csv",
+                "query": "select * from NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"equipmentinfo.sysName\",\"equipmentinfo.ipAddress\",\"equipmentinfo.uptime\"],\"file_name\":\"network_devices_host_ip_uptime.csv\",\"rows\":19}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2066,
+            "completion_tokens": 112
+          },
+          "chars": 396
+        },
+        {
+          "text": "Attached network_devices_host_ip_uptime.csv with the hostname, IP address, and uptime for {{int:15:23}} devices.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2177,
+            "completion_tokens": 26
+          },
+          "chars": 101
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "summarize_long/attached/v0/s1",
+  "flavor": "summarize_long",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T23:01:56Z",
+  "turns": [
+    {
+      "user_message": "[Attached file \"notes.txt\"]\nOn Tuesday at 14:05 UTC the payments API started returning 503 errors. Monitoring alerted at 14:07. The on-call engineer found that a configuration change deployed at 13:58 lowered the database connection pool from 200 to 20. Traffic peaked at 14:00 and requests queued waiting for connections until the load balancer timed them out. The change was rolled back at 14:31 and error rates returned to normal by 14:36. About 18 percent of payment attempts failed during the incident. Action items: add validation for pool sizes in the deployment pipeline, alert on connection pool saturation, and require a second reviewer for database configuration changes.\n[End of attached file \"notes.txt\"]\nSummarize the attached file.",
+      "steps": [
+        {
+          "reasoning": "[Attached file \"notes.txt\"]\nOn Tuesday at 14:05 UTC the payments API started returning {{int:402:604}} errors. Monitoring alerted at 14:07. The on-call engineer found that a configuration change deployed at 13:58 lowered the database connection pool from {{int:160:240}} to {{int:16:24}}. Traffic peaked at 14:00 and requests queued waiting for connections until the load balancer timed them out. The change was rolled back at 14:31 and error rates returned to normal by 14:36. About {{int:14:22}} percent of payment attempts failed during the incident. Action items: add validation for pool sizes in the deployment pipeline, alert on connection pool saturation, and require a second reviewer for database configuration changes.\nSummarize the attached file.\n\nWe need to summarize attached file. No tool needed. Just summarize.\n\nProbably output summary.\n\nWe should not hallucinate. Provide summary.\n\nProbably concise bullet points.\n\nNo tools needed.\n\n",
+          "text": "The notes describe a payment API outage on Tuesday:\n\n* **Timeline**\n  * 13:58 UTC – Configuration change deployed that lowered the database connection pool from {{int:160:240}} to {{int:16:24}}.\n  * 14:00 UTC – Traffic peaked.\n  * 14:05 UTC – Payments API started returning {{int:402:604}} errors.\n  * 14:07 UTC – Monitoring alerted.\n  * 14:31 UTC – Change was rolled back.\n  * 14:36 UTC – Error rates returned to normal.\n\n* **Root cause / impact**\n  * The reduced pool caused requests to queue waiting for connections until the load balancer timed them out.\n  * ~18% of payment attempts failed during the incident.\n\n* **Action items**\n  * Add validation for pool sizes in the deployment pipeline.\n  * Alert on connection pool saturation.\n  * Require a second reviewer for database configuration changes.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2583,
+            "completion_tokens": 377
+          },
+          "chars": 1685
+        }
+      ]
+    }
+  ]
+}

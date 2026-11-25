@@ -1,0 +1,24 @@
+{
+  "id": "code_debug/go-json/v0/s2",
+  "flavor": "code_debug",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:02:06Z",
+  "turns": [
+    {
+      "user_message": "My Go struct marshals to `{}` with encoding/json:\n```go\ntype user struct {\n    name string\n    age  int\n}\n```\nWhy is it empty?",
+      "steps": [
+        {
+          "reasoning": "We need to answer a programming question. No tools needed. Explain that fields need to be exported (capitalized) for JSON marshaling. Also need tags maybe. Provide solution.",
+          "text": "`encoding/json` only marshals **exported** struct fields.  \nIn Go a field is exported (visible to other packages, including the JSON package) only when its name starts with an upper‑case letter.  \n\nYour struct is defined with lower‑case field names:\n\n```go\ntype user struct {\n    name string // unexported\n    age  int    // unexported\n}\n```\n\nBecause both `name` and `age` are unexported, the JSON encoder sees no fields it is allowed to read, so it produces an empty JSON object `{}`.\n\n### Fix\n\nMake the fields exported (capitalize them). Optionally add JSON tags if you want a different key name or to omit empty values.\n\n```go\ntype User struct {                 // type name itself can be exported, but not required for marshaling\n    Name string `json:\"name\"`   // exported field\n    Age  int    `json:\"age\"`    // exported field\n}\n```\n\nNow:\n\n```go\nu := User{Name: \"Alice\", Age: 30}\nb, _ := json.Marshal(u)\nfmt.Println(string(b))   // {\"name\":\"Alice\",\"age\":30}\n```\n\nIf you need the struct type to stay unexported but still want its fields marshaled, you still have to export the fields (capitalise them); the type name’s visibility does not affect marshaling. \n\nSo the empty output is simply because the fields are unexported. Capitalize them (or provide custom `MarshalJSON` implementation) to get the expected JSON.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1823,
+            "completion_tokens": 369
+          },
+          "chars": 1500
+        }
+      ]
+    }
+  ]
+}

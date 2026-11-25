@@ -1,0 +1,44 @@
+{
+  "id": "code_app/flask-shortener/v0/s2",
+  "flavor": "code_app",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T18:42:42Z",
+  "turns": [
+    {
+      "user_message": "Write a simple URL shortener web app in Python Flask.",
+      "steps": [
+        {
+          "reasoning": "We need to respond with code for a Flask URL shortener. No tools needed. Provide a simple example, perhaps using SQLite. Provide instructions. Probably produce a .py file. Use create_file.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "# Simple URL Shortener using Flask and SQLite\n# -------------------------------------------------\n# This example demonstrates a minimal URL shortener web application.\n# It provides two main endpoints:\n#   * GET /\u003cshort_code\u003e   – redirects to the original long URL.\n#   * POST /shorten       – accepts a JSON payload with a \"url\" field and returns a short code.\n# The mapping between short codes and long URLs is stored in a SQLite database.\n# -------------------------------------------------\n# To run:\n#   1. Install dependencies: pip install flask sqlalchemy\n#   2. Execute: python url_shortener.py\n#   3. The app will be available at http://127.0.0.1:5000/\n# -------------------------------------------------\n\nfrom flask import Flask, request, jsonify, redirect, abort\nfrom flask_sqlalchemy import SQLAlchemy\nimport string\nimport random\nimport re\n\napp = Flask(__name__)\n# SQLite database stored in the same directory\napp.config[\"SQLALCHEMY_DATABASE_URI\"] = \"sqlite:///shortener.db\"\napp.config[\"SQLALCHEMY_TRACK_MODIFICATIONS\"] = False\n\ndb = SQLAlchemy(app)\n\n# -------------------------------------------------\n# Database model\n# -------------------------------------------------\nclass UrlMapping(db.Model):\n    __tablename__ = \"url_mapping\"\n    id = db.Column(db.Integer, primary_key=True)\n    short_code = db.Column(db.String({{int:8:12}}), unique=True, nullable=False)\n    long_url = db.Column(db.Text, nullable=False)\n    # optional: track creation date, hit count, etc.\n    created_at = db.Column(db.DateTime, server_default=db.func.now())\n    hits = db.Column(db.Integer, default=0)\n\n    def __repr__(self):\n        return f\"\u003cUrlMapping {self.short_code} -\u003e {self.long_url}\u003e\"\n\n# -------------------------------------------------\n# Helper functions\n# -------------------------------------------------\ndef generate_short_code(length=6):\n    \"\"\"Generate a random alphanumeric short code.\"\"\"\n    characters = string.ascii_letters + string.digits\n    while True:\n        code = \"\".join(random.choices(characters, k=length))\n        # Ensure uniqueness\n        if not UrlMapping.query.filter_by(short_code=code).first():\n            return code\n\ndef is_valid_url(url):\n    # Very basic URL validation. For production use a more robust validator.\n    regex = re.compile(\n        r'^(?:http|https)://'  # http:// or https://\n        r'(?:\\S+)$', re.IGNORECASE)\n    return re.match(regex, url) is not None\n\n# -------------------------------------------------\n# Routes\n# -------------------------------------------------\n@app.route('/shorten', methods=['POST'])\ndef shorten():\n    \"\"\"Create a short URL.\n    Expected JSON payload: {\"url\": \"https://example.com\"}\n    Returns JSON: {\"short_code\": \"abc123\", \"short_url\": \"http://host/abc123\"}\n    \"\"\"\n    data = request.get_json()\n    if not data or 'url' not in data:\n        return jsonify({'error': 'Missing \"url\" in request body'}), {{int:320:480}}\n\n    long_url = data['url'].strip()\n    if not is_valid_url(long_url):\n        return jsonify({'error': 'Invalid URL. Must start with http:// or https://'}), {{int:320:480}}\n\n    # Check if this URL was already shortened (optional)\n    existing = UrlMapping.query.filter_by(long_url=long_url).first()\n    if existing:\n        short_code = existing.short_code\n    else:\n        short_code = generate_short_code()\n        mapping = UrlMapping(short_code=short_code, long_url=long_url)\n        db.session.add(mapping)\n        db.session.commit()\n\n    short_url = request.host_url + short_code\n    return jsonify({'short_code': short_code, 'short_url': short_url}), {{int:160:242}}\n\n@app.route('/\u003cstring:code\u003e', methods=['GET'])\ndef redirect_short(code):\n    \"\"\"Redirect a short code to the original URL.\"\"\"\n    mapping = UrlMapping.query.filter_by(short_code=code).first()\n    if not mapping:\n        abort({{int:323:485}})\n    # Update hit count (optional)\n    mapping.hits += 1\n    db.session.commit()\n    return redirect(mapping.long_url, code={{int:241:363}})\n\n# -------------------------------------------------\n# Initialization\n# -------------------------------------------------\nif __name__ == '__main__':\n    # Create tables if they don't exist\n    with app.app_context():\n        db.create_all()\n    # Run the development server (not for production!)\n    app.run(debug=True)\n",
+                "file_name": "url_shortener.py"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":4213,\"file_name\":\"url_shortener.py\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1799,
+            "completion_tokens": 1120
+          },
+          "chars": 4650
+        },
+        {
+          "text": "I’ve created a simple Flask‑based URL shortener for you. The file **url_shortener.py** contains the full source code and can be run directly.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2898,
+            "completion_tokens": 38
+          },
+          "chars": 147
+        }
+      ]
+    }
+  ]
+}

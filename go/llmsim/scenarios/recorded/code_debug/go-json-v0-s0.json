@@ -1,0 +1,24 @@
+{
+  "id": "code_debug/go-json/v0/s0",
+  "flavor": "code_debug",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T21:05:19Z",
+  "turns": [
+    {
+      "user_message": "My Go struct marshals to `{}` with encoding/json:\n```go\ntype user struct {\n    name string\n    age  int\n}\n```\nWhy is it empty?",
+      "steps": [
+        {
+          "reasoning": "My Go struct marshals to `{}` with encoding/json:\n```go\ntype user struct {\n    name string\n    age  int\n}\n```\nWhy is it empty?\n\nWe need explain Go JSON marshaling: unexported fields. Lowercase name, age not exported. Need capital first letter.\n\nUser asks why empty. Answer explain.\n\nNo tools needed. Just answer.\n\nProbably mention encoding/json uses reflection and only exported fields.\n\nPossibly offer fix.\n\nNo need for L8 query. This is unrelated to database. Just answer.\n\nFollow policy.\n\n",
+          "text": "In Go's `encoding/json`, only **exported** struct fields are marshalled.\n\nA field is exported if its name starts with an upper-case letter. In your struct:\n\n```go\ntype user struct {\n    name string   // unexported -\u003e ignored\n    age  int      // unexported -\u003e ignored\n}\n```\n\nBoth `name` and `age` are unexported, so the reflection-based marshaler sees a struct with zero exported fields and produces `{}`.\n\nFix it by exporting the fields:\n\n```go\ntype user struct {\n    Name string `json:\"name\"`\n    Age  int    `json:\"age\"`\n}\n```\n\nNow `json.Marshal(user{Name:\"Alice\", Age:30})` will produce `{\"name\":\"Alice\",\"age\":30}`.\n\nNote: the type name `user` is also unexported, but that's fine for JSON marshaling; only the field names matter for the output.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2459,
+            "completion_tokens": 312
+          },
+          "chars": 1240
+        }
+      ]
+    }
+  ]
+}

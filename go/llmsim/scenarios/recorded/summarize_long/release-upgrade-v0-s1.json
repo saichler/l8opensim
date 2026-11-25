@@ -1,0 +1,24 @@
+{
+  "id": "summarize_long/release-upgrade/v0/s1",
+  "flavor": "summarize_long",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:33:19Z",
+  "turns": [
+    {
+      "user_message": "Summarize what an operator must do to upgrade, from this text:\n\nRelease 4.2 of the platform introduces a new scheduler that reduces job start latency by 35 percent, support for ARM64 worker nodes, and a redesigned dashboard. The storage layer now supports snapshots every 15 minutes with retention policies per namespace. Breaking changes: the v1beta1 API is removed and clients must migrate to v1; the default log level changed from debug to info. Known issues: the dashboard may show stale metrics for up to two minutes after a node restart, and snapshot restore is not yet supported for volumes larger than 2 TB. Upgrade path: upgrade the control plane first, then drain and upgrade workers one at a time. The team recommends testing the migration to the v1 API in a staging environment before upgrading production clusters. Security fixes include patches for two medium-severity vulnerabilities in the API gateway and an updated TLS configuration that disables TLS 1.0 and 1.1 by default.",
+      "steps": [
+        {
+          "reasoning": "We need to summarize what an operator must do to upgrade, based on the provided text. So we need to list steps: upgrade control plane first, then drain and upgrade workers one at a time; test migration to v1 API in staging before production; also consider API removal, default log level change, etc. Provide a concise summary. No tools needed.",
+          "text": "**Operator Upgrade Checklist**\n\n1. **Pre‑Upgrade Preparation**\n   - **Test API migration**: In a staging environment, migrate any clients or custom code from the removed `v1beta1` API to the new `v1` API. Verify functionality before touching production clusters.\n   - **Review security fixes**: Apply the patches for the two medium‑severity API‑gateway vulnerabilities and the updated TLS configuration (TLS 1.0/1.1 disabled by default).\n\n2. **Control‑Plane Upgrade**\n   - Upgrade the control‑plane components first (API server, scheduler, etc.).  \n   - Verify that the new scheduler is running (it provides a {{int:28:42}} % reduction in job‑start latency).\n\n3. **Worker‑Node Upgrade**\n   - For each worker node:\n     1. **Drain the node** – safely evict pods so that workloads are moved elsewhere.  \n     2. **Upgrade the node** – apply the new release (adds ARM64 support; note the default log level is now **info** instead of **debug**).  \n     3. **Uncordon** the node and let it re‑join the cluster.  \n   - Repeat the drain‑upgrade‑uncordon cycle **one node at a time** until all workers are updated.\n\n4. **Post‑Upgrade Validation**\n   - Check that the **new dashboard** loads correctly (be aware it may show stale metrics for up to 2 minutes after a node restart).  \n   - Verify storage snapshots are being created every {{int:12:18}} minutes and that per‑namespace retention policies are enforced.  \n   - Confirm that the system operates with the updated TLS settings.\n\n5. **Known Limitations**\n   - Snapshot **restore** is not yet supported for volumes larger than **2 TB** – plan accordingly if you have such volumes.  \n   - Expect a short window of stale dashboard metrics after node restarts.\n\nFollowing these steps will ensure a smooth upgrade to Platform 4.2 while respecting the breaking changes and known issues.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1988,
+            "completion_tokens": 500
+          },
+          "chars": 2193
+        }
+      ]
+    }
+  ]
+}

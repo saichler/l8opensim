@@ -1,0 +1,78 @@
+{
+  "id": "csv_export/devices-by-site/v0/s1",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:23:52Z",
+  "params": {
+    "entity": [
+      "network devices",
+      "GPU servers"
+    ],
+    "site": [
+      "Austin",
+      "Dallas",
+      "Houston",
+      "Seattle",
+      "Denver",
+      "Chicago"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Export all network devices in Austin to CSV.",
+      "steps": [
+        {
+          "reasoning": "We need to export all NetworkDevice records where location is {{p:site}}. Need to know field for location. Let's describe model NetworkDevice.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1796,
+            "completion_tokens": 55
+          },
+          "chars": 177
+        },
+        {
+          "reasoning": "We need to export all {{p:entity}} in {{p:site}}. Likely location field is equipmentinfo.location. Use export_csv with query filtering location = {{p:site}}. L8Query syntax: where equipmentinfo.location=\"{{p:site}}\". Use select * from NetworkDevice where equipmentinfo.location=\"{{p:site}}\". No limit needed for export. Provide file name, maybe {{p:entity:snake}}_{{p:site:lower}}.csv.\n\n",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "{{p:entity:snake}}_{{p:site:lower}}.csv",
+                "query": "select * from NetworkDevice where equipmentinfo.location=\"{{p:site}}\""
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"id\",\"equipmentinfo.vendor\",\"equipmentinfo.model\",\"equipmentinfo.series\",\"equipmentinfo.sysName\",\"equipmentinfo.ipAddress\",\"equipmentinfo.serialNumber\",\"equipmentinfo.version\",\"equipmentinfo.firmwareVersion\",\"equipmentinfo.location\",\"equipmentinfo.deviceType\",\"equipmentinfo.deviceStatus\",\"equipmentinfo.uptime\",\"equipmentinfo.lastSeen\",\"equipmentinfo.interfaceCount\"],\"file_name\":\"network_devices_austin.csv\",\"rows\":2}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2033,
+            "completion_tokens": 122
+          },
+          "chars": 491
+        },
+        {
+          "text": "Here is the CSV file with all {{p:entity}} located in {{p:site}}:\n\n**Attached:** `{{p:entity:snake}}_{{p:site:lower}}.csv` – 2 records, containing the standard network‑device fields.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2178,
+            "completion_tokens": 40
+          },
+          "chars": 172
+        }
+      ]
+    }
+  ]
+}

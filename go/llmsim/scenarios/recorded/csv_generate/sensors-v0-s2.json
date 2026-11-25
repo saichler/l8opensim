@@ -1,0 +1,93 @@
+{
+  "id": "csv_generate/sensors/v0/s2",
+  "flavor": "csv_generate",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-25T01:48:50Z",
+  "csv": [
+    {
+      "header": [
+        "timestamp",
+        "sensor_id",
+        "temperature",
+        "humidity"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "2025-12-01T00:00:00Z",
+            "2025-12-01T00:15:00Z",
+            "2025-12-01T00:30:00Z",
+            "2025-12-01T00:45:00Z",
+            "2025-12-01T01:00:00Z",
+            "2025-12-01T01:15:00Z",
+            "2025-12-01T01:30:00Z",
+            "2025-12-01T01:45:00Z",
+            "2025-12-01T02:00:00Z",
+            "2025-12-01T02:15:00Z"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "sensor-01",
+            "sensor-02",
+            "sensor-03",
+            "sensor-04"
+          ]
+        },
+        {
+          "kind": "float",
+          "min": 19.8,
+          "max": 27.2,
+          "decimals": 1
+        },
+        {
+          "kind": "int",
+          "min": 40,
+          "max": 69
+        }
+      ],
+      "rows": 40
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Make a CSV with 40 rows of fictitious temperature sensor readings: timestamp, sensor id, temperature, humidity. It is synthetic test data for a demo, not records from the system: attach it as sensor_readings.csv.",
+      "steps": [
+        {
+          "reasoning": "Make a CSV with {{int:32:48}} rows of fictitious temperature sensor readings: timestamp, sensor id, temperature, humidity. It is synthetic test data for a demo, not records from the system: attach it as sensor_readings.csv.\n\nWe need to produce CSV with {{int:32:48}} rows of fictitious temperature sensor readings. Timestamp, sensor id, temperature, humidity. Synthetic test data for demo, not records from system: attach it as sensor_readings.csv.\n\nWe can use create_file to attach a text file. The user wants CSV. So create_file with file_name sensor_readings.csv, content with header and {{int:32:48}} rows.\n\nWe should ensure {{int:32:48}} rows of data (plus header). Synthetic.\n\nWe should not use export_csv because that's for exporting records. This is synthetic, not from system.\n\nSo create_file.\n\nWe need timestamp format? Probably ISO. sensor id maybe sensor-001 etc. Temperature maybe 20-30 Celsius, humidity 30-80.\n\nLet's generate {{int:32:48}} rows.\n\nBetter to make them plausible. Could use timestamp incrementing.\n\nLet's generate timestamps like 2025-01-01T00:00:00Z etc.\n\nUse sensor ids like sensor-01, sensor-02, etc.\n\nWe need {{int:32:48}} rows. Let's create.\n\nMake sure CSV format correct.\n\nProbably create_file content.\n\nWe should also perhaps describe file.\n\nNo need to query system.\n\nMake sure to follow guidelines: use create_file for text file.\n\nLet's generate {{int:32:48}} rows.\n\nWe can create 5 sensors each with 8 readings.\n\nTimestamp: let's start 2025-12-01T00:00:00Z increment 5 minutes.\n\nBetter generate.\n\nLet's produce CSV header: timestamp,sensor_id,temperature,humidity\n\nRows 1-40.\n\nI'll produce with plausible values.\n\nI'll create content.\n\nUse create_file.\n\nPotential need to ensure no extra formatting.\n\nLet's produce.\n\nWe'll generate:\n\ntimestamp,sensor_id,temperature,humidity\n2025-12-01T00:00:00Z,sensor-01,22.5,45\n...\n\nMake {{int:32:48}} rows.\n\nWe need ensure exactly {{int:32:48}} rows.\n\nLet's count. I'll generate {{int:32:48}}.\n\nLet's create sequential.\n\nI'll do {{int:32:48}} rows.\n\nI'll list them.\n\nLet's generate timestamps every {{int:8:12}} minutes.\n\nStart at 2025-12-01T00:00:00Z\n\nRow 1: 2025-12-01T00:00:00Z, sensor-01, 22.3, {{int:38:58}}\nRow2: 2025-12-01T00:10:00Z, sensor-01, 22.4, {{int:37:57}}\n...\nWe need {{int:32:48}} rows.\n\nSimpler: use 4 sensors with {{int:8:12}} readings each.\n\nLet's produce.\n\nI'll just generate quickly with pattern.\n\nLet's create list:\n\n1 2025-12-01T00:00:00Z sensor-01 22.1 {{int:40:60}}\n2 2025-12-01T00:15:00Z sensor-01 22.3 {{int:39:59}}\n3 2025-12-01T00:30:00Z sensor-01 22.5 {{int:38:58}}\n4 2025-12-01T00:45:00Z sensor-01 22.4 {{int:37:57}}\n5 2025-12-01T01:00:00Z sensor-01 22.2 {{int:36:56}}\n6 2025-12-01T01:15:00Z sensor-01 22.0 {{int:36:54}}\n7 2025-12-01T01:30:00Z sensor-01 21.9 {{int:35:53}}\n8 2025-12-01T01:45:00Z sensor-01 21.8 {{int:36:54}}\n9 2025-12-01T02:00:00Z sensor-01 21.7 {{int:36:56}}\n{{int:8:12}} 2025-12-01T02:15:00Z sensor-01 21.6 {{int:37:57}}\n\n{{int:8:14}} 2025-12-01T00:00:00Z sensor-02 24.5 {{int:44:66}}\n{{int:9:15}} 2025-12-01T00:15:00Z sensor-02 24.6 {{int:43:65}}\n{{int:10:16}} 2025-12-01T00:30:00Z sensor-02 24.7 {{int:42:64}}\n{{int:11:17}} 2025-12-01T00:45:00Z sensor-02 24.8 {{int:41:63}}\n{{int:12:18}} 2025-12-01T01:00:00Z sensor-02 24.9 {{int:40:62}}\n{{int:12:20}} 2025-12-01T01:15:00Z sensor-02 25.0 {{int:40:60}}\n{{int:13:21}} 2025-12-01T01:30:00Z sensor-02 25.1 {{int:39:59}}\n{{int:14:22}} 2025-12-01T01:45:00Z sensor-02 25.2 {{int:38:58}}\n{{int:15:23}} 2025-12-01T02:00:00Z sensor-02 25.3 {{int:37:57}}\n{{int:16:24}} 2025-12-01T02:15:00Z sensor-02 25.4 {{int:36:56}}\n\n{{int:16:26}} 2025-12-01T00:00:00Z sensor-03 19.8 {{int:48:72}}\n{{int:17:27}} 2025-12-01T00:15:00Z sensor-03 19.9 {{int:48:74}}\n{{int:18:28}} 2025-12-01T00:30:00Z sensor-03 20.0 {{int:49:75}}\n{{int:19:29}} 2025-12-01T00:45:00Z sensor-03 20.1 {{int:50:76}}\n{{int:20:30}} 2025-12-01T01:00:00Z sensor-03 20.2 {{int:51:77}}\n{{int:20:32}} 2025-12-01T01:15:00Z sensor-03 20.3 {{int:52:78}}\n{{int:21:33}} 2025-12-01T01:30:00Z sensor-03 20.4 {{int:52:80}}\n{{int:22:34}} 2025-12-01T01:45:00Z sensor-03 20.5 {{int:53:81}}\n{{int:23:35}} 2025-12-01T02:00:00Z sensor-03 20.6 {{int:54:82}}\n{{int:24:36}} 2025-12-01T02:15:00Z sensor-03 20.7 {{int:55:83}}\n\n{{int:24:38}} 2025-12-01T00:00:00Z sensor-04 26.3 {{int:32:48}}\n{{int:25:39}} 2025-12-01T00:15:00Z sensor-04 26.4 {{int:32:50}}\n{{int:26:40}} 2025-12-01T00:30:00Z sensor-04 26.5 {{int:33:51}}\n{{int:27:41}} 2025-12-01T00:45:00Z sensor-04 26.6 {{int:34:52}}\n{{int:28:42}} 2025-12-01T01:00:00Z sensor-04 26.7 {{int:35:53}}\n{{int:28:44}} 2025-12-01T01:15:00Z sensor-04 26.8 {{int:36:54}}\n{{int:29:45}} 2025-12-01T01:30:00Z sensor-04 26.9 {{int:36:56}}\n{{int:30:46}} 2025-12-01T01:45:00Z sensor-04 27.0 {{int:37:57}}\n{{int:31:47}} 2025-12-01T02:00:00Z sensor-04 27.1 {{int:38:58}}\n{{int:32:48}} 2025-12-01T02:15:00Z sensor-04 27.2 {{int:39:59}}\n\nThat's {{int:32:48}} rows.\n\nCreate file.\n\nWe must ensure content includes header.\n\nCreate file with file_name sensor_readings.csv, content as above.\n\nProceed.\n\n",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "timestamp,sensor_id,temperature,humidity\n{{csv:0}}",
+                "file_name": "sensor_readings.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1601,\"file_name\":\"sensor_readings.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2469,
+            "completion_tokens": 2637
+          },
+          "chars": 5766
+        },
+        {
+          "reasoning": "Make a CSV with {{int:32:48}} rows... attach it as sensor_readings.csv.\n\nWe have created file with {{int:32:48}} rows? Let's count. Header + {{int:32:48}} rows = {{int:32:50}} lines. We have sensors: sensor-01 {{int:8:12}} rows, sensor-02 {{int:8:12}} rows, sensor-03 {{int:8:12}} rows, sensor-04 {{int:8:12}} rows ={{int:32:48}} rows. Good.\n\nWe should respond briefly what file contains.\n\nWe must not fabricate data? This is synthetic test data. The instruction says to make CSV with fictitious... Use create_file. Done.\n\nReturn answer: attached sensor_readings.csv with {{int:32:48}} readings...\n\nWe should ensure file name matches. Yes sensor_readings.csv.\n\nPotential issue: user said \"Make a CSV with {{int:32:48}} rows of fictitious temperature sensor readings... attach it as sensor_readings.csv.\" We did.\n\nWe should not query system. Good.\n\nReturn brief summary.",
+          "text": "Attached sensor_readings.csv with {{int:32:48}} synthetic temperature sensor readings.\n\nThe file contains {{int:32:48}} rows of fictitious test data for demo purposes with columns:\n`timestamp,sensor_id,temperature,humidity`\n\n* {{int:8:12}} readings each for sensor-01, sensor-02, sensor-03 and sensor-04 spanning 2025-12-01T00:00:00Z to 2025-12-01T02:15:00Z in 15-minute intervals.\n",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 3537,
+            "completion_tokens": 285
+          },
+          "chars": 1102
+        }
+      ]
+    }
+  ]
+}

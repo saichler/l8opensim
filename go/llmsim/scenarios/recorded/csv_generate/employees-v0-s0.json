@@ -1,0 +1,115 @@
+{
+  "id": "csv_generate/employees/v0/s0",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:26:51Z",
+  "params": {
+    "rows": [
+      "20",
+      "50"
+    ]
+  },
+  "csv": [
+    {
+      "header": [
+        "id",
+        "name",
+        "email",
+        "department",
+        "salary",
+        "hire_date"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "E001",
+            "E002",
+            "E003",
+            "E004",
+            "E005",
+            "E006",
+            "E007",
+            "E008",
+            "E009",
+            "E010",
+            "E011",
+            "E012",
+            "E013",
+            "E014",
+            "E015",
+            "E016",
+            "E017",
+            "E018",
+            "E019",
+            "E020"
+          ]
+        },
+        {
+          "kind": "name"
+        },
+        {
+          "kind": "email"
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Engineering",
+            "Sales",
+            "Marketing",
+            "HR",
+            "Finance",
+            "IT"
+          ]
+        },
+        {
+          "kind": "int",
+          "min": 62000,
+          "max": 95000
+        },
+        {
+          "kind": "date"
+        }
+      ],
+      "rows": 20
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Generate a CSV of 20 fictitious employees with id, name, email, department, salary and hire date. It is synthetic test data for a demo, not records from the system: attach it as employees.csv.",
+      "steps": [
+        {
+          "reasoning": "The user wants to generate a CSV of {{int:16:24}} fictitious employees. This is not from system; we cannot use system data. We need to create a file ourselves using create_file with CSV content. We must generate synthetic data. Provide id, name, email, department, salary, hire date. We'll create {{int:16:24}} rows with plausible data. Salary could be numeric; we can just put numbers. Hire date as ISO date.\n\nWe need to attach as employees.csv. Use create_file tool.\n\nWe must ensure we follow format: file name employees.csv, content includes header line and {{int:16:24}} rows. Provide as CSV.\n\nWe'll generate IDs like E001 to E020. Names can be random. Departments like Engineering, Sales, HR, Marketing, Finance, IT. Salary maybe integer.\n\nProceed.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "id,name,email,department,salary,hire_date\n{{csv:0}}",
+                "file_name": "employees.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1421,\"file_name\":\"employees.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1831,
+            "completion_tokens": 700
+          },
+          "chars": 2214
+        },
+        {
+          "text": "Attached **employees.csv** with {{int:16:24}} synthetic employee records (id, name, email, department, salary, hire_date).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2392,
+            "completion_tokens": 29
+          },
+          "chars": 111
+        }
+      ]
+    }
+  ]
+}

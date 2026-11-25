@@ -1,0 +1,24 @@
+{
+  "id": "summarize_long/release-tldr/v0/s2",
+  "flavor": "summarize_long",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:33:04Z",
+  "turns": [
+    {
+      "user_message": "TL;DR of this please:\n\nRelease 4.2 of the platform introduces a new scheduler that reduces job start latency by 35 percent, support for ARM64 worker nodes, and a redesigned dashboard. The storage layer now supports snapshots every 15 minutes with retention policies per namespace. Breaking changes: the v1beta1 API is removed and clients must migrate to v1; the default log level changed from debug to info. Known issues: the dashboard may show stale metrics for up to two minutes after a node restart, and snapshot restore is not yet supported for volumes larger than 2 TB. Upgrade path: upgrade the control plane first, then drain and upgrade workers one at a time. The team recommends testing the migration to the v1 API in a staging environment before upgrading production clusters. Security fixes include patches for two medium-severity vulnerabilities in the API gateway and an updated TLS configuration that disables TLS 1.0 and 1.1 by default.",
+      "steps": [
+        {
+          "reasoning": "We need to produce a TL;DR summary of the user's text. No data queries needed. Just summarize succinctly.",
+          "text": "**TL;DR**\n\n- **New in 4.2:** Faster scheduler (‑{{int:28:42}} % start latency), ARM64 worker support, revamped dashboard.  \n- **Storage:** Snapshots every {{int:12:18}} min with per‑namespace retention; restores \u003e2 TB not yet supported.  \n- **Breaking changes:** `v1beta1` API removed → migrate to `v1`; default log level now **info** (was debug).  \n- **Known issues:** Dashboard can show stale metrics for up to 2 min after a node restart.  \n- **Upgrade steps:** Upgrade control plane first, then drain and upgrade workers one‑by‑one. Test `v1` API migration in staging before production.  \n- **Security:** Patches for two medium‑severity API‑gateway vulns; TLS 1.0/1.1 disabled by default.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1980,
+            "completion_tokens": 213
+          },
+          "chars": 798
+        }
+      ]
+    }
+  ]
+}

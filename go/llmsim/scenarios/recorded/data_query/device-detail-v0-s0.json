@@ -1,0 +1,71 @@
+{
+  "id": "data_query/device-detail/v0/s0",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:39:59Z",
+  "params": {
+    "n": [
+      "01",
+      "05",
+      "12"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Show me the details of device core-rtr-01.",
+      "steps": [
+        {
+          "reasoning": "We need to show details of a device named core-rtr-01. Likely a NetworkDevice. Need to query NetworkDevice where hostname or name equals core-rtr-01. First we need to describe model to know field names.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1799,
+            "completion_tokens": 77
+          },
+          "chars": 241
+        },
+        {
+          "reasoning": "We need details of device core-rtr-01. Probably device's sysName or hostname is core-rtr-01. We need to find record(s) where equipmentinfo.sysName = \"core-rtr-01\". Use select * from NetworkDevice where equipmentinfo.sysName=core-rtr-01 limit 1. Then export details maybe as CSV or list fields. Since user wants details, we can export CSV with all fields. Use export_csv.\n\n",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "core_rtr_01_details.csv",
+                "query": "select * from NetworkDevice where equipmentinfo.sysName=core-rtr-01"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"id\",\"equipmentinfo.vendor\",\"equipmentinfo.model\",\"equipmentinfo.series\",\"equipmentinfo.sysName\",\"equipmentinfo.ipAddress\",\"equipmentinfo.serialNumber\",\"equipmentinfo.version\",\"equipmentinfo.firmwareVersion\",\"equipmentinfo.location\",\"equipmentinfo.deviceType\",\"equipmentinfo.deviceStatus\",\"equipmentinfo.uptime\",\"equipmentinfo.lastSeen\",\"equipmentinfo.interfaceCount\"],\"file_name\":\"core_rtr_01_details.csv\",\"rows\":1}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2036,
+            "completion_tokens": 150
+          },
+          "chars": 499
+        },
+        {
+          "text": "Here is the requested information:\n\n**Attached:** `core_rtr_01_details.csv` – details of the device **core‑rtr‑01** (1 record).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2190,
+            "completion_tokens": 39
+          },
+          "chars": 133
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/puzzle/v0/s2",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:11:05Z",
+  "turns": [
+    {
+      "user_message": "Puzzle: you have 3 switches outside a room with 3 bulbs, you can enter once. How do you know which switch controls which bulb?",
+      "steps": [
+        {
+          "reasoning": "We need to answer puzzle. No tool needed. Provide solution.",
+          "text": "**Solution**\n\n1. **Turn on switch 1** and leave it on for a few minutes.  \n   *This will make the bulb it powers get hot.*\n\n2. **After a few minutes, turn switch 1 off** and **immediately turn on switch 2**.  \n   *Now switch 2 is supplying power, while the bulb that was on from switch 1 has had time to cool a little but will still be warm.*\n\n3. **Enter the room** (you may only go in once).\n\n   - The bulb that is **on** is the one controlled by **switch 2** (the only switch still supplying power).  \n   - Feel the two bulbs that are **off**:  \n     * the bulb that is **warm/hot** is the one that was powered by **switch 1** (it was on long enough to heat up before you turned it off).  \n     * the bulb that is **cold** is the one controlled by **switch 3** (it has never been powered).\n\nThus you have identified which switch corresponds to each bulb with a single entry into the room.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1817,
+            "completion_tokens": 255
+          },
+          "chars": 965
+        }
+      ]
+    }
+  ]
+}

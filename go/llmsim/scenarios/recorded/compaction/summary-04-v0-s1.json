@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-04/v0/s1",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:17:20Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user asked for a weekly report.\n\nNext part of the conversation:\nUser: Write the weekly network report as markdown.\n\nAssistant: Attached weekly_report.md with device status, alarms and top issues.\n\nUser: Add the alarm counts per severity.\n\nAssistant: Updated: critical 4, major 9, minor 6, warning 11.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary replacing current. We have facts: user asked for weekly report. Then asked to write weekly network report as markdown. Assistant attached weekly_report.md with device status, alarms and top issues. User wants alarm counts per severity. Assistant updated with critical 4, major 9, minor 6, warning {{int:8:14}}.\n\nThus summary should include: user requested weekly network report in markdown, includes device status, alarms, top issues. Alarm counts per severity: critical 4, major 9, minor 6, warning {{int:8:14}}. Also mention the file weekly_report.md. Keep placeholder tokens? None. Keep decisions? No. So summary: \"User requested weekly network report as markdown; assistant provided weekly_report.md containing device status, alarms, top issues; user asked to add alarm counts per severity; assistant updated counts: critical 4, major 9, minor 6, warning {{int:8:14}}.\" That's it.",
+          "text": "User requested a weekly network report in markdown. Assistant provided weekly_report.md containing device status, alarms, and top issues. User asked to add alarm counts per severity; assistant updated the report with counts: critical 4, major 9, minor 6, warning {{int:8:14}}.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 292,
+            "completion_tokens": 255
+          },
+          "chars": 1159
+        }
+      ]
+    }
+  ]
+}

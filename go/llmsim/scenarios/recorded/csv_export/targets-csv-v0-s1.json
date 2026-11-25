@@ -1,0 +1,44 @@
+{
+  "id": "csv_export/targets-csv/v0/s1",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:26:00Z",
+  "turns": [
+    {
+      "user_message": "Download the polling targets as a CSV.",
+      "steps": [
+        {
+          "reasoning": "We need to export polling targets (model L8PTarget) as CSV. Use export_csv with query select * from L8PTarget (no limit needed). Provide file name like polling_targets.csv. Then respond with attached file note.\n\n",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "polling_targets.csv",
+                "query": "select * from L8PTarget"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"targetId\",\"linksId\",\"state\",\"inventoryType\"],\"file_name\":\"polling_targets.csv\",\"rows\":22}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 93
+          },
+          "chars": 291
+        },
+        {
+          "text": "Attached **polling_targets.csv** with {{int:17:27}} polling targets.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1877,
+            "completion_tokens": 17
+          },
+          "chars": 57
+        }
+      ]
+    }
+  ]
+}

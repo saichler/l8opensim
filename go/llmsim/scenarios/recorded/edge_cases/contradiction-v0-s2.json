@@ -1,0 +1,24 @@
+{
+  "id": "edge_cases/contradiction/v0/s2",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:48:10Z",
+  "turns": [
+    {
+      "user_message": "Export the devices to CSV but don't create any file.",
+      "steps": [
+        {
+          "reasoning": "The user says: \"Export the devices to CSV but don't create any file.\" In this system, we have an export_csv tool which creates a file attached to the answer. The user says \"but don't create any file.\" Perhaps they just want the CSV data inline? But policy says we must use export_csv to give CSV, which attaches file. But user explicitly says not to create file. Conflict. We need to clarify. According to rules, we cannot output raw CSV data; we must attach file. The user says don't create any file, but we cannot comply with that request as tool constraints. So we must explain we can only provide via export_csv which attaches a file. Ask if okay.",
+          "text": "I can export the device records as a CSV for you, but the system can only provide the CSV by attaching it as a file to the response. If that works for you, just let me know and I’ll generate the export.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1798,
+            "completion_tokens": 199
+          },
+          "chars": 857
+        }
+      ]
+    }
+  ]
+}

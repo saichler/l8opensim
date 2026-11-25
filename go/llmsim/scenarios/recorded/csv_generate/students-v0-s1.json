@@ -1,0 +1,74 @@
+{
+  "id": "csv_generate/students/v0/s1",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:30:54Z",
+  "csv": [
+    {
+      "header": [
+        "id",
+        "name",
+        "grade",
+        "score"
+      ],
+      "columns": [
+        {
+          "kind": "seq",
+          "min": 1
+        },
+        {
+          "kind": "name"
+        },
+        {
+          "kind": "int",
+          "min": 9,
+          "max": 12
+        },
+        {
+          "kind": "int",
+          "min": 68,
+          "max": 95
+        }
+      ],
+      "rows": 25
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Generate a CSV of 25 fictitious students with id, name, grade and score. It is synthetic test data for a demo, not records from the system: attach it as students.csv.",
+      "steps": [
+        {
+          "reasoning": "The user wants synthetic test data, not from system. We cannot fabricate data using system records. We need to generate synthetic data ourselves. We can create a CSV file via create_file. Provide {{int:20:30}} rows. The user wants id, name, grade, score. We can generate synthetic entries. Since we must not fabricate real system data, but synthetic is okay. We'll produce a CSV text with header and {{int:20:30}} rows. Use create_file.\n\nWe'll attach as students.csv.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "id,name,grade,score\n{{csv:0}}",
+                "file_name": "students.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":566,\"file_name\":\"students.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1826,
+            "completion_tokens": 366
+          },
+          "chars": 1088
+        },
+        {
+          "text": "Attached **students.csv** containing {{int:20:30}} synthetic student records (id, name, grade, score).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2116,
+            "completion_tokens": 24
+          },
+          "chars": 91
+        }
+      ]
+    }
+  ]
+}

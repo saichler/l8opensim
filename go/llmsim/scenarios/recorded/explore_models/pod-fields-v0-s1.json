@@ -1,0 +1,44 @@
+{
+  "id": "explore_models/pod-fields/v0/s1",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:51:45Z",
+  "turns": [
+    {
+      "user_message": "Which fields can I filter pods by?",
+      "steps": [
+        {
+          "reasoning": "We need to list fields of K8SPod model. Use describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SPod"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"key\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"namespace\",\"type\":\"string\"},{\"path\":\"ready.count\",\"type\":\"int\"},{\"path\":\"ready.outof\",\"type\":\"int\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"restarts.count\",\"type\":\"int\"},{\"path\":\"restarts.ago\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"ip\",\"type\":\"string\"},{\"path\":\"node\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SPod\",\"primaryKey\":\"key\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 47
+          },
+          "chars": 91
+        },
+        {
+          "reasoning": "We need to answer: Which fields can I filter pods by? Provide list of fields available for filtering. We have fields list. Should mention that filter can use any of these fields. Possibly note they are string or int. Provide answer.",
+          "text": "You can filter **K8SPod** records on any of the fields listed in its model:\n\n| Field (path) | Type |\n|--------------|------|\n| `key` | string (primary key) |\n| `name` | string |\n| `namespace` | string |\n| `ready.count` | int |\n| `ready.outof` | int |\n| `status` | string |\n| `restarts.count` | int |\n| `restarts.ago` | string |\n| `age` | string |\n| `ip` | string |\n| `node` | string |\n| `clusterName` | string |\n\nYou can use any of these fields in a `where` clause of an L8Query to filter pods (e.g., `where status='Running'` or `where restarts.count\u003e5`).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1977,
+            "completion_tokens": 234
+          },
+          "chars": 795
+        }
+      ]
+    }
+  ]
+}

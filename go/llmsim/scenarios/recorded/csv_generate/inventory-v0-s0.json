@@ -1,0 +1,110 @@
+{
+  "id": "csv_generate/inventory/v0/s0",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:31:49Z",
+  "csv": [
+    {
+      "header": [
+        "item_id",
+        "name",
+        "quantity",
+        "location",
+        "reorder_level"
+      ],
+      "columns": [
+        {
+          "kind": "seq",
+          "min": 1
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Widget A",
+            "Widget B",
+            "Gadget C",
+            "Gadget D",
+            "Component E",
+            "Component F",
+            "Part G",
+            "Part H",
+            "Supply I",
+            "Supply J",
+            "Material K",
+            "Material L",
+            "Tool M",
+            "Tool N",
+            "Accessory O",
+            "Accessory P",
+            "Equipment Q",
+            "Equipment R",
+            "Device S",
+            "Device T",
+            "Item U",
+            "Item V",
+            "Product W",
+            "Product X",
+            "Good Y",
+            "Good Z",
+            "Resource AA",
+            "Resource BB",
+            "Stock CC",
+            "Stock DD"
+          ]
+        },
+        {
+          "kind": "int",
+          "min": 20,
+          "max": 200
+        },
+        {
+          "kind": "city"
+        },
+        {
+          "kind": "int",
+          "min": 5,
+          "max": 100
+        }
+      ],
+      "rows": 30
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Generate a CSV of 30 warehouse inventory items with item id, name, quantity, location and reorder level. It is synthetic test data for a demo, not records from the system: attach it as inventory.csv.",
+      "steps": [
+        {
+          "reasoning": "The user wants a CSV of synthetic test data, not from system. We cannot fabricate data using system queries; we must create a file ourselves with synthetic data. Use create_file tool to attach a CSV named inventory.csv with {{int:24:36}} rows, columns: item id, name, quantity, location, reorder level.\n\nWe need to generate synthetic data. We'll create header line then {{int:24:36}} rows with plausible values. Use simple incremental IDs, names like \"Item A\", etc. Ensure proper CSV format.\n\nWe'll use create_file with content.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "item_id,name,quantity,location,reorder_level\n{{csv:0}}",
+                "file_name": "inventory.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":997,\"file_name\":\"inventory.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1830,
+            "completion_tokens": 542
+          },
+          "chars": 1586
+        },
+        {
+          "text": "Attached `inventory.csv` containing {{int:24:36}} synthetic warehouse inventory items with columns: item_id, name, quantity, location, reorder_level.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2285,
+            "completion_tokens": 31
+          },
+          "chars": 138
+        }
+      ]
+    }
+  ]
+}

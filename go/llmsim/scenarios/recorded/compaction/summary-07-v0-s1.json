@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-07/v0/s1",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:17:51Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user prefers answers as tables.\n\nNext part of the conversation:\nUser: How many alarms per site?\n\nAssistant: | Site | Alarms |\n|---|---|\n| Austin | 7 |\n| Dallas | 5 |\n| Seattle | 4 |\n\nUser: Which alarm is the most frequent?\n\nAssistant: 'Link Flapping' with 42 occurrences.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to update summary. Current summary: \"The user prefers answers as tables.\" Next: user asks \"How many alarms per site?\" Assistant gave table. Then user asks \"Which alarm is the most frequent?\" Assistant answered 'Link Flapping' with {{int:33:51}} occurrences.\n\nWe need to keep facts: user preferences (answers as tables). Also keep that user asked about alarms per site and got counts: {{city:1}} 7, {{city:2}} 5, {{city:3}} 4. Also that most frequent alarm is 'Link Flapping' with {{int:33:51}} occurrences. Possibly also note that they care about alarms data. No open questions left.\n\nThus new summary should incorporate these facts and preferences. Write plain text.\n\n",
+          "text": "The user prefers answers as tables.  \nAlarms per site: {{city:1}} – 7, {{city:2}} – 5, {{city:3}} – 4.  \nMost frequent alarm: “Link Flapping” with {{int:33:51}} occurrences.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 297,
+            "completion_tokens": 194
+          },
+          "chars": 817
+        }
+      ]
+    }
+  ]
+}

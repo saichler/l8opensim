@@ -1,0 +1,99 @@
+{
+  "id": "record_crud/update-location/v0/s0",
+  "flavor": "record_crud",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:14:29Z",
+  "params": {
+    "site": [
+      "Austin",
+      "Dallas",
+      "Houston",
+      "Seattle",
+      "Denver",
+      "Chicago"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Change the location of device core-rtr-11 to Austin.",
+      "steps": [
+        {
+          "reasoning": "We need to update a NetworkDevice location. We need to find the record for device core-rtr-11. Likely a field like deviceInfo.hostname or name. First we need to find its ID. Use describe_model for NetworkDevice, then query to find record where deviceInfo.hostname = \"core-rtr-11\". Then update location field (maybe deviceInfo.location? need to check fields). Let's describe model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1800,
+            "completion_tokens": 114
+          },
+          "chars": 419
+        },
+        {
+          "reasoning": "We need to change location of device with sysName \"core-rtr-11\"? The field for location is equipmentinfo.location. Need to find record id. First, query for that device.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select id,equipmentinfo.sysName,equipmentinfo.location from NetworkDevice where equipmentinfo.sysName='core-rtr-11' limit 2"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":1,\"model\":\"NetworkDevice\",\"records\":[{\"equipmentinfo\":{\"location\":\"San Antonio\",\"sysName\":\"core-rtr-11\"},\"id\":\"nd-011\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2037,
+            "completion_tokens": 96
+          },
+          "chars": 310
+        },
+        {
+          "reasoning": "We need to change location of device core-rtr-11 to {{p:site}}. We have its id nd-011. Need to update_record for NetworkDevice with primary key id and set equipmentinfo.location to \"{{p:site}}\". Let's do update_record.",
+          "tool_calls": [
+            {
+              "name": "update_record",
+              "arguments": {
+                "data": {
+                  "equipmentinfo": {
+                    "location": "Austin"
+                  },
+                  "id": "nd-011"
+                },
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"action\":\"update\",\"model\":\"NetworkDevice\",\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2140,
+            "completion_tokens": 108
+          },
+          "chars": 309
+        },
+        {
+          "text": "The location for device **core‑rtr‑{{int:8:14}}** has been updated to **{{p:site}}**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2209,
+            "completion_tokens": 24
+          },
+          "chars": 75
+        }
+      ]
+    }
+  ]
+}

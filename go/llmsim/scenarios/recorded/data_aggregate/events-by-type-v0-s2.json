@@ -1,0 +1,64 @@
+{
+  "id": "data_aggregate/events-by-type/v0/s2",
+  "flavor": "data_aggregate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:35:32Z",
+  "turns": [
+    {
+      "user_message": "Show the distribution of events by type.",
+      "steps": [
+        {
+          "reasoning": "We need to provide distribution of events by type. Model is EventRecord. Need to count events grouped by type field. First we should describe the model to know field name for type.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "EventRecord"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"eventId\",\"type\":\"string\"},{\"path\":\"category\",\"type\":\"string\"},{\"path\":\"eventType\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"sourceId\",\"type\":\"string\"},{\"path\":\"sourceName\",\"type\":\"string\"},{\"path\":\"sourceType\",\"type\":\"string\"},{\"path\":\"message\",\"type\":\"string\"},{\"path\":\"occurredAt\",\"type\":\"int\"}],\"model\":\"EventRecord\",\"primaryKey\":\"eventId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 66
+          },
+          "chars": 217
+        },
+        {
+          "reasoning": "We need distribution of events by type, i.e., count per eventType. Use aggregate: select eventType, count(*) from EventRecord group-by eventType. Let's query.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select eventType,count(*) from EventRecord group-by eventType"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"count(*)\":8,\"group\":{\"eventType\":\"configChange\"}},{\"count(*)\":5,\"group\":{\"eventType\":\"linkDown\"}},{\"count(*)\":3,\"group\":{\"eventType\":\"linkUp\"}},{\"count(*)\":7,\"group\":{\"eventType\":\"login\"}},{\"count(*)\":11,\"group\":{\"eventType\":\"reboot\"}},{\"count(*)\":6,\"group\":{\"eventType\":\"threshold\"}}],\"model\":\"EventRecord\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1942,
+            "completion_tokens": 72
+          },
+          "chars": 238
+        },
+        {
+          "reasoning": "We need to show distribution of events by type. Provide a summary perhaps a table. Use the aggregates we got. Should format nicely.",
+          "text": "**Event Distribution by Type**\n\n| Event Type | Count |\n|------------|-------|\n| configChange | 8 |\n| linkDown | 5 |\n| linkUp | 3 |\n| login | 7 |\n| reboot | {{int:8:14}} |\n| threshold | 6 |\n\nThe table shows how many events of each `eventType` are recorded in the system.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2093,
+            "completion_tokens": 111
+          },
+          "chars": 390
+        }
+      ]
+    }
+  ]
+}

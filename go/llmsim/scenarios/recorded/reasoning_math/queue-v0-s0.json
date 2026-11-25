@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/queue/v0/s0",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:12:16Z",
+  "turns": [
+    {
+      "user_message": "Requests arrive at 900 per second and each takes 20 ms on one worker. How many workers do we need to keep utilization under 70%?",
+      "steps": [
+        {
+          "reasoning": "We need to compute required workers based on arrival rate λ = {{int:720:1080}} per sec. Service time per request = {{int:16:24}} ms = 0.02 sec. So service rate per worker μ = 1 / 0.02 = {{int:40:60}} per sec. Utilization per worker = λ_per_worker / μ. If we have N workers, total capacity = N * μ = 50N per sec. Utilization = λ / (N*μ) = {{int:720:1080}} / (50N) = {{int:14:22}} / N. Want utilization \u003c 0.7, i.e., 18/N \u003c 0.7 =\u003e N \u003e {{int:14:22}} / 0.7 = approx 25.714 =\u003e need at least {{int:20:32}} workers. Answer: {{int:20:32}} workers.",
+          "text": "To keep each worker’s utilization below {{int:56:84}} %:\n\n- Arrival rate λ = {{int:720:1080}} requests / s  \n- Service time = {{int:16:24}} ms = 0.02 s → service rate per worker μ = 1 / 0.02 = {{int:40:60}} requests / s  \n\nUtilization per worker = λ / (N × μ) = {{int:720:1080}} / ({{int:40:60}} N) = {{int:14:22}} / N  \n\nRequire {{int:14:22}} / N \u003c 0.70 → N \u003e {{int:14:22}} / 0.70 ≈ 25.7  \n\n**Therefore, you need at least {{int:20:32}} workers** to keep utilization under {{int:56:84}} %.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1818,
+            "completion_tokens": 323
+          },
+          "chars": 918
+        }
+      ]
+    }
+  ]
+}

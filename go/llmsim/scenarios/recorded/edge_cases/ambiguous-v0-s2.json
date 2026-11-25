@@ -1,0 +1,24 @@
+{
+  "id": "edge_cases/ambiguous/v0/s2",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:42:19Z",
+  "turns": [
+    {
+      "user_message": "Fix it.",
+      "steps": [
+        {
+          "reasoning": "The user says \"Fix it.\" No context. Probably they previously asked something but not shown. We need to ask clarifying question? The instruction: We need to respond appropriately. The user gave minimal \"Fix it.\" Could be they want to fix some issue with a query or data. We need clarification. We should ask what needs fixing.",
+          "text": "I’m not sure what you’d like me to fix. Could you let me know which record, query, or report you’re referring to and what the desired outcome should be?",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1790,
+            "completion_tokens": 115
+          },
+          "chars": 483
+        }
+      ]
+    }
+  ]
+}

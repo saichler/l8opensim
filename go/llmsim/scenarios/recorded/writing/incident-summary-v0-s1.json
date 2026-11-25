@@ -1,0 +1,44 @@
+{
+  "id": "writing/incident-summary/v0/s1",
+  "flavor": "writing",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:52:31Z",
+  "turns": [
+    {
+      "user_message": "Write an incident summary for customers about a 25-minute outage of the login service caused by an expired certificate.",
+      "steps": [
+        {
+          "reasoning": "We need to write an incident summary for customers about a 25-minute outage of the login service caused by an expired certificate.\n\nNo data queries needed. Just produce text. Should we attach as file? Probably can just output as text. Could also create a markdown file. Let's do create_file with incident_summary.md containing the summary.\n\nWe need to produce a brief but complete incident summary: what happened, when, impact, cause, resolution, steps to prevent. Provide as attached file.\n\nWe must call create_file tool.\n\n",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "# Incident Summary: Login Service Outage\n\n**Date:** [Insert Date]\n**Duration:** {{int:20:30}} minutes\n**Affected Service:** User Login Service\n\n## What Happened\nAt **[Insert Time]**, users experienced an inability to log into the platform. The login service was returning authentication errors, preventing both new sessions and re‑authentication of existing sessions.\n\n## Impact\n- All customers were unable to access their accounts during the outage.\n- Any automated processes relying on login authentication also failed.\n- No data loss occurred; the issue was limited to authentication.\n\n## Root Cause\nThe outage was caused by an **expired TLS certificate** used by the login service. The certificate reached its expiration date, and the service automatically rejected TLS handshakes, resulting in failed login attempts.\n\n## Resolution\n1. Detected the authentication failures via monitoring alerts.\n2. Identified the expired certificate as the source of the problem.\n3. Renewed the TLS certificate and redeployed the login service configuration.\n4. Verified successful login functionality and restored normal operation.\n\n## Preventive Measures\n- Implemented automated certificate expiration monitoring with alerts {{int:24:36}} days before expiry.\n- Added a scheduled task to rotate certificates ahead of expiration.\n- Updated deployment scripts to enforce certificate validity checks during CI/CD pipelines.\n\nWe apologize for the inconvenience caused and appreciate your understanding.\n\n---\n*For any further questions, please contact our support team.*",
+                "file_name": "incident_summary.md"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1534,\"file_name\":\"incident_summary.md\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1809,
+            "completion_tokens": 445
+          },
+          "chars": 2148
+        },
+        {
+          "text": "The incident summary has been prepared.\n\n**Attached:** `incident_summary.md` – a markdown document outlining the {{int:20:30}}‑minute login service outage, its impact, root cause, resolution steps, and preventive measures.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2171,
+            "completion_tokens": 46
+          },
+          "chars": 215
+        }
+      ]
+    }
+  ]
+}

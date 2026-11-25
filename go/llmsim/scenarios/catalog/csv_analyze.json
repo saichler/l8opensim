@@ -1,0 +1,96 @@
+{
+  "flavor": "csv_analyze",
+  "mode": "tanto",
+  "validators": [],
+  "expect_tools": [],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "sales-totals",
+      "params": {},
+      "turns": [
+        "Here is our sales data:\n```csv\nregion,month,units,revenue\nNorth,Jan,120,24000\nNorth,Feb,95,19000\nSouth,Jan,200,41000\nSouth,Feb,15,2900\nEast,Jan,130,26500\nEast,Feb,140,28000\nWest,Jan,90,18200\nWest,Feb,310,61000\n```\nWhat are the totals per region?"
+      ]
+    },
+    {
+      "id": "sales-anomaly",
+      "params": {},
+      "turns": [
+        "Find anomalies in this CSV:\n```csv\nregion,month,units,revenue\nNorth,Jan,120,24000\nNorth,Feb,95,19000\nSouth,Jan,200,41000\nSouth,Feb,15,2900\nEast,Jan,130,26500\nEast,Feb,140,28000\nWest,Jan,90,18200\nWest,Feb,310,61000\n```"
+      ]
+    },
+    {
+      "id": "latency",
+      "params": {},
+      "turns": [
+        "Analyze this latency CSV and tell me which endpoints need attention:\n```csv\nendpoint,p50_ms,p99_ms,errors\n/login,40,180,2\n/search,85,950,14\n/checkout,120,400,1\n/profile,30,90,0\n/upload,300,4200,37\n```"
+      ]
+    },
+    {
+      "id": "sales-trend",
+      "params": {},
+      "turns": [
+        "Which region grew the most from Jan to Feb in this CSV?\n```csv\nregion,month,units,revenue\nNorth,Jan,120,24000\nNorth,Feb,95,19000\nSouth,Jan,200,41000\nSouth,Feb,15,2900\nEast,Jan,130,26500\nEast,Feb,140,28000\nWest,Jan,90,18200\nWest,Feb,310,61000\n```"
+      ]
+    },
+    {
+      "id": "latency-avg",
+      "params": {},
+      "turns": [
+        "What is the average p99 latency in this CSV?\n```csv\nendpoint,p50_ms,p99_ms,errors\n/login,40,180,2\n/search,85,950,14\n/checkout,120,400,1\n/profile,30,90,0\n/upload,300,4200,37\n```"
+      ]
+    },
+    {
+      "id": "grades",
+      "params": {},
+      "turns": [
+        "Summarize this CSV:\n```csv\nstudent,math,science,english\nAna,91,85,78\nBen,67,72,88\nChloe,78,95,90\nDan,55,61,70\nEva,88,79,94\n```"
+      ]
+    },
+    {
+      "id": "inventory-low",
+      "params": {},
+      "turns": [
+        "Which items need reordering in this CSV?\n```csv\nitem,qty,reorder_level\nbolts,500,200\nnuts,120,150\nwashers,80,100\nscrews,900,300\nrivets,40,50\n```"
+      ]
+    },
+    {
+      "id": "expenses",
+      "params": {},
+      "turns": [
+        "Analyze my expenses CSV and suggest where to save:\n```csv\ncategory,jan,feb,mar\nrent,1500,1500,1500\nfood,620,710,690\ntransport,180,240,95\nsubscriptions,85,85,130\nentertainment,200,340,410\n```"
+      ]
+    },
+    {
+      "id": "uptime",
+      "params": {},
+      "turns": [
+        "Which services had the worst availability in this CSV?\n```csv\nservice,uptime_pct,incidents\napi,99.95,1\ndb,99.2,4\ncache,99.99,0\nqueue,98.7,6\nweb,99.9,2\n```"
+      ]
+    },
+    {
+      "id": "sales-chart-advice",
+      "params": {},
+      "turns": [
+        "What chart would best show this CSV data and why?\n```csv\nregion,month,units,revenue\nNorth,Jan,120,24000\nNorth,Feb,95,19000\nSouth,Jan,200,41000\nSouth,Feb,15,2900\nEast,Jan,130,26500\nEast,Feb,140,28000\nWest,Jan,90,18200\nWest,Feb,310,61000\n```"
+      ]
+    },
+    {
+      "id": "latency-followup",
+      "params": {},
+      "turns": [
+        "Analyze this CSV:\n```csv\nendpoint,p50_ms,p99_ms,errors\n/login,40,180,2\n/search,85,950,14\n/checkout,120,400,1\n/profile,30,90,0\n/upload,300,4200,37\n```",
+        "Which single change would reduce errors the most?"
+      ]
+    },
+    {
+      "id": "sales-forecast",
+      "params": {},
+      "turns": [
+        "Based on this CSV, estimate March revenue per region:\n```csv\nregion,month,units,revenue\nNorth,Jan,120,24000\nNorth,Feb,95,19000\nSouth,Jan,200,41000\nSouth,Feb,15,2900\nEast,Jan,130,26500\nEast,Feb,140,28000\nWest,Jan,90,18200\nWest,Feb,310,61000\n```"
+      ]
+    }
+  ]
+}

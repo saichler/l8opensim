@@ -1,0 +1,96 @@
+{
+  "flavor": "code_review",
+  "mode": "tanto",
+  "validators": [],
+  "expect_tools": [],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "go-sql",
+      "params": {},
+      "turns": [
+        "Review this code for bugs and security issues:\n```go\nfunc GetUser(db *sql.DB, id string) (*User, error) {\n    rows, _ := db.Query(\"SELECT id, name, email FROM users WHERE id = '\" + id + \"'\")\n    var u User\n    for rows.Next() {\n        rows.Scan(&u.ID, &u.Name, &u.Email)\n    }\n    return &u, nil\n}\n```"
+      ]
+    },
+    {
+      "id": "py-avg",
+      "params": {},
+      "turns": [
+        "Review this Python code:\n```python\ndef average(values):\n    total = 0\n    for i in range(1, len(values)):\n        total += values[i]\n    return total / len(values)\n\ndef load(path):\n    f = open(path)\n    return [float(x) for x in f.read().split(\",\")]\n```"
+      ]
+    },
+    {
+      "id": "js-xss",
+      "params": {},
+      "turns": [
+        "Review this Express handler:\n```js\napp.get('/user', (req, res) => {\n  const user = users.find(u => u.id == req.query.id)\n  res.send('<h1>' + user.name + '</h1>')\n})\n```"
+      ]
+    },
+    {
+      "id": "go-race",
+      "params": {},
+      "turns": [
+        "Review this Go cache for problems:\n```go\nvar cache = map[string]string{}\n\nfunc Get(key string) string {\n    if v, ok := cache[key]; ok {\n        return v\n    }\n    v := load(key)\n    go func() { cache[key] = v }()\n    return v\n}\n```"
+      ]
+    },
+    {
+      "id": "go-sql-fix",
+      "params": {},
+      "turns": [
+        "Review this code for bugs and security issues:\n```go\nfunc GetUser(db *sql.DB, id string) (*User, error) {\n    rows, _ := db.Query(\"SELECT id, name, email FROM users WHERE id = '\" + id + \"'\")\n    var u User\n    for rows.Next() {\n        rows.Scan(&u.ID, &u.Name, &u.Email)\n    }\n    return &u, nil\n}\n```",
+        "Rewrite it with the fixes."
+      ]
+    },
+    {
+      "id": "py-style",
+      "params": {},
+      "turns": [
+        "Do a code review of this function and suggest improvements:\n```python\ndef f(l):\n    r=[]\n    for x in l:\n        if x%2==0: r.append(x*x)\n    return r\n```"
+      ]
+    },
+    {
+      "id": "dockerfile",
+      "params": {},
+      "turns": [
+        "Review this Dockerfile:\n```dockerfile\nFROM ubuntu:latest\nRUN apt-get update\nRUN apt-get install -y python3 python3-pip\nCOPY . /app\nRUN pip3 install -r /app/requirements.txt\nUSER root\nCMD python3 /app/main.py\n```"
+      ]
+    },
+    {
+      "id": "k8s-yaml",
+      "params": {},
+      "turns": [
+        "Review this Kubernetes deployment:\n```yaml\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: api\nspec:\n  replicas: 1\n  template:\n    spec:\n      containers:\n      - name: api\n        image: api:latest\n        ports:\n        - containerPort: 8080\n```"
+      ]
+    },
+    {
+      "id": "bash",
+      "params": {},
+      "turns": [
+        "Review this script:\n```bash\n#!/bin/bash\nfor f in $(ls *.log); do\n  rm $f\ndone\ncd $1\nrm -rf *\n```"
+      ]
+    },
+    {
+      "id": "go-errors",
+      "params": {},
+      "turns": [
+        "Review the error handling in this Go code:\n```go\nfunc Save(path string, data []byte) {\n    f, _ := os.Create(path)\n    f.Write(data)\n}\n```"
+      ]
+    },
+    {
+      "id": "sql-query",
+      "params": {},
+      "turns": [
+        "Review this SQL query for performance:\n```sql\nSELECT * FROM orders o WHERE YEAR(o.created_at) = 2025 AND o.customer_id IN (SELECT id FROM customers WHERE name LIKE '%smith%') ORDER BY o.created_at;\n```"
+      ]
+    },
+    {
+      "id": "py-async",
+      "params": {},
+      "turns": [
+        "Review this async Python code:\n```python\nimport asyncio, requests\nasync def fetch_all(urls):\n    return [requests.get(u).text for u in urls]\n```"
+      ]
+    }
+  ]
+}

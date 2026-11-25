@@ -1,0 +1,16 @@
+{
+  "name": "chaos",
+  "extends": "default",
+  "faults": {
+    "http_429": 0.02,
+    "http_503": 0.01,
+    "http_500": 0.01,
+    "drop_connection": 0.005,
+    "context_exceeded": 0.002,
+    "truncated_length": 0.01,
+    "malformed_tool_json": 0.01,
+    "bad_model_in_tool": 0.01,
+    "empty_answer": 0.005
+  },
+  "flawed_fraction": 0.15
+}

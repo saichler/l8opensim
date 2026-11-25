@@ -1,0 +1,24 @@
+{
+  "id": "qa_chat/raid/v0/s0",
+  "flavor": "qa_chat",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:03:24Z",
+  "turns": [
+    {
+      "user_message": "What is the difference between RAID 5 and RAID 10?",
+      "steps": [
+        {
+          "reasoning": "The user asks a general question about RAID 5 vs RAID {{int:8:12}}. This is not about data in the system. I can answer with knowledge. No need to use tools. Provide explanation.",
+          "text": "**RAID 5 vs. RAID {{int:8:12}}**\n\n| Feature | RAID 5 | RAID {{int:8:12}} (1+0) |\n|---------|--------|--------------|\n| **Architecture** | Striping with distributed parity across all drives. Requires at least 3 disks. | A mirror of striped sets: first mirrors pairs of disks, then stripes across those mirrored pairs. Requires an even number of disks (minimum 4). |\n| **Fault tolerance** | Can survive **one** drive failure. If a second drive fails before the first is rebuilt, data is lost. | Can survive **one drive failure per mirrored pair** (i.e., up to half the drives can fail, as long as no two failed drives are in the same mirror). |\n| **Write performance** | Slower writes because parity must be calculated and written (read‑modify‑write). | Faster writes – data is written to both mirrors simultaneously, no parity calculation. |\n| **Read performance** | Good reads: data can be read from any of the striped disks; parity blocks are ignored. | Very good reads: data can be read from any disk in the mirrored pairs, providing load‑balancing across all drives. |\n| **Usable capacity** | `(N‑1) × size_of_smallest_disk` (one disk’s worth is used for parity). | `(N/2) × size_of_smallest_disk` (half the disks are mirrors). |\n| **Rebuild time** | Rebuilding a failed drive requires reading all remaining disks to recalculate parity, which can be I/O‑intensive and takes longer. | Rebuild is simply copying the intact mirror’s data to a new disk, generally faster and less taxing on the array. |\n| **Typical use cases** | Cost‑effective storage where capacity efficiency is important and workload is read‑heavy (e.g., file servers, backup archives). | High‑performance, mission‑critical workloads that need both speed and high fault tolerance (e.g., databases, virtualization hosts). |\n| **Pros** | • Better storage efficiency (only one disk overhead).\u003cbr\u003e• Good read throughput.\u003cbr\u003e• Fewer disks needed for a given capacity. | • Excellent read and write performance.\u003cbr\u003e• Higher fault tolerance (can survive multiple simultaneous drive failures).\u003cbr\u003e• Faster rebuilds. |\n| **Cons** | • Slower writes due to parity calculations.\u003cbr\u003e• Vulnerable during rebuild (only one drive can fail).\u003cbr\u003e• Rebuild can stress the array. | • {{int:40:60}} % capacity overhead (half the disks are mirrors).\u003cbr\u003e• Requires at least four disks, increasing hardware cost. |\n\n### Bottom line\n- **RAID 5** is a good choice when you need to maximize usable space and your workload is read‑intensive, and you can tolerate slower writes and the risk of a single‑drive failure during rebuild.\n- **RAID {{int:8:12}}** sacrifices half the raw capacity for superior write performance, faster rebuilds, and greater resilience to multiple drive failures—making it ideal for performance‑critical, high‑availability environments.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1800,
+            "completion_tokens": 693
+          },
+          "chars": 3007
+        }
+      ]
+    }
+  ]
+}

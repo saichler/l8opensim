@@ -1,0 +1,24 @@
+{
+  "id": "qa_chat/latency/v0/s1",
+  "flavor": "qa_chat",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:05:05Z",
+  "turns": [
+    {
+      "user_message": "Why is p99 latency more important than the average?",
+      "steps": [
+        {
+          "reasoning": "The user asks a conceptual question: \"Why is p99 latency more important than the average?\" This is not about data querying; we just need to answer conceptually. No tool calls needed.\n\nProvide explanation: p99 latency reflects tail latency, user experience, SLA, outliers, capacity planning, etc. Mention average can be skewed, hide worst-case, etc.\n\nProceed with answer.",
+          "text": "**Because the 99th‑percentile (p99) latency tells you how the *slowest* 1 % of requests behave, while the average (mean) only tells you the “typical” case.**  \n\n| Aspect | Average (Mean) | 99th‑percentile (p99) |\n|--------|----------------|----------------------|\n| **What it measures** | Overall sum of all latencies divided by the number of requests. | The latency value below which {{int:79:119}} % of all requests fall (only the slowest 1 % are slower). |\n| **Sensitivity to outliers** | Can be heavily skewed by a few very fast or very slow requests, making it unreliable for user‑experience guarantees. | Directly reflects the worst‑case tail; it *highlights* outliers that affect real users. |\n| **User experience** | A low average may still hide long pauses for some users (e.g., “most pages load in {{int:160:240}} ms, but 1 % take 5 s”). | p99 is a good proxy for “what most users will actually notice,” because those tail latencies often correspond to perceived slowness. |\n| **Service‑level agreements (SLAs) \u0026 reliability** | SLAs rarely use the mean because it doesn’t guarantee a bound on latency for any given request. | Many SLAs are defined as “p99 latency \u003c X ms,” ensuring that almost all requests meet the performance target. |\n| **Capacity \u0026 scaling decisions** | May underestimate required resources if the tail is heavy, leading to surprise outages under load. | Reveals whether you have enough headroom to handle spikes, guiding provisioning and autoscaling rules. |\n| **Root‑cause analysis** | Averages can mask the source of latency problems (e.g., a particular microservice that only occasionally stalls). | By focusing on the slowest requests, you can isolate and investigate the components that cause tail latency. |\n\n### In practice\n- **Web services**: Users abandon a page if it takes \u003e 2 s, even if the average is {{int:400:600}} ms. A p99 of 3 s signals a serious problem.\n- **APIs \u0026 microservices**: Downstream services may experience occasional lock contention or GC pauses; the mean stays low, but p99 spikes reveal those issues.\n- **Capacity planning**: Autoscaling based on average CPU or latency can leave the system under‑provisioned during spikes. Scaling on p99 ensures you have enough capacity for the worst‑case load most of the time.\n\n### Bottom line\nThe average is a useful high‑level metric, but it hides the tail of the latency distribution—exactly where users feel the impact and where reliability problems surface. Monitoring and optimizing p99 latency (or even p999) gives you a concrete, user‑centric guarantee that “the service is fast enough for virtually everyone who uses it.”",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1798,
+            "completion_tokens": 696
+          },
+          "chars": 3035
+        }
+      ]
+    }
+  ]
+}

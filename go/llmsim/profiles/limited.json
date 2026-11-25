@@ -1,0 +1,16 @@
+{
+  "name": "limited",
+  "extends": "default",
+  "pools": {
+    "coder": { "max_concurrent": 500 },
+    "muse": { "max_concurrent": 50, "fallback": "coder" }
+  },
+  "keys": [
+    { "key": "sk-sim-tanto-1", "name": "tanto-openai", "apis": ["openai", "webtools"], "rpm": 30000, "tpm": 300000000 },
+    { "key": "sk-sim-tanto-2", "name": "tanto-anthropic", "apis": ["anthropic", "webtools"], "rpm": 30000, "tpm": 300000000 },
+    { "key": "sk-sim-agent-1", "name": "agent-1", "rpm": 6000, "tpm": 60000000 },
+    { "key": "sk-sim-agent-2", "name": "agent-2", "rpm": 6000, "tpm": 60000000 }
+  ],
+  "reject_status": 429,
+  "retry_after_seconds": 2
+}

@@ -1,0 +1,106 @@
+{
+  "flavor": "web_research",
+  "mode": "tanto_web",
+  "validators": [
+    "tool_sequence"
+  ],
+  "expect_tools": [
+    "web_search"
+  ],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "k8s-release",
+      "params": {},
+      "turns": [
+        "@web What is the latest Kubernetes release and what changed?"
+      ]
+    },
+    {
+      "id": "cuda-version",
+      "params": {},
+      "turns": [
+        "@web What is the latest CUDA version and which drivers does it need?"
+      ]
+    },
+    {
+      "id": "cve",
+      "params": {
+        "vendor": [
+          "Cisco IOS XR",
+          "Juniper Junos",
+          "Arista EOS"
+        ]
+      },
+      "turns": [
+        "@web Are there recent critical CVEs for {{vendor}}?"
+      ]
+    },
+    {
+      "id": "bgp-best-practices",
+      "params": {},
+      "turns": [
+        "@web What are current best practices for BGP route filtering?"
+      ]
+    },
+    {
+      "id": "h200-specs",
+      "params": {},
+      "turns": [
+        "@web What are the specs of the NVIDIA H200 GPU?"
+      ]
+    },
+    {
+      "id": "go-release",
+      "params": {},
+      "turns": [
+        "@web What is the latest stable Go release?"
+      ]
+    },
+    {
+      "id": "dcgm",
+      "params": {},
+      "turns": [
+        "@web How do I monitor GPU health with NVIDIA DCGM?"
+      ]
+    },
+    {
+      "id": "crashloop",
+      "params": {},
+      "turns": [
+        "@web How do I debug a pod in CrashLoopBackOff?"
+      ]
+    },
+    {
+      "id": "srv6",
+      "params": {},
+      "turns": [
+        "@web Explain SRv6 and who supports it."
+      ]
+    },
+    {
+      "id": "ubuntu-lts",
+      "params": {},
+      "turns": [
+        "@web When does Ubuntu 22.04 LTS reach end of standard support?"
+      ]
+    },
+    {
+      "id": "containerd",
+      "params": {},
+      "turns": [
+        "@web What is new in the latest containerd release?"
+      ]
+    },
+    {
+      "id": "followup",
+      "params": {},
+      "turns": [
+        "@web What is the latest Istio version?",
+        "@web Is it compatible with Kubernetes 1.30?"
+      ]
+    }
+  ]
+}

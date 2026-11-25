@@ -1,0 +1,24 @@
+{
+  "id": "edge_cases/ambiguous-data/v0/s0",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:42:23Z",
+  "turns": [
+    {
+      "user_message": "Show me the thing from yesterday.",
+      "steps": [
+        {
+          "reasoning": "The user says \"Show me the thing from yesterday.\" That's vague. We need clarification. According to guidelines, we should ask for clarification.",
+          "text": "I’m not sure which data you’d like to see from yesterday. Could you let me know what type of records you’re interested in (e.g., network devices, GPU servers, Kubernetes clusters, alarms, events, etc.) and any details that would help identify them?",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 93
+          },
+          "chars": 398
+        }
+      ]
+    }
+  ]
+}

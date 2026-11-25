@@ -1,0 +1,42 @@
+{
+  "id": "explore_models/what-data/v0/s1",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:48:16Z",
+  "turns": [
+    {
+      "user_message": "What data can you show me?",
+      "steps": [
+        {
+          "reasoning": "We need to respond as Tanto. Should list what data we can show: the models available: NetworkDevice, GpuDevice, K8SCluster, K8SNode, K8SPod, K8SDeployment, Alarm, EventRecord, L8PTarget. Also we can provide aggregates, detailed records, export CSV, create reports. We must not fabricate. Should use list_modules tool to get list. Let's call list_modules.",
+          "tool_calls": [
+            {
+              "name": "list_modules",
+              "arguments": {}
+            }
+          ],
+          "tool_results": [
+            "{\"models\":[{\"area\":\"Inventory\",\"model\":\"NetworkDevice\",\"primaryKey\":\"id\",\"service\":\"NetDev\"},{\"area\":\"Inventory\",\"model\":\"GpuDevice\",\"primaryKey\":\"id\",\"service\":\"GpuDev\"},{\"area\":\"Kubernetes\",\"model\":\"K8SCluster\",\"primaryKey\":\"name\",\"service\":\"K8sClstr\"},{\"area\":\"Kubernetes\",\"model\":\"K8SNode\",\"primaryKey\":\"name\",\"service\":\"K8sNode\"},{\"area\":\"Kubernetes\",\"model\":\"K8SPod\",\"primaryKey\":\"key\",\"service\":\"K8sPod\"},{\"area\":\"Kubernetes\",\"model\":\"K8SDeployment\",\"primaryKey\":\"key\",\"service\":\"K8sDeploy\"},{\"area\":\"Alarms\",\"model\":\"Alarm\",\"primaryKey\":\"alarmId\",\"service\":\"Alarm\"},{\"area\":\"Alarms\",\"model\":\"EventRecord\",\"primaryKey\":\"eventId\",\"service\":\"Events\"},{\"area\":\"Collection\",\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\",\"service\":\"Targets\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 110
+          },
+          "chars": 368
+        },
+        {
+          "reasoning": "We need to answer the user's question: \"What data can you show me?\" We should describe the available models and perhaps fields. We can list models and say we can query them, show aggregates, export CSV, etc. Might also describe that we can retrieve network devices, GPU servers, Kubernetes clusters/nodes/pods/deployments, alarms, events, collection targets. Should we also call describe_model for each? Might not be needed, but could give summary. We can describe that we can show counts, statuses, etc. Provide a helpful answer.\n\nWe should not query further unless needed. Let's respond with a description.",
+          "text": "I can work with the data stored in Probler’s inventory, Kubernetes, alarm, and collection areas. The available models (and their primary‑key fields) are:\n\n| Area | Model | Primary key | Service |\n|------|-------|-------------|---------|\n| **Inventory** | **NetworkDevice** | `id` | NetDev – network switches, routers, firewalls, etc. |\n| **Inventory** | **GpuDevice** | `id` | GpuDev – GPU‑enabled servers (one record per server; the `deviceInfo.gpuCount` field tells how many GPUs it contains) |\n| **Kubernetes** | **K8SCluster** | `name` | K8sClstr – Kubernetes clusters |\n| **Kubernetes** | **K8SNode** | `name` | K8sNode – worker nodes in a cluster |\n| **Kubernetes** | **K8SPod** | `key` | K8sPod – individual pods |\n| **Kubernetes** | **K8SDeployment** | `key` | K8sDeploy – deployments (set of pods) |\n| **Alarms** | **Alarm** | `alarmId` | Alarm – active or historic alarms |\n| **Alarms** | **EventRecord** | `eventId` | Events – event log entries |\n| **Collection** | **L8PTarget** | `targetId` | Targets – polling / collection endpoints |\n\nWith these models I can:\n\n* **List records** – e.g., show the first N devices, pods, alarms, etc.\n* **Summarise data** – counts, totals, averages, min/max, grouped by fields (e.g., number of GPUs per vendor, pods per namespace, alarm status breakdown).\n* **Export full result sets** as CSV files for you to download.\n* **Create or update records** (if you need to add a new device, change a label, acknowledge an alarm, etc.).\n* **Delete records** – but only after you explicitly confirm the deletion.\n\nIf you let me know which area or specific question you have (e.g., “How many network devices are online?”, “Show all GPU servers with \u003e4 GPUs”, “List pods that are pending”), I can run the appropriate query and return the data (or a CSV export).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2039,
+            "completion_tokens": 620
+          },
+          "chars": 2452
+        }
+      ]
+    }
+  ]
+}

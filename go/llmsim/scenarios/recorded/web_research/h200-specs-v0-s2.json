@@ -1,0 +1,191 @@
+{
+  "id": "web_research/h200-specs/v0/s2",
+  "flavor": "web_research",
+  "model": "gpt-oss-120b",
+  "quality": "flawed",
+  "recorded_at": "2026-11-24T20:40:04Z",
+  "turns": [
+    {
+      "user_message": "@web What are the specs of the NVIDIA H200 GPU?",
+      "steps": [
+        {
+          "reasoning": "User wants web info about specs of NVIDIA H200 GPU. Use web_search.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 5,
+                "query": "NVIDIA H200 GPU specifications"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 GPU specifications\", \"results\": [{\"title\": \"Mature Wife Fucked Wearing Girdle Porn Videos - xHamster\", \"url\": \"https://xhamster.com/search/mature+wife+fucked+wearing+girdle\", \"snippet\": \"Watch mature wife fucked wearing girdle porn videos. Explore tons of XXX movies with sex scenes in 2026 on xHamster!\"}, {\"title\": \"Wife Wearing Girdle Porn Videos - xHamster\", \"url\": \"https://xhamster.com/search/wife+wearing+girdle\", \"snippet\": \"Watch wife wearing girdle porn videos. Explore tons of XXX movies with sex scenes in 2026 on xHamster!\"}, {\"title\": \"'Mature women in girdles fuck' Search - XVIDEOS.COM\", \"url\": \"https://www.xvideos.com/?k=Mature+women+in+girdles+fuck\", \"snippet\": \"122,642 Mature women in girdles fuck FREE videos found on XVIDEOS for this search.\"}, {\"title\": \"'girdle fuck mature wife' Search - XVIDEOS.COM\", \"url\": \"https://www.xvideos.com/?k=girdle+fuck+mature+wife\", \"snippet\": \"57,998 girdle fuck mature wife FREE videos found on XVIDEOS for this search.\"}, {\"title\": \"Wife In Girdle Porn Videos | Pornhub.com\", \"url\": \"https://www.pornhub.com/video/search?search=wife+in+girdle\", \"snippet\": \"Browse through our impressive selection of porn videos in HD quality on any device you own.\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1904,
+            "completion_tokens": 57
+          },
+          "chars": 135
+        },
+        {
+          "reasoning": "The web search returned irrelevant porn results due to likely safe search not enabled. We need correct specs. Could try a more specific query.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 GPU specs"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 GPU specs\", \"results\": [{\"title\": \"Anthropic, PBC Class A Common Stock (ANT) - Yahoo Finance\", \"url\": \"https://finance.yahoo.com/quote/ANT/\", \"snippet\": \"Find the latest Anthropic, PBC Class A Common Stock (ANT) stock quote, history, news and other vital information to help you with …\"}, {\"title\": \"ANT Stock Quote Price and Forecast | CNN\", \"url\": \"https://www.cnn.com/markets/stocks/ANT\", \"snippet\": \"1 day ago · View Anthropic, PBC Class A ANT stock quote prices, financial information, real-time forecasts, and company news from …\"}, {\"title\": \"Anthropic, PBC (ANT) Stock Price, Chart \u0026 News\", \"url\": \"https://stockanalysis.com/stocks/ant/\", \"snippet\": \"A detailed overview of Anthropic, PBC (ANT) stock, including real-time price, chart, key statistics, news, and more.\"}, {\"title\": \"Anthropic: ANT Stock Price Quote \u0026 News | Robinhood\", \"url\": \"https://robinhood.com/us/en/stocks/ANT/\", \"snippet\": \"View the real-time ANT price chart on Robinhood and decide if you want to buy or sell commission-free. Other fees such as trading …\"}, {\"title\": \"ANT: Anthropic, PBC - Stock Price, Quote and News - CNBC\", \"url\": \"https://www.cnbc.com/quotes/ANT?msockid=16b38c318ca861e732e3942a8d9e6006\", \"snippet\": \"Get Anthropic, PBC (ANT:NASDAQ) real-time stock quotes, news, price and financial information from CNBC.\"}, {\"title\": \"Anthropic Stock Price \u0026 Chart — NASDAQ:ANT — TradingView\", \"url\": \"https://www.tradingview.com/symbols/NASDAQ-ANT/\", \"snippet\": \"Track Anthropic stock price and see how investors are reacting to the IPO. Follow live price action, market sentiment, trading ideas, …\"}, {\"title\": \"ANT: Anthropic Latest Stock Price, Analysis, News and Trading Ideas\", \"url\": \"https://stocktwits.com/symbol/ANT\", \"snippet\": \"Get real-time Anthropic (ANT) stock price, news, financials, community insights, and trading ideas. Join 10 million+ investors and …\"}, {\"title\": \"When Is Anthropic’s IPO Date and What Is the ANT Stock IPO Price …\", \"url\": \"https://finance.yahoo.com/markets/stocks/articles/anthropic-ipo-date-ant-stock-211907331.html\", \"snippet\": \"6 days ago · Anthropic (ANT) is all set to go public, and investors now have a clearer idea of what a stake in the Claude maker could …\"}, {\"title\": \"Should You Buy Anthropic Stock at Its IPO? Here's What History Says.\", \"url\": \"https://www.fool.com/investing/2026/11/17/should-you-buy-anthropic-stock-at-its-ipo-here-s-what-history-says/?msockid=16b38c318ca861e732e3942a8d9e6006\", \"snippet\": \"6 days ago · Should you buy Anthropic stock at the IPO? Historical IPO performance offers an important lesson, but it doesn't …\"}, {\"title\": \"Anthropic PBC (ANT) Stock Price, News \u0026 Analysis - MarketBeat\", \"url\": \"https://www.marketbeat.com/stocks/NASDAQ/ANT/\", \"snippet\": \"Nov 11, 2026 · Should You Buy or Sell Anthropic PBC Stock? Get The Latest ANT Stock Analysis, Price Target, Headlines, and …\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2310,
+            "completion_tokens": 64
+          },
+          "chars": 202
+        },
+        {
+          "reasoning": "The web search returned irrelevant results, likely due to safe search filters. We might need to adjust query, maybe \"NVIDIA H200 GPU architecture\" or \"NVIDIA H200 data center GPU\". Let's try again with different query.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 data center GPU specifications"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 data center GPU specifications\", \"results\": [{\"title\": \"XBOX Official Site: Play Games Anywhere | XBOX\", \"url\": \"https://www.xbox.com/?msockid=0e71245476aa630120d83c4f770c622c\", \"snippet\": \"Play with XBOX on PC, console, \u0026 more. Explore Game Pass. Discover thousands of games. Shop controllers, handhelds, \u0026 …\"}, {\"title\": \"XBOX - Best Buy\", \"url\": \"https://www.bestbuy.com/site/video-games/xbox/pcmcat1741975945801.c?id=pcmcat1741975945801\", \"snippet\": \"Shop products from XBOX including consoles, games, and controllers at Best Buy. Experience the latest in XBOX gaming and …\"}, {\"title\": \"Xbox\", \"url\": \"https://www.xbox.com/en-US/%C2%A0?msockid=0e71245476aa630120d83c4f770c622c\", \"snippet\": \"XBOX games Browse XBOX games to find the latest hot new releases, blockbuster exclusives, Indie games and more.\"}, {\"title\": \"XBOX - Walmart.com\", \"url\": \"https://www.walmart.com/brand/xbox/10063717\", \"snippet\": \"Shop items from XBOX at Walmart.com and learn more about how you can save money on the best XBOX products to help you live …\"}, {\"title\": \"Play XBOX\", \"url\": \"https://play.xbox.com/\", \"snippet\": \"Welcome to Play XBOX!\"}, {\"title\": \"XBOX Consoles, Games, Controllers, Gear \u0026 More - Microsoft Store\", \"url\": \"https://www.microsoft.com/en-us/store/b/xbox?msockid=0e71245476aa630120d83c4f770c622c\", \"snippet\": \"The current lineup includes the XBOX Series X|S consoles, XBOX Game Pass subscriptions for access to hundreds of games, cloud …\"}, {\"title\": \"Xbox - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Xbox\", \"snippet\": \"Xbox ... Xbox (stylized in all caps [1]) is a video gaming brand that consists of four main home video game console lines, as well as …\"}, {\"title\": \"XBOX Support\", \"url\": \"https://support.xbox.com/en-US/\", \"snippet\": \"XBOX Support offers help for XBOX, Game Pass, and billing questions. Get advice and customer service in the XBOX Support …\"}, {\"title\": \"Buy New XBOX Series X|S Consoles - See Deals \u0026 Pricing\", \"url\": \"https://www.microsoft.com/en-us/store/b/xboxconsoles?msockid=0e71245476aa630120d83c4f770c622c\", \"snippet\": \"Shop XBOX Series X \u0026 Series S consoles at the Microsoft Store. Explore new and Certified Refurbished models, browse deals, …\"}, {\"title\": \"Xbox Cloud Gaming on Xbox.com\", \"url\": \"https://www.xbox.com/en-US/play?msockid=0e71245476aa630120d83c4f770c622c\", \"snippet\": \"Play Xbox Cloud Gaming on Xbox.com. Use your Xbox Game Pass Ultimate membership to play 100s of consoles games on PC and …\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 3171,
+            "completion_tokens": 86
+          },
+          "chars": 299
+        },
+        {
+          "reasoning": "The web searches returned irrelevant results. We need correct specs of NVIDIA H200 GPU. Could try search with \"NVIDIA H200 GPU spec sheet\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 spec sheet"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 spec sheet\", \"results\": [{\"title\": \"Google\", \"url\": \"https://www.google.com/\", \"snippet\": \"Search the world's information, including webpages, images, videos and more. Google has many special features to help you find …Read more\"}, {\"title\": \"Google\", \"url\": \"https://www.google.com.nf/webhp?gl=nf\u0026hl=en\u0026gws_rd=cr\u0026pws=0\", \"snippet\": \"Advertising Business Solutions About Google Google.com © 2026 - Privacy - Terms\"}, {\"title\": \"Google Chrome - The Fast \u0026 Secure Web Browser Built to be Yours\", \"url\": \"https://www.google.com/chrome/\", \"snippet\": \"Chrome is the official web browser from Google, built to be fast, secure, and customizable. Download now and make it yours.\"}, {\"title\": \"Sign in - Google Accounts\", \"url\": \"https://accounts.google.com/\", \"snippet\": \"Not your computer? Use a private browsing window to sign in. Learn more about using Guest mode Next Create account\"}, {\"title\": \"About Google: Our products, technology and company information\", \"url\": \"https://about.google/\", \"snippet\": \"Learn more about Google. Explore our innovative AI products and services, and how we're using technology to help improve lives …Read more\"}, {\"title\": \"Google Search\", \"url\": \"https://ogs.google.com/widget/empty\", \"snippet\": \"Google Search provides a fast, easy way to find information, images, videos and more across the web.\"}, {\"title\": \"Google Search - A new kind of help\", \"url\": \"https://search.google/\", \"snippet\": \"Explore a new kind of help for your everyday with breakthroughs in Search intelligence from Google I/O.\"}, {\"title\": \"Google - Wikipedia\", \"url\": \"https://en.m.wikipedia.org/wiki/Google\", \"snippet\": \"Google LLC (also known simply as Google and pronounced / ˈɡuː.ɡəl / ⓘ or GOO-gəl) is an American multinational technology …Read more\"}, {\"title\": \"Google - Facebook\", \"url\": \"https://www.facebook.com/Google/\", \"snippet\": \"4 days ago · Google. 36,137,190 followers · 319,481 talking about this. Organizing the world's information and making it universally …Read more\"}, {\"title\": \"Google Search\", \"url\": \"https://accounts.google.com/InteractiveLogin?service=safesearchlock\", \"snippet\": \"Search the world’s information, including webpages, images, videos and more. Sign in to lock SafeSearch.\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 3952,
+            "completion_tokens": 67
+          },
+          "chars": 200
+        },
+        {
+          "reasoning": "The web searches returned unrelated results (likely due to safe search). Need to refine query. Might need to fetch a specific article. Let's search for \"NVIDIA H200 GPU architecture\"",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 GPU architecture specifications"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 GPU architecture specifications\", \"results\": [{\"title\": \"Download Claude | Claude by Anthropic\", \"url\": \"https://claude.com/download\", \"snippet\": \"Claude Code runs directly in the desktop app. You can preview running servers, review local code changes, and monitor pull request …Read more\"}, {\"title\": \"Install Claude Desktop | Claude Help Center\", \"url\": \"https://support.claude.com/en/articles/10065433-install-claude-desktop\", \"snippet\": \"Nov 17, 2026 · The Claude desktop apps bring Claude's capabilities directly to your computer, allowing for seamless integration with …Read more\"}, {\"title\": \"Claude by Anthropic | The AI for problem solvers\", \"url\": \"https://claude.com/\", \"snippet\": \"Claude is an AI assistant built by Anthropic and designed to be helpful, honest, and harmless, so you can do your best work.\"}, {\"title\": \"Sign in or create an account | Claude.ai\", \"url\": \"https://claude.ai/\", \"snippet\": \"Log in to Claude or create an account to start using the web app online. Hand off tasks, write, analyze, and code with Anthropic’s AI …Read more\"}, {\"title\": \"Desktop application - Claude Code Docs\", \"url\": \"https://code.claude.com/docs/en/desktop\", \"snippet\": \"Get more out of Claude Code Desktop: parallel sessions with Git isolation, drag-and-drop pane layout, integrated terminal and file …Read more\"}, {\"title\": \"Claude - Free download and install on Windows | Microsoft Store\", \"url\": \"https://apps.microsoft.com/detail/9p6k58ths811?hl=en-US\u0026gl=US\", \"snippet\": \"With Claude in Chrome, Claude can navigate sites, click, and fill in forms in your browser without switching windows. Desktop …Read more\"}, {\"title\": \"Get started with the desktop app - Claude Code Docs\", \"url\": \"https://code.claude.com/docs/en/desktop-quickstart\", \"snippet\": \"The desktop app gives you Claude Code with a graphical interface. You can ask Claude to work on the code in a folder on your …Read more\"}, {\"title\": \"Deploy Claude Desktop for Windows | Claude Help Center\", \"url\": \"https://support.claude.com/en/articles/12622703-deploy-claude-desktop-for-windows\", \"snippet\": \"Nov 17, 2026 · Administrators on Team or Enterprise plans can deploy Claude Desktop automatically across their organization to …Read more\"}, {\"title\": \"Navigating the Claude desktop app · Claude Academy\", \"url\": \"https://academy.claude.com/tutorials/navigating-the-claude-desktop-app\", \"snippet\": \"Learn what changes when you use Claude in the desktop app, and what it can do across your computer and tools.\"}, {\"title\": \"Claude Code Installation Guide\", \"url\": \"https://claudecode.us.org/\", \"snippet\": \"Running claude code windows is well-supported via WSL2 or a native Node.js installation. The claude code windows install guide …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 4571,
+            "completion_tokens": 75
+          },
+          "chars": 264
+        },
+        {
+          "reasoning": "The web searches returned irrelevant results (mostly porn, XBOX, Anthropic). Likely need to refine search to \"NVIDIA H200 data center GPU specs site:nvidia.com\". Let's try a more specific search.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 GPU specs site:nvidia.com"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 GPU specs site:nvidia.com\", \"results\": [{\"title\": \"I Survived 100 Days on NIGHTMARE ISLAND in Among Us\", \"url\": \"https://www.youtube.com/watch?v=MiIs8em6rwM\", \"snippet\": \"Apr 27, 2023 · We try and survive 100 days in a Haunted Island mod in Among Us☞ Subscribe \u0026 click the bell Subscribe …Read more\"}, {\"title\": \"The Most Satisfying Video in Among Us - YouTube\", \"url\": \"https://www.youtube.com/watch?v=q8KmvOaRdg4\", \"snippet\": \"Mar 30, 2023 · We play the most satisfying Mod in Among Us!☞ Subscribe \u0026 click the bell Subscribe …Read more\"}, {\"title\": \"IMPOSTER T-Rex Role in Among Us - YouTube\", \"url\": \"https://www.youtube.com/watch?v=1izFZ1zkpVc\", \"snippet\": \"Mar 10, 2021 · We add a T-Rex Dinosaur Impostor Role in Among Us!🔔 Subscribe \u0026 click the bell! …Read more\"}, {\"title\": \"SSundee Among us in order - YouTube\", \"url\": \"https://www.youtube.com/playlist?list=PLE5NIJl_HRrgWptHZqvdE6sTruK8Lv6Up\", \"snippet\": \"Ssundee's oldest to newest among us videos. I'll ask who/whom ever sees this to follow him, have a great day/night.\"}, {\"title\": \"What if You Could 1v1 in Among Us - YouTube\", \"url\": \"https://www.youtube.com/watch?v=QyXHD3D5beo\", \"snippet\": \"Nov 9, 2025 · What if You Could 1v1 in Among Us SSundee 25.5M subscribers 31K 1.6M views 11mo ago #ssundee #amongus …Read more\"}, {\"title\": \"SSUNDEE 100 Doors in Among Us - video Dailymotion\", \"url\": \"https://www.dailymotion.com/video/x8ezhe6\", \"snippet\": \"Oct 27, 2022 · SSUNDEE 100 Doors in Among Us YOU CAN SEE ALL MY VIDEOS HERE: https://dailymotion.com/playlist/x7m14s\"}, {\"title\": \"SSUNDEE I Survived 100 Days on NIGHTMARE ISLAND in Among Us\", \"url\": \"https://www.dailymotion.com/video/x978og4\", \"snippet\": \"Oct 12, 2024 · SSUNDEE I Survived 100 Days on NIGHTMARE ISLAND in Among Us YOU CAN SEE ALL MY VIDEOS HERE: …Read more\"}, {\"title\": \"SSundee - YouTube\", \"url\": \"https://www.youtube.com/@ssundee\", \"snippet\": \"We Brought Back Lucky Blocks in Minecraft! Among Us is a party game of teamwork and betrayal. Watch SSundee have his own …Read more\"}, {\"title\": \"SSUNDEE Olympics Mod In Among us - video Dailymotion\", \"url\": \"https://www.dailymotion.com/video/x96osd6\", \"snippet\": \"Oct 3, 2024 · 00:06 It's time to bring home the gold. All right, here we go. Give me the thing. Give me the Olympic Olympic. 00:11 No …Read more\"}, {\"title\": \"SSUNDEE Venom in Among Us - video Dailymotion\", \"url\": \"https://www.dailymotion.com/video/x95pybc\", \"snippet\": \"Sep 15, 2024 · 00:00 We are Venom in Among Us. With this crazy symbiote, I'm going to the Shadow Realm to get even stronger. …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 5297,
+            "completion_tokens": 85
+          },
+          "chars": 271
+        },
+        {
+          "reasoning": "The web searches are failing because maybe the environment blocks certain sites. We need better approach: use search engine maybe \"NVIDIA H200 specifications\" but we get unrelated results due to possibly safe search. Could try include \"NVIDIA H200 GPU spec sheet PDF\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "\"NVIDIA H200\" GPU specifications pdf"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"\\\"NVIDIA H200\\\" GPU specifications pdf\", \"results\": [{\"title\": \"Official Baltimore Orioles Website | MLB.com\", \"url\": \"https://www.mlb.com/orioles?msockid=073678eb5c3f61cf0fc560f05dfe6093\", \"snippet\": \"The official website of the Baltimore Orioles with the most up-to-date information on news, tickets, schedule, stadium, roster, rumors, …\"}, {\"title\": \"Baltimore Orioles - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Baltimore_Orioles\", \"snippet\": \"The Baltimore Orioles are an American professional baseball team based in Baltimore. The Orioles compete in Major League …\"}, {\"title\": \"2026 Baltimore Orioles Statistics | Baseball-Reference.com\", \"url\": \"https://www.baseball-reference.com/teams/BAL/2026.shtml\", \"snippet\": \"Baltimore Orioles latest stats and more including batting stats, pitching stats, team fielding totals and more on Baseball-Reference.com\"}, {\"title\": \"Latest Orioles News | Baltimore Orioles - MLB.com\", \"url\": \"https://www.mlb.com/orioles/news?msockid=073678eb5c3f61cf0fc560f05dfe6093\", \"snippet\": \"The official Orioles news source including trades, rumors, scores, standings, stats, game recaps, highlights, injuries and more from …\"}, {\"title\": \"Baltimore Orioles: Breaking News, Rumors \u0026 Highlights | Yardbarker\", \"url\": \"https://www.yardbarker.com/mlb/teams/baltimore_orioles/3\", \"snippet\": \"The Baltimore Orioles are far from a contender in the American League -- or even in the AL East, for that matter. But that hasn't …\"}, {\"title\": \"Baltimore Orioles Rumors - MLB Trade Rumors\", \"url\": \"https://www.mlbtraderumors.com/baltimore-orioles\", \"snippet\": \"4 hours ago · The Orioles and free agent starter Freddy Peralta are reportedly in agreement on a five-year, $125MM contract. The …\"}, {\"title\": \"Baltimore Orioles Team History \u0026 Encyclopedia | Baseball …\", \"url\": \"https://www.baseball-reference.com/teams/BAL/index.shtml\", \"snippet\": \"Get information about Baltimore Orioles history, past franchise names, retired numbers, top players and more on Baseball …\"}, {\"title\": \"Baltimore Orioles news, trade rumors \u0026 analysis - Birds Watcher\", \"url\": \"https://birdswatcher.com/\", \"snippet\": \"Your ultimate source for Baltimore Orioles news, rumors, scores, and analysis from Birds Watcher, part of the FanSided Network.\"}, {\"title\": \"Baltimore Orioles News, Rumors \u0026 Analysis - Sports Illustrated\", \"url\": \"https://www.si.com/mlb/orioles\", \"snippet\": \"Follow the Baltimore Orioles with the latest news, live game updates, roster moves, full schedule, stats, standings, and player …\"}, {\"title\": \"Camden Chat\", \"url\": \"https://www.camdenchat.com/\", \"snippet\": \"Your best source for quality Baltimore Orioles news, rumors, analysis, stats and scores from the fan perspective.\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 6191,
+            "completion_tokens": 92
+          },
+          "chars": 345
+        },
+        {
+          "reasoning": "The web searches are returning irrelevant results (mostly porn or baseball). Likely need to refine search or use fetch_url for a known page. Maybe the GPU spec is on NVIDIA's website, but search blocked. Could try using Bing? The tool might be returning generic results due to restrictions. Could try more specific query: \"NVIDIA H200 GPU architecture H200 spec sheet nvidia.com\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 GPU site:nvidia.com spec"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 GPU site:nvidia.com spec\", \"results\": [{\"title\": \"Messenger\", \"url\": \"https://www.messenger.com/?_rdr\", \"snippet\": \"Instantly reach the people in your life—for free. Messenger is just like texting, but you don't have to pay for every message (it works …Read more\"}, {\"title\": \"Messenger\", \"url\": \"https://www.messenger.com/\", \"snippet\": \"A place for meaningful conversations Messenger helps you connect with your Facebook friends and family, build your community, …Read more\"}, {\"title\": \"Messenger\", \"url\": \"https://web.messenger.com/?locale=tl_PH\", \"snippet\": \"Mag-hang out kahit anong oras, kahit saanman - ginagawang madali at nakakatuwa ng Messenger na manatiling malapit sa iyong …Read more\"}, {\"title\": \"Messenger\", \"url\": \"https://www.messenger.com/login\", \"snippet\": \"Connect with your favorite people. Continue\"}, {\"title\": \"Messenger features - Facebook\", \"url\": \"https://web.messenger.com/features\", \"snippet\": \"Hang out anytime, anywhere - Messenger makes it easy and fun to stay close to your favorite people.\"}, {\"title\": \"Log into Facebook | Messenger Help Center\", \"url\": \"https://www.messenger.com/help/messenger-app/185285184853471/\", \"snippet\": \"How to log into your Facebook account using your email, phone number or username.\"}, {\"title\": \"Messenger Help Center\", \"url\": \"https://www.messenger.com/help\", \"snippet\": \"Learn how to use Messenger, fix a problem, and get answers to your questions.\"}, {\"title\": \"Messenger\", \"url\": \"https://www.messenger.com/user_cookie_prompt/\", \"snippet\": \"Connect with friends and family on Messenger, build communities, and share interests. Stay in touch easily and enjoyably anytime, …Read more\"}, {\"title\": \"Audio and video calls | Messenger Help Center\", \"url\": \"https://www.messenger.com/help/1673374996287506\", \"snippet\": \"Find out more about calls on Messenger, including how to play games and use special effects.\"}, {\"title\": \"Messenger contacts | Messenger Help Center\", \"url\": \"https://www.messenger.com/help/1735450220114273/\", \"snippet\": \"Find out about your contacts on Messenger. How active status works on Messenger and Facebook See or hide who's active on …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 6936,
+            "completion_tokens": 120
+          },
+          "chars": 455
+        },
+        {
+          "reasoning": "The web searches didn't return relevant results (maybe blocked). Could try to fetch a known article. Perhaps use fetch_url on a known page like NVIDIA H200 spec on NVIDIA's site. Let's try search with different query.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 7526,
+            "completion_tokens": 81
+          },
+          "chars": 217
+        }
+      ]
+    }
+  ]
+}

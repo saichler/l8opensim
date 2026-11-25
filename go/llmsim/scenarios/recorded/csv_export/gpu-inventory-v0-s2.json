@@ -1,0 +1,71 @@
+{
+  "id": "csv_export/gpu-inventory/v0/s2",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:25:16Z",
+  "turns": [
+    {
+      "user_message": "Export the GPU inventory to CSV: hostname, model, GPU count, driver and CUDA versions.",
+      "steps": [
+        {
+          "reasoning": "User wants to export GPU inventory to CSV with fields: hostname, model, GPU count, driver and CUDA versions.\n\nWe need to know fields in GpuDevice model. Let's describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "GpuDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"deviceInfo.hostname\",\"type\":\"string\"},{\"path\":\"deviceInfo.vendor\",\"type\":\"string\"},{\"path\":\"deviceInfo.model\",\"type\":\"string\"},{\"path\":\"deviceInfo.ipAddress\",\"type\":\"string\"},{\"path\":\"deviceInfo.serialNumber\",\"type\":\"string\"},{\"path\":\"deviceInfo.location\",\"type\":\"string\"},{\"path\":\"deviceInfo.osVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.kernelVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.driverVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.cudaVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.dcgmVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"deviceInfo.uptime\",\"type\":\"string\"},{\"path\":\"deviceInfo.lastSeen\",\"type\":\"string\"},{\"path\":\"deviceInfo.gpuCount\",\"type\":\"int\"}],\"model\":\"GpuDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1806,
+            "completion_tokens": 67
+          },
+          "chars": 209
+        },
+        {
+          "reasoning": "We need to export CSV with fields: hostname, model, GPU count, driver and CUDA versions.\n\nFrom fields: deviceInfo.hostname, deviceInfo.model, deviceInfo.gpuCount, deviceInfo.driverVersion, deviceInfo.cudaVersion.\n\nUse export_csv with query select * from GpuDevice (no limit). Provide columns array.\n\nLet's call export_csv.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "columns": [
+                  "deviceInfo.hostname",
+                  "deviceInfo.model",
+                  "deviceInfo.gpuCount",
+                  "deviceInfo.driverVersion",
+                  "deviceInfo.cudaVersion"
+                ],
+                "file_name": "gpu_inventory.csv",
+                "query": "select * from GpuDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"deviceInfo.hostname\",\"deviceInfo.model\",\"deviceInfo.gpuCount\",\"deviceInfo.driverVersion\",\"deviceInfo.cudaVersion\"],\"file_name\":\"gpu_inventory.csv\",\"rows\":8}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2058,
+            "completion_tokens": 155
+          },
+          "chars": 526
+        },
+        {
+          "text": "Attached is **gpu_inventory.csv** containing the hostname, model, GPU count, driver version, and CUDA version for all GPU devices (8 records).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2182,
+            "completion_tokens": 34
+          },
+          "chars": 142
+        }
+      ]
+    }
+  ]
+}

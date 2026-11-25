@@ -1,0 +1,24 @@
+{
+  "id": "summarize_long/postmortem-actions/v0/s2",
+  "flavor": "summarize_long",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:33:11Z",
+  "turns": [
+    {
+      "user_message": "Summarize the action items from this report:\n\nOn Tuesday at 14:05 UTC the payments API started returning 503 errors. Monitoring alerted at 14:07. The on-call engineer found that a configuration change deployed at 13:58 lowered the database connection pool from 200 to 20. Traffic peaked at 14:00 and requests queued waiting for connections until the load balancer timed them out. The change was rolled back at 14:31 and error rates returned to normal by 14:36. About 18 percent of payment attempts failed during the incident. Action items: add validation for pool sizes in the deployment pipeline, alert on connection pool saturation, and require a second reviewer for database configuration changes.",
+      "steps": [
+        {
+          "reasoning": "We need to summarize action items from the report. The user gave a textual report and asked \"Summarize the action items\". No data queries needed. We just need to provide a summary list.\n\nWe should produce concise bullet points: add validation for pool sizes in CI/CD pipeline, set up alert for connection pool saturation, enforce second reviewer for DB config changes.\n\nLet's answer.",
+          "text": "**Action Items**\n\n1. **Validate pool sizes in the deployment pipeline** – Add automated checks that prevent deployments with unreasonable database connection‑pool settings (e.g., a pool size that is too low or too high).\n\n2. **Alert on connection‑pool saturation** – Create a monitoring alert that triggers when the connection pool reaches a high utilization threshold, so the team is warned before requests start queuing and timing out.\n\n3. **Require a second reviewer for database‑configuration changes** – Update the change‑management process so any modification to database‑related configuration (such as connection‑pool values) must be reviewed and approved by at least one additional engineer before it is deployed.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1934,
+            "completion_tokens": 223
+          },
+          "chars": 1122
+        }
+      ]
+    }
+  ]
+}

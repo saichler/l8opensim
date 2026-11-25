@@ -1,0 +1,24 @@
+{
+  "id": "edge_cases/empty-ish/v0/s0",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:47:41Z",
+  "turns": [
+    {
+      "user_message": "...",
+      "steps": [
+        {
+          "reasoning": "The user just sent \"...\". Likely they expect something. Maybe they sent ellipsis meaning they want help? Could be a placeholder. Need to ask clarification. Since no request, respond asking what they need.",
+          "text": "I’m here to help! Could you let me know what you’d like to do—e.g., view or update network devices, GPU servers, Kubernetes clusters, alarms, etc.? Just tell me the information you need or the changes you’d like to make.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1788,
+            "completion_tokens": 105
+          },
+          "chars": 432
+        }
+      ]
+    }
+  ]
+}

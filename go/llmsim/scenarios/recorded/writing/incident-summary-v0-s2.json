@@ -1,0 +1,45 @@
+{
+  "id": "writing/incident-summary/v0/s2",
+  "flavor": "writing",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:52:50Z",
+  "turns": [
+    {
+      "user_message": "Write an incident summary for customers about a 25-minute outage of the login service caused by an expired certificate.",
+      "steps": [
+        {
+          "reasoning": "We need to write an incident summary for customers about a 25-minute outage of login service due to expired certificate. No data fetching needed. Just write a summary. Use create_file to attach? The user wants a summary. We can provide directly in answer, but likely better to attach as a text file. The instructions: Use create_file to attach a text file, and then say briefly what file contains. Let's do that.\n\nCreate file named incident_summary.txt with appropriate content.\n\n",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "Incident Summary\n\nDate: [Insert Date]\nDuration: {{int:20:30}} minutes\nAffected Service: Login Service\nRoot Cause: Expired SSL/TLS certificate\n\nWhat happened?\nOur monitoring systems detected that the login service became unavailable at [Insert Time]. Investigation revealed that the SSL/TLS certificate used by the service had expired, causing authentication requests to be rejected.\n\nImpact:\n- Users were unable to log in to the portal for approximately {{int:20:30}} minutes.\n- All login attempts during this period resulted in error messages.\n\nResolution:\n- The expired certificate was promptly replaced with a valid one.\n- The login service was restarted, restoring normal operation.\n- Post‑incident checks confirmed that the service was fully functional.\n\nPreventive Measures:\n- Implemented automated certificate monitoring and renewal processes.\n- Added alerts for upcoming certificate expirations.\n- Updated operational runbooks to include rapid certificate replacement steps.\n\nWe apologize for the inconvenience caused and appreciate your understanding.\n\nIf you have any further questions, please contact our support team.",
+                "file_name": "incident_summary.txt"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1109,\"file_name\":\"incident_summary.txt\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1809,
+            "completion_tokens": 352
+          },
+          "chars": 1675
+        },
+        {
+          "reasoning": "The user asked to write an incident summary for customers about a 25-minute outage of the login service caused by an expired certificate. The assistant created a file incident_summary.txt with content. Need to respond indicating attached file.",
+          "text": "I’ve prepared an incident summary for you. The file **incident_summary.txt** is attached and contains a concise overview of the {{int:20:30}}‑minute login service outage, its cause, impact, resolution steps, and preventive measures. Let me know if you need any revisions or additional details.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2087,
+            "completion_tokens": 111
+          },
+          "chars": 529
+        }
+      ]
+    }
+  ]
+}

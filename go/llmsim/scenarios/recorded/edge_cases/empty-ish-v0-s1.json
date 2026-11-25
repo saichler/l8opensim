@@ -1,0 +1,24 @@
+{
+  "id": "edge_cases/empty-ish/v0/s1",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:47:43Z",
+  "turns": [
+    {
+      "user_message": "...",
+      "steps": [
+        {
+          "reasoning": "The user sent just \"...\". Probably they expect the assistant to respond or ask clarifying question. Since no request is given, we should ask what they need.",
+          "text": "I’m here to help! What information or task would you like assistance with today? Feel free to let me know what data you’d like to view, any reports you need, or any changes you’d like to make in the system.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1788,
+            "completion_tokens": 90
+          },
+          "chars": 368
+        }
+      ]
+    }
+  ]
+}

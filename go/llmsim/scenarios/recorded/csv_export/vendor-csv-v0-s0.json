@@ -1,0 +1,79 @@
+{
+  "id": "csv_export/vendor-csv/v0/s0",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:26:22Z",
+  "params": {
+    "vendor": [
+      "Cisco",
+      "Juniper",
+      "Arista"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Export the Cisco devices to Excel.",
+      "steps": [
+        {
+          "reasoning": "The user wants to export {{p:vendor}} devices to Excel. We need to find devices where vendor is {{p:vendor}}. Model is NetworkDevice. Need to export to Excel (CSV). Use export_csv with query selecting {{p:vendor}} devices. Need to know field names for vendor. Use describe_model first.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 84
+          },
+          "chars": 303
+        },
+        {
+          "reasoning": "User wants to export {{p:vendor}} devices to Excel. We need to export records where vendor is {{p:vendor}}. Use export_csv, columns maybe include fields of interest. Provide file name .xlsx? Export_csv can only output CSV file; Excel can open CSV. So use .xlsx? The tool only supports CSV, but we can name .csv and user can open in Excel. We'll do export_csv with query: select * from NetworkDevice where equipmentinfo.vendor='{{p:vendor}}'. Need correct syntax: where \u003cconditions\u003e likely field=VALUE, strings maybe quoted. Use where equipmentinfo.vendor={{p:vendor}}? Usually need quotes. Let's try equipmentinfo.vendor='{{p:vendor}}'. Use limit? Not needed for export. We'll include columns: maybe vendor, model, ipAddress, serialNumber, status, uptime. Provide file name {{p:vendor:lower}}_devices.csv. Then say attached.\n\n",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "columns": [
+                  "equipmentinfo.vendor",
+                  "equipmentinfo.model",
+                  "equipmentinfo.ipAddress",
+                  "equipmentinfo.serialNumber",
+                  "equipmentinfo.deviceStatus",
+                  "equipmentinfo.uptime"
+                ],
+                "file_name": "{{p:vendor:lower}}_devices.csv",
+                "query": "select * from NetworkDevice where equipmentinfo.vendor='{{p:vendor}}'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"equipmentinfo.vendor\",\"equipmentinfo.model\",\"equipmentinfo.ipAddress\",\"equipmentinfo.serialNumber\",\"equipmentinfo.deviceStatus\",\"equipmentinfo.uptime\"],\"file_name\":\"cisco_devices.csv\",\"rows\":1}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2031,
+            "completion_tokens": 264
+          },
+          "chars": 1058
+        },
+        {
+          "text": "I’ve exported all network devices whose vendor is {{p:vendor}}.\n\n**Attached file:** `{{p:vendor:lower}}_devices.csv` – contains the vendor, model, IP address, serial number, status, and uptime for each {{p:vendor}} device.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2171,
+            "completion_tokens": 47
+          },
+          "chars": 199
+        }
+      ]
+    }
+  ]
+}

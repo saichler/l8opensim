@@ -1,0 +1,67 @@
+{
+  "id": "record_crud/create-target/v0/s2",
+  "flavor": "record_crud",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:14:55Z",
+  "turns": [
+    {
+      "user_message": "Create a new polling target tgt-100 for SNMP.",
+      "steps": [
+        {
+          "reasoning": "The user wants to create a new polling target with ID tgt-100 for SNMP. We need to create a record in L8PTarget model. We need to know fields of L8PTarget. Use describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "L8PTarget"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"targetId\",\"type\":\"string\"},{\"path\":\"linksId\",\"type\":\"string\"},{\"path\":\"state\",\"type\":\"string\"},{\"path\":\"inventoryType\",\"type\":\"string\"}],\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1799,
+            "completion_tokens": 73
+          },
+          "chars": 210
+        },
+        {
+          "reasoning": "We need to create a new polling target with ID tgt-100 for SNMP. Need to know fields: targetId, linksId, state, inventoryType. Likely need inventoryType = \"SNMP\". Maybe other required fields? The user just says create new polling target tgt-100 for SNMP. We'll set targetId = \"tgt-100\", inventoryType = \"SNMP\". Possibly linksId and state optional. We can set state maybe \"ACTIVE\"? Not sure. We'll just set inventoryType and maybe leave others null? But need to provide fields; if optional maybe omit. Use create_record.\n\n",
+          "tool_calls": [
+            {
+              "name": "create_record",
+              "arguments": {
+                "data": {
+                  "inventoryType": "SNMP",
+                  "targetId": "tgt-100"
+                },
+                "model": "L8PTarget"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"action\":\"create\",\"model\":\"L8PTarget\",\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1896,
+            "completion_tokens": 183
+          },
+          "chars": 608
+        },
+        {
+          "text": "The polling target **tgt-100** has been created with the inventory type set to **SNMP**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1968,
+            "completion_tokens": 27
+          },
+          "chars": 88
+        }
+      ]
+    }
+  ]
+}

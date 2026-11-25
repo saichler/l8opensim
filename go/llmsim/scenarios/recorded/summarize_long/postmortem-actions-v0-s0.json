@@ -1,0 +1,24 @@
+{
+  "id": "summarize_long/postmortem-actions/v0/s0",
+  "flavor": "summarize_long",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T23:00:33Z",
+  "turns": [
+    {
+      "user_message": "Summarize the action items from this report:\n\nOn Tuesday at 14:05 UTC the payments API started returning 503 errors. Monitoring alerted at 14:07. The on-call engineer found that a configuration change deployed at 13:58 lowered the database connection pool from 200 to 20. Traffic peaked at 14:00 and requests queued waiting for connections until the load balancer timed them out. The change was rolled back at 14:31 and error rates returned to normal by 14:36. About 18 percent of payment attempts failed during the incident. Action items: add validation for pool sizes in the deployment pipeline, alert on connection pool saturation, and require a second reviewer for database configuration changes.",
+      "steps": [
+        {
+          "reasoning": "Summarize the action items from this report:\n\nOn Tuesday at 14:05 UTC... Action items: add validation for pool sizes in deployment pipeline, alert on connection pool saturation, and require a second reviewer for database configuration changes.\n\nThe user wants summarize the action items from this report. Likely just summarize. Might be a simple text summary. No need for tools? The prompt says summarize action items. Could just output summary. Probably no need to query data. The report is provided in the message.\n\nPossibly the user expects we extract action items. Could create a file? Might be just summary.\n\nThe instruction: Summarize the action items from this report. So we can respond with bullet list.\n\nNo tools needed. Might be just text.\n\nPotential follow-up? No.\n\nThus output summary.\n\nPossibly want to ensure we don't hallucinate. Action items: add validation for pool sizes in deployment pipeline, alert on connection pool saturation, require second reviewer for DB config changes.\n\nWe can provide brief summary of incident plus action items.\n\nNo tools needed.\n\nProceed.",
+          "text": "The incident report describes a payments API {{int:402:604}} outage on Tuesday:\n\n* **Timeline**\n  * 13:58 UTC – config change deployed lowering DB connection pool from {{int:160:240}} → {{int:16:24}}\n  * 14:00 UTC – traffic peak\n  * 14:05 UTC – payments API starts returning {{int:402:604}} errors\n  * 14:07 UTC – monitoring alerted\n  * 14:31 UTC – change rolled back\n  * 14:36 UTC – error rates back to normal\n  * ~18% of payment attempts failed during the incident\n\n* **Root cause**\n  Requests queued waiting for connections until the load balancer timed them out due to the reduced pool size.\n\n**Action items identified in the report**\n\n1. **Add validation for pool sizes in the deployment pipeline** – prevent unsafe connection-pool values from being deployed.\n2. **Alert on connection pool saturation** – create monitoring/alerting for pool utilization so saturation is detected before timeouts.\n3. **Require a second reviewer for database configuration changes** – add a mandatory peer review gate for DB config changes.\n\nLet me know if you want these tracked as tasks in the system or exported to a file.\n",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2570,
+            "completion_tokens": 465
+          },
+          "chars": 2170
+        }
+      ]
+    }
+  ]
+}

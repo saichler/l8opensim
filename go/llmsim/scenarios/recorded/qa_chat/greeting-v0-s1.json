@@ -1,0 +1,51 @@
+{
+  "id": "qa_chat/greeting/v0/s1",
+  "flavor": "qa_chat",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T22:33:59Z",
+  "turns": [
+    {
+      "user_message": "Hi Tanto!",
+      "steps": [
+        {
+          "text": "Hey! How can I help you with Probler today?",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2427,
+            "completion_tokens": 16
+          },
+          "chars": 43
+        }
+      ]
+    },
+    {
+      "user_message": "What can you do?",
+      "steps": [
+        {
+          "text": "I can query and change Probler data: network devices, GPU servers, Kubernetes clusters/nodes/pods/deployments, alarms/events, and polling targets.\n\nI can:\n- list/search records, run aggregates (counts, sums, averages)\n- create, update, or delete records (with your confirmation for deletes)\n- export matching records as a CSV file for download\n- build text reports or summaries as files\n\nWhat would you like to look at or change first?",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2454,
+            "completion_tokens": 98
+          },
+          "chars": 435
+        }
+      ]
+    },
+    {
+      "user_message": "Thanks, bye.",
+      "steps": [
+        {
+          "text": "Bye!",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2562,
+            "completion_tokens": 7
+          },
+          "chars": 4
+        }
+      ]
+    }
+  ]
+}

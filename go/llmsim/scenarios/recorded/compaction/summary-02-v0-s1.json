@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-02/v0/s1",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:16:54Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\n\nNext part of the conversation:\nUser: How many GPUs do we have?\n\nAssistant: There are 64 GPUs across 8 servers (sum of deviceInfo.gpuCount).\n\nUser: Which servers run driver 535?\n\nAssistant: gpu-node-02 and gpu-node-05 run driver 535.183.01.\n\nUser: Please export those to CSV.\n\nAssistant: Attached gpu_driver_535.csv with 2 servers.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce a new summary replacing current one. The current summary is empty? Actually they gave \"Current summary:\" then next part. So we need to create a summary containing facts, decisions, etc. The conversation: user asked \"How many GPUs do we have?\" Assistant responded: {{int:51:77}} GPUs across 8 servers (sum of deviceInfo.gpuCount). Then user asked \"Which servers run driver {{int:428:642}}?\" Assistant: gpu-node-02 and gpu-node-05 run driver 535.183.01. Then user: \"Please export those to CSV.\" Assistant: attached gpu_driver_535.csv with 2 servers.\n\nWe need to keep facts: total GPUs={{int:51:77}} across 8 servers; servers with driver 535.183.01 are gpu-node-02, gpu-node-05; CSV exported containing those servers.\n\nNo placeholders needed.\n\nWrite summary.\n\n",
+          "text": "- Total GPUs: {{int:51:77}} across 8 servers (sum of deviceInfo.gpuCount).  \n- Servers running driver 535.183.01: gpu-node-02, gpu-node-05.  \n- Exported list of these servers to CSV (gpu_driver_535.csv).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 309,
+            "completion_tokens": 244
+          },
+          "chars": 934
+        }
+      ]
+    }
+  ]
+}

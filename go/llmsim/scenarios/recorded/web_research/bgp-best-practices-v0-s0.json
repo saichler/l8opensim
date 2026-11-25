@@ -1,0 +1,191 @@
+{
+  "id": "web_research/bgp-best-practices/v0/s0",
+  "flavor": "web_research",
+  "model": "gpt-oss-120b",
+  "quality": "flawed",
+  "recorded_at": "2026-11-24T20:38:12Z",
+  "turns": [
+    {
+      "user_message": "@web What are current best practices for BGP route filtering?",
+      "steps": [
+        {
+          "reasoning": "We need to answer the web search request. Use web_search.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 5,
+                "query": "current best practices for BGP route filtering"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"current best practices for BGP route filtering\", \"results\": [{\"title\": \"Current | Future of Banking\", \"url\": \"https://current.com/\", \"snippet\": \"When you buy or sell cryptocurrency, a difference between the current market price and the price you buy or sell that asset for is …\"}, {\"title\": \"CURRENT中文 (简体)翻译：剑桥词典\", \"url\": \"https://dictionary.cambridge.org/zhs/%E8%AF%8D%E5%85%B8/%E8%8B%B1%E8%AF%AD-%E6%B1%89%E8%AF%AD-%E7%AE%80%E4%BD%93/current\", \"snippet\": \"Who is the current editor of the Times? A lot of businesses are being hurt by the current high interest rates. I wouldn't work for them …\"}, {\"title\": \"current（英语单词）_百度百科\", \"url\": \"https://baike.baidu.com/item/current/5342364\", \"snippet\": \"current，英语单词，主要用作名词和形容词，英式音标为 [ˈkʌrənt]，美式音标为 [ˈkɜːrənt]。 作名词时表示水流、气流、电流或社会思 …\"}, {\"title\": \"Current | Future of Banking | Get Started |\", \"url\": \"https://current.com/phil50/\", \"snippet\": \"Mobile banking done better. Build credit while you bank. No overdraft fees/hidden fees. Current is a fintech not a bank. Banking …\"}, {\"title\": \"current是什么意思_current的翻译_音标_读音_用法_例句_爱词霸在线 …\", \"url\": \"https://www.iciba.com/word?w=current\", \"snippet\": \"爱词霸权威在线词典,为您提供current的中文意思,current的用法讲解,current的读音,current的同义词,current的反义词,current的例句等 …\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1904,
+            "completion_tokens": 56
+          },
+          "chars": 141
+        },
+        {
+          "reasoning": "The web search results returned irrelevant items about \"current\". Likely need to refine query. Let's search again with better keywords.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "BGP route filtering best practices"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"BGP route filtering best practices\", \"results\": [{\"title\": \"Border Gateway Protocol - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Border_Gateway_Protocol\", \"snippet\": \"BGP is classified as a path-vector routing protocol, [3] and it makes routing decisions based on paths, network policies, or rule-sets …Read more\"}, {\"title\": \"Border Gateway Protocol (BGP) - GeeksforGeeks\", \"url\": \"https://www.geeksforgeeks.org/computer-networks/border-gateway-protocol-bgp/\", \"snippet\": \"Oct 10, 2025 · Border Gateway Protocol (BGP) is an Exterior Gateway Protocol (EGP) used to connect autonomous systems (AS) in …Read more\"}, {\"title\": \"What Is BGP? | BGP Routing Explained - Cloudflare\", \"url\": \"https://www.cloudflare.com/learning/security/glossary/what-is-bgp/\", \"snippet\": \"Border Gateway Protocol (BGP) is the routing protocol for the Internet. Much like the post office processing mail, BGP picks the most …Read more\"}, {\"title\": \"Introduction to BGP - NetworkLessons.com\", \"url\": \"https://networklessons.com/bgp/introduction-to-bgp\", \"snippet\": \"BGP (Border Gateway Protocol) is the routing protocol that glues the Internet together. I’m going to explain in which situations we …Read more\"}, {\"title\": \"BGP - NetworkLessons.com\", \"url\": \"https://networklessons.com/bgp\", \"snippet\": \"BGP (Border Gateway Protocol) is the routing protocol that exchanges routes between autonomous systems. An autonomous …Read more\"}, {\"title\": \"Hurricane Electric BGP Toolkit\", \"url\": \"https://bgp.he.net/\", \"snippet\": \"22 hours ago · Welcome to the Hurricane Electric BGP Toolkit.\"}, {\"title\": \"What Is BGP? - Border Gateway Protocol in Networking Explained\", \"url\": \"https://aws.amazon.com/what-is/border-gateway-protocol/\", \"snippet\": \"Border Gateway Protocol (BGP) makes the internet work through data routing. BGP routing is critical because, at its core, the …Read more\"}, {\"title\": \"BGP.Tools\", \"url\": \"https://bgp.tools/\", \"snippet\": \"bgp.tools allows you to do bgp debugging and gives insight into internet routing with ease in a user friendly way\"}, {\"title\": \"Border Gateway Protocol (BGP) - Cisco\", \"url\": \"https://www.cisco.com/site/us/en/products/networking/software/ios-nx-os/border-gateway-protocol-bgp/index.html\", \"snippet\": \"Border Gateway Protocol (BGP) is an Internet Engineering Task Force (IETF) standard, and the most scalable of all routing …Read more\"}, {\"title\": \"What Is BGP? Border Gateway Protocol Explained | Fortinet\", \"url\": \"https://www.fortinet.com/resources/cyberglossary/bgp-border-gateway-protocol\", \"snippet\": \"Learn what Border Gateway Protocol (BGP) is, how it works, and its characteristics. BGP takes into consideration all the different …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2400,
+            "completion_tokens": 62
+          },
+          "chars": 208
+        },
+        {
+          "reasoning": "The web search results are not directly giving best practices. Need to fetch a relevant article. Perhaps search \"BGP route filtering best practices site:ietf.org\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "BGP route filtering best practices site:ietf.org"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"BGP route filtering best practices site:ietf.org\", \"results\": [{\"title\": \"Border Gateway Protocol - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Border_Gateway_Protocol\", \"snippet\": \"BGP is classified as a path-vector routing protocol, [3] and it makes routing decisions based on paths, network policies, or rule-sets …\"}, {\"title\": \"Border Gateway Protocol (BGP) - GeeksforGeeks\", \"url\": \"https://www.geeksforgeeks.org/computer-networks/border-gateway-protocol-bgp/\", \"snippet\": \"Oct 10, 2025 · Border Gateway Protocol (BGP) is an Exterior Gateway Protocol (EGP) used to connect autonomous systems (AS) in …\"}, {\"title\": \"What Is BGP? | BGP Routing Explained - Cloudflare\", \"url\": \"https://www.cloudflare.com/learning/security/glossary/what-is-bgp/\", \"snippet\": \"Border Gateway Protocol (BGP) is the routing protocol for the Internet. Much like the post office processing mail, BGP picks the most …\"}, {\"title\": \"Introduction to BGP - NetworkLessons.com\", \"url\": \"https://networklessons.com/bgp/introduction-to-bgp\", \"snippet\": \"BGP (Border Gateway Protocol) is the routing protocol that glues the Internet together. I’m going to explain in which situations we …\"}, {\"title\": \"BGP - NetworkLessons.com\", \"url\": \"https://networklessons.com/bgp\", \"snippet\": \"BGP (Border Gateway Protocol) is the routing protocol that exchanges routes between autonomous systems. An autonomous …\"}, {\"title\": \"Hurricane Electric BGP Toolkit\", \"url\": \"https://bgp.he.net/\", \"snippet\": \"22 hours ago · Welcome to the Hurricane Electric BGP Toolkit.\"}, {\"title\": \"What Is BGP? - Border Gateway Protocol in Networking Explained\", \"url\": \"https://aws.amazon.com/what-is/border-gateway-protocol/\", \"snippet\": \"Border Gateway Protocol (BGP) makes the internet work through data routing. BGP routing is critical because, at its core, the …\"}, {\"title\": \"BGP.Tools\", \"url\": \"https://bgp.tools/\", \"snippet\": \"bgp.tools allows you to do bgp debugging and gives insight into internet routing with ease in a user friendly way\"}, {\"title\": \"Border Gateway Protocol (BGP) - Cisco\", \"url\": \"https://www.cisco.com/site/us/en/products/networking/software/ios-nx-os/border-gateway-protocol-bgp/index.html\", \"snippet\": \"Border Gateway Protocol (BGP) is an Internet Engineering Task Force (IETF) standard, and the most scalable of all routing …\"}, {\"title\": \"What Is BGP? Border Gateway Protocol Explained | Fortinet\", \"url\": \"https://www.fortinet.com/resources/cyberglossary/bgp-border-gateway-protocol\", \"snippet\": \"Learn what Border Gateway Protocol (BGP) is, how it works, and its characteristics. BGP takes into consideration all the different …\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 3141,
+            "completion_tokens": 73
+          },
+          "chars": 250
+        },
+        {
+          "reasoning": "The user asked: \"@web What are current best practices for BGP route filtering?\" They want web info. The search results didn't return relevant best practice content. We need to fetch a proper source like from network operators, Cisco, ARIN, etc. Let's refine search query.\n\n",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "BGP route filtering best practices network operator guide"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"BGP route filtering best practices network operator guide\", \"results\": [{\"title\": \"Border Gateway Protocol - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Border_Gateway_Protocol\", \"snippet\": \"BGP is classified as a path-vector routing protocol, [3] and it makes routing decisions based on paths, network policies, or rule-sets …Read more\"}, {\"title\": \"Border Gateway Protocol (BGP) - GeeksforGeeks\", \"url\": \"https://www.geeksforgeeks.org/computer-networks/border-gateway-protocol-bgp/\", \"snippet\": \"Oct 10, 2025 · Border Gateway Protocol (BGP) is an Exterior Gateway Protocol (EGP) used to connect autonomous systems (AS) in …Read more\"}, {\"title\": \"What Is BGP? | BGP Routing Explained - Cloudflare\", \"url\": \"https://www.cloudflare.com/learning/security/glossary/what-is-bgp/\", \"snippet\": \"Border Gateway Protocol (BGP) is the routing protocol for the Internet. Much like the post office processing mail, BGP picks the most …Read more\"}, {\"title\": \"Introduction to BGP - NetworkLessons.com\", \"url\": \"https://networklessons.com/bgp/introduction-to-bgp\", \"snippet\": \"BGP (Border Gateway Protocol) is the routing protocol that glues the Internet together. I’m going to explain in which situations we …Read more\"}, {\"title\": \"BGP - NetworkLessons.com\", \"url\": \"https://networklessons.com/bgp\", \"snippet\": \"BGP (Border Gateway Protocol) is the routing protocol that exchanges routes between autonomous systems. An autonomous …Read more\"}, {\"title\": \"Hurricane Electric BGP Toolkit\", \"url\": \"https://bgp.he.net/\", \"snippet\": \"22 hours ago · Welcome to the Hurricane Electric BGP Toolkit.\"}, {\"title\": \"What Is BGP? - Border Gateway Protocol in Networking Explained\", \"url\": \"https://aws.amazon.com/what-is/border-gateway-protocol/\", \"snippet\": \"Border Gateway Protocol (BGP) makes the internet work through data routing. BGP routing is critical because, at its core, the …Read more\"}, {\"title\": \"BGP.Tools\", \"url\": \"https://bgp.tools/\", \"snippet\": \"bgp.tools allows you to do bgp debugging and gives insight into internet routing with ease in a user friendly way\"}, {\"title\": \"Border Gateway Protocol (BGP) - Cisco\", \"url\": \"https://www.cisco.com/site/us/en/products/networking/software/ios-nx-os/border-gateway-protocol-bgp/index.html\", \"snippet\": \"Border Gateway Protocol (BGP) is an Internet Engineering Task Force (IETF) standard, and the most scalable of all routing …Read more\"}, {\"title\": \"What Is BGP? Border Gateway Protocol Explained | Fortinet\", \"url\": \"https://www.fortinet.com/resources/cyberglossary/bgp-border-gateway-protocol\", \"snippet\": \"Learn what Border Gateway Protocol (BGP) is, how it works, and its characteristics. BGP takes into consideration all the different …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 3874,
+            "completion_tokens": 96
+          },
+          "chars": 369
+        },
+        {
+          "reasoning": "The web search results are not giving specific best practice pages. Might need to open a known resource, like \"BGP best practices route filtering\" maybe from network operator forums, NTT, etc. Could search more precisely.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "BGP route filtering best practices \"prefix filtering\" \"BGP\" \"best practice\""
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"BGP route filtering best practices \\\"prefix filtering\\\" \\\"BGP\\\" \\\"best practice\\\"\", \"results\": [{\"title\": \"Border Gateway Protocol - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Border_Gateway_Protocol\", \"snippet\": \"BGP is classified as a path-vector routing protocol, [3] and it makes routing decisions based on paths, network policies, or rule-sets …\"}, {\"title\": \"Border Gateway Protocol (BGP) - GeeksforGeeks\", \"url\": \"https://www.geeksforgeeks.org/computer-networks/border-gateway-protocol-bgp/\", \"snippet\": \"Oct 10, 2025 · Border Gateway Protocol (BGP) is an Exterior Gateway Protocol (EGP) used to connect autonomous systems (AS) in any …\"}, {\"title\": \"What Is BGP? | BGP Routing Explained - Cloudflare\", \"url\": \"https://www.cloudflare.com/learning/security/glossary/what-is-bgp/\", \"snippet\": \"Border Gateway Protocol (BGP) is the routing protocol for the Internet. Much like the post office processing mail, BGP picks the most …\"}, {\"title\": \"Introduction to BGP - NetworkLessons.com\", \"url\": \"https://networklessons.com/bgp/introduction-to-bgp\", \"snippet\": \"BGP (Border Gateway Protocol) is the routing protocol that glues the Internet together. I’m going to explain in which situations we …\"}, {\"title\": \"BGP - NetworkLessons.com\", \"url\": \"https://networklessons.com/bgp\", \"snippet\": \"BGP (Border Gateway Protocol) is the routing protocol that exchanges routes between autonomous systems. An autonomous system …\"}, {\"title\": \"Hurricane Electric BGP Toolkit\", \"url\": \"https://bgp.he.net/\", \"snippet\": \"22 hours ago · Welcome to the Hurricane Electric BGP Toolkit.\"}, {\"title\": \"What Is BGP? - Border Gateway Protocol in Networking Explained - AWS\", \"url\": \"https://aws.amazon.com/what-is/border-gateway-protocol/\", \"snippet\": \"Border Gateway Protocol (BGP) makes the internet work through data routing. BGP routing is critical because, at its core, the internet …\"}, {\"title\": \"BGP.Tools\", \"url\": \"https://bgp.tools/\", \"snippet\": \"bgp.tools allows you to do bgp debugging and gives insight into internet routing with ease in a user friendly way\"}, {\"title\": \"Border Gateway Protocol (BGP) - Cisco\", \"url\": \"https://www.cisco.com/site/us/en/products/networking/software/ios-nx-os/border-gateway-protocol-bgp/index.html\", \"snippet\": \"Border Gateway Protocol (BGP) is an Internet Engineering Task Force (IETF) standard, and the most scalable of all routing protocols. …\"}, {\"title\": \"What Is BGP? Border Gateway Protocol Explained | Fortinet\", \"url\": \"https://www.fortinet.com/resources/cyberglossary/bgp-border-gateway-protocol\", \"snippet\": \"Learn what Border Gateway Protocol (BGP) is, how it works, and its characteristics. BGP takes into consideration all the different …\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 4621,
+            "completion_tokens": 93
+          },
+          "chars": 341
+        },
+        {
+          "reasoning": "The web searches returned generic results, not specific. I need better approach: maybe search for \"BGP route filtering best practices Cisco\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "BGP prefix filtering best practices Cisco"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"BGP prefix filtering best practices Cisco\", \"results\": [{\"title\": \"Border Gateway Protocol - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Border_Gateway_Protocol\", \"snippet\": \"BGP is classified as a path-vector routing protocol, [3] and it makes routing decisions based on paths, network policies, or rule-sets …Read more\"}, {\"title\": \"Border Gateway Protocol (BGP) - GeeksforGeeks\", \"url\": \"https://www.geeksforgeeks.org/computer-networks/border-gateway-protocol-bgp/\", \"snippet\": \"Oct 10, 2025 · Border Gateway Protocol (BGP) is an Exterior Gateway Protocol (EGP) used to connect autonomous systems (AS) in …Read more\"}, {\"title\": \"What Is BGP? | BGP Routing Explained - Cloudflare\", \"url\": \"https://www.cloudflare.com/learning/security/glossary/what-is-bgp/\", \"snippet\": \"Border Gateway Protocol (BGP) is the routing protocol for the Internet. Much like the post office processing mail, BGP picks the most …Read more\"}, {\"title\": \"Introduction to BGP - NetworkLessons.com\", \"url\": \"https://networklessons.com/bgp/introduction-to-bgp\", \"snippet\": \"BGP (Border Gateway Protocol) is the routing protocol that glues the Internet together. I’m going to explain in which situations we …Read more\"}, {\"title\": \"BGP - NetworkLessons.com\", \"url\": \"https://networklessons.com/bgp\", \"snippet\": \"BGP (Border Gateway Protocol) is the routing protocol that exchanges routes between autonomous systems. An autonomous …Read more\"}, {\"title\": \"Hurricane Electric BGP Toolkit\", \"url\": \"https://bgp.he.net/\", \"snippet\": \"22 hours ago · Welcome to the Hurricane Electric BGP Toolkit.\"}, {\"title\": \"What Is BGP? - Border Gateway Protocol in Networking Explained\", \"url\": \"https://aws.amazon.com/what-is/border-gateway-protocol/\", \"snippet\": \"Border Gateway Protocol (BGP) makes the internet work through data routing. BGP routing is critical because, at its core, the …Read more\"}, {\"title\": \"BGP.Tools\", \"url\": \"https://bgp.tools/\", \"snippet\": \"bgp.tools allows you to do bgp debugging and gives insight into internet routing with ease in a user friendly way\"}, {\"title\": \"Border Gateway Protocol (BGP) - Cisco\", \"url\": \"https://www.cisco.com/site/us/en/products/networking/software/ios-nx-os/border-gateway-protocol-bgp/index.html\", \"snippet\": \"Border Gateway Protocol (BGP) is an Internet Engineering Task Force (IETF) standard, and the most scalable of all routing …Read more\"}, {\"title\": \"What Is BGP? Border Gateway Protocol Explained | Fortinet\", \"url\": \"https://www.fortinet.com/resources/cyberglossary/bgp-border-gateway-protocol\", \"snippet\": \"Learn what Border Gateway Protocol (BGP) is, how it works, and its characteristics. BGP takes into consideration all the different …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 5382,
+            "completion_tokens": 65
+          },
+          "chars": 221
+        },
+        {
+          "reasoning": "The user asks: \"@web What are current best practices for BGP route filtering?\" So they want a web-sourced answer. The web search returned many generic results but not specific content. Might need to fetch a relevant page. Let's search for \"BGP route filtering best practices network operators\" maybe a PDF or blog.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "BGP route filtering best practices \"network operators\" \"prefix-list\" \"filtering\" "
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"BGP route filtering best practices \\\"network operators\\\" \\\"prefix-list\\\" \\\"filtering\\\"\", \"results\": [{\"title\": \"Border Gateway Protocol - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Border_Gateway_Protocol\", \"snippet\": \"BGP is classified as a path-vector routing protocol, [3] and it makes routing decisions based on paths, network policies, or rule-sets …Read more\"}, {\"title\": \"Border Gateway Protocol (BGP) - GeeksforGeeks\", \"url\": \"https://www.geeksforgeeks.org/computer-networks/border-gateway-protocol-bgp/\", \"snippet\": \"Oct 10, 2025 · Border Gateway Protocol (BGP) is an Exterior Gateway Protocol (EGP) used to connect autonomous systems (AS) in …Read more\"}, {\"title\": \"What Is BGP? | BGP Routing Explained - Cloudflare\", \"url\": \"https://www.cloudflare.com/learning/security/glossary/what-is-bgp/\", \"snippet\": \"Border Gateway Protocol (BGP) is the routing protocol for the Internet. Much like the post office processing mail, BGP picks the most …Read more\"}, {\"title\": \"Introduction to BGP - NetworkLessons.com\", \"url\": \"https://networklessons.com/bgp/introduction-to-bgp\", \"snippet\": \"BGP (Border Gateway Protocol) is the routing protocol that glues the Internet together. I’m going to explain in which situations we …Read more\"}, {\"title\": \"BGP - NetworkLessons.com\", \"url\": \"https://networklessons.com/bgp\", \"snippet\": \"BGP (Border Gateway Protocol) is the routing protocol that exchanges routes between autonomous systems. An autonomous …Read more\"}, {\"title\": \"Hurricane Electric BGP Toolkit\", \"url\": \"https://bgp.he.net/\", \"snippet\": \"22 hours ago · Welcome to the Hurricane Electric BGP Toolkit.\"}, {\"title\": \"What Is BGP? - Border Gateway Protocol in Networking Explained\", \"url\": \"https://aws.amazon.com/what-is/border-gateway-protocol/\", \"snippet\": \"Border Gateway Protocol (BGP) makes the internet work through data routing. BGP routing is critical because, at its core, the …Read more\"}, {\"title\": \"BGP.Tools\", \"url\": \"https://bgp.tools/\", \"snippet\": \"bgp.tools allows you to do bgp debugging and gives insight into internet routing with ease in a user friendly way\"}, {\"title\": \"Border Gateway Protocol (BGP) - Cisco\", \"url\": \"https://www.cisco.com/site/us/en/products/networking/software/ios-nx-os/border-gateway-protocol-bgp/index.html\", \"snippet\": \"Border Gateway Protocol (BGP) is an Internet Engineering Task Force (IETF) standard, and the most scalable of all routing …Read more\"}, {\"title\": \"What Is BGP? Border Gateway Protocol Explained | Fortinet\", \"url\": \"https://www.fortinet.com/resources/cyberglossary/bgp-border-gateway-protocol\", \"snippet\": \"Learn what Border Gateway Protocol (BGP) is, how it works, and its characteristics. BGP takes into consideration all the different …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 6125,
+            "completion_tokens": 114
+          },
+          "chars": 440
+        },
+        {
+          "reasoning": "The user asked: \"@web What are current best practices for BGP route filtering?\" We need to provide answer based on web search results. However the search results returned are generic Wikipedia and not specific best practices. We need to fetch a more relevant source. Perhaps search for \"BGP route filtering best practices network operators blog\" or \"BGP prefix filtering best practice blog\". Let's try a targeted search.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "BGP route filtering best practices blog site:networklessons.com"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"BGP route filtering best practices blog site:networklessons.com\", \"results\": [{\"title\": \"Border Gateway Protocol - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Border_Gateway_Protocol\", \"snippet\": \"BGP is classified as a path-vector routing protocol, [3] and it makes routing decisions based on paths, network policies, or rule-sets …\"}, {\"title\": \"Border Gateway Protocol (BGP) - GeeksforGeeks\", \"url\": \"https://www.geeksforgeeks.org/computer-networks/border-gateway-protocol-bgp/\", \"snippet\": \"Oct 10, 2025 · Border Gateway Protocol (BGP) is an Exterior Gateway Protocol (EGP) used to connect autonomous systems (AS) in …\"}, {\"title\": \"What Is BGP? | BGP Routing Explained - Cloudflare\", \"url\": \"https://www.cloudflare.com/learning/security/glossary/what-is-bgp/\", \"snippet\": \"Border Gateway Protocol (BGP) is the routing protocol for the Internet. Much like the post office processing mail, BGP picks the most …\"}, {\"title\": \"Introduction to BGP - NetworkLessons.com\", \"url\": \"https://networklessons.com/bgp/introduction-to-bgp\", \"snippet\": \"BGP (Border Gateway Protocol) is the routing protocol that glues the Internet together. I’m going to explain in which situations we …\"}, {\"title\": \"BGP - NetworkLessons.com\", \"url\": \"https://networklessons.com/bgp\", \"snippet\": \"BGP (Border Gateway Protocol) is the routing protocol that exchanges routes between autonomous systems. An autonomous …\"}, {\"title\": \"Hurricane Electric BGP Toolkit\", \"url\": \"https://bgp.he.net/\", \"snippet\": \"22 hours ago · Welcome to the Hurricane Electric BGP Toolkit.\"}, {\"title\": \"What Is BGP? - Border Gateway Protocol in Networking Explained\", \"url\": \"https://aws.amazon.com/what-is/border-gateway-protocol/\", \"snippet\": \"Border Gateway Protocol (BGP) makes the internet work through data routing. BGP routing is critical because, at its core, the …\"}, {\"title\": \"BGP.Tools\", \"url\": \"https://bgp.tools/\", \"snippet\": \"bgp.tools allows you to do bgp debugging and gives insight into internet routing with ease in a user friendly way\"}, {\"title\": \"Border Gateway Protocol (BGP) - Cisco\", \"url\": \"https://www.cisco.com/site/us/en/products/networking/software/ios-nx-os/border-gateway-protocol-bgp/index.html\", \"snippet\": \"Border Gateway Protocol (BGP) is an Internet Engineering Task Force (IETF) standard, and the most scalable of all routing …\"}, {\"title\": \"What Is BGP? Border Gateway Protocol Explained | Fortinet\", \"url\": \"https://www.fortinet.com/resources/cyberglossary/bgp-border-gateway-protocol\", \"snippet\": \"Learn what Border Gateway Protocol (BGP) is, how it works, and its characteristics. BGP takes into consideration all the different …\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 6896,
+            "completion_tokens": 125
+          },
+          "chars": 522
+        },
+        {
+          "reasoning": "The web searches aren't returning relevant results because maybe blocked? Could be need to fetch specific pages. Let's try fetch a known article like \"BGP route filtering best practices\" from a known source, maybe \"https://www.cloudflare.com/learning/network-layer/bgp-routing/\".",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 7635,
+            "completion_tokens": 99
+          },
+          "chars": 279
+        }
+      ]
+    }
+  ]
+}

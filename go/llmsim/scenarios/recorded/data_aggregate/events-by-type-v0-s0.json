@@ -1,0 +1,63 @@
+{
+  "id": "data_aggregate/events-by-type/v0/s0",
+  "flavor": "data_aggregate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:35:23Z",
+  "turns": [
+    {
+      "user_message": "Show the distribution of events by type.",
+      "steps": [
+        {
+          "reasoning": "We need to show distribution of events by type. Likely model EventRecord with a field type maybe eventType. Need to describe model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "EventRecord"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"eventId\",\"type\":\"string\"},{\"path\":\"category\",\"type\":\"string\"},{\"path\":\"eventType\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"sourceId\",\"type\":\"string\"},{\"path\":\"sourceName\",\"type\":\"string\"},{\"path\":\"sourceType\",\"type\":\"string\"},{\"path\":\"message\",\"type\":\"string\"},{\"path\":\"occurredAt\",\"type\":\"int\"}],\"model\":\"EventRecord\",\"primaryKey\":\"eventId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 57
+          },
+          "chars": 168
+        },
+        {
+          "reasoning": "We need distribution of events by type: count per eventType. Use aggregate count(*) group by eventType. Use L8Query: select eventType, count(*) from EventRecord group-by eventType. Probably need to include eventType in select list.\n\nLet's run query.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select eventType,count(*) from EventRecord group-by eventType"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"count(*)\":8,\"group\":{\"eventType\":\"configChange\"}},{\"count(*)\":5,\"group\":{\"eventType\":\"linkDown\"}},{\"count(*)\":3,\"group\":{\"eventType\":\"linkUp\"}},{\"count(*)\":7,\"group\":{\"eventType\":\"login\"}},{\"count(*)\":11,\"group\":{\"eventType\":\"reboot\"}},{\"count(*)\":6,\"group\":{\"eventType\":\"threshold\"}}],\"model\":\"EventRecord\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1942,
+            "completion_tokens": 91
+          },
+          "chars": 329
+        },
+        {
+          "text": "**Event type distribution**\n\n| Event Type   | Count |\n|--------------|-------|\n| configChange | 8 |\n| linkDown     | 5 |\n| linkUp       | 3 |\n| login        | 7 |\n| reboot       | {{int:8:14}} |\n| threshold    | 6 |\n\nThis table shows how many events of each type are recorded in the system.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2093,
+            "completion_tokens": 80
+          },
+          "chars": 280
+        }
+      ]
+    }
+  ]
+}

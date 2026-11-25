@@ -1,0 +1,100 @@
+{
+  "id": "csv_generate/orders-file/v0/s2",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:30:29Z",
+  "csv": [
+    {
+      "header": [
+        "orderId",
+        "customerName",
+        "orderDate",
+        "totalAmount",
+        "status"
+      ],
+      "columns": [
+        {
+          "kind": "seq",
+          "min": 1
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Acme Corp",
+            "Globex Inc",
+            "Initech",
+            "Umbrella Corp",
+            "Stark Industries",
+            "Wayne Enterprises",
+            "Wonka Ltd",
+            "Oscorp",
+            "Gringotts",
+            "Hogwarts",
+            "The Simpsons",
+            "Jurassic Park",
+            "Fortune 500",
+            "Pixel Studios",
+            "Oscillations LLC"
+          ]
+        },
+        {
+          "kind": "date"
+        },
+        {
+          "kind": "float",
+          "min": 660.5,
+          "max": 8200,
+          "decimals": 2
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Pending",
+            "Shipped",
+            "Delivered",
+            "Cancelled"
+          ]
+        }
+      ],
+      "rows": 30
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Generate a CSV file of 30 fictitious orders. It is synthetic test data for a demo, not records from the system: attach it as orders.csv.",
+      "steps": [
+        {
+          "reasoning": "We need to generate synthetic data, not from system. Use create_file to make CSV content. We need {{int:24:36}} rows of fictitious orders. Need to decide fields. Since not specified, we can define columns: orderId, customerName, orderDate, totalAmount (as money maybe), status. Provide CSV content. Use create_file.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "orderId,customerName,orderDate,totalAmount,status\n{{csv:0}}",
+                "file_name": "orders.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1361,\"file_name\":\"orders.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1819,
+            "completion_tokens": 712
+          },
+          "chars": 1745
+        },
+        {
+          "text": "Attached `orders.csv` with {{int:24:36}} synthetic order records.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2482,
+            "completion_tokens": 16
+          },
+          "chars": 54
+        }
+      ]
+    }
+  ]
+}

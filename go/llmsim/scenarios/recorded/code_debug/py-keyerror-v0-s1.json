@@ -1,0 +1,24 @@
+{
+  "id": "code_debug/py-keyerror/v0/s1",
+  "flavor": "code_debug",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T18:54:51Z",
+  "turns": [
+    {
+      "user_message": "Why does this fail?\n```\nTraceback (most recent call last):\n  File \"app.py\", line 12, in \u003cmodule\u003e\n    print(config['database']['host'])\nKeyError: 'database'\n```",
+      "steps": [
+        {
+          "reasoning": "The user asks: \"Why does this fail?\" They provide a Python traceback showing a KeyError 'database' when trying to access config['database']['host']. Likely config does not have a 'database' key. Need to explain that the config dict missing that key leads to KeyError. Suggest checking config structure, ensure key exists, perhaps use .get, provide default, etc. No need for tools.",
+          "text": "The traceback tells us that the code tried to look up `config['database']`, but the key **`'database'` does not exist in the `config` dictionary**. When you then try to index `['host']` on that missing entry, Python raises a `KeyError`.\n\nTypical reasons for this:\n\n1. **`config` wasn’t populated with a `database` section** – maybe the configuration file or source you’re loading doesn’t contain a `database` block, or the file wasn’t read correctly.\n2. **A typo in the key name** – e.g., the config might have `'db'`, `'Database'`, or `'databases'` instead of `'database'`.\n3. **The config was overwritten or cleared** before this line runs.\n\n### How to fix it\n\n- **Inspect the actual content of `config`** before the failing line:\n\n  ```python\n  print(config)   # or pprint.pprint(config)\n  ```\n\n  This will show you which top‑level keys are present.\n\n- **Ensure the configuration source defines the expected structure**, for example in a YAML/JSON file:\n\n  ```yaml\n  database:\n    host: localhost\n    port: 5432\n    user: myuser\n    password: secret\n  ```\n\n- **Guard against missing keys** if the config may be incomplete:\n\n  ```python\n  db_cfg = config.get('database')\n  if not db_cfg:\n      raise RuntimeError(\"Missing 'database' configuration section\")\n  host = db_cfg.get('host', 'default_host')\n  ```\n\n- **Use a default value or a safe lookup**:\n\n  ```python\n  host = config.get('database', {}).get('host', 'localhost')\n  ```\n\nBy confirming that `config` actually contains a `'database'` entry (and that it includes a `'host'` field), the `KeyError` will be resolved.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1831,
+            "completion_tokens": 492
+          },
+          "chars": 1969
+        }
+      ]
+    }
+  ]
+}

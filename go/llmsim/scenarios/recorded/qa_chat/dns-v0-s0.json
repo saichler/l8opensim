@@ -1,0 +1,24 @@
+{
+  "id": "qa_chat/dns/v0/s0",
+  "flavor": "qa_chat",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:03:45Z",
+  "turns": [
+    {
+      "user_message": "Why does DNS use both UDP and TCP?",
+      "steps": [
+        {
+          "reasoning": "The user asks a conceptual question about DNS using both UDP and TCP. No tool needed. Just answer.",
+          "text": "DNS (Domain Name System) was designed to be fast, lightweight, and able to handle a huge volume of small queries. To meet those goals it uses **UDP** for most of its traffic, but it also falls back to **TCP** when certain conditions arise. Here’s why both protocols are needed:\n\n| Reason | UDP (default) | TCP (fallback) |\n|--------|----------------|----------------|\n| **Efficiency for small queries** | DNS queries and responses are usually \u003c {{int:409:615}} bytes. UDP’s connection‑less nature means a single packet can carry the request and the reply, avoiding the overhead of establishing a connection. | For larger responses (e.g., DNSSEC signatures, zone transfers, or many resource records) the data can exceed the UDP size limit. TCP’s streaming nature can carry arbitrarily large messages. |\n| **Low latency** | No handshake, so the client can send a query immediately and get a reply in one round‑trip. | The three‑way TCP handshake adds a few extra round‑trips, but it’s acceptable when the extra reliability or size is required. |\n| **Reliability** | UDP is unreliable (no guarantee of delivery, ordering, or duplicate suppression). DNS tolerates occasional loss because the client can simply retry the query. | TCP guarantees delivery, ordering, and error checking. This is essential for operations that must be accurate and complete, such as zone transfers (AXFR/IXFR) between name servers. |\n| **Fragmentation avoidance** | Large UDP packets can be fragmented at the IP layer, which many middleboxes drop, causing failures. Keeping DNS over UDP small avoids this problem. | TCP handles segmentation internally, so the application never sees fragmented IP packets. |\n| **Security considerations** | Historically, UDP was sufficient, but modern extensions (e.g., DNS over TLS, DNS over HTTPS) encapsulate DNS inside TCP‑based transports for encryption. | Those secure transports inherently use TCP (or TLS/HTTPS) to provide confidentiality and integrity. |\n\n### Typical flow\n\n1. **Normal lookup** – The resolver sends a UDP query to a recursive or authoritative server.  \n2. **Truncated response** – If the answer doesn’t fit in the UDP packet, the server sets the **TC (truncated)** flag. The client then retries the same query over TCP.  \n3. **Zone transfer** – When a secondary DNS server needs a full copy of a zone, it initiates a TCP connection (AXFR/IXFR).  \n\n### Summary\n\n- **UDP** gives DNS its speed and low overhead for the vast majority of lookups.  \n- **TCP** steps in when size, reliability, or security requirements exceed what UDP can provide.\n\nThat combination lets DNS remain both fast for everyday queries and robust when larger or more critical data exchanges are required.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1796,
+            "completion_tokens": 607
+          },
+          "chars": 2823
+        }
+      ]
+    }
+  ]
+}

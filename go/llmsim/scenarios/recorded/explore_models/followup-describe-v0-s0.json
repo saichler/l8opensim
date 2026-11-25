@@ -1,0 +1,75 @@
+{
+  "id": "explore_models/followup-describe/v0/s0",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:53:09Z",
+  "turns": [
+    {
+      "user_message": "List the models you can use.",
+      "steps": [
+        {
+          "reasoning": "We need to list modules. Use list_modules.",
+          "tool_calls": [
+            {
+              "name": "list_modules",
+              "arguments": {}
+            }
+          ],
+          "tool_results": [
+            "{\"models\":[{\"area\":\"Inventory\",\"model\":\"NetworkDevice\",\"primaryKey\":\"id\",\"service\":\"NetDev\"},{\"area\":\"Inventory\",\"model\":\"GpuDevice\",\"primaryKey\":\"id\",\"service\":\"GpuDev\"},{\"area\":\"Kubernetes\",\"model\":\"K8SCluster\",\"primaryKey\":\"name\",\"service\":\"K8sClstr\"},{\"area\":\"Kubernetes\",\"model\":\"K8SNode\",\"primaryKey\":\"name\",\"service\":\"K8sNode\"},{\"area\":\"Kubernetes\",\"model\":\"K8SPod\",\"primaryKey\":\"key\",\"service\":\"K8sPod\"},{\"area\":\"Kubernetes\",\"model\":\"K8SDeployment\",\"primaryKey\":\"key\",\"service\":\"K8sDeploy\"},{\"area\":\"Alarms\",\"model\":\"Alarm\",\"primaryKey\":\"alarmId\",\"service\":\"Alarm\"},{\"area\":\"Alarms\",\"model\":\"EventRecord\",\"primaryKey\":\"eventId\",\"service\":\"Events\"},{\"area\":\"Collection\",\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\",\"service\":\"Targets\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 30
+          },
+          "chars": 56
+        },
+        {
+          "text": "Here are the models available in the system:\n\n| Area          | Model            | Primary Key | Service   |\n|---------------|------------------|-------------|-----------|\n| Inventory     | NetworkDevice    | id          | NetDev    |\n| Inventory     | GpuDevice        | id          | GpuDev    |\n| Kubernetes    | K8SCluster       | name        | K8sClstr  |\n| Kubernetes    | K8SNode          | name        | K8sNode   |\n| Kubernetes    | K8SPod           | key         | K8sPod    |\n| Kubernetes    | K8SDeployment    | key         | K8sDeploy |\n| Alarms        | Alarm            | alarmId     | Alarm     |\n| Alarms        | EventRecord      | eventId     | Events    |\n| Collection    | L8PTarget        | targetId    | Targets   |",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2039,
+            "completion_tokens": 192
+          },
+          "chars": 738
+        }
+      ]
+    },
+    {
+      "user_message": "Describe the K8SNode model.",
+      "steps": [
+        {
+          "reasoning": "We need to describe fields of K8SNode. Use describe_model tool.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SNode"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"roles\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"version\",\"type\":\"string\"},{\"path\":\"internalIp\",\"type\":\"string\"},{\"path\":\"osImage\",\"type\":\"string\"},{\"path\":\"kernelVersion\",\"type\":\"string\"},{\"path\":\"containerRuntime\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SNode\",\"primaryKey\":\"name\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2000,
+            "completion_tokens": 47
+          },
+          "chars": 96
+        },
+        {
+          "text": "**K8SNode model fields**\n\n| Field | Type | Description |\n|-------|------|-------------|\n| **name** | string | Primary key; the node’s unique identifier within the cluster. |\n| **status** | string | Current operational status (e.g., Ready, NotReady, Unknown). |\n| **roles** | string | Comma‑separated list of the node’s roles (e.g., master, worker). |\n| **age** | string | How long the node has been part of the cluster (e.g., “5d12h”). |\n| **version** | string | Kubernetes version running on the node (e.g., “v1.27.3”). |\n| **internalIp** | string | The node’s internal IP address used for cluster communication. |\n| **osImage** | string | Operating system image name (e.g., “Ubuntu 22.04.3 LTS”). |\n| **kernelVersion** | string | Kernel version of the node’s OS. |\n| **containerRuntime** | string | Container runtime in use (e.g., “docker://20.10.24”). |\n| **clusterName** | string | Name of the Kubernetes cluster the node belongs to. |\n\nThe **primary key** for this model is **name**. Use these fields when querying or updating K8SNode records.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2158,
+            "completion_tokens": 285
+          },
+          "chars": 1074
+        }
+      ]
+    }
+  ]
+}

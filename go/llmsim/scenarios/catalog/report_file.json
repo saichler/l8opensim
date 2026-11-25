@@ -1,0 +1,118 @@
+{
+  "flavor": "report_file",
+  "mode": "tanto",
+  "validators": [
+    "tool_sequence"
+  ],
+  "expect_tools": [
+    "create_file"
+  ],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "critical-alarms-md",
+      "params": {},
+      "turns": [
+        "Write a markdown report of today's critical alarms."
+      ]
+    },
+    {
+      "id": "pod-restarts-csv",
+      "params": {},
+      "turns": [
+        "Create a CSV summary of pod restarts per namespace as a file."
+      ]
+    },
+    {
+      "id": "site-report",
+      "params": {
+        "site": [
+          "Austin",
+          "Dallas",
+          "Houston",
+          "Seattle",
+          "Denver",
+          "Chicago"
+        ]
+      },
+      "turns": [
+        "Write a report about the health of the devices in {{site}} and attach it as a file."
+      ]
+    },
+    {
+      "id": "gpu-report",
+      "params": {},
+      "turns": [
+        "Prepare a GPU fleet report (models, drivers, status) as a markdown file."
+      ]
+    },
+    {
+      "id": "weekly-summary",
+      "params": {},
+      "turns": [
+        "Create a weekly network summary report file I can send to my manager."
+      ]
+    },
+    {
+      "id": "cluster-report",
+      "params": {
+        "cluster": [
+          "prod-east",
+          "prod-west"
+        ]
+      },
+      "turns": [
+        "Write a report on the {{cluster}} cluster's state and attach it."
+      ]
+    },
+    {
+      "id": "vendor-report",
+      "params": {},
+      "turns": [
+        "Create a JSON file summarizing device counts per vendor and status."
+      ]
+    },
+    {
+      "id": "alarm-trends",
+      "params": {},
+      "turns": [
+        "Write a report on alarm trends and recurring problems."
+      ]
+    },
+    {
+      "id": "offline-report",
+      "params": {},
+      "turns": [
+        "Create a text file listing the offline devices and what to check for each."
+      ]
+    },
+    {
+      "id": "capacity-report",
+      "params": {},
+      "turns": [
+        "Write a capacity report for our Kubernetes clusters as a markdown file."
+      ]
+    },
+    {
+      "id": "incident-report",
+      "params": {
+        "device": [
+          "core-rtr-03",
+          "core-rtr-07"
+        ]
+      },
+      "turns": [
+        "Write an incident report file for the alarms on {{device}}."
+      ]
+    },
+    {
+      "id": "inventory-report",
+      "params": {},
+      "turns": [
+        "Create an HTML report of the network inventory."
+      ]
+    }
+  ]
+}

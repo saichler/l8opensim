@@ -1,0 +1,43 @@
+{
+  "id": "explore_models/gpu-fields/v0/s2",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:49:07Z",
+  "turns": [
+    {
+      "user_message": "What fields does a GPU server have?",
+      "steps": [
+        {
+          "reasoning": "The user asks: \"What fields does a GPU server have?\" We need to list the fields of the GpuDevice model. Use describe_model tool.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "GpuDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"deviceInfo.hostname\",\"type\":\"string\"},{\"path\":\"deviceInfo.vendor\",\"type\":\"string\"},{\"path\":\"deviceInfo.model\",\"type\":\"string\"},{\"path\":\"deviceInfo.ipAddress\",\"type\":\"string\"},{\"path\":\"deviceInfo.serialNumber\",\"type\":\"string\"},{\"path\":\"deviceInfo.location\",\"type\":\"string\"},{\"path\":\"deviceInfo.osVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.kernelVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.driverVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.cudaVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.dcgmVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"deviceInfo.uptime\",\"type\":\"string\"},{\"path\":\"deviceInfo.lastSeen\",\"type\":\"string\"},{\"path\":\"deviceInfo.gpuCount\",\"type\":\"int\"}],\"model\":\"GpuDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 60
+          },
+          "chars": 163
+        },
+        {
+          "text": "The **GpuDevice** model (a GPU server) has the following fields:\n\n| Field | Type |\n|-------|------|\n| **id** | string (primary key) |\n| **deviceInfo.hostname** | string |\n| **deviceInfo.vendor** | string |\n| **deviceInfo.model** | string |\n| **deviceInfo.ipAddress** | string |\n| **deviceInfo.serialNumber** | string |\n| **deviceInfo.location** | string |\n| **deviceInfo.osVersion** | string |\n| **deviceInfo.kernelVersion** | string |\n| **deviceInfo.driverVersion** | string |\n| **deviceInfo.cudaVersion** | string |\n| **deviceInfo.dcgmVersion** | string |\n| **deviceInfo.deviceStatus** | string |\n| **deviceInfo.uptime** | string |\n| **deviceInfo.lastSeen** | string |\n| **deviceInfo.gpuCount** | integer (number of GPUs in the server) |\n\nThese fields capture identification, hardware details, software versions, status, and the count of GPUs for each GPU server record.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2047,
+            "completion_tokens": 221
+          },
+          "chars": 872
+        }
+      ]
+    }
+  ]
+}

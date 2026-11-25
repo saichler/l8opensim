@@ -1,0 +1,24 @@
+{
+  "id": "qa_chat/tls/v0/s2",
+  "flavor": "qa_chat",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:03:08Z",
+  "turns": [
+    {
+      "user_message": "Explain how TLS certificates work in simple terms.",
+      "steps": [
+        {
+          "reasoning": "We need to answer the question: \"Explain how TLS certificates work in simple terms.\" No data tools needed. Just provide explanation.",
+          "text": "**TLS certificates in plain language**\n\n1. **What TLS is**  \n   TLS (Transport Layer Security) is the protocol that makes a connection on the internet private and trustworthy. When you see “https://” in a browser, TLS is doing the work behind the scenes.\n\n2. **Why certificates are needed**  \n   TLS needs to know *who* it’s talking to. A certificate is a digital “ID card” that proves the identity of a server (or sometimes a client). It lets the other side be confident that the computer it’s connecting to really belongs to the domain it expects (e.g., *example.com*).\n\n3. **What’s inside a certificate**  \n   - **Domain name** – the web address the certificate is valid for.  \n   - **Public key** – a cryptographic key that anyone can use to encrypt data *to* the server.  \n   - **Owner information** – the organization that owns the domain (optional).  \n   - **Issuer** – the Certificate Authority (CA) that signed the certificate.  \n   - **Validity period** – start and end dates.  \n   - **Digital signature** – a cryptographic stamp from the CA that proves the CA has vetted the certificate.\n\n4. **How the trust chain works**  \n   1. **Certificate Authority (CA)** – a trusted third‑party (e.g., DigiCert, Let’s Encrypt). Browsers ship with a list of CA root certificates that they already trust.  \n   2. **Signing** – the CA uses its private key to create a digital signature on the server’s certificate.  \n   3. **Verification** – when a client (like a browser) receives the server’s certificate, it checks the signature using the CA’s *public* root key (which it already trusts). If the signature matches, the certificate is considered valid.\n\n5. **The TLS handshake (simplified)**  \n   1. **Client hello** – the browser says, “I want to talk securely; here are the TLS versions and cipher suites I support.”  \n   2. **Server hello + certificate** – the server replies with its chosen TLS version, cipher suite, and sends its TLS certificate (and sometimes intermediate certificates that link back to the root CA).  \n   3. **Certificate verification** – the client checks the certificate’s signature, makes sure the domain matches, and that it’s not expired or revoked.  \n   4. **Key exchange** – using the server’s public key (from the certificate), the client encrypts a secret (or part of a secret) and sends it back. Only the server can decrypt it because it holds the matching private key.  \n   5. **Secure channel established** – both sides now have the same secret key, which they use to encrypt and decrypt the rest of the session.\n\n6. **Why the private key stays secret**  \n   The server’s private key never leaves the server. It’s used only to prove that the server really owns the public key in the certificate (by decrypting the client’s secret). If the private key were compromised, anyone could impersonate the server, so protecting it is critical.\n\n7. **Renewal and revocation**  \n   - **Renewal**: certificates have limited lifetimes (often {{int:72:108}}‑{{int:292:438}} days). They must be re‑issued before they expire.  \n   - **Revocation**: if a certificate is compromised, the CA can list it in a Certificate Revocation List (CRL) or make it unavailable via the Online Certificate Status Protocol (OCSP). Clients check these to avoid using a bad certificate.\n\n8. **Bottom‑line analogy**  \n   Think of a TLS certificate like a passport:  \n   - The **passport** (certificate) contains your name, photo, and a government‑signed seal (digital signature).  \n   - The **government** (CA) is trusted by other countries (browsers).  \n   - When you travel (connect), you show the passport; the other country checks the seal, verifies it’s still valid, and then lets you in securely.  \n\nThat’s the essence of how TLS certificates let you trust that the server you’re talking to is who it says it is, and they enable the encrypted channel that protects your data.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1796,
+            "completion_tokens": 922
+          },
+          "chars": 4077
+        }
+      ]
+    }
+  ]
+}

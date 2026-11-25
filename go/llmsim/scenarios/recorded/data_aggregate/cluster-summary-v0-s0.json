@@ -1,0 +1,64 @@
+{
+  "id": "data_aggregate/cluster-summary/v0/s0",
+  "flavor": "data_aggregate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:35:42Z",
+  "turns": [
+    {
+      "user_message": "Summarize each Kubernetes cluster: nodes, ready nodes, pods and failed pods.",
+      "steps": [
+        {
+          "reasoning": "We need to summarize each K8SCluster: number of nodes, number of ready nodes, number of pods, number of failed pods. Need to query models: K8SCluster, K8SNode, K8SPod. First describe models to know fields.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SCluster"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"k8sVersion\",\"type\":\"string\"},{\"path\":\"platform\",\"type\":\"string\"},{\"path\":\"summary.totalNodes\",\"type\":\"int\"},{\"path\":\"summary.readyNodes\",\"type\":\"int\"},{\"path\":\"summary.totalPods\",\"type\":\"int\"},{\"path\":\"summary.runningPods\",\"type\":\"int\"},{\"path\":\"summary.failedPods\",\"type\":\"int\"},{\"path\":\"summary.pendingPods\",\"type\":\"int\"},{\"path\":\"summary.totalDeployments\",\"type\":\"int\"},{\"path\":\"summary.availableDeployments\",\"type\":\"int\"},{\"path\":\"summary.totalNamespaces\",\"type\":\"int\"},{\"path\":\"summary.warningEvents\",\"type\":\"int\"}],\"model\":\"K8SCluster\",\"primaryKey\":\"name\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1804,
+            "completion_tokens": 86
+          },
+          "chars": 241
+        },
+        {
+          "reasoning": "We need to summarize each Kubernetes cluster with nodes, ready nodes, pods and failed pods. So we need to select name, summary.totalNodes, summary.readyNodes, summary.totalPods, summary.failedPods from K8SCluster. Possibly also include other info? The request: \"Summarize each Kubernetes cluster: nodes, ready nodes, pods and failed pods.\" So list each cluster with those numbers.\n\nWe need to query all clusters. Use select name,summary.totalNodes,summary.readyNodes,summary.totalPods,summary.failedPods from K8SCluster.\n\nNo limit needed? The query will return all records. Use select name,summary.totalNodes,summary.readyNodes,summary.totalPods,summary.failedPods from K8SCluster. No limit needed, but maybe limit is optional. For safety, maybe limit {{int:800:1200}}. It's fine.\n\nLet's run query.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select name,summary.totalNodes,summary.readyNodes,summary.totalPods,summary.failedPods from K8SCluster"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":3,\"model\":\"K8SCluster\",\"records\":[{\"name\":\"prod-east\",\"summary\":{\"failedPods\":4,\"readyNodes\":4,\"totalNodes\":10,\"totalPods\":264}},{\"name\":\"prod-west\",\"summary\":{\"failedPods\":0,\"readyNodes\":9,\"totalNodes\":9,\"totalPods\":124}},{\"name\":\"staging\",\"summary\":{\"failedPods\":1,\"readyNodes\":5,\"totalNodes\":6,\"totalPods\":316}}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2012,
+            "completion_tokens": 222
+          },
+          "chars": 907
+        },
+        {
+          "reasoning": "We have the data for three clusters with required fields. Need to summarize each cluster: nodes, ready nodes, pods and failed pods. Provide a concise summary. Should we include totalPods? The request: \"nodes, ready nodes, pods and failed pods.\" So nodes = totalNodes, ready nodes = readyNodes, pods = totalPods, failed pods = failedPods.\n\nWe'll format maybe bullet list.\n\n",
+          "text": "**Kubernetes Cluster Summary**\n\n| Cluster | Total Nodes | Ready Nodes | Total Pods | Failed Pods |\n|--------|--------------|------------|------------|-------------|\n| prod-east | {{int:8:12}} | 4 | {{int:211:317}} | 4 |\n| prod-west | 9 | 9 | {{int:99:149}} | 0 |\n| staging | 6 | 5 | {{int:252:380}} | 1 |\n\n* Each row shows the overall node count, how many are in the Ready state, the total number of pods running (or scheduled), and how many pods have failed in that cluster.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2170,
+            "completion_tokens": 207
+          },
+          "chars": 802
+        }
+      ]
+    }
+  ]
+}

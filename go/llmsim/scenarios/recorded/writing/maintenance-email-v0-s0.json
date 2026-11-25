@@ -1,0 +1,31 @@
+{
+  "id": "writing/maintenance-email/v0/s0",
+  "flavor": "writing",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:51:29Z",
+  "params": {
+    "site": [
+      "Austin",
+      "Dallas",
+      "Seattle"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Write an email to the team announcing a network maintenance window in Austin this Saturday from 22:00 to 02:00.",
+      "steps": [
+        {
+          "reasoning": "The user wants an email text. No data needed. Just write email.",
+          "text": "Subject: Scheduled Network Maintenance – {{p:site}} Data Center (Saturday 22:00‑02:00)\n\nHi Team,\n\nPlease be advised that we have a planned network maintenance window for the {{p:site}} data center this coming **Saturday, from 22:00 to 02:00 (local time)**.\n\n**What’s happening?**  \n- Routine firmware upgrades on core switches  \n- Configuration refreshes for edge routers  \n- Verification of redundancy paths  \n\n**Why?**  \nThese updates are necessary to improve network stability, security, and performance across our {{p:site}} infrastructure.\n\n**Impact:**  \n- Network services may experience brief interruptions or reduced performance during the window.  \n- Critical production traffic should be monitored; please coordinate with any affected application owners.  \n\n**Action required:**  \n- Ensure any time‑sensitive jobs are completed or paused before 22:00.  \n- Notify your stakeholders of the potential impact.  \n- Report any issues observed during or after the maintenance to the Network Operations team.\n\nWe’ll provide a post‑maintenance status update once the work is complete. Thank you for your cooperation and understanding.\n\nBest regards,  \n[Your Name]  \nNetwork Operations Lead  \nProbler Data Center Services  ",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1813,
+            "completion_tokens": 265
+          },
+          "chars": 1290
+        }
+      ]
+    }
+  ]
+}

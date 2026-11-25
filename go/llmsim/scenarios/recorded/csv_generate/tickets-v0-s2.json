@@ -1,0 +1,130 @@
+{
+  "id": "csv_generate/tickets/v0/s2",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:32:29Z",
+  "csv": [
+    {
+      "header": [
+        "id",
+        "title",
+        "priority",
+        "status",
+        "created_date"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "TCK-001",
+            "TCK-002",
+            "TCK-003",
+            "TCK-004",
+            "TCK-005",
+            "TCK-006",
+            "TCK-007",
+            "TCK-008",
+            "TCK-009",
+            "TCK-010",
+            "TCK-011",
+            "TCK-012",
+            "TCK-013",
+            "TCK-014",
+            "TCK-015",
+            "TCK-016",
+            "TCK-017",
+            "TCK-018",
+            "TCK-019",
+            "TCK-020"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Unable to login to portal",
+            "Server CPU usage spikes",
+            "Email delivery delayed",
+            "Printer malfunction on floor 2",
+            "Database backup failed",
+            "VPN connection drops intermittently",
+            "Website SSL certificate expiring soon",
+            "Password reset request not processed",
+            "File share permissions incorrect",
+            "Mobile app crash on launch",
+            "Network latency in building B",
+            "Data sync job failing nightly",
+            "Request for new workstation",
+            "Security alert: multiple failed logins",
+            "Upgrade to latest OS version",
+            "Audio issues in conference rooms",
+            "Report generation timeout",
+            "License renewal for software X",
+            "User reports slow file transfers",
+            "Automated test suite failures"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "High",
+            "Medium",
+            "Low",
+            "Critical"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Open",
+            "In Progress",
+            "Resolved",
+            "Closed",
+            "Planned"
+          ]
+        },
+        {
+          "kind": "date"
+        }
+      ],
+      "rows": 20
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Make a CSV of 20 fictitious support tickets with id, title, priority, status and created date. It is synthetic test data for a demo, not records from the system: attach it as tickets.csv.",
+      "steps": [
+        {
+          "reasoning": "The user wants a CSV of {{int:16:24}} fictitious support tickets with fields: id, title, priority, status, created date. This is synthetic test data, not from the system. So we cannot use export_csv because that pulls from real data. We need to generate synthetic data ourselves. We can create a text file with CSV content. Use create_file tool. Provide {{int:16:24}} rows with those columns.\n\nWe need to generate IDs (could be numeric or like TICK-001). Titles arbitrary, priority (e.g., Low, Medium, High, Critical), status (Open, In Progress, Resolved, Closed), created date (ISO date). We'll produce CSV header then {{int:16:24}} rows.\n\nWe'll create file tickets.csv.\n\nWe should ensure we don't exceed any policy. It's fine.\n\nProceed to create_file.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "id,title,priority,status,created_date\n{{csv:0}}",
+                "file_name": "tickets.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1280,\"file_name\":\"tickets.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1830,
+            "completion_tokens": 648
+          },
+          "chars": 2071
+        },
+        {
+          "text": "Attached **tickets.csv** containing {{int:16:24}} synthetic support tickets with the fields id, title, priority, status, and created_date.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2335,
+            "completion_tokens": 31
+          },
+          "chars": 129
+        }
+      ]
+    }
+  ]
+}

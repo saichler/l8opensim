@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-03/v0/s2",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:17:11Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user, [NAME_AB12CD], manages the prod-east cluster.\n\nNext part of the conversation:\nUser: Which pods are failing in prod-east?\n\nAssistant: 3 pods are failing: billing-7f9c, search-1a2b and worker-9d8e.\n\nUser: Why is billing failing?\n\nAssistant: Its restarts count is 18 and the status is FAILED; the logs are not available to me.\n\nUser: Ok, remind me tomorrow to check it.\n\nAssistant: I can't set reminders, but you can ask me again tomorrow.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary based on current summary and next part. Current summary: \"The user, [NAME_AB12CD], manages the prod-east cluster.\"\n\nAdd facts: pods failing in prod-east: billing-7f9c, search-1a2b, worker-9d8e. Billing pod details: restarts count {{int:14:22}}, status FAILED, logs not available. User wants reminder tomorrow to check billing; assistant can't set reminders. So we keep that open request.\n\nWe must keep facts, decisions, entities, IDs, user preferences and constraints, open questions, any L8Query result (none). Remove greetings etc. So final summary:\n\n\"The user, [NAME_AB12CD], manages the prod-east cluster. In prod-east, three pods are failing: billing-7f9c, search-1a2b, and worker-9d8e. The billing-7f9c pod has {{int:14:22}} restarts and status FAILED; its logs are unavailable. The user asked to be reminded tomorrow to check the billing pod, but the assistant cannot set reminders.\"\n\nThat captures.",
+          "text": "The user, [NAME_AB12CD], manages the prod-east cluster. In prod-east, three pods are failing: billing-7f9c, search-1a2b, and worker-9d8e. The billing-7f9c pod has {{int:14:22}} restarts and status FAILED; its logs are unavailable. The user requested a reminder tomorrow to check the billing pod, but the assistant cannot set reminders.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 340,
+            "completion_tokens": 324
+          },
+          "chars": 1241
+        }
+      ]
+    }
+  ]
+}

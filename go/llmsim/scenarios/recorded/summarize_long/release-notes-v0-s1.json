@@ -1,0 +1,24 @@
+{
+  "id": "summarize_long/release-notes/v0/s1",
+  "flavor": "summarize_long",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:31:31Z",
+  "turns": [
+    {
+      "user_message": "Summarize this document:\n\nRelease 4.2 of the platform introduces a new scheduler that reduces job start latency by 35 percent, support for ARM64 worker nodes, and a redesigned dashboard. The storage layer now supports snapshots every 15 minutes with retention policies per namespace. Breaking changes: the v1beta1 API is removed and clients must migrate to v1; the default log level changed from debug to info. Known issues: the dashboard may show stale metrics for up to two minutes after a node restart, and snapshot restore is not yet supported for volumes larger than 2 TB. Upgrade path: upgrade the control plane first, then drain and upgrade workers one at a time. The team recommends testing the migration to the v1 API in a staging environment before upgrading production clusters. Security fixes include patches for two medium-severity vulnerabilities in the API gateway and an updated TLS configuration that disables TLS 1.0 and 1.1 by default.",
+      "steps": [
+        {
+          "reasoning": "We need to summarize the provided document. No data queries needed. Just produce summary.",
+          "text": "**Release 4.2 Summary**\n\n- **Key New Features**\n  - **Scheduler:** Reduces job start latency by {{int:28:42}} %.\n  - **ARM64 Support:** Worker nodes can now run on ARM64 architecture.\n  - **Dashboard:** Complete visual redesign.\n  - **Storage Snapshots:** Automatic snapshots every {{int:12:18}} minutes with per‑namespace retention policies.\n\n- **Breaking Changes**\n  - **API:** `v1beta1` API is removed; all clients must migrate to `v1`.\n  - **Logging:** Default log level changed from **debug** to **info**.\n\n- **Known Issues**\n  - Dashboard may display stale metrics for up to 2 minutes after a node restart.\n  - Snapshot restore is not supported for volumes larger than 2 TB.\n\n- **Upgrade Path**\n  1. Upgrade the **control plane** first.\n  2. Drain each worker node and upgrade them **one at a time**.\n  - Recommendation: Test the `v1` API migration in a staging environment before upgrading production clusters.\n\n- **Security Fixes**\n  - Patches for two medium‑severity vulnerabilities in the API gateway.\n  - Updated TLS configuration: TLS 1.0 and 1.1 are disabled by default.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1979,
+            "completion_tokens": 288
+          },
+          "chars": 1174
+        }
+      ]
+    }
+  ]
+}

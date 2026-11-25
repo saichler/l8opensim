@@ -1,0 +1,44 @@
+{
+  "id": "csv_export/targets-csv/v0/s2",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:26:05Z",
+  "turns": [
+    {
+      "user_message": "Download the polling targets as a CSV.",
+      "steps": [
+        {
+          "reasoning": "The user wants to download the polling targets as a CSV. So we need to export records from L8PTarget model. Use export_csv with query: select * from L8PTarget. No limit needed, but export_csv will handle up to {{int:8000:12000}}.\n\nWe need to call export_csv with query \"select * from L8PTarget\". Possibly include columns? Not required.\n\nLet's do that.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "polling_targets.csv",
+                "query": "select * from L8PTarget"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"targetId\",\"linksId\",\"state\",\"inventoryType\"],\"file_name\":\"polling_targets.csv\",\"rows\":22}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 127
+          },
+          "chars": 417
+        },
+        {
+          "text": "Attached **polling_targets.csv** ({{int:17:27}} rows) with the columns `targetId`, `linksId`, `state`, and `inventoryType`.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1877,
+            "completion_tokens": 34
+          },
+          "chars": 112
+        }
+      ]
+    }
+  ]
+}

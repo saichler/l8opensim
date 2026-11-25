@@ -1,0 +1,24 @@
+{
+  "id": "code_debug/go-deadlock/v0/s2",
+  "flavor": "code_debug",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T21:04:45Z",
+  "turns": [
+    {
+      "user_message": "fatal error: all goroutines are asleep - deadlock!\n```go\nfunc main() {\n    ch := make(chan int)\n    ch \u003c- 1\n    fmt.Println(\u003c-ch)\n}\n```\nWhy?",
+      "steps": [
+        {
+          "reasoning": "fatal error: all goroutines are asleep - deadlock!\n```go\nfunc main() {\n    ch := make(chan int)\n    ch \u003c- 1\n    fmt.Println(\u003c-ch)\n}\n```\nWhy?\n\nWe need explain why deadlock. Channel is unbuffered. Send blocks until receiver ready. Main goroutine sends to ch, blocks waiting for receiver. But receiver \u003c-ch is after send, never reached. So deadlock.\n\nUser asks why. Probably explain. No tools needed. It's a programming question. No need to query data. Just explain.\n\nWe can respond with explanation. No tool needed.\n\nPossibly they want explanation. Provide answer.\n\nNo tool call needed.\n\nWe must follow rules: no fabrication. Just explain.\n\nPotentially user expects explanation about unbuffered channel deadlock.\n\nAnswer in simple terms.\n\nNo need to use tools.\n\n",
+          "text": "An unbuffered channel `make(chan int)` has zero capacity.\n\n* `ch \u003c- 1` is a send. On an unbuffered channel a send blocks until **another goroutine is already waiting on a receive** from that channel.\n* `\u003c-ch` is a receive. On an unbuffered channel a receive blocks until **another goroutine is already waiting on a send** to that channel.\n\nIn `main` you are the only goroutine running:\n\n1. `ch \u003c- 1` tries to send. No receiver is waiting yet, so the send blocks forever.\n2. The next line `fmt.Println(\u003c-ch)` is never reached, so no receiver ever starts waiting.\n\nAll goroutines are asleep waiting for each other → `fatal error: all goroutines are asleep - deadlock!`.\n\nFixes are e.g.:\n\n* Use a buffered channel: `ch := make(chan int, 1)`\n* Receive before you send, or do the send/receive in a separate goroutine\n* Use a buffered channel or close the channel appropriately\n\nWith an unbuffered channel the send and receive must happen concurrently in two different goroutines.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2466,
+            "completion_tokens": 416
+          },
+          "chars": 1736
+        }
+      ]
+    }
+  ]
+}

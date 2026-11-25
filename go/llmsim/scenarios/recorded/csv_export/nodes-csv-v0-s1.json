@@ -1,0 +1,68 @@
+{
+  "id": "csv_export/nodes-csv/v0/s1",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:24:55Z",
+  "turns": [
+    {
+      "user_message": "I need a CSV of all Kubernetes nodes with their versions.",
+      "steps": [
+        {
+          "reasoning": "We need to export CSV of all K8SNode records with version field. Need to know field names. Use describe_model for K8SNode.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SNode"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"roles\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"version\",\"type\":\"string\"},{\"path\":\"internalIp\",\"type\":\"string\"},{\"path\":\"osImage\",\"type\":\"string\"},{\"path\":\"kernelVersion\",\"type\":\"string\"},{\"path\":\"containerRuntime\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SNode\",\"primaryKey\":\"name\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1799,
+            "completion_tokens": 62
+          },
+          "chars": 155
+        },
+        {
+          "reasoning": "We need a CSV of all Kubernetes nodes with their versions. So we need export_csv with query selecting all K8SNode records, and columns probably name and version, maybe also include other fields? User asked \"with their versions\" implies name and version columns. We'll export those two columns.\n\nWe'll run export_csv with query: select * from K8SNode (no limit). Provide columns: [\"name\",\"version\"].\n\n",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "columns": [
+                  "name",
+                  "version"
+                ],
+                "file_name": "k8s_nodes_versions.csv",
+                "query": "select * from K8SNode"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"name\",\"version\"],\"file_name\":\"k8s_nodes_versions.csv\",\"rows\":12}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1957,
+            "completion_tokens": 143
+          },
+          "chars": 509
+        },
+        {
+          "text": "Here is the CSV file you requested.\n\n**k8s_nodes_versions.csv** – {{int:9:15}} Kubernetes nodes with their versions.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2045,
+            "completion_tokens": 29
+          },
+          "chars": 108
+        }
+      ]
+    }
+  ]
+}

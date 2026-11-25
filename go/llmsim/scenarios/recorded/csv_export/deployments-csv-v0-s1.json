@@ -1,0 +1,73 @@
+{
+  "id": "csv_export/deployments-csv/v0/s1",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:26:11Z",
+  "turns": [
+    {
+      "user_message": "Export all deployments with their ready counts to a CSV file.",
+      "steps": [
+        {
+          "reasoning": "The user wants to export all deployments with their ready counts to a CSV file.\n\nWe need to know the model for deployments: K8SDeployment. Need to see fields: ready count likely something like readyReplicas or readyCount. We should describe_model for K8SDeployment.\n\nWe'll then export CSV with columns: maybe name, namespace, readyCount? Let's first describe model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SDeployment"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"key\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"namespace\",\"type\":\"string\"},{\"path\":\"ready\",\"type\":\"string\"},{\"path\":\"upToDate\",\"type\":\"string\"},{\"path\":\"available\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SDeployment\",\"primaryKey\":\"key\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1799,
+            "completion_tokens": 108
+          },
+          "chars": 404
+        },
+        {
+          "reasoning": "We need to export all deployments with their ready counts. Fields: ready likely includes ready count like \"3/5\"? It's a string. They want ready counts, so include ready field. Export all deployments. Use export_csv with query select * from K8SDeployment. No limit. Provide columns maybe include name, namespace, ready, upToDate, available, age, clusterName. Let's export all fields. We'll call export_csv.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "columns": [
+                  "name",
+                  "namespace",
+                  "ready",
+                  "upToDate",
+                  "available",
+                  "age",
+                  "clusterName"
+                ],
+                "file_name": "k8s_deployments.csv",
+                "query": "select * from K8SDeployment"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"name\",\"namespace\",\"ready\",\"upToDate\",\"available\",\"age\",\"clusterName\"],\"file_name\":\"k8s_deployments.csv\",\"rows\":20}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1935,
+            "completion_tokens": 159
+          },
+          "chars": 570
+        },
+        {
+          "text": "Attached is **k8s_deployments.csv** containing the deployments with their ready counts (and related fields) – {{int:16:24}} rows exported.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2056,
+            "completion_tokens": 33
+          },
+          "chars": 129
+        }
+      ]
+    }
+  ]
+}

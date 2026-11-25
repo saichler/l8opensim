@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-09/v0/s2",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:18:15Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user is comparing Kubernetes versions across clusters.\n\nNext part of the conversation:\nUser: Which version does each cluster run?\n\nAssistant: prod-east v1.30.4, prod-west v1.29.6, staging v1.31.1.\n\nUser: Which nodes in prod-west are not ready?\n\nAssistant: worker-06 and worker-12 are not ready.\n\nUser: I'll upgrade prod-west next week, only nodes that are ready first.\n\nAssistant: Noted: upgrade prod-west next week, ready nodes first.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary replacing current. Include facts, decisions, entities and IDs, preferences, constraints, open questions, any L8Query results. The conversation:\n\n- User comparing K8s versions across clusters.\n- Assistant gave versions: prod-east v1.30.4, prod-west v1.29.6, staging v1.31.1.\n- User asked about nodes not ready in prod-west.\n- Assistant: worker-06 and worker-12 not ready.\n- User: \"I'll upgrade prod-west next week, only nodes that are ready first.\"\n- Assistant noted: upgrade prod-west next week, ready nodes first.\n\nThus summary should capture:\n\n- Clusters: prod-east (v1.30.4), prod-west (v1.29.6), staging (v1.31.1).\n- Nodes in prod-west not ready: worker-06, worker-12.\n- Planned upgrade: prod-west next week, upgrade only ready nodes first (i.e., upgrade ready nodes before non-ready? Actually \"only nodes that are ready first\" implies upgrade ready nodes first, maybe skip non-ready for now). So note constraint: upgrade schedule next week, prioritize ready nodes.\n\nNo open questions remain. Keep placeholder tokens? None present.\n\nWrite plain text, up to {{int:1200:1800}} tokens.\n\nLet's craft summary.",
+          "text": "Clusters and versions:\n- prod-east runs Kubernetes v1.30.4\n- prod-west runs Kubernetes v1.29.6\n- staging runs Kubernetes v1.31.1\n\nprod-west node health:\n- Not ready: worker-06, worker-12\n- Remaining nodes are ready\n\nPlanned actions:\n- Upgrade of prod-west scheduled for next week\n- Upgrade will target only ready nodes first, deferring non‑ready nodes.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 331,
+            "completion_tokens": 374
+          },
+          "chars": 1480
+        }
+      ]
+    }
+  ]
+}

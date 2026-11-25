@@ -1,0 +1,24 @@
+{
+  "id": "code_app/go-cli-wc/v0/s2",
+  "flavor": "code_app",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T18:43:59Z",
+  "turns": [
+    {
+      "user_message": "Write a Go program that counts lines, words and characters in files, like wc.",
+      "steps": [
+        {
+          "reasoning": "We need to respond with a Go program source code that counts lines, words, characters similar to wc. Provide code. No tool usage needed.",
+          "text": "Below is a complete, self‑contained Go program that behaves like the Unix **wc** utility. It reads one or more files (or stdin when “‑” is given) and reports the number of lines, words, and bytes (characters) for each input, followed by a total when multiple files are processed.\n\n```go\n// wc.go\n// A minimal re‑implementation of the Unix `wc` command.\n// Counts lines, words and bytes (characters) for each file supplied\n// or for standard input when no file or a single \"-\" argument is given.\n\npackage main\n\nimport (\n\t\"bufio\"\n\t\"fmt\"\n\t\"io\"\n\t\"os\"\n\t\"path/filepath\"\n)\n\ntype counts struct {\n\tlines int64\n\twords int64\n\tbytes int64\n}\n\n// countReader reads from r and returns the line/word/byte counts.\nfunc countReader(r io.Reader) (counts, error) {\n\tvar c counts\n\t// bufio.Scanner with SplitFunc for words gives us line counting for free.\n\tscanner := bufio.NewScanner(r)\n\n\t// By default Scanner splits on lines, which is what we need for line counting.\n\t// We'll also count words manually on each line.\n\tfor scanner.Scan() {\n\t\tc.lines++\n\t\tline := scanner.Bytes()\n\t\tc.bytes += int64(len(line) + 1) // +1 for the newline that Scanner stripped\n\n\t\t// Count words in the line.\n\t\t// A word is a sequence of non‑space characters, matching the behaviour of wc.\n\t\tinWord := false\n\t\tfor _, b := range line {\n\t\t\tif isSpace(b) {\n\t\t\t\tif inWord {\n\t\t\t\t\tinWord = false\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tif !inWord {\n\t\t\t\t\tc.words++\n\t\t\t\t\tinWord = true\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tif err := scanner.Err(); err != nil {\n\t\treturn c, err\n\t}\n\treturn c, nil\n}\n\n// isSpace reports whether b is considered whitespace by wc.\n// It follows Unicode's definition of space characters used by the original wc.\nfunc isSpace(b byte) bool {\n\t// Treat the standard ASCII whitespace characters as spaces.\n\tswitch b {\n\tcase ' ', '\\t', '\\n', '\\v', '\\f', '\\r':\n\t\treturn true\n\t}\n\treturn false\n}\n\n// formatCounts formats the three numbers the way wc does.\n// It aligns the fields to width 7, matching GNU wc output.\nfunc formatCounts(c counts) string {\n\treturn fmt.Sprintf(\"%7d %7d %7d\", c.lines, c.words, c.bytes)\n}\n\nfunc main() {\n\targs := os.Args[1:]\n\n\t// If no arguments, read from stdin.\n\tif len(args) == 0 {\n\t\targs = []string{\"-\"}\n\t}\n\n\tvar total counts\n\tmultiple := len(args) \u003e 1\n\n\tfor _, name := range args {\n\t\tvar r io.Reader\n\t\tvar err error\n\n\t\tif name == \"-\" {\n\t\t\tr = os.Stdin\n\t\t} else {\n\t\t\tf, errOpen := os.Open(name)\n\t\t\tif errOpen != nil {\n\t\t\t\tfmt.Fprintf(os.Stderr, \"wc: %s: %v\\n\", name, errOpen)\n\t\t\t\tcontinue\n\t\t\t}\n\t\t\tdefer f.Close()\n\t\t\tr = f\n\t\t}\n\n\t\tc, err := countReader(r)\n\t\tif err != nil {\n\t\t\tfmt.Fprintf(os.Stderr, \"wc: %s: %v\\n\", name, err)\n\t\t\tcontinue\n\t\t}\n\t\tfmt.Printf(\"%s %s\\n\", formatCounts(c), name)\n\n\t\t// Accumulate totals for the final line.\n\t\ttotal.lines += c.lines\n\t\ttotal.words += c.words\n\t\ttotal.bytes += c.bytes\n\t}\n\n\tif multiple {\n\t\tfmt.Printf(\"%s total\\n\", formatCounts(total))\n\t}\n}\n```\n\n### How to build and run\n\n```bash\n# Build\ngo build -o wc wc.go\n\n# Use like the real wc:\n./wc file1.txt file2.txt\n./wc -                # read from stdin\n```\n\n### Explanation of the implementation\n\n| Part | What it does |\n|------|--------------|\n| `counts` struct | Holds line, word, and byte totals. |\n| `countReader` | Streams the input line‑by‑line with a `bufio.Scanner`. For each line it increments the line count, adds the line length + 1 (the stripped newline) to the byte count, and walks the bytes to detect word boundaries. |\n| `isSpace` | Mirrors the whitespace characters that GNU `wc` treats as delimiters. |\n| `formatCounts` | Produces output aligned to a width of 7 columns, matching the default `wc` formatting. |\n| Main loop | Handles one or many file arguments, treats “‑” as stdin, reports errors to `stderr`, prints per‑file results, and prints a total line when more than one file is supplied. |\n\nThe program deliberately avoids loading whole files into memory, making it suitable for very large inputs while still being concise and easy to understand.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1804,
+            "completion_tokens": 1089
+          },
+          "chars": 4085
+        }
+      ]
+    }
+  ]
+}

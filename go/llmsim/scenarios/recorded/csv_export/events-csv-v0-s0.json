@@ -1,0 +1,64 @@
+{
+  "id": "csv_export/events-csv/v0/s0",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:25:37Z",
+  "turns": [
+    {
+      "user_message": "Export the events of the last week to CSV.",
+      "steps": [
+        {
+          "reasoning": "We need to export EventRecord records from last week. Need to know date field name. Let's describe model EventRecord.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "EventRecord"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"eventId\",\"type\":\"string\"},{\"path\":\"category\",\"type\":\"string\"},{\"path\":\"eventType\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"sourceId\",\"type\":\"string\"},{\"path\":\"sourceName\",\"type\":\"string\"},{\"path\":\"sourceType\",\"type\":\"string\"},{\"path\":\"message\",\"type\":\"string\"},{\"path\":\"occurredAt\",\"type\":\"int\"}],\"model\":\"EventRecord\",\"primaryKey\":\"eventId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1797,
+            "completion_tokens": 53
+          },
+          "chars": 154
+        },
+        {
+          "reasoning": "We need to export events of the last week. Need to filter by occurredAt, which is int timestamp? Likely Unix epoch seconds. Need to compute timestamp for one week ago. We don't have current time, but we can approximate? Probably we need to use a condition: where occurredAt \u003e= \u003ctimestamp\u003e. We don't have ability to compute timestamp here, but we can approximate using now? Maybe we can ask the user for timestamp. However typical approach: use current time? We could compute using known date: today is {{date:1}}. One week ago is {{date:2}}. Convert to epoch seconds. Let's compute: {{date:1}} 00:00 UTC? Use known epoch: {{date:1}}. Let's approximate: Use python? Not available. Could compute manually? Let's approximate: Epoch for {{date:1}}. {{date:3}} epoch 1577836800. Add years: 2021 +{{int:292:438}} days (2020 is leap) etc. But easier: Could ask user? Probably okay to compute approximate.\n\nBut maybe we can just export all events and user can filter. However request explicitly last week. We need to use where occurredAt \u003e= X.\n\nWe can compute using known date. Let's quickly compute epoch for {{date:2}}. Let's compute days from 1970-01-01 to {{date:2}}.\n\nUse known epoch for {{date:4}}? Not known. Let's compute using known epoch for {{date:5}} is 1735689600 (I think). Actually {{date:5}} epoch: 1735689600. Add days for 2025 to 2026: 2025 not leap, {{int:292:438}} days -\u003e 31536000 seconds =\u003e 1767225600 for {{date:4}}. Now add days for Jan to Oct and part of Nov. Days per month 2026 (non-leap): Jan31, Feb28, Mar31, Apr30, May31, Jun30, Jul31, Aug31, Sep30, Oct31 = {{int:243:365}}? Let's sum: Jan31, Feb28={{int:47:71}}, Mar31={{int:72:108}}, Apr30={{int:96:144}}, May31={{int:120:182}}, Jun30={{int:144:218}}, Jul31={{int:169:255}}, Aug31={{int:194:292}}, Sep30={{int:218:328}}, Oct31={{int:243:365}}. Add days in Nov up to {{int:12:20}} (since we want 17th start at day 0?), Actually we want {{date:2}} 00:00. Days in Nov before 17: {{int:12:20}} days. So total days = {{int:243:365}} + {{int:12:20}} = {{int:256:384}} days from Jan 1 to Nov {{int:13:21}} (exclusive). Multiply by {{int:69120:103680}} = {{int:256:384}}*{{int:69120:103680}} = 27648000. Add to 1767225600 = 1794873600? Let's compute: 1767225600 + 27,648,000 = 1794873600. That should be epoch for {{date:2}} 00:00 UTC.\n\nThus where occurredAt \u003e= 1794873600.\n\nNow we need to export CSV. Use export_csv with query: select * from EventRecord where occurredAt\u003e=1794873600. No limit. Provide file name events_last_week.csv.\n\nLet's do that.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "events_last_week.csv",
+                "query": "select * from EventRecord where occurredAt\u003e=1794873600"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"eventId\",\"category\",\"eventType\",\"severity\",\"sourceId\",\"sourceName\",\"sourceType\",\"message\",\"occurredAt\"],\"file_name\":\"events_last_week.csv\",\"rows\":40}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1944,
+            "completion_tokens": 745
+          },
+          "chars": 2380
+        },
+        {
+          "text": "Attached is **events_last_week.csv** containing {{int:32:48}} event records from the past week.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2046,
+            "completion_tokens": 22
+          },
+          "chars": 84
+        }
+      ]
+    }
+  ]
+}

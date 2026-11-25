@@ -1,0 +1,24 @@
+{
+  "id": "writing/slack/v0/s2",
+  "flavor": "writing",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:56:10Z",
+  "turns": [
+    {
+      "user_message": "Write a friendly Slack message reminding everyone to update their on-call availability.",
+      "steps": [
+        {
+          "reasoning": "The user wants a friendly Slack message reminding everyone to update their on-call availability. This is a text generation task, no data needed. The assistant should produce a Slack message text. No need to use tools. Provide a friendly reminder.",
+          "text": "Hey team! 👋  \n\nJust a quick reminder to please take a moment to update your on‑call availability in the schedule. Keeping it current helps us make sure the right folks are notified when things come up and keeps our service running smoothly.  \n\nYou can edit your availability in the on‑call board (or the Ops calendar) at your convenience. Thanks for staying on top of it! 🙏  \n\nIf you have any questions or run into issues, feel free to ping me. Have a great day! 🎉",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1801,
+            "completion_tokens": 162
+          },
+          "chars": 723
+        }
+      ]
+    }
+  ]
+}

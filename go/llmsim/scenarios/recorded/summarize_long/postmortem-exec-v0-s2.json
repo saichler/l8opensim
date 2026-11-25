@@ -1,0 +1,24 @@
+{
+  "id": "summarize_long/postmortem-exec/v0/s2",
+  "flavor": "summarize_long",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:32:05Z",
+  "turns": [
+    {
+      "user_message": "Give me a two-sentence executive summary of this:\n\nOn Tuesday at 14:05 UTC the payments API started returning 503 errors. Monitoring alerted at 14:07. The on-call engineer found that a configuration change deployed at 13:58 lowered the database connection pool from 200 to 20. Traffic peaked at 14:00 and requests queued waiting for connections until the load balancer timed them out. The change was rolled back at 14:31 and error rates returned to normal by 14:36. About 18 percent of payment attempts failed during the incident. Action items: add validation for pool sizes in the deployment pipeline, alert on connection pool saturation, and require a second reviewer for database configuration changes.",
+      "steps": [
+        {
+          "reasoning": "We need to produce a two-sentence executive summary. Summarize incident: payments API {{int:402:604}} due to config change reducing DB pool, caused failures, rolled back. Provide summary. No data fetching needed. Just answer.",
+          "text": "The payments API suffered a {{int:402:604}} outage starting at 14:05 UTC after a deployment at 13:58 reduced the database connection pool from {{int:160:240}} to {{int:16:24}}, causing traffic that peaked at 14:00 to queue and time out, with roughly {{int:14:22}} % of payment attempts failing. The change was rolled back at 14:31, restoring normal error rates by 14:36, and the follow‑up actions are to add pool‑size validation in the pipeline, alert on connection‑pool saturation, and require a second reviewer for database configuration changes.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1935,
+            "completion_tokens": 172
+          },
+          "chars": 725
+        }
+      ]
+    }
+  ]
+}

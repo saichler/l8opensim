@@ -1,0 +1,108 @@
+{
+  "id": "csv_generate/tickets/v0/s1",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:32:17Z",
+  "csv": [
+    {
+      "header": [
+        "id",
+        "title",
+        "priority",
+        "status",
+        "created_date"
+      ],
+      "columns": [
+        {
+          "kind": "seq",
+          "min": 1
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Login failure on portal",
+            "Server CPU usage spikes",
+            "Unable to reset password",
+            "Network latency in region A",
+            "Database backup failed",
+            "Email notifications not sent",
+            "Mobile app crashes on launch",
+            "SSL certificate renewal issue",
+            "File upload size limit error",
+            "VPN connectivity drops",
+            "User profile picture not displaying",
+            "API rate limit exceeded",
+            "Search functionality returns no results",
+            "Payment gateway timeout",
+            "Data sync between services failing",
+            "Two-factor authentication setup issue",
+            "Reporting dashboard shows stale data",
+            "Cache invalidation not working",
+            "Service deployment script error",
+            "Incorrect timezone displayed in UI"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "High",
+            "Medium",
+            "Low",
+            "Critical"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Open",
+            "In Progress",
+            "Resolved",
+            "Closed"
+          ]
+        },
+        {
+          "kind": "date"
+        }
+      ],
+      "rows": 20
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Make a CSV of 20 fictitious support tickets with id, title, priority, status and created date. It is synthetic test data for a demo, not records from the system: attach it as tickets.csv.",
+      "steps": [
+        {
+          "reasoning": "The user wants a CSV of {{int:16:24}} fictitious support tickets with fields id, title, priority, status, created date. This is synthetic test data, not from system. We cannot generate via export_csv because that pulls from system. We need to create a CSV file ourselves via create_file with content. The user wants a CSV file attached named tickets.csv. So we should generate {{int:16:24}} rows of synthetic data. Must include headers: id,title,priority,status,created_date (maybe createdDate). Provide plausible values. Use simple CSV. Then create_file with that content. Then respond indicating attached file.\n\nWe need to ensure formatting correct. Let's generate ids 1-20, titles like \"Issue with login\", etc., priorities maybe Low, Medium, High, Critical. Status: Open, In Progress, Resolved, Closed. Created date: some ISO dates.\n\nWe'll produce content as string.\n\nProceed.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "id,title,priority,status,created_date\n{{csv:0}}",
+                "file_name": "tickets.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1167,\"file_name\":\"tickets.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1830,
+            "completion_tokens": 597
+          },
+          "chars": 2095
+        },
+        {
+          "text": "Attached **tickets.csv** containing {{int:16:24}} synthetic support‑ticket records (id, title, priority, status, created date).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2265,
+            "completion_tokens": 30
+          },
+          "chars": 120
+        }
+      ]
+    }
+  ]
+}

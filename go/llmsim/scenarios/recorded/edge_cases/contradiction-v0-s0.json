@@ -1,0 +1,24 @@
+{
+  "id": "edge_cases/contradiction/v0/s0",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:48:03Z",
+  "turns": [
+    {
+      "user_message": "Export the devices to CSV but don't create any file.",
+      "steps": [
+        {
+          "reasoning": "The user says \"Export the devices to CSV but don't create any file.\" In the system, export_csv creates a file attached to answer. The user says not to create any file. Maybe they want to just export devices to CSV format as text? But we can't provide raw rows. According to instructions: \"Never type the rows yourself\". So we must obey: we cannot export CSV without creating a file. So we need to clarify: we need to attach a file for CSV export. If the user wants no file, perhaps we need to ask clarification. Likely they misunderstand. So we respond that export_csv attaches a file; we can't provide CSV inline. Ask if they'd like us to attach file.",
+          "text": "I can export the device records as a CSV file, but the system always attaches the CSV as a downloadable file — it can’t be sent as raw text in the chat. Would you like me to go ahead and attach the CSV export for you?",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1798,
+            "completion_tokens": 204
+          },
+          "chars": 877
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "id": "web_research/h200-specs/v0/s0",
+  "flavor": "web_research",
+  "model": "gpt-oss-120b",
+  "quality": "flawed",
+  "recorded_at": "2026-11-24T20:39:07Z",
+  "turns": [
+    {
+      "user_message": "@web What are the specs of the NVIDIA H200 GPU?",
+      "steps": [
+        {
+          "reasoning": "The user asks: \"@web What are the specs of the NVIDIA H200 GPU?\" This is a web search request. Use web_search tool. Then fetch relevant info.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 5,
+                "query": "NVIDIA H200 GPU specifications"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 GPU specifications\", \"results\": [{\"title\": \"Free Porn Videos \u0026 Sex Movies - Porno, XXX, Porn Tube | Pornhub\", \"url\": \"https://www.pornhub.com/\", \"snippet\": \"Pornhub provides you with unlimited free porn videos with the hottest pornstars. Enjoy the largest amateur porn community on the …Read more\"}, {\"title\": \"Pornhub Porn Videos\", \"url\": \"https://www.pornhub.com/video/search?search=pornhub\", \"snippet\": \"Watch Pornhub porn videos for free, here on Pornhub.com. Discover the growing collection of high quality Most Relevant XXX …Read more\"}, {\"title\": \"Videos Porno y Películas De Sexo Gratis - Porno, XXX, Porno Tube | Pornhub\", \"url\": \"https://es.pornhub.com/\", \"snippet\": \"Pornhub te ofrece un número ilimitado de vídeos porno gratis con los actores para adultos más sexis. Disfruta de la mayor …Read more\"}, {\"title\": \"pornhub videos - XVIDEOS.COM\", \"url\": \"https://www.xvideos.com/tags/pornhub\", \"snippet\": \"XVIDEOS pornhub videos, free joven latina se siente triste por que su novio la dejo y no hay quien se la folle, pero para eso esta el …Read more\"}, {\"title\": \"Vidéos porno et films de sexe gratuits - Porno, XXX, Porn Tube | Pornhub\", \"url\": \"https://fr.pornhub.com/\", \"snippet\": \"Pornhub est le site tube pornographique le plus complet et le plus révolutionnaire. Nous offrons des vidéos porno en streaming, des …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1904,
+            "completion_tokens": 75
+          },
+          "chars": 209
+        },
+        {
+          "reasoning": "The web search returned irrelevant results (porn). Need to refine query. Use better query.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 GPU spec"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 GPU spec\", \"results\": [{\"title\": \"Allrecipes | Recipes, How-Tos, Videos and More\", \"url\": \"https://www.allrecipes.com/\", \"snippet\": \"Everyday recipes with ratings and reviews by home cooks like you. Find easy dinner ideas, healthy recipes, plus helpful cooking tips …\"}, {\"title\": \"Recipes\", \"url\": \"https://www.allrecipes.com/recipes/\", \"snippet\": \"Find and share everyday cooking inspiration on Allrecipes. Discover recipes, cooks, videos, and how-tos based on the food you love …\"}, {\"title\": \"Recipes, Dinners and Easy Meal Ideas | Food Network\", \"url\": \"https://www.foodnetwork.com/recipes\", \"snippet\": \"Need a recipe? Get dinner on the table with Food Network's best recipes, videos, cooking tips and meal ideas from top chefs, shows …\"}, {\"title\": \"MyRecipes | Save and Organize the World’s Best Recipes\", \"url\": \"https://www.myrecipes.com/\", \"snippet\": \"Easily find, save, and organize the world’s best recipes with MyRecipes. Use top food sites like Food \u0026 Wine and EatingWell to …\"}, {\"title\": \"Recipes Archives\", \"url\": \"https://www.tasteofhome.com/recipes/\", \"snippet\": \"Explore our thousands of tested recipes to find the best recipe for dinner, breakfast, lunch, game day, snacks, cooking for two—you …\"}, {\"title\": \"Recipes and Cooking Guides From The New York Times\", \"url\": \"https://cooking.nytimes.com/\", \"snippet\": \"New York Times Cooking offers subscribers recipes, advice and inspiration for better everyday cooking. From easy weeknight …\"}, {\"title\": \"Taste of Home: Find Recipes, Appetizers, Desserts, Holiday Recipes ...\", \"url\": \"https://www.tasteofhome.com/\", \"snippet\": \"Search recipes for your favorite desserts, appetizers, main dish recipes, and more. Find an array of easy recipes as well as home …\"}, {\"title\": \"Recipes - Martha Stewart\", \"url\": \"https://www.marthastewart.com/1505788/recipes\", \"snippet\": \"Find recipes for quick and easy dinners to holiday favorites. Whether you're in the mood for chicken, one-pot pasta, or a chocolate …\"}, {\"title\": \"All Our Recipes - America's Test Kitchen\", \"url\": \"https://www.americastestkitchen.com/recipes\", \"snippet\": \"All of our recipes have gone through our one-of-a-kind testing process. Browse for inspiration or filter to find the best recipes for your …\"}, {\"title\": \"Recipes - Betty Crocker\", \"url\": \"https://www.bettycrocker.com/recipes\", \"snippet\": \"A great recipe is at the heart of every memorable meal. Browse our themed recipes for inspiration or search by ingredient.\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2309,
+            "completion_tokens": 55
+          },
+          "chars": 149
+        },
+        {
+          "reasoning": "The web search results are irrelevant; likely the search got messed up. Need to target proper query. Could add more specific: \"NVIDIA H200 data center GPU specifications\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 data center GPU specifications"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 data center GPU specifications\", \"results\": [{\"title\": \"WhatsApp - Official Site\", \"url\": \"https://www.whatsapp.com/\", \"snippet\": \"WhatsApp Messenger: More than 1 billion people in over 180 countries use WhatsApp to stay in touch with friends and family, …Read more\"}, {\"title\": \"Can’t see notification count | WhatsApp Help Center\", \"url\": \"https://faq.whatsapp.com/1179858316217879/\", \"snippet\": \"Launchers such as Nova or apps such as Notifyer can create notification counts on app icons. A missing or incorrect notification …Read more\"}, {\"title\": \"How to reply to a message | WhatsApp Help Center\", \"url\": \"https://faq.whatsapp.com/3240283752856917\", \"snippet\": \"You can reply to a specific message in an individual or group chat using the reply feature. You can also reply privately to someone …Read more\"}, {\"title\": \"WhatsApp Web\", \"url\": \"https://web.whatsapp.com/\", \"snippet\": \"Log in to WhatsApp Web for simple, reliable and private messaging on your desktop. Send and receive messages and files with …Read more\"}, {\"title\": \"WhatsApp 網頁版 - WhatsApp 網誌\", \"url\": \"https://blog.whatsapp.com/whats-app-web?lang=zh-tw\", \"snippet\": \"WhatsApp 網頁版 今天，百萬名用戶第一次可以在網頁瀏覽器上使用 WhatsApp。 我們的網路用戶端只是您手機的延伸：網頁瀏覽器 …Read more\"}, {\"title\": \"WhatsApp\", \"url\": \"https://www.whatsapp.com/coronavirus/get-started?lang=es\", \"snippet\": \"WhatsApp: Más de 2 mil millones de personas en más de 180 países utilizan WhatsApp para mantenerse en contacto con amigos y …Read more\"}, {\"title\": \"WhatsApp | Mesaje și apeluri private, gratuite, securizate și de încredere\", \"url\": \"https://www.whatsapp.com/?lang=ro\", \"snippet\": \"Folosește WhatsApp Messenger pentru a ține legătura cu prietenii și cu familia. WhatsApp este gratuit și oferă servicii de mesagerie …Read more\"}, {\"title\": \"Introducing Group Message History: A more private way\", \"url\": \"https://blog.whatsapp.com/introducing-group-message-history-a-more-private-way-to-catch-up-in-group-chats\", \"snippet\": \"Feb 19, 2026 · We’re excited to introduce Group Message History, a feature that makes group chats even more welcoming without …Read more\"}, {\"title\": \"WhatsApp Web - Content Not Found\", \"url\": \"https://web.whatsapp.com:5222/\", \"snippet\": \"Sorry, this content isn't available right now.\"}, {\"title\": \"WhatsApp | Secure and Reliable Free Private Messaging and Calling\", \"url\": \"https://test-web.whatsapp.com/\", \"snippet\": \"Use WhatsApp Messenger to stay in touch with friends and family. WhatsApp is free and offers simple, secure, reliable messaging …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2981,
+            "completion_tokens": 74
+          },
+          "chars": 252
+        },
+        {
+          "reasoning": "The web search results are giving irrelevant stuff (mostly porn or WhatsApp). Possibly the search engine is blocked or returning weird results. Could try more specific query like \"NVIDIA H200 GPU architecture\" or use quotes.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "\"NVIDIA H200\" GPU"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"\\\"NVIDIA H200\\\" GPU\", \"results\": [{\"title\": \"Adam Levine greatest hits - YouTube Music\", \"url\": \"https://music.youtube.com/playlist?list=PLn3HneQOIEqkptrd5HMPNpU-nNhkkfmQ2\", \"snippet\": \"What Lovers Do ft. SZA (Official Music Video) (feat. SZA) Cold ft. Future (Official Music Video) (feat. FUTURE) If I Never See Your …Read more\"}, {\"title\": \"All Songs - Adam Levine - YouTube\", \"url\": \"https://www.youtube.com/playlist?list=PLEFin5ZtEWUpVA-t5PUOIFSUf7XA5yV-S\", \"snippet\": \"Every officially released song by / featuring Adam Levine on YouTube These videos are sorted by their release/publication date …Read more\"}, {\"title\": \"Adam Levine Songs - Genius\", \"url\": \"https://genius.com/artists/Adam-levine/songs\", \"snippet\": \"Adam Levine has 575 songs with the most popular being Girls Like You (Remix), Memories and Sugar.\"}, {\"title\": \"Best songs of Adam Levine Full Album-Adam Levine Greatest Hits\", \"url\": \"https://music.youtube.com/watch?v=MzOkch4Nxc4\", \"snippet\": \"Diep Vien 007\"}, {\"title\": \"Best songs of Adam Levine Full Album-Adam Levine Greatest Hits\", \"url\": \"https://www.youtube.com/watch?v=MzOkch4Nxc4\", \"snippet\": \"Jan 12, 2018 · Best songs of Adam Levine Full Album-Adam Levine Greatest Hits Diep Vien 007 2.18K subscribers Subscribe\"}, {\"title\": \"The Best Songs Featuring Adam Levine, Ranked\", \"url\": \"https://www.ranker.com/list/best-songs-featuring-adam-levine/bobby-bernstein\", \"snippet\": \"Sep 5, 2024 · Adam Levine, with his distinctive voice and charismatic presence, has lent his talents to quite a few other artists' …Read more\"}, {\"title\": \"Adam Levine Songs, Genres \u0026 Musical Style - Chosic\", \"url\": \"https://www.chosic.com/artist/adam-levine/4bYPcJP5jwMhSivRcqie2n/\", \"snippet\": \"Adam Levine songs, genres, musical style, audio features, popularity stats, and similar artists, all analyzed in detail.\"}, {\"title\": \"Adam Levine - Top 10 Songs\", \"url\": \"https://top10songs.com/artist/adam-levine\", \"snippet\": \"Sep 24, 2015 · Adam Levine top 10 songs (including GMVs and kernels if applicable) with the peak position and peak date for each …Read more\"}, {\"title\": \"Adam Levine Top Songs - Greatest Hits and Chart Singles …\", \"url\": \"https://www.musicvf.com/Adam%2BLevine.songs\", \"snippet\": \"Adam Noah Levine ( lə-VEEN; born March 18, 1979) is an American singer, songwriter, musician and television personality who is …Read more\"}, {\"title\": \"Maroon 5's Best Songs of All Time (Critic's Picks) - Billboard\", \"url\": \"https://www.billboard.com/lists/maroon-5-best-songs-of-all-time/\", \"snippet\": \"Jul 1, 2022 · But which hits from the pop/rock combo’s insanely catchy back catalog deserve to be singled out? Here’s a look at ten …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 3720,
+            "completion_tokens": 81
+          },
+          "chars": 282
+        },
+        {
+          "reasoning": "The web searches returned irrelevant results (mostly porn, recipes, WhatsApp, music). Likely the search is being filtered or not finding the right page. Might need to refine query with \"NVIDIA H200 GPU specs\" and maybe include \"NVIDIA H200 specs\". Could also use \"NVIDIA H200 data center GPU\". Let's try again with a more specific query.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 data center GPU specifications site:nvidia.com"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 data center GPU specifications site:nvidia.com\", \"results\": [{\"title\": \"Starbucks Coffee Company\", \"url\": \"https://www.starbucks.com/\", \"snippet\": \"Explore our menu of handcrafted drinks, order ahead, sign up for Starbucks® Rewards, manage your gift card and more.\"}, {\"title\": \"Menu - Starbucks Coffee Company\", \"url\": \"https://www.starbucks.com/menu\", \"snippet\": \"Check out Starbucks menu and get nutritional information about each menu item.\"}, {\"title\": \"Official Starbucks® Shop | Coffee, Subscriptions, Apparel \u0026 Exclusives\", \"url\": \"https://www.shop.starbucks.com/\", \"snippet\": \"Shop Starbucks® coffee, Starbucks Reserve® coffees, coffee subscriptions, drinkware, brewing equipment, apparel and …Read more\"}, {\"title\": \"Homepage | Starbucks\", \"url\": \"https://www.starbucks.co.uk/\", \"snippet\": \"Try one of the range or add it to your favourite drink Order in store, for collection with the Starbucks® UK app, or straight to your door …Read more\"}, {\"title\": \"Homepage | Starbucks\", \"url\": \"https://www.starbucks.co.za/\", \"snippet\": \"The cup of Starbucks coffee you'll hold in your hand is more than just a drink. It’s an expertly handcrafted beverage, a daily ritual, the …Read more\"}, {\"title\": \"MENU - Starbucks Coffee Company\", \"url\": \"https://www.starbucks.co.uk/menu\", \"snippet\": \"Espresso Drinks. Brewed Coffee. Iced Coffee. Hot Teavana Tea.\"}, {\"title\": \"Starbucks Careers\", \"url\": \"https://careers.starbucks.com/\", \"snippet\": \"Interested in a career at Starbucks? This is a great place to start. Learn about the jobs we offer, benefits, culture, and more.\"}, {\"title\": \"Home | Starbucks Australia\", \"url\": \"https://www.starbucks.com.au/\", \"snippet\": \"Nov 12, 2026 · Discover your favourite coffee and treats at Starbucks Australia. Explore our menu, locations, and Starbucks Rewards.\"}, {\"title\": \"Starbucks Menu | Starbucks Coffee Company\", \"url\": \"https://starbucks.ph/menu\", \"snippet\": \"We’ve got delicious food to go with our hand-crafted coffee drinks. Check out the Starbucks menu, our quick breakfast ideas and …Read more\"}, {\"title\": \"Home | Starbucks HK\", \"url\": \"https://www.starbucks.com.hk/en\", \"snippet\": \"Starbucks HK official website.\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 4550,
+            "completion_tokens": 119
+          },
+          "chars": 434
+        },
+        {
+          "reasoning": "The web searches returned irrelevant results, likely due to some blocking. Could try search without quotes, maybe \"NVIDIA H200 specs\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 specs"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 specs\", \"results\": [{\"title\": \"Hot Nude Russian Girls Porn Pics - EliteBabes.com\", \"url\": \"https://www.elitebabes.com/tag/russian/\", \"snippet\": \"Dive into explicit galleries of stunning, uninhibited Russian girls. Enjoy flawless pale skin, intense eye contact, and wild action. ️🔥 Get …\"}, {\"title\": \"russian-woman videos - XVIDEOS.COM\", \"url\": \"https://www.xvideos.com/tags/russian-woman\", \"snippet\": \"SHE COULDN'T HOLD BACK HER MOANS, fucking a Russian beauty in a pussy without LUBRICATION! We invited our Russian …\"}, {\"title\": \"Naked Russian Babes Nude Porn Pics and Videos\", \"url\": \"https://www.elitebabes.com/tag/russian+babe/\", \"snippet\": \"Forget the shy girls—these hot nude babes crave the spotlight and know exactly how to work it for your viewing pleasure. You’ll find …\"}, {\"title\": \"Russian Nudes - Naked Russian Women \u0026 Hot Girls Porn Pics\", \"url\": \"https://www.auntmia.com/pics/russian/\", \"snippet\": \"Nov 10, 2023 · Browse AuntMia's free Russian nudes — thousands of nude Russian women and hot naked girls posing in HD. …\"}, {\"title\": \"Nude Russian Women Porn Pics - BabeHub.com\", \"url\": \"https://www.babehub.com/tag/russian/\", \"snippet\": \"Witness pristine, porcelain skin and fiery attitudes in XXX Russian porn. These babes master deep anal, passionate BJs, and …\"}, {\"title\": \"Russian Nude Pics Galleries, XXX Photos - Hot Naked Women\", \"url\": \"https://hotnakedwomen.com/russian/\", \"snippet\": \"Welcome to an exclusive Russian nude pictures collection at NakedPics. Hot 【naked Russian XXX photos】 are waiting for you. …\"}, {\"title\": \"Hot Nude Russian Women \u0026 Girls Porn Pics - PornPics.com\", \"url\": \"https://www.pornpics.com/russian/\", \"snippet\": \"The most arousing ️FREE Russian porn pics collection available, showcasing super sexy, horny, naked Russian girls with wicked …\"}, {\"title\": \"nude-russian-girl videos - XVIDEOS.COM\", \"url\": \"https://www.xvideos.com/tags/nude-russian-girl\", \"snippet\": \"Russian Gymnast Katarina Kat Plays With Her Tits And Rubs Her Clit! Aleksey Oils Yulia’s Bare Butt Then Pounds Her Pussy On …\"}, {\"title\": \"Naked russian girls - Aloha Tube\", \"url\": \"https://www.alohatube.com/top/naked_russian_girls\", \"snippet\": \"Chinese girl performs oral sex and swallows semen. Millions of porno videos! Watch best porn for free! Updates every 5 minutes.\"}, {\"title\": \"Nude In Russia Porn Pics - Elite Babes\", \"url\": \"https://www.elitebabes.com/nude-in-russia/\", \"snippet\": \"Watch Video and Pic Galleries of the hottest nude-in-russia.com Models right here at Elite Babes. Bookmark this Channel right now …\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 5156,
+            "completion_tokens": 63
+          },
+          "chars": 190
+        },
+        {
+          "reasoning": "The web searches are being polluted by adult content; probably need to refine search query with quotes and site maybe. Let's try search for \"NVIDIA H200 GPU\" and restrict to news.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "\"NVIDIA H200\" \"GPU\" \"specifications\" \"NVIDIA\""
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"\\\"NVIDIA H200\\\" \\\"GPU\\\" \\\"specifications\\\" \\\"NVIDIA\\\"\", \"results\": [{\"title\": \"New Cars, Trucks, SUVs \u0026 Hybrids | Toyota Official Site\", \"url\": \"https://www.toyota.com/?msockid=152a9f758fb6620106ff876e8e3e63a1\", \"snippet\": \"Jan 6, 2023 · Explore the newest Toyota trucks, cars, SUVs, hybrids and minivans. See photos, compare models, get tips, calculate …\"}, {\"title\": \"TABC, Inc. - Toyota USA Newsroom\", \"url\": \"https://pressroom.toyota.com/facility/tabc-inc/\", \"snippet\": \"Toyota’s first manufacturing facility in North America, TABC, Inc., has been helping to build the company’s reputation for quality in …\"}, {\"title\": \"Toyota Drain Plug Gasket #12157-10010 | Autoparts.toyota.com\", \"url\": \"https://autoparts.toyota.com/products/product/gasket-drain-plug-1215710010\", \"snippet\": \"Toyota Drain Plug Gasket #12157-10010 is a sealing washer used at the drain plug connection on housings and cases that hold …\"}, {\"title\": \"Toyota TrueStart Battery #00544-24F60-575 | Autoparts.toyota.com\", \"url\": \"https://autoparts.toyota.com/products/product/toyota-truestart-battery-575-cca-0054424f60575\", \"snippet\": \"Toyota TrueStart Battery delivers reliable starting power and electrical support, engineered for your Toyota and backed by warranty.\"}, {\"title\": \"Local Toyota Finance, Lease and Other Specials | Toyota.com\", \"url\": \"https://www.toyota.com/centralatlantic/deals-incentives/?msockid=152a9f758fb6620106ff876e8e3e63a1\", \"snippet\": \"Check out the Toyota local specials to find the perfect offer for your next Toyota car, truck or SUV at a nearby dealership. Learn …\"}, {\"title\": \"Dealer Daily - Toyota\", \"url\": \"https://dealer.toyota.com/assets/logout/logout.html\", \"snippet\": \"To log back into the system, click the button below.\"}, {\"title\": \"2027 Toyota Land Cruiser - Toyota USA Newsroom\", \"url\": \"https://pressroom.toyota.com/vehicle/2027-toyota-land-cruiser/\", \"snippet\": \"The Toyota Land Cruiser enters the 2027 model year with enhancements that further elevate its signature balance of rugged …\"}, {\"title\": \"TBMNC Production Interview Prep - Toyota\", \"url\": \"https://careers.toyota.com/us/en/tbmnc-production-interview-prep\", \"snippet\": \"We appreciate your interest in the Production Team Member role at Toyota Battery Manufacturing North Carolina (TBMNC) and look …\"}, {\"title\": \"Toyota | Mississippi\", \"url\": \"https://careers.toyota.com/us/en/toyota-mississippi\", \"snippet\": \"The highly skilled Toyota Mississippi team is trained and skilled in stamping, welding, painting, assembling and inspecting brand-new …\"}, {\"title\": \"WARRANTY \u0026 MAINTENANCE GUIDE - assets.sia.toyota.com\", \"url\": \"https://assets.sia.toyota.com/publications/en/omms-s/T-MMS-26RAV4HV/pdf/T-MMS-26RAV4HV.pdf\", \"snippet\": \"Toyota recommends that you retain all receipts covering maintenance on your vehicle, but Toyota cannot deny warranty coverage …\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 5893,
+            "completion_tokens": 84
+          },
+          "chars": 271
+        },
+        {
+          "reasoning": "The web search results are dominated by irrelevant sites (porn, Starbucks, Toyota). Likely the search engine blocked the query or returned spam. We need to find specs of NVIDIA H200 GPU. Could try a different query maybe \"NVIDIA H200 GPU architecture\" but still may get spam. Maybe we can use fetch_url on a specific known page: NVIDIA press release. For example \"https://www.nvidia.com/en-us/data-center/h200/\". Let's try fetch_url.",
+          "tool_calls": [
+            {
+              "name": "fetch_url",
+              "arguments": {
+                "max_chars": 2000,
+                "url": "https://www.nvidia.com/en-us/data-center/h200/"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"url\": \"https://www.nvidia.com/en-us/data-center/h200/\", \"title\": \"H200 GPU | NVIDIANVIDIA HomeMenuMenuCloseCloseCloseCaret down iconCaret down iconCaret up iconCaret right iconCaret right iconCaret right iconCaret left iconCaret left iconCaret left iconShopping CartSearch iconArtificial Intelligence Computing Leadership from NVIDIAArtificial Intelligence Computing Leadership from NVIDIANVIDIANVIDIA\", \"content_type\": \"text/html; charset=UTF-8\", \"total_chars\": 7568, \"start\": 0, \"returned_chars\": 2000, \"truncated\": true, \"next_start\": 2000, \"text\": \"#\\n\\nNVIDIA H200 GPU\\n\\nSupercharging AI and HPC workloads.\\n\\n##\\nNow available.\\n\\nDatasheet | Specs | Data Center Product Performance\\n\\nIntroduction\\n\\nHighlights\\n\\nBenefits\\n\\nH200 NVL\\n\\nNVIDIA AI Enterprise\\n\\nSpecifications\\n\\nIntroduction\\n\\nHighlights\\n\\nBenefits\\n\\nH200 NVL\\n\\nNVIDIA AI Enterprise\\n\\nSpecifications\\n\\nIntroduction\\n\\nHighlights\\n\\nBenefits\\n\\nH200 NVL\\n\\nNVIDIA AI Enterprise\\n\\nSpecifications\\n\\n##\\n\\nThe GPU for Generative AI and HPC\\n\\nThe NVIDIA H200 GPU supercharges generative AI and high-performance computing (HPC) workloads with game-changing performance and memory capabilities. As the first GPU with HBM3E, the H200’s larger and faster memory fuels the acceleration of generative AI and large language models (LLMs) while advancing scientific computing for HPC workloads.\\n\\n###\\nNVIDIA Supercharges Hopper, the World’s Leading AI Computing Platform\\n\\nThe NVIDIA HGX H200 features the NVIDIA H200 GPU with advanced memory to handle massive amounts of data for generative AI and high-performance computing workloads.\\n\\nRead the Press Release\\n\\n##\\n\\nHighlights\\n\\n##\\n\\nExperience Next-Level Performance\\n\\n###\\n\\nLlama2 70B Inference\\n\\n1.9X Faster\\n\\n###\\n\\nGPT-3 175B Inference\\n\\n1.6X Faster\\n\\n###\\n\\nHigh-Performance Computing\\n\\n110X Faster\\n\\n##\\n\\nBenefits\\n\\n##\\n\\nHigher Performance With Larger, Faster Memory\\n\\nBased on the NVIDIA Hopper™ architecture, the NVIDIA H200 is the first GPU to offer 141 gigabytes (GB) of HBM3e memory at 4.8 terabytes per second (TB/s) —that’s nearly double the capacity of the NVIDIA H100 GPU with 1.4X more memory bandwidth. The H200’s larger and faster memory accelerates generative AI and LLMs, while advancing scientific computing for HPC workloads with better energy efficiency and lower total cost of ownership.\\n\\nPreliminary specifications. May be subject to change.\\n\\nLlama2 13B: ISL 128, OSL 2K | Throughput | H100 SXM 1x GPU BS 64 | H200 SXM 1x GPU BS 128\\n\\nGPT-3 175B: ISL 80, OSL 200 | x8 H100 SXM GPUs BS 64 | x8 H200 SXM GPUs BS 128\\n\\nLlama2 70B: ISL 2K, OSL 128 | Throughput | H100 SXM 1x GPU BS\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 6745,
+            "completion_tokens": 145
+          },
+          "chars": 515
+        },
+        {
+          "reasoning": "We fetched first 2000 chars, got a lot of info. Need specs: memory size, bandwidth, maybe GPU cores, FP16, FP8, etc. The page may contain a specs table further down. Need more content. Let's fetch next segment.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 7606,
+            "completion_tokens": 104
+          },
+          "chars": 210
+        }
+      ]
+    }
+  ]
+}

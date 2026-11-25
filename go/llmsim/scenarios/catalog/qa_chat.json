@@ -1,0 +1,105 @@
+{
+  "flavor": "qa_chat",
+  "mode": "tanto",
+  "validators": [],
+  "expect_tools": [],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "bgp-vs-ospf",
+      "params": {},
+      "turns": [
+        "What's the difference between BGP and OSPF?",
+        "When would I use both?",
+        "Thanks! And what is a route reflector?"
+      ]
+    },
+    {
+      "id": "k8s-basics",
+      "params": {},
+      "turns": [
+        "Explain what a Kubernetes StatefulSet is.",
+        "How is it different from a Deployment?"
+      ]
+    },
+    {
+      "id": "gpu-mig",
+      "params": {},
+      "turns": [
+        "What is NVIDIA MIG?",
+        "Which GPUs support it?"
+      ]
+    },
+    {
+      "id": "snmp",
+      "params": {},
+      "turns": [
+        "How does SNMP polling work?",
+        "What is the difference between v2c and v3?"
+      ]
+    },
+    {
+      "id": "tls",
+      "params": {},
+      "turns": [
+        "Explain how TLS certificates work in simple terms."
+      ]
+    },
+    {
+      "id": "raid",
+      "params": {},
+      "turns": [
+        "What is the difference between RAID 5 and RAID 10?"
+      ]
+    },
+    {
+      "id": "dns",
+      "params": {},
+      "turns": [
+        "Why does DNS use both UDP and TCP?"
+      ]
+    },
+    {
+      "id": "cap",
+      "params": {},
+      "turns": [
+        "Tell me about the CAP theorem.",
+        "Which one does etcd choose?"
+      ]
+    },
+    {
+      "id": "latency",
+      "params": {},
+      "turns": [
+        "Why is p99 latency more important than the average?"
+      ]
+    },
+    {
+      "id": "ipv6",
+      "params": {},
+      "turns": [
+        "What are the main benefits of IPv6?",
+        "Is NAT still needed?"
+      ]
+    },
+    {
+      "id": "greeting",
+      "params": {},
+      "turns": [
+        "Hi Tanto!",
+        "What can you do?",
+        "Thanks, bye."
+      ]
+    },
+    {
+      "id": "vlan-vxlan",
+      "params": {},
+      "turns": [
+        "Explain VLAN vs VXLAN.",
+        "Why do datacenters prefer VXLAN?"
+      ]
+    }
+  ]
+}

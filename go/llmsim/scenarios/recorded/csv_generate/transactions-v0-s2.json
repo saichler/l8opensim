@@ -1,0 +1,97 @@
+{
+  "id": "csv_generate/transactions/v0/s2",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:31:44Z",
+  "csv": [
+    {
+      "header": [
+        "date",
+        "description",
+        "amount",
+        "balance"
+      ],
+      "columns": [
+        {
+          "kind": "date"
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Opening Deposit",
+            "ATM Withdrawal",
+            "Salary Deposit",
+            "Coffee Shop",
+            "Utility Bill",
+            "Groceries",
+            "Online Purchase",
+            "Interest Credit",
+            "Restaurant",
+            "Transfer to Savings",
+            "Refund",
+            "Car Payment",
+            "Dividend",
+            "Bookstore",
+            "Phone Bill",
+            "Gift Received",
+            "Parking Fee",
+            "Subscription Service",
+            "Travel Refund",
+            "Medical Bill"
+          ]
+        },
+        {
+          "kind": "float",
+          "min": -400,
+          "max": 1500,
+          "decimals": 2
+        },
+        {
+          "kind": "float",
+          "min": 800,
+          "max": 3592.38,
+          "decimals": 2
+        }
+      ],
+      "rows": 40
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Create sample bank transactions as CSV: 40 rows with date, description, amount, balance. It is synthetic test data for a demo, not records from the system: attach it as transactions.csv.",
+      "steps": [
+        {
+          "reasoning": "We need to create a CSV file with synthetic data, {{int:32:48}} rows, columns: date, description, amount, balance. Use create_file with content. Must generate sample data. No need to query system. We'll create a CSV text with header line and {{int:32:48}} rows. Dates can be sequential. Amount can be positive or negative. Balance computed cumulatively. We'll produce placeholder values? Since no constraints, we can generate realistic-looking numbers. Use e.g., start balance {{int:800:1200}}. Then each transaction modify balance. Provide varied descriptions. We'll output as attached file.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "date,description,amount,balance\n{{csv:0}}",
+                "file_name": "transactions.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1615,\"file_name\":\"transactions.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1827,
+            "completion_tokens": 915
+          },
+          "chars": 2269
+        },
+        {
+          "text": "Here is the synthetic CSV file you requested.\n\n**Attached:** `transactions.csv` – {{int:32:48}} rows of sample bank transactions with date, description, amount, and balance.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2648,
+            "completion_tokens": 38
+          },
+          "chars": 164
+        }
+      ]
+    }
+  ]
+}

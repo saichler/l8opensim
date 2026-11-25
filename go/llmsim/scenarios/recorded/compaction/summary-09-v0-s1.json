@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-09/v0/s1",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:18:09Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user is comparing Kubernetes versions across clusters.\n\nNext part of the conversation:\nUser: Which version does each cluster run?\n\nAssistant: prod-east v1.30.4, prod-west v1.29.6, staging v1.31.1.\n\nUser: Which nodes in prod-west are not ready?\n\nAssistant: worker-06 and worker-12 are not ready.\n\nUser: I'll upgrade prod-west next week, only nodes that are ready first.\n\nAssistant: Noted: upgrade prod-west next week, ready nodes first.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary replacing current one. Keep facts: clusters and their versions, non-ready nodes, plan to upgrade prod-west next week, only ready nodes first. Also any IDs? No placeholders. No open questions remain. So summary:\n\n- Clusters: prod-east v1.30.4, prod-west v1.29.6, staging v1.31.1.\n- In prod-west, nodes worker-06 and worker-12 are not ready.\n- User plans to upgrade prod-west next week, upgrading only ready nodes first.\n\nThat's it.",
+          "text": "- Cluster versions: prod-east runs v1.30.4, prod-west runs v1.29.6, staging runs v1.31.1.  \n- In prod-west, nodes **worker-06** and **worker-12** are not ready.  \n- User plans to upgrade **prod-west** next week, targeting only the ready nodes first.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 331,
+            "completion_tokens": 201
+          },
+          "chars": 710
+        }
+      ]
+    }
+  ]
+}

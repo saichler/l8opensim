@@ -1,0 +1,51 @@
+{
+  "name": "default",
+  "n_ctx": 131072,
+  "chars_per_token": 4.0,
+  "auth": true,
+  "keys": [
+    { "key": "sk-sim-tanto-1", "name": "tanto-openai", "apis": ["openai", "webtools"] },
+    { "key": "sk-sim-tanto-2", "name": "tanto-anthropic", "apis": ["anthropic", "webtools"] },
+    { "key": "sk-sim-agent-1", "name": "agent-1" },
+    { "key": "sk-sim-agent-2", "name": "agent-2" }
+  ],
+  "models": [
+    { "alias": "gpt-oss-120b", "pool": "coder" },
+    { "alias": "muse-glimmer-30b", "pool": "muse" },
+    { "alias": "claude-sim", "pool": "coder" }
+  ],
+  "pools": {
+    "coder": { "max_concurrent": 0 },
+    "muse": { "max_concurrent": 0 }
+  },
+  "reject_status": 429,
+  "retry_after_seconds": 1,
+  "faults": {},
+  "slow_response_ms": 5000,
+  "flawed_fraction": 0.05,
+  "compaction_marker": "You maintain the running summary of a conversation",
+  "flavor_mix": {
+    "data_query": 15, "data_aggregate": 10, "csv_export": 8, "report_file": 6, "record_crud": 4,
+    "explore_models": 4, "web_research": 6, "code_app": 8, "code_review": 5, "code_debug": 4,
+    "csv_generate": 6, "csv_analyze": 4, "summarize_long": 4, "writing": 4, "qa_chat": 8,
+    "reasoning_math": 2, "edge_cases": 2, "conversation": 10
+  },
+  "classifier": [
+    { "flavor": "web_research", "any": ["@web", "search the web", "on the web", "look it up online"] },
+    { "flavor": "csv_export", "all": ["export"], "any": ["csv", "spreadsheet", "excel", "download", "file"] },
+    { "flavor": "report_file", "any": ["report", "markdown file", "as a file", "summary file", "create a file", "attach a"] },
+    { "flavor": "code_review", "any": ["review this", "review the", "code review", "review my"] },
+    { "flavor": "code_debug", "any": ["stack trace", "traceback", "panic:", "exception", "segfault", "nil pointer", "fix this bug", "why does this fail", "error:"] },
+    { "flavor": "csv_generate", "all": ["csv"], "any": ["generate", "fictitious", "sample", "make a", "create a"] },
+    { "flavor": "csv_analyze", "all": ["csv"], "any": ["analy", "anomal", "total", "which row", "average", "summar"] },
+    { "flavor": "record_crud", "any": ["add a note", "create a record", "update the", "delete the", "remove the", "rename the", "change the", "set the", "yes, go ahead", "yes, delete"] },
+    { "flavor": "explore_models", "any": ["what data", "what fields", "which models", "what can you show", "what models", "what kind of data", "list the models"] },
+    { "flavor": "reasoning_math", "any": ["puzzle", "probability", "word problem", "if a train", "how long would it take", "calculate how", "step by step"] },
+    { "flavor": "summarize_long", "any": ["summarize", "summarise", "tl;dr", "summary of this"] },
+    { "flavor": "writing", "any": ["email", "release notes", "draft a", "announcement", "status update", "incident summary", "write a letter", "blog post"] },
+    { "flavor": "code_app", "any": ["write a simple", "build a simple", "write a program", "write a script", "implement a", "rest api", "cli that", "web app", "calculator", "dockerfile", "add tests", "unit tests"] },
+    { "flavor": "data_aggregate", "any": ["how many", "count of", "total number", "average", "per vendor", "per site", "per cluster", "breakdown", "distribution", "sum of"] },
+    { "flavor": "data_query", "any": ["show me", "list all", "list the", "which devices", "which gpu", "which pods", "which nodes", "are down", "offline", "critical alarms", "status of"] },
+    { "flavor": "qa_chat", "any": ["what is", "explain", "why ", "how does", "tell me", "what's the difference"] }
+  ]
+}

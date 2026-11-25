@@ -1,0 +1,24 @@
+{
+  "id": "summarize_long/postmortem-timeline/v0/s1",
+  "flavor": "summarize_long",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:33:44Z",
+  "turns": [
+    {
+      "user_message": "Summarize this as a timeline:\n\nOn Tuesday at 14:05 UTC the payments API started returning 503 errors. Monitoring alerted at 14:07. The on-call engineer found that a configuration change deployed at 13:58 lowered the database connection pool from 200 to 20. Traffic peaked at 14:00 and requests queued waiting for connections until the load balancer timed them out. The change was rolled back at 14:31 and error rates returned to normal by 14:36. About 18 percent of payment attempts failed during the incident. Action items: add validation for pool sizes in the deployment pipeline, alert on connection pool saturation, and require a second reviewer for database configuration changes.",
+      "steps": [
+        {
+          "reasoning": "User wants a timeline summary of incident. No data fetching needed. Just produce summary.",
+          "text": "**Incident Timeline**\n\n| Time (UTC) | Event |\n|------------|-------|\n| **13:58** | Deployment changes the database connection pool from **{{int:160:240}} → {{int:16:24}}**. |\n| **14:00** | Traffic peaks; requests begin queuing, waiting for DB connections. |\n| **14:05** | Payments API starts returning **{{int:402:604}} errors**. |\n| **14:07** | Monitoring system alerts on the rising error rate. |\n| **14:07‑14:31** | On‑call engineer investigates; discovers the reduced pool size is the root cause. |\n| **14:31** | Configuration change is **rolled back** to the original pool size ({{int:160:240}}). |\n| **14:36** | Error rate returns to normal; incident considered resolved. |\n| **During incident** | Approximately **{{int:14:22}} %** of payment attempts fail. |\n\n**Action Items**\n\n1. **Add validation for pool sizes** in the deployment pipeline to prevent accidental mis‑configurations.  \n2. **Create an alert** for database connection‑pool saturation.  \n3. **Require a second reviewer** for any database‑configuration changes.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1932,
+            "completion_tokens": 264
+          },
+          "chars": 1076
+        }
+      ]
+    }
+  ]
+}

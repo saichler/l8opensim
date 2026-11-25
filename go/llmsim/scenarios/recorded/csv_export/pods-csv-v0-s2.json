@@ -1,0 +1,71 @@
+{
+  "id": "csv_export/pods-csv/v0/s2",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:24:46Z",
+  "params": {
+    "cluster": [
+      "prod-east",
+      "prod-west",
+      "staging"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Export the pods of the prod-east cluster as a CSV for download.",
+      "steps": [
+        {
+          "reasoning": "We need to export pods for a specific cluster named \"{{p:cluster}}\". Need to know fields of K8SPod and possibly cluster relation. Likely K8SPod has field clusterId or clusterName. We need to filter pods where cluster name equals \"{{p:cluster}}\". We need to know model fields. First describe_model K8SPod.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SPod"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"key\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"namespace\",\"type\":\"string\"},{\"path\":\"ready.count\",\"type\":\"int\"},{\"path\":\"ready.outof\",\"type\":\"int\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"restarts.count\",\"type\":\"int\"},{\"path\":\"restarts.ago\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"ip\",\"type\":\"string\"},{\"path\":\"node\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SPod\",\"primaryKey\":\"key\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1801,
+            "completion_tokens": 101
+          },
+          "chars": 328
+        },
+        {
+          "reasoning": "We need to export pods of the {{p:cluster}} cluster. Likely filter where clusterName='{{p:cluster}}'. Use export_csv with query \"select * from K8SPod where clusterName='{{p:cluster}}'\". No limit needed. Provide file name pods_prod_east.csv.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "pods_prod_east.csv",
+                "query": "select * from K8SPod where clusterName='{{p:cluster}}'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"key\",\"name\",\"namespace\",\"ready.count\",\"ready.outof\",\"status\",\"restarts.count\",\"restarts.ago\",\"age\",\"ip\",\"node\",\"clusterName\"],\"file_name\":\"pods_prod_east.csv\",\"rows\":18}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1983,
+            "completion_tokens": 107
+          },
+          "chars": 333
+        },
+        {
+          "text": "Attached **pods_prod_east.csv** with {{int:14:22}} pod records from the **prod‑east** cluster.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2095,
+            "completion_tokens": 26
+          },
+          "chars": 85
+        }
+      ]
+    }
+  ]
+}

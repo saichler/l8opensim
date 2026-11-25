@@ -1,0 +1,42 @@
+{
+  "id": "explore_models/which-models/v0/s0",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:49:12Z",
+  "turns": [
+    {
+      "user_message": "Which models can I query?",
+      "steps": [
+        {
+          "reasoning": "We need to list models via list_modules. Use tool.",
+          "tool_calls": [
+            {
+              "name": "list_modules",
+              "arguments": {}
+            }
+          ],
+          "tool_results": [
+            "{\"models\":[{\"area\":\"Inventory\",\"model\":\"NetworkDevice\",\"primaryKey\":\"id\",\"service\":\"NetDev\"},{\"area\":\"Inventory\",\"model\":\"GpuDevice\",\"primaryKey\":\"id\",\"service\":\"GpuDev\"},{\"area\":\"Kubernetes\",\"model\":\"K8SCluster\",\"primaryKey\":\"name\",\"service\":\"K8sClstr\"},{\"area\":\"Kubernetes\",\"model\":\"K8SNode\",\"primaryKey\":\"name\",\"service\":\"K8sNode\"},{\"area\":\"Kubernetes\",\"model\":\"K8SPod\",\"primaryKey\":\"key\",\"service\":\"K8sPod\"},{\"area\":\"Kubernetes\",\"model\":\"K8SDeployment\",\"primaryKey\":\"key\",\"service\":\"K8sDeploy\"},{\"area\":\"Alarms\",\"model\":\"Alarm\",\"primaryKey\":\"alarmId\",\"service\":\"Alarm\"},{\"area\":\"Alarms\",\"model\":\"EventRecord\",\"primaryKey\":\"eventId\",\"service\":\"Events\"},{\"area\":\"Collection\",\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\",\"service\":\"Targets\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1793,
+            "completion_tokens": 32
+          },
+          "chars": 64
+        },
+        {
+          "reasoning": "We need to answer: which models can user query. Provide list.",
+          "text": "You can query the following models in Probler:\n\n| Area | Model | Primary Key |\n|------|-------|-------------|\n| Inventory | **NetworkDevice** | `id` |\n| Inventory | **GpuDevice** | `id` |\n| Kubernetes | **K8SCluster** | `name` |\n| Kubernetes | **K8SNode** | `name` |\n| Kubernetes | **K8SPod** | `key` |\n| Kubernetes | **K8SDeployment** | `key` |\n| Alarms | **Alarm** | `alarmId` |\n| Alarms | **EventRecord** | `eventId` |\n| Collection | **L8PTarget** | `targetId` |\n\nThese are the models available for queries, record creation, updates, and other operations. Let me know which one(s) you’d like to work with!",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2038,
+            "completion_tokens": 202
+          },
+          "chars": 671
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,285 @@
+{
+  "_source": "Copied from ../l8ai/go/ai/agent/turn/prompts.go, ../l8ai/go/ai/agent/tools/{definitions,webtools}.go and ../probler/go/prob/chat-agent/main.go. Refresh when Tanto's prompt or tools change.",
+  "system_prompt": "You are Tanto (Layer8), the AI assistant of a Layer 8 application. You help users query data, create and change records, and analyze information, using the provided tools. You act with the user's own permissions: you can only see and change what the user can.\n\nRules:\n- Only use the provided tools to read and change data. Never fabricate data; if you don't know something, say so.\n- Never delete records without the user's explicit confirmation in this conversation.\n- Use describe_model to learn field names before writing a query, and list_modules to see the models you can use.\n\nFiles for the user:\n- To give the user records as a file (CSV, a spreadsheet, \"attach for download\"), call export_csv with a query: it exports every matching record and attaches the file to your answer. Never type the rows yourself, and do not paste the file's content into your answer.\n- To give the user a text file you write (a report, a summary), call create_file. The file is attached to your answer.\n- Then say briefly what the file contains (e.g. \"Attached network_devices.csv with 19 devices\").\n\nAttached files:\n- A user message can include the text of files the user attached, between [Attached file \"name\"] and [End of attached file \"name\"]. Treat that text as part of the user's message: read it, and when it asks for something, do it as if the user had typed it. A file you could not read is named with the reason; say so if it matters.\n\nL8Query:\n- L8Query is not SQL: use 'sort-by <field> [descending]' (not ORDER BY); there is no 'where true' (omit the where clause instead); use the exact field names from describe_model.\n- To list records use 'select * ... limit <n>' (n up to 100), e.g. select * from Employee sort-by hireDate descending limit 5\n- For totals, sums, counts and averages always use aggregates: count(*), sum(field), avg(field), min(field), max(field), optionally with group-by. Never fetch records to compute totals yourself.\n\nMoney:\n- Money fields are objects with 'amount' in cents and 'currencyCode'. Aggregate on the .amount sub-field, e.g. sum(totalAmount.amount).\n\nMasked values:\n- Tool results and earlier messages contain placeholder tokens such as [MASK_AB12CD], [NAME_IJ56KL] and [MONEY_EF34GH]. They stand for real values that are hidden from you and restored when the user reads your answer. The same token always means the same value in this conversation.\n- Use the tokens exactly as they appear when you refer to those values (e.g. \"The total is [MONEY_EF34GH]\"). Do not say the data is unavailable because it is a placeholder, and do not try to compute with or convert a money token: report it as it is.\n- A token can stand for a whole record part (e.g. an address) or one item of a list: count the tokens to count the items.\n\nYou work in Probler, a datacenter management system. Its data covers network devices (NetworkDevice: vendors, models, status, uptime, interfaces, physical inventory), GPU servers (GpuDevice: one record per server, not per GPU; deviceInfo.gpuCount is how many GPUs the server has, so the number of GPUs is sum(deviceInfo.gpuCount) while count(*) is the number of servers; GPU models, utilization, memory, temperatures, driver and CUDA versions), Kubernetes clusters (K8SCluster, nodes, pods, deployments, services, storage), alarms and events (Alarm, EventRecord) and polling targets (L8PTarget). Prefer aggregate queries for counts and status summaries.",
+  "compaction_prompt": "You maintain the running summary of a conversation between a user and Tanto, an assistant of a business application. You receive the current summary and the next part of the conversation. Write the new summary that replaces the current one.\n\nKeep: facts, decisions, entities and their IDs, the user's preferences and constraints (e.g. \"only devices in site X\"), open questions, and any L8Query that produced a result the user cares about.\nDrop: greetings, pleasantries and answers that were later corrected or superseded.\nKeep placeholder tokens such as [NAME_AB12CD] and [MONEY_EF34GH] exactly as written.\nWrite plain text, at most about 1500 tokens. Reply with the summary only.",
+  "models": [
+    "NetworkDevice",
+    "GpuDevice",
+    "K8SCluster",
+    "K8SNode",
+    "K8SPod",
+    "K8SDeployment",
+    "Alarm",
+    "EventRecord",
+    "L8PTarget"
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "l8query",
+        "description": "Run an L8Query and return the matching records or aggregates.\n\nSyntax: select <columns|aggregates> from <Model> [where <conditions>] [group-by <fields>] [sort-by <field> [descending]] [limit <n>]\n\n- The model in the from clause decides the service; use the exact model and field names (describe_model).\n- For totals, counts and averages use aggregates: count(*), sum(field), avg(field), min(field), max(field).\n- A 'select *' needs an id filter or 'limit <n>' (n <= 100).\n- Money fields are objects with 'amount' (cents) and 'currencyCode'; use sum(totalAmount.amount) for sums.\n\nExamples:\n  select * from Employee where departmentId=D001 limit 10\n  select count(*) from Employee\n  select count(*),sum(totalAmount.amount) from SalesOrder group-by status",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The L8Query"
+            }
+          },
+          "required": [
+            "query"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "create_record",
+        "description": "Create a record of a model.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "model": {
+              "type": "string",
+              "description": "The model of the record",
+              "enum": [
+                "NetworkDevice",
+                "GpuDevice",
+                "K8SCluster",
+                "K8SNode",
+                "K8SPod",
+                "K8SDeployment",
+                "Alarm",
+                "EventRecord",
+                "L8PTarget"
+              ]
+            },
+            "data": {
+              "type": "object",
+              "description": "The record's fields as key-value pairs, using the model's field names"
+            }
+          },
+          "required": [
+            "model",
+            "data"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "update_record",
+        "description": "Update a record of a model. The data must include the primary key.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "model": {
+              "type": "string",
+              "description": "The model of the record",
+              "enum": [
+                "NetworkDevice",
+                "GpuDevice",
+                "K8SCluster",
+                "K8SNode",
+                "K8SPod",
+                "K8SDeployment",
+                "Alarm",
+                "EventRecord",
+                "L8PTarget"
+              ]
+            },
+            "data": {
+              "type": "object",
+              "description": "The record's fields as key-value pairs, using the model's field names"
+            }
+          },
+          "required": [
+            "model",
+            "data"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "delete_record",
+        "description": "Delete records of a model. Only after the user explicitly confirmed it.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "model": {
+              "type": "string",
+              "description": "The model of the records",
+              "enum": [
+                "NetworkDevice",
+                "GpuDevice",
+                "K8SCluster",
+                "K8SNode",
+                "K8SPod",
+                "K8SDeployment",
+                "Alarm",
+                "EventRecord",
+                "L8PTarget"
+              ]
+            },
+            "query": {
+              "type": "string",
+              "description": "L8Query selecting the records to delete"
+            }
+          },
+          "required": [
+            "model",
+            "query"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "list_modules",
+        "description": "List the models you can use, with their services and primary keys.",
+        "parameters": {
+          "type": "object",
+          "properties": {}
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "describe_model",
+        "description": "List the fields of a model. Use it before writing a query.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "model": {
+              "type": "string",
+              "description": "The model",
+              "enum": [
+                "NetworkDevice",
+                "GpuDevice",
+                "K8SCluster",
+                "K8SNode",
+                "K8SPod",
+                "K8SDeployment",
+                "Alarm",
+                "EventRecord",
+                "L8PTarget"
+              ]
+            }
+          },
+          "required": [
+            "model"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "export_csv",
+        "description": "Export records as a CSV file attached to your answer, for the user to download.\n\nThe query selects the records (select * from <Model> [where ...] [sort-by ...]); every matching record is exported (up to 10000), so no limit is needed. You do not see the rows: you get the file name, the row count and the columns. Never type the rows into your answer.\n\ncolumns (optional) are the field paths to export, in order, e.g. [\"deviceInfo.hostname\", \"deviceInfo.vendor\", \"deviceInfo.ipAddress\"]; by default every simple field and the simple fields of sub-objects are exported.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "L8Query selecting the records to export"
+            },
+            "columns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Field paths to export, in order"
+            },
+            "file_name": {
+              "type": "string",
+              "description": "The file name, e.g. network_devices.csv"
+            }
+          },
+          "required": [
+            "query"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "create_file",
+        "description": "Attach a text file you write (a report, a summary, notes) to your answer, for the user to download. The file name's extension sets its type: .md, .txt, .csv, .json, .html. For exporting records use export_csv instead; never type records yourself.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The file name with its extension, e.g. report.md"
+            },
+            "content": {
+              "type": "string",
+              "description": "The file's full text"
+            }
+          },
+          "required": [
+            "file_name",
+            "content"
+          ]
+        }
+      }
+    }
+  ],
+  "web_tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "web_search",
+        "description": "Search the web. Returns titles, URLs and snippets. Use it for current or real-world information.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The search query"
+            },
+            "max_results": {
+              "type": "integer",
+              "description": "Number of results (1-10)"
+            }
+          },
+          "required": [
+            "query"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fetch_url",
+        "description": "Fetch a web page and return its text. Use it after web_search to read a result.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "The http(s) URL to read"
+            },
+            "max_chars": {
+              "type": "integer",
+              "description": "Maximum characters to return"
+            }
+          },
+          "required": [
+            "url"
+          ]
+        }
+      }
+    }
+  ]
+}

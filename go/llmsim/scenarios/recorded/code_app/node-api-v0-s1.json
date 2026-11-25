@@ -1,0 +1,48 @@
+{
+  "id": "code_app/node-api/v0/s1",
+  "flavor": "code_app",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T18:48:34Z",
+  "params": {
+    "entity": [
+      "tasks",
+      "books",
+      "contacts",
+      "products",
+      "notes"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Write a simple Express.js API for tasks with an in-memory store.",
+      "steps": [
+        {
+          "reasoning": "We need to respond with code. No need to use tools. Provide Express.js code for task CRUD using in-memory store. Probably a brief example.",
+          "text": "Below is a minimal **Express .js** API that lets you manage a simple list of {{p:entity}} stored only in memory.  \nIt supports the usual CRUD operations (create, read, update, delete) and demonstrates basic error handling and JSON body parsing.\n\n```js\n// server.js\nconst express = require('express');\nconst app = express();\nconst port = 3000;\n\n// ------------------------------------------------------------------\n// In‑memory store\n// ------------------------------------------------------------------\n// Each task is an object: { id: number, title: string, completed: boolean }\nlet {{p:entity}} = [];\nlet nextId = 1;\n\n// ------------------------------------------------------------------\n// Middleware\n// ------------------------------------------------------------------\napp.use(express.json()); // parse JSON bodies\n\n// ------------------------------------------------------------------\n// Routes\n// ------------------------------------------------------------------\n\n// GET /{{p:entity}}\n// Return the full list of {{p:entity}}\napp.get('/{{p:entity}}', (req, res) =\u003e {\n  res.json({{p:entity}});\n});\n\n// GET /{{p:entity}}/:id\n// Return a single task by its id\napp.get('/{{p:entity}}/:id', (req, res) =\u003e {\n  const id = Number(req.params.id);\n  const task = {{p:entity}}.find(t =\u003e t.id === id);\n\n  if (!task) {\n    return res.status(404).json({ error: 'Task not found' });\n  }\n  res.json(task);\n});\n\n// POST /{{p:entity}}\n// Create a new task. Body must contain a \"title\" field.\napp.post('/{{p:entity}}', (req, res) =\u003e {\n  const { title } = req.body;\n\n  if (!title || typeof title !== 'string') {\n    return res.status(400).json({ error: 'Invalid or missing \"title\"' });\n  }\n\n  const newTask = {\n    id: nextId++,\n    title: title.trim(),\n    completed: false,\n  };\n  {{p:entity}}.push(newTask);\n  res.status(201).json(newTask);\n});\n\n// PUT /{{p:entity}}/:id\n// Replace an existing task (title \u0026 completed)\napp.put('/{{p:entity}}/:id', (req, res) =\u003e {\n  const id = Number(req.params.id);\n  const taskIndex = {{p:entity}}.findIndex(t =\u003e t.id === id);\n\n  if (taskIndex === -1) {\n    return res.status(404).json({ error: 'Task not found' });\n  }\n\n  const { title, completed } = req.body;\n  if (typeof title !== 'string' || typeof completed !== 'boolean') {\n    return res\n      .status(400)\n      .json({ error: '\"title\" must be string and \"completed\" must be boolean' });\n  }\n\n  const updatedTask = { id, title: title.trim(), completed };\n  {{p:entity}}[taskIndex] = updatedTask;\n  res.json(updatedTask);\n});\n\n// PATCH /{{p:entity}}/:id\n// Partially update a task (e.g. toggle completed)\napp.patch('/{{p:entity}}/:id', (req, res) =\u003e {\n  const id = Number(req.params.id);\n  const task = {{p:entity}}.find(t =\u003e t.id === id);\n\n  if (!task) {\n    return res.status(404).json({ error: 'Task not found' });\n  }\n\n  const { title, completed } = req.body;\n  if (title !== undefined) {\n    if (typeof title !== 'string') {\n      return res.status(400).json({ error: '\"title\" must be a string' });\n    }\n    task.title = title.trim();\n  }\n  if (completed !== undefined) {\n    if (typeof completed !== 'boolean') {\n      return res.status(400).json({ error: '\"completed\" must be a boolean' });\n    }\n    task.completed = completed;\n  }\n\n  res.json(task);\n});\n\n// DELETE /{{p:entity}}/:id\n// Remove a task from the store\napp.delete('/{{p:entity}}/:id', (req, res) =\u003e {\n  const id = Number(req.params.id);\n  const initialLength = {{p:entity}}.length;\n  {{p:entity}} = {{p:entity}}.filter(t =\u003e t.id !== id);\n\n  if ({{p:entity}}.length === initialLength) {\n    return res.status(404).json({ error: 'Task not found' });\n  }\n\n  res.status(204).send(); // No Content\n});\n\n// ------------------------------------------------------------------\n// Start the server\n// ------------------------------------------------------------------\napp.listen(port, () =\u003e {\n  console.log(`Task API listening at http://localhost:${port}`);\n});\n```\n\n### How to run\n\n1. **Create a project folder** and `cd` into it.  \n2. Initialise npm and install Express:\n\n   ```bash\n   npm init -y\n   npm install express\n   ```\n\n3. Save the code above as `server.js` in that folder.  \n4. Start the API:\n\n   ```bash\n   node server.js\n   ```\n\n   You should see:\n\n   ```\n   Task API listening at http://localhost:3000\n   ```\n\n### Quick test with `curl`\n\n```bash\n# Create a task\ncurl -X POST -H \"Content-Type: application/json\" \\\n     -d '{\"title\":\"Buy milk\"}' http://localhost:3000/{{p:entity}}\n\n# List all {{p:entity}}\ncurl http://localhost:3000/{{p:entity}}\n\n# Mark task 1 as completed (partial update)\ncurl -X PATCH -H \"Content-Type: application/json\" \\\n     -d '{\"completed\":true}' http://localhost:3000/{{p:entity}}/1\n\n# Delete task 1\ncurl -X DELETE http://localhost:3000/{{p:entity}}/1\n```\n\nBecause the store lives only in memory, all data disappears when the process stops—perfect for prototyping, tests, or teaching the basics of a RESTful API.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1801,
+            "completion_tokens": 1179
+          },
+          "chars": 4830
+        }
+      ]
+    },
+    {
+      "user_message": "Add a Dockerfile for it.",
+      "steps": [
+        {
+          "reasoning": "We need to provide a Dockerfile for the Express app. Provide content with node base, copy package.json, install, copy server.js, expose port, CMD. Also maybe include .dockerignore. Provide simple Dockerfile.",
+          "text": "Here’s a minimal **Dockerfile** that builds and runs the Express‑JS task API you just created.\n\n```dockerfile\n# ------------------------------------------------------------\n#  Dockerfile – Node.js + Express task API (in‑memory store)\n# ------------------------------------------------------------\n\n# 1️⃣ Use an official lightweight Node runtime as the base image\nFROM node:20-alpine   # Alpine keeps the image small\n\n# 2️⃣ Set a working directory inside the container\nWORKDIR /app\n\n# 3️⃣ Copy only the files needed for installing dependencies\n#    (package.json + package-lock.json if you have one)\nCOPY package*.json ./\n\n# 4️⃣ Install production dependencies (no dev deps needed for this demo)\nRUN npm ci --only=production\n\n# 5️⃣ Copy the rest of the source code (server.js, any other files)\nCOPY . .\n\n# 6️⃣ Expose the port the app listens on (3000 in the example)\nEXPOSE 3000\n\n# 7️⃣ Define the command that runs when the container starts\nCMD [\"node\", \"server.js\"]\n```\n\n### Optional: `.dockerignore`\n\nCreate a `.dockerignore` file next to the Dockerfile to keep the build context tidy:\n\n```\nnode_modules\nnpm-debug.log\nDockerfile\n.dockerignore\n.git\n.gitignore\n```\n\n### Building \u0026 Running the Image\n\n```bash\n# Build the image (you can name it whatever you like)\ndocker build -t task-api .\n\n# Run a container from the image\ndocker run -d -p 3000:3000 --name task-api-container task-api\n```\n\nThe API will now be reachable at `http://localhost:3000`. Because the data store is in‑memory, each container start begins with an empty task list. If you need persistence, you’d have to add a database or mount a volume, but for a simple demo the above is all you need.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2957,
+            "completion_tokens": 451
+          },
+          "chars": 1905
+        }
+      ]
+    }
+  ]
+}

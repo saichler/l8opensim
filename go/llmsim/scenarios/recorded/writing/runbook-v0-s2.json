@@ -1,0 +1,44 @@
+{
+  "id": "writing/runbook/v0/s2",
+  "flavor": "writing",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:55:19Z",
+  "turns": [
+    {
+      "user_message": "Write a short runbook section for restarting a stuck polling target.",
+      "steps": [
+        {
+          "reasoning": "We need to write a short runbook section for restarting a stuck polling target. No data needed. Just produce a text file. Use create_file.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "# Runbook: Restarting a Stuck Polling Target\n\n## Purpose\nWhen a polling target (`L8PTarget`) becomes unresponsive or reports errors continuously, it can block data collection for associated devices. This procedure safely restarts the target to restore normal operation.\n\n## Prerequisites\n- Appropriate permissions to view and update `L8PTarget` records.\n- Access to the Probler UI or API.\n- Confirmation that the target is indeed stuck (e.g., repeated alarm, no recent data updates).\n\n## Steps\n1. **Identify the Stuck Target**\n   - Open the **Polling Targets** dashboard.\n   - Locate the target with status `ERROR` or `STALE` and note its `targetId`.\n\n2. **Verify Impact**\n   - Check associated devices (`NetworkDevice` / `GpuDevice`) for recent data timestamps.\n   - If critical services depend on this target, notify stakeholders before proceeding.\n\n3. **Pause the Target**\n   - In the UI, click **Pause** or run the API call:\n     ```\n     PATCH /api/L8PTarget/{targetId}\n     {\n       \"status\": \"PAUSED\"\n     }\n     ```\n   - Confirm the status changes to `PAUSED`.\n\n4. **Clear Stale State (Optional)**\n   - If the target maintains a cache, clear it via the **Reset Cache** button or appropriate API endpoint.\n\n5. **Restart the Target**\n   - Click **Restart** or issue:\n     ```\n     PATCH /api/L8PTarget/{targetId}\n     {\n       \"action\": \"RESTART\"\n     }\n     ```\n   - Wait for the status to transition to `RUNNING`.\n\n6. **Validate Operation**\n   - Verify that new poll data appears within the expected interval (e.g., 5‑{{int:12:18}} minutes).\n   - Check the **Alarms** page for any new errors.\n\n7. **Document the Incident**\n   - Record the `targetId`, time of restart, observed symptoms, and any stakeholder notifications in the incident log.\n\n## Troubleshooting\n- **Target fails to restart**: Ensure the underlying host is reachable and has sufficient resources. Consider rebooting the host or contacting the infrastructure team.\n- **Data still missing after restart**: Check network connectivity, firewall rules, and credentials for the target.\n\n## References\n- Probler Documentation: *Polling Targets* \n- API Reference: `PATCH /api/L8PTarget/{targetId}`\n\n---\n*Prepared by the Operations Team*",
+                "file_name": "restart_stuck_polling_target.md"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":2193,\"file_name\":\"restart_stuck_polling_target.md\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1800,
+            "completion_tokens": 645
+          },
+          "chars": 2468
+        },
+        {
+          "text": "The runbook section has been created.\n\n**Attached:** `restart_stuck_polling_target.md` – a short guide for restarting a stuck polling target.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2440,
+            "completion_tokens": 35
+          },
+          "chars": 143
+        }
+      ]
+    }
+  ]
+}

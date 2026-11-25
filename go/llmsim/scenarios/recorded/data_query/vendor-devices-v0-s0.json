@@ -1,0 +1,77 @@
+{
+  "id": "data_query/vendor-devices/v0/s0",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:38:36Z",
+  "params": {
+    "vendor": [
+      "Cisco",
+      "Juniper",
+      "Arista",
+      "Nokia"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "List all Cisco devices with their IP addresses and status.",
+      "steps": [
+        {
+          "reasoning": "We need to list all {{p:vendor}} devices: model likely NetworkDevice. Need fields: vendor, ipAddress, status. First we should describe model NetworkDevice to see field names.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1798,
+            "completion_tokens": 64
+          },
+          "chars": 206
+        },
+        {
+          "reasoning": "We need to list all {{p:vendor}} devices with their IP addresses and status. From fields, vendor is equipmentinfo.vendor, ipAddress is equipmentinfo.ipAddress, status maybe equipmentinfo.deviceStatus. So we need a query: select * from NetworkDevice where equipmentinfo.vendor=\"{{p:vendor}}\". Then export CSV with columns ip and status? Provide a CSV export. Use export_csv.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "columns": [
+                  "equipmentinfo.ipAddress",
+                  "equipmentinfo.deviceStatus",
+                  "equipmentinfo.vendor"
+                ],
+                "file_name": "{{p:vendor:lower}}_devices.csv",
+                "query": "select * from NetworkDevice where equipmentinfo.vendor='{{p:vendor}}'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"equipmentinfo.ipAddress\",\"equipmentinfo.deviceStatus\",\"equipmentinfo.vendor\"],\"file_name\":\"cisco_devices.csv\",\"rows\":1}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2035,
+            "completion_tokens": 144
+          },
+          "chars": 565
+        },
+        {
+          "text": "Attached is **{{p:vendor:lower}}_devices.csv** containing the IP address, status, and vendor for each {{p:vendor}} device.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2144,
+            "completion_tokens": 26
+          },
+          "chars": 102
+        }
+      ]
+    }
+  ]
+}

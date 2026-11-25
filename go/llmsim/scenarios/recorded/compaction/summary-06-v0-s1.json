@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-06/v0/s1",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:17:41Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user is planning a maintenance window in Dallas on Saturday.\n\nNext part of the conversation:\nUser: List the devices in Dallas.\n\nAssistant: Dallas has 3 devices: core-rtr-04, core-rtr-08 and core-rtr-16.\n\nUser: Draft the maintenance email.\n\nAssistant: Here is the draft email announcing maintenance on Saturday 22:00-02:00 for the three Dallas devices.\n\nUser: Change the time to 23:00.\n\nAssistant: Updated the email to 23:00-03:00.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary. Keep facts: user planning maintenance window in {{city:1}} on Saturday. Devices in {{city:1}}: core-rtr-04, core-rtr-08, core-rtr-16. Draft email prepared with maintenance on Saturday 22:00-02:00 for those three devices, then updated to 23:00-03:00. Keep that. No placeholders needed. No greetings. So summary: User planning maintenance window in {{city:1}} on Saturday; devices: core-rtr-04, core-rtr-08, core-rtr-16. Email draft scheduled for Saturday 23:00-03:00 covering those devices. No open questions. That's it.",
+          "text": "User is planning a maintenance window in {{city:1}} on Saturday. The {{city:1}} site has three devices: core-rtr-04, core-rtr-08, and core-rtr-16. A maintenance announcement email has been drafted for these three devices, scheduled for Saturday from 23:00 to 03:00.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 334,
+            "completion_tokens": 212
+          },
+          "chars": 796
+        }
+      ]
+    }
+  ]
+}

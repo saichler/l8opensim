@@ -1,0 +1,148 @@
+{
+  "id": "data_query/pods-failing/v0/s1",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:38:56Z",
+  "params": {
+    "cluster": [
+      "prod-east",
+      "prod-west",
+      "staging"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Which pods are failing or pending in the prod-east cluster?",
+      "steps": [
+        {
+          "reasoning": "We need to list pods (K8SPod) that are failing or pending status in the {{p:cluster}} cluster. We need to know fields. First describe_model for K8SPod.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SPod"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"key\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"namespace\",\"type\":\"string\"},{\"path\":\"ready.count\",\"type\":\"int\"},{\"path\":\"ready.outof\",\"type\":\"int\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"restarts.count\",\"type\":\"int\"},{\"path\":\"restarts.ago\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"ip\",\"type\":\"string\"},{\"path\":\"node\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SPod\",\"primaryKey\":\"key\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1799,
+            "completion_tokens": 69
+          },
+          "chars": 179
+        },
+        {
+          "reasoning": "We need pods failing or pending in {{p:cluster}} cluster. Need filter where clusterName='{{p:cluster}}' and status in ('Failed','Pending' maybe 'Pending' status). Let's query.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select key,name,namespace,status,node,age from K8SPod where clusterName='{{p:cluster}}' and (status='Failed' or status='Pending')"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"error\":\"unknown field '(status' in model K8SPod; use describe_model\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1981,
+            "completion_tokens": 93
+          },
+          "chars": 311
+        },
+        {
+          "reasoning": "We need proper where syntax. Probably conditions are simple equality? No complex parentheses? Might need separate where clauses combined? The L8Query syntax seems limited: \"where \u003cconditions\u003e\" maybe supports AND, OR? The error suggests field \"(status\". Need to format correctly: maybe use status='Failed' or status='Pending' without parentheses, and combine with AND. Possibly syntax: where clusterName='{{p:cluster}}' and status='Failed' or status='Pending' but precedence? Could do two separate queries and union? Simpler: get pods where clusterName='{{p:cluster}}' and (status='Failed' or status='Pending'). Not working. Maybe need to use multiple where conditions with AND and OR, but need correct parentheses? Could try: where clusterName='{{p:cluster}}' and (status='Failed' or status='Pending'). But parentheses cause token error. Maybe need to escape? Could try: where clusterName='{{p:cluster}}' and status='Failed' or status='Pending'. Might treat OR as separate? Let's try that.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select key,name,namespace,status,node,age from K8SPod where clusterName='{{p:cluster}}' and status='Failed' or status='Pending'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":6,\"model\":\"K8SPod\",\"records\":[{\"age\":\"105d\",\"key\":\"pod-003\",\"name\":\"api-5abc-wqi\",\"namespace\":\"payments\",\"node\":\"worker-03\",\"status\":\"K8S_POD_STATUS_PENDING\"},{\"age\":\"90d\",\"key\":\"pod-004\",\"name\":\"billing-4ff1-jof\",\"namespace\":\"web\",\"node\":\"worker-04\",\"status\":\"K8S_POD_STATUS_PENDING\"},{\"age\":\"205d\",\"key\":\"pod-007\",\"name\":\"web-83ed-2xj\",\"namespace\":\"web\",\"node\":\"worker-07\",\"status\":\"K8S_POD_STATUS_FAILED\"},{\"age\":\"140d\",\"key\":\"pod-035\",\"name\":\"api-ad2c-fa6\",\"namespace\":\"payments\",\"node\":\"worker-35\",\"status\":\"K8S_POD_STATUS_PENDING\"},{\"age\":\"279d\",\"key\":\"pod-042\",\"name\":\"auth-3e96-8jt\",\"namespace\":\"data\",\"node\":\"worker-42\",\"status\":\"K8S_POD_STATUS_PENDING\"},{\"age\":\"49d\",\"key\":\"pod-052\",\"name\":\"billing-1a1e-26r\",\"namespace\":\"web\",\"node\":\"worker-52\",\"status\":\"K8S_POD_STATUS_FAILED\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2066,
+            "completion_tokens": 264
+          },
+          "chars": 1115
+        },
+        {
+          "reasoning": "We have result showing pods with statuses \"K8S_POD_STATUS_PENDING\" and \"K8S_POD_STATUS_FAILED\". The user asked: \"Which pods are failing or pending in the {{p:cluster}} cluster?\" So we need to present list. Provide maybe a table. Also note we have fields name, namespace, status, node, age. We could include those. Could also export CSV. Probably better to attach CSV file for user's convenience. Use export_csv with query selecting fields. Provide file. Use export_csv tool.\n\n",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "columns": [
+                  "key",
+                  "name",
+                  "namespace",
+                  "status",
+                  "node",
+                  "age"
+                ],
+                "file_name": "{{p:cluster}}_failing_pending_pods.csv",
+                "query": "select * from K8SPod where clusterName='{{p:cluster}}' and (status='K8S_POD_STATUS_PENDING' or status='K8S_POD_STATUS_FAILED')"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"error\":\"unknown field '(status' in model K8SPod; use describe_model\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2406,
+            "completion_tokens": 207
+          },
+          "chars": 724
+        },
+        {
+          "reasoning": "The query syntax for where clause needs proper grouping. The error was unknown field '(status' due to parentheses. Need to use proper syntax: L8Query likely uses logical operators but parentheses may not be supported? Could use separate conditions with and/or; need to ensure precedence: maybe we can use where status='K8S_POD_STATUS_PENDING' or status='K8S_POD_STATUS_FAILED' and clusterName='{{p:cluster}}'. Need to ensure both conditions applied: Use where clusterName='{{p:cluster}}' and (status='...') is not allowed. Could rewrite as where clusterName='{{p:cluster}}' and status='K8S_POD_STATUS_PENDING' or clusterName='{{p:cluster}}' and status='K8S_POD_STATUS_FAILED'. That should work.\n\nLet's export CSV with that query.\n\n",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "columns": [
+                  "key",
+                  "name",
+                  "namespace",
+                  "status",
+                  "node",
+                  "age"
+                ],
+                "file_name": "{{p:cluster}}_failing_pending_pods.csv",
+                "query": "select * from K8SPod where clusterName='{{p:cluster}}' and status='K8S_POD_STATUS_PENDING' or clusterName='{{p:cluster}}' and status='K8S_POD_STATUS_FAILED'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"key\",\"name\",\"namespace\",\"status\",\"node\",\"age\"],\"file_name\":\"prod-east_failing_pending_pods.csv\",\"rows\":4}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2529,
+            "completion_tokens": 256
+          },
+          "chars": 993
+        },
+        {
+          "text": "Attached **{{p:cluster}}_failing_pending_pods.csv** with the pods that are in Pending or Failed status in the **prod‑east** cluster.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2676,
+            "completion_tokens": 35
+          },
+          "chars": 132
+        }
+      ]
+    }
+  ]
+}

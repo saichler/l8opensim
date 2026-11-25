@@ -1,0 +1,74 @@
+{
+  "id": "csv_generate/customers/v0/s2",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:28:59Z",
+  "csv": [
+    {
+      "header": [
+        "id",
+        "first_name",
+        "last_name",
+        "city",
+        "signup_date"
+      ],
+      "columns": [
+        {
+          "kind": "seq",
+          "min": 1
+        },
+        {
+          "kind": "first"
+        },
+        {
+          "kind": "last"
+        },
+        {
+          "kind": "city"
+        },
+        {
+          "kind": "date"
+        }
+      ],
+      "rows": 30
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Generate sample customer data as CSV: 30 rows with id, first name, last name, city, signup date. It is synthetic test data for a demo, not records from the system: attach it as customers.csv.",
+      "steps": [
+        {
+          "reasoning": "User wants synthetic sample data, not from system. We cannot fabricate data using system tools, but we can generate a file ourselves using create_file with CSV content. Since it's not from system, we can create synthetic data manually. Provide {{int:24:36}} rows with headers: id,first_name,last_name,city,signup_date. Need to generate plausible data. We'll create simple IDs 1-30, random names, cities, dates. Provide file via create_file.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "id,first_name,last_name,city,signup_date\n{{csv:0}}",
+                "file_name": "customers.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1170,\"file_name\":\"customers.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1832,
+            "completion_tokens": 625
+          },
+          "chars": 1682
+        },
+        {
+          "text": "Attached `customers.csv` containing {{int:24:36}} rows of synthetic customer data with the fields id, first_name, last_name, city, and signup_date.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2385,
+            "completion_tokens": 34
+          },
+          "chars": 136
+        }
+      ]
+    }
+  ]
+}

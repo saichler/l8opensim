@@ -1,0 +1,44 @@
+{
+  "id": "explore_models/device-fields/v0/s2",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:50:50Z",
+  "turns": [
+    {
+      "user_message": "Describe the network device model for me.",
+      "steps": [
+        {
+          "reasoning": "User asks \"Describe the network device model for me.\" They want model fields description. We need to use describe_model for NetworkDevice. Then summarize fields. Use describe_model tool.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 65
+          },
+          "chars": 225
+        },
+        {
+          "reasoning": "We need to describe the network device model based on fields. Provide a description of each field. Probably summarize the model. No tool needed. Just answer.",
+          "text": "**NetworkDevice model**\n\n| Field (path)                | Type    | Description |\n|-----------------------------|---------|-------------|\n| `id`                        | string  | Unique identifier for the network device (primary key). |\n| `equipmentinfo.vendor`      | string  | Manufacturer of the device (e.g., Cisco, Juniper, Arista). |\n| `equipmentinfo.model`       | string  | Specific model name/number of the device. |\n| `equipmentinfo.series`      | string  | Product series or family the model belongs to. |\n| `equipmentinfo.sysName`     | string  | System name or hostname configured on the device. |\n| `equipmentinfo.ipAddress`   | string  | Management IP address used to reach the device. |\n| `equipmentinfo.serialNumber`| string  | Manufacturer‑assigned serial number for inventory tracking. |\n| `equipmentinfo.version`     | string  | Software version (e.g., OS or firmware release) currently running. |\n| `equipmentinfo.firmwareVersion` | string | Firmware version of the device (may be separate from the OS version). |\n| `equipmentinfo.location`    | string  | Physical location or rack/room where the device is installed. |\n| `equipmentinfo.deviceType`  | string  | Type of device (e.g., switch, router, firewall, load‑balancer). |\n| `equipmentinfo.deviceStatus`| string  | Current operational status (e.g., online, offline, maintenance). |\n| `equipmentinfo.uptime`      | string  | How long the device has been up (usually expressed as a duration). |\n| `equipmentinfo.lastSeen`    | string  | Timestamp of the most recent successful poll or heartbeat. |\n| `equipmentinfo.interfaceCount` | int   | Number of network interfaces (ports) present on the device. |\n\n**Key points**\n\n- All fields are stored under the `equipmentinfo` sub‑object, which groups the hardware and operational attributes of a network device.  \n- The model is primarily identified by `id`, while `vendor`, `model`, `series`, and `serialNumber` are used for inventory and procurement tracking.  \n- Operational monitoring relies on `deviceStatus`, `uptime`, `lastSeen`, and `interfaceCount`.  \n- Network management and troubleshooting use `sysName`, `ipAddress`, `version`, and `firmwareVersion`.  \n\nThis structure lets Probler keep detailed inventory, status, and configuration information for each network device in the datacenter.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2032,
+            "completion_tokens": 563
+          },
+          "chars": 2481
+        }
+      ]
+    }
+  ]
+}

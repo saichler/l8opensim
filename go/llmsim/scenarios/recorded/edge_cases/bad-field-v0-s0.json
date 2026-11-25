@@ -1,0 +1,62 @@
+{
+  "id": "edge_cases/bad-field/v0/s0",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:47:46Z",
+  "turns": [
+    {
+      "user_message": "Show me devices where the colour is blue.",
+      "steps": [
+        {
+          "reasoning": "We need to query devices where colour is blue. Which model? Probably NetworkDevice has a field for colour? Need to describe model. Let's list modules.",
+          "tool_calls": [
+            {
+              "name": "list_modules",
+              "arguments": {}
+            }
+          ],
+          "tool_results": [
+            "{\"models\":[{\"area\":\"Inventory\",\"model\":\"NetworkDevice\",\"primaryKey\":\"id\",\"service\":\"NetDev\"},{\"area\":\"Inventory\",\"model\":\"GpuDevice\",\"primaryKey\":\"id\",\"service\":\"GpuDev\"},{\"area\":\"Kubernetes\",\"model\":\"K8SCluster\",\"primaryKey\":\"name\",\"service\":\"K8sClstr\"},{\"area\":\"Kubernetes\",\"model\":\"K8SNode\",\"primaryKey\":\"name\",\"service\":\"K8sNode\"},{\"area\":\"Kubernetes\",\"model\":\"K8SPod\",\"primaryKey\":\"key\",\"service\":\"K8sPod\"},{\"area\":\"Kubernetes\",\"model\":\"K8SDeployment\",\"primaryKey\":\"key\",\"service\":\"K8sDeploy\"},{\"area\":\"Alarms\",\"model\":\"Alarm\",\"primaryKey\":\"alarmId\",\"service\":\"Alarm\"},{\"area\":\"Alarms\",\"model\":\"EventRecord\",\"primaryKey\":\"eventId\",\"service\":\"Events\"},{\"area\":\"Collection\",\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\",\"service\":\"Targets\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1796,
+            "completion_tokens": 51
+          },
+          "chars": 164
+        },
+        {
+          "reasoning": "We need to find devices where colour is blue. Likely field name? We need to describe model NetworkDevice to see if it has a colour field.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2041,
+            "completion_tokens": 56
+          },
+          "chars": 176
+        },
+        {
+          "reasoning": "We need devices where colour is blue. Look at NetworkDevice fields: no colour field. Maybe colour stored in equipmentinfo.location? Not sure. Could be a custom attribute not in model. Since not present, we can't query. We should ask user clarification.",
+          "text": "I’m not seeing a “colour” field in the NetworkDevice model (the available fields are things like vendor, model, sysName, ipAddress, location, deviceStatus, etc.). Could you let me know which field holds the colour information, or if you’re looking for a different type of device that includes a colour attribute? Once I know the correct field, I can retrieve the matching records for you.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2278,
+            "completion_tokens": 147
+          },
+          "chars": 652
+        }
+      ]
+    }
+  ]
+}

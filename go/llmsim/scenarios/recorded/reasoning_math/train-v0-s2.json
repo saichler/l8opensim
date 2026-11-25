@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/train/v0/s2",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:10:46Z",
+  "turns": [
+    {
+      "user_message": "If a train leaves at 9:00 going 80 km/h and another leaves at 10:00 from the same station going 120 km/h, when does the second catch up?",
+      "steps": [
+        {
+          "reasoning": "We need to solve a word problem. No data needed from system. Just compute.\n\nFirst train leaves at 9:00 at {{int:64:96}} km/h. By 10:00, it has traveled 1 hour = {{int:64:96}} km. Second train leaves at 10:00 at {{int:96:144}} km/h. Relative speed = {{int:96:144}} - {{int:64:96}} = {{int:32:48}} km/h. Distance to close = {{int:64:96}} km. Time = distance / relative speed = {{int:64:96}} / {{int:32:48}} = 2 hours. So second catches up at 12:00. Provide answer.",
+          "text": "The first train has a one‑hour head start. By the time the second train departs at 10:00, the first train is already **{{int:64:96}} km** ahead ({{int:64:96}} km/h × 1 h).\n\nThe second train travels faster:\n\n- Speed of second train = **{{int:96:144}} km/h**\n- Speed of first train = **{{int:64:96}} km/h**\n- **Relative speed** = {{int:96:144}} km/h − {{int:64:96}} km/h = **{{int:32:48}} km/h**\n\nTo close the {{int:64:96}} km gap at {{int:32:48}} km/h, the time required is:\n\n\\[\n\\text{time} = \\frac{\\text{distance}}{\\text{relative speed}} = \\frac{{{int:64:96}}\\text{ km}}{{{int:32:48}}\\text{ km/h}} = 2\\text{ h}\n\\]\n\nStarting from 10:00, adding 2 hours gives **12:00**.\n\n**Answer:** The second train catches up to the first at **12:00 PM**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1826,
+            "completion_tokens": 335
+          },
+          "chars": 1017
+        }
+      ]
+    }
+  ]
+}

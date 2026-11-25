@@ -1,0 +1,44 @@
+{
+  "id": "reasoning_math/capacity/v0/s0",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:09:02Z",
+  "turns": [
+    {
+      "user_message": "We have 8 GPU servers with 8 GPUs each, each job needs 3 GPUs and jobs can't span servers. How many jobs can run at once? Explain step by step.",
+      "steps": [
+        {
+          "reasoning": "We need to answer: number of GPU servers =8, each has 8 GPUs =\u003e total GPUs =8*8={{int:51:77}}. Each job needs 3 GPUs, cannot span servers, so each server can host floor(8/3)=2 jobs (since 2*3=6 GPUs, leaving 2 idle). So total jobs =8 servers *2 ={{int:12:20}} jobs. Explain step by step. No need to query data? Could verify numbers using system data, but user gave numbers. Should we confirm via query? Might be nice to get actual data: count GpuDevice, sum deviceInfo.gpuCount. Let's do that to be thorough. We'll need to describe model GpuDevice first.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "GpuDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"deviceInfo.hostname\",\"type\":\"string\"},{\"path\":\"deviceInfo.vendor\",\"type\":\"string\"},{\"path\":\"deviceInfo.model\",\"type\":\"string\"},{\"path\":\"deviceInfo.ipAddress\",\"type\":\"string\"},{\"path\":\"deviceInfo.serialNumber\",\"type\":\"string\"},{\"path\":\"deviceInfo.location\",\"type\":\"string\"},{\"path\":\"deviceInfo.osVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.kernelVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.driverVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.cudaVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.dcgmVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"deviceInfo.uptime\",\"type\":\"string\"},{\"path\":\"deviceInfo.lastSeen\",\"type\":\"string\"},{\"path\":\"deviceInfo.gpuCount\",\"type\":\"int\"}],\"model\":\"GpuDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1824,
+            "completion_tokens": 173
+          },
+          "chars": 567
+        },
+        {
+          "reasoning": "We need number of jobs that can run concurrently given constraints: total GPUs = servers * GPUs per server = 8 * 8 = {{int:51:77}} GPUs. Each job requires 3 GPUs, cannot span servers, meaning each job must be allocated to a single server, using 3 GPUs from that server. Each server has 8 GPUs, so per server max jobs = floor(8/3) = 2 jobs (since 2*3=6 GPUs, leaving 2 idle). So across 8 servers, total jobs = 8 * 2 = {{int:12:20}} jobs. Provide step-by-step explanation.",
+          "text": "**Step‑by‑step calculation**\n\n1. **Total GPUs available**  \n   - 8 GPU servers × 8 GPUs each = **{{int:51:77}} GPUs**.\n\n2. **GPUs required per job**  \n   - Each job needs **3 GPUs**.\n\n3. **Jobs cannot span servers**  \n   - A job must get all its 3 GPUs from the *same* server.\n\n4. **How many jobs can fit on one server?**  \n   - A server has 8 GPUs.  \n   - The maximum whole‑job count that fits without exceeding 8 GPUs is the integer division:  \n     \\[\n     \\text{jobs per server} = \\left\\lfloor \\frac{8\\ \\text{GPUs}}{3\\ \\text{GPUs/job}} \\right\\rfloor = \\left\\lfloor 2.66\\ldots \\right\\rfloor = **2 jobs**\n     \\]\n   - After assigning 2 jobs (2 × 3 = 6 GPUs), 2 GPUs remain idle on that server (they’re not enough for another job).\n\n5. **Total concurrent jobs across all servers**  \n   - 2 jobs per server × 8 servers = **{{int:12:20}} jobs**.\n\n---\n\n**Answer:** With 8 servers each holding 8 GPUs, and each job needing 3 GPUs that must stay on a single server, you can run **{{int:12:20}} jobs at once**. (Each server runs 2 jobs, using 6 of its 8 GPUs; the remaining 2 GPUs per server stay unused.)",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2076,
+            "completion_tokens": 458
+          },
+          "chars": 1534
+        }
+      ]
+    }
+  ]
+}

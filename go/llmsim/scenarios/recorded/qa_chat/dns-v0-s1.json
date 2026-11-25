@@ -1,0 +1,24 @@
+{
+  "id": "qa_chat/dns/v0/s1",
+  "flavor": "qa_chat",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:03:58Z",
+  "turns": [
+    {
+      "user_message": "Why does DNS use both UDP and TCP?",
+      "steps": [
+        {
+          "reasoning": "The user asks a conceptual networking question: \"Why does DNS use both UDP and TCP?\" This is not about data in system, but a general question. According to instructions, we can answer directly, no need to use tools. Provide explanation: UDP for queries due to low overhead, small messages, fast; TCP for zone transfers, large responses, reliability, etc. Provide details.",
+          "text": "DNS was designed to be fast and lightweight for the overwhelming majority of queries, so it uses **UDP** as the default transport:\n\n| Reason for using UDP | What it gives DNS |\n|----------------------|-------------------|\n| **Connection‑less** – no three‑way handshake | Queries can be sent and answered with a single packet, keeping latency low. |\n| **Small messages** – most DNS responses fit into a single {{int:409:615}}‑byte packet (or up to {{int:3276:4916}} bytes with EDNS(0)). | One UDP datagram is enough, so the overhead of establishing a TCP connection is avoided. |\n| **Low overhead** – no per‑connection state on the server. | Servers can handle many more simultaneous queries. |\n| **Stateless on the network** – firewalls and NAT devices can forward UDP more easily than TCP. | Improves reliability of reaching recursive resolvers. |\n\nWhen DNS needs the capabilities that UDP cannot provide, it falls back to **TCP**:\n\n| Situation that forces TCP | Why TCP is required |\n|---------------------------|----------------------|\n| **Responses larger than the UDP limit** (e.g., DNSSEC‑signed records, many resource records, or large EDNS(0) payloads). | TCP can carry arbitrarily large messages because it streams data and supports fragmentation/reassembly. |\n| **Zone transfers (AXFR/IXFR)** – transferring an entire DNS zone between primary and secondary name servers. | The transfer may involve megabytes of data, requires reliable ordered delivery, and often needs flow control; TCP supplies these guarantees. |\n| **Reliability and ordering** – when a client explicitly requests TCP (e.g., with the `TC` flag set in a UDP response). | TCP ensures the response is received completely and in order, eliminating the need for the client to retry or reassemble fragments. |\n| **Security considerations** – some DNS‑based security mechanisms (e.g., DNS over TLS) use TCP as the transport layer. | TCP provides the underlying stream needed for TLS encryption. |\n\nIn short, **UDP gives DNS speed and efficiency for the vast majority of short queries**, while **TCP is a safety net for large or critical data exchanges that require reliability, ordering, and flow control**. The protocol switches automatically: a server returns a UDP response with the *truncated* (`TC`) flag set when the answer won’t fit, prompting the client to retry the same query over TCP. This hybrid approach lets DNS balance performance with robustness.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1796,
+            "completion_tokens": 597
+          },
+          "chars": 2810
+        }
+      ]
+    }
+  ]
+}

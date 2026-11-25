@@ -1,0 +1,24 @@
+{
+  "id": "code_debug/py-keyerror/v0/s0",
+  "flavor": "code_debug",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T18:54:51Z",
+  "turns": [
+    {
+      "user_message": "Why does this fail?\n```\nTraceback (most recent call last):\n  File \"app.py\", line 12, in \u003cmodule\u003e\n    print(config['database']['host'])\nKeyError: 'database'\n```",
+      "steps": [
+        {
+          "reasoning": "The user asks: \"Why does this fail?\" They show a Python traceback: trying to access config['database']['host'] but KeyError: 'database'. Likely config dict doesn't have 'database' key. Need to explain that config likely missing that key, perhaps loaded incorrectly, maybe using configparser etc. Provide possible solutions: ensure config contains that key, maybe using config.get('database',{}). Also could be reading from file missing section. Provide explanation.",
+          "text": "The error isn’t coming from Python’s internals – it’s telling you that the `config` dictionary you’re working with simply doesn’t have a key called **`'database'`**. When you write:\n\n```python\nprint(config['database']['host'])\n```\n\nPython evaluates it in two steps:\n\n1. **`config['database']`** – it looks for the top‑level key `'database'` in the `config` dict.  \n2. **`['host']`** – if step 1 had succeeded, it would then look for the key `'host'` inside the value returned from step 1 (which should itself be a dictionary).\n\nBecause step 1 fails (the key isn’t present), Python raises a **`KeyError: 'database'`** and never gets to step 2.\n\n### Why the key might be missing\n\n| Possible cause | What’s happening | How to fix / check |\n|----------------|------------------|--------------------|\n| **Configuration file not loaded** | You may have attempted to read a JSON/YAML/INI file but the file path is wrong, the file is empty, or the parsing failed, leaving `config` as an empty dict (`{}`) or a dict that lacks the expected sections. | Verify the file is being read correctly. Print or log `config` right after loading it to see its actual contents. |\n| **Wrong key name / typo** | The key in the file might be `db`, `Database`, or nested under another top‑level key (e.g., `settings`). | Open the configuration source and confirm the exact spelling and nesting. |\n| **Conditional loading** | Your code might only add the `'database'` entry under certain conditions (e.g., only in production). In a development environment those conditions aren’t met, so the key isn’t added. | Review any `if …:` blocks that populate `config`. Ensure the branch that adds `'database'` runs in the current context. |\n| **Overwritten variable** | Somewhere later in the script `config` could be reassigned to a different dict that doesn’t contain `'database'`. | Search for assignments like `config = …` after the initial load. |\n| **Using `configparser` (INI files)** | `configparser` returns a `ConfigParser` object, not a plain dict. Access is done via `config['database']['host']` *only* if the INI file has a `[database]` section. If the section is missing, you get a `KeyError`. | Check the INI file for a `[database]` section. If you’re mixing `configparser` with a plain dict, convert appropriately. |\n\n### Quick ways to avoid the crash\n\n```python\n# 1. Guard with .get() – returns None (or a default) instead of raising\nhost = config.get('database', {}).get('host')\nprint(host)   # prints None if the key chain is missing\n\n# 2. Provide a sensible default\nhost = config.get('database', {}).get('host', 'localhost')\nprint(host)\n\n# 3. Raise a clear error with a custom message\nif 'database' not in config or 'host' not in config['database']:\n    raise KeyError(\"Missing 'database.host' configuration – check your config file.\")\n```\n\n### Suggested debugging steps\n\n1. **Print the whole config** right after you load it:\n\n   ```python\n   print(\"Loaded config:\", config)\n   ```\n\n2. **Validate the structure** (e.g., using `jsonschema` or a simple `assert`):\n\n   ```python\n   assert isinstance(config, dict)\n   assert 'database' in config, \"Missing 'database' section\"\n   assert 'host' in config['database'], \"Missing 'host' in database config\"\n   ```\n\n3. **Check the source file** for the expected section/key.\n\nOnce you confirm that the `'database'` entry exists (and contains a `'host'` key), the line `print(config['database']['host'])` will work without raising a `KeyError`.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1831,
+            "completion_tokens": 958
+          },
+          "chars": 3983
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "id": "web_research/crashloop/v0/s2",
+  "flavor": "web_research",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:44:17Z",
+  "turns": [
+    {
+      "user_message": "@web How do I debug a pod in CrashLoopBackOff?",
+      "steps": [
+        {
+          "reasoning": "The user asks: \"@web How do I debug a pod in CrashLoopBackOff?\" They want a web search. Use web_search.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 5,
+                "query": "how to debug a pod in CrashLoopBackOff"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"how to debug a pod in CrashLoopBackOff\", \"results\": [{\"title\": \"Debugging - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Debugging\", \"snippet\": \"In engineering, debugging is the process of finding the root cause, workarounds, and possible fixes for bugs. For software, …Read more\"}, {\"title\": \"DEBUG Definition \u0026 Meaning - Merriam-Webster\", \"url\": \"https://www.merriam-webster.com/dictionary/debug\", \"snippet\": \"5 days ago · The meaning of DEBUG is to remove insects from. How to use debug in a sentence.\"}, {\"title\": \"Debugging code for absolute beginners - Visual Studio (Windows)\", \"url\": \"https://learn.microsoft.com/en-us/visualstudio/debugger/debugging-absolute-beginners?view=visualstudio\", \"snippet\": \"Dec 18, 2025 · In this article, we introduce the core principles of debugging and provide tips to get you started. It helps to clarify the …Read more\"}, {\"title\": \"Get started with Windows debugging - Windows drivers\", \"url\": \"https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/getting-started-with-windows-debugging\", \"snippet\": \"Apr 16, 2026 · To get started with Windows debugging, complete the following steps. 1. Install the Windows Debugger. Install …Read more\"}, {\"title\": \"What Is Debugging? | IBM\", \"url\": \"https://www.ibm.com/think/topics/debugging\", \"snippet\": \"Apr 7, 2023 · Debugging is the process of finding, isolating and resolving coding errors known as bugs in software programs. …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1905,
+            "completion_tokens": 73
+          },
+          "chars": 179
+        },
+        {
+          "reasoning": "Search results are generic, not specific to Kubernetes CrashLoopBackOff. Might need to adjust query.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "Kubernetes CrashLoopBackOff debug pod"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"Kubernetes CrashLoopBackOff debug pod\", \"results\": [{\"title\": \"Kubernetes\", \"url\": \"https://kubernetes.io/\", \"snippet\": \"Kubernetes, also known as K8s, is an open source system for automating deployment, scaling, and management of containerized …\"}, {\"title\": \"Kubernetes - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Kubernetes\", \"snippet\": \"Common attributes of Container Attached Storage include the use of extensions to Kubernetes, such as custom resource definitions, …\"}, {\"title\": \"Kubernetes Documentation\", \"url\": \"https://kubernetes.io/docs/home/\", \"snippet\": \"Kubernetes is an open source container orchestration engine for automating deployment, scaling, and management of containerized …\"}, {\"title\": \"Introduction to Kubernetes (K8s) - GeeksforGeeks\", \"url\": \"https://www.geeksforgeeks.org/devops/introduction-to-kubernetes-k8s/\", \"snippet\": \"Oct 3, 2026 · A Kubernetes cluster is a group of computers (called nodes) that work together to run your containerized applications. …\"}, {\"title\": \"What is Kubernetes? - Red Hat\", \"url\": \"https://www.redhat.com/en/topics/containers/what-is-kubernetes\", \"snippet\": \"Jun 26, 2026 · Kubernetes is an open source container orchestration platform that automates the deployment, management, and …\"}, {\"title\": \"Kubernetes Tutorial - GeeksforGeeks\", \"url\": \"https://www.geeksforgeeks.org/devops/kubernetes-tutorial/\", \"snippet\": \"Jun 25, 2026 · Developed at Google in 2014, Kubernetes draws on Google’s production experience and is now maintained by the …\"}, {\"title\": \"What Is Kubernetes? | Microsoft Azure\", \"url\": \"https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-kubernetes/?msockid=0bbd593938c261c22cfc4122393060c4\", \"snippet\": \"Kubernetes is open-source software that automates the deployment, management, and scaling of containerized applications. It …\"}, {\"title\": \"What is Kubernetes? - Google Cloud\", \"url\": \"https://cloud.google.com/learn/what-is-kubernetes\", \"snippet\": \"Kubernetes (sometimes shortened to K8s with the 8 standing for the number of letters between the \\\"K\\\" and the \\\"s\\\") is an open …\"}, {\"title\": \"Get started with Kubernetes - Azure Kubernetes Service\", \"url\": \"https://learn.microsoft.com/en-us/azure/aks/get-started-kubernetes\", \"snippet\": \"Jul 19, 2025 · This guide provides resources to help you learn the basics of Kubernetes, a portable, extensible, open-source platform …\"}, {\"title\": \"What is Kubernetes? - IBM\", \"url\": \"https://www.ibm.com/think/topics/kubernetes\", \"snippet\": \"Mar 11, 2024 · Kubernetes is an open source container orchestration platform that automates deployment, management and scaling …\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2325,
+            "completion_tokens": 59
+          },
+          "chars": 176
+        },
+        {
+          "reasoning": "The web search results didn't return specific helpful docs. Could fetch a specific article about CrashLoopBackOff debugging, maybe from Kubernetes docs. Let's search with more specific query.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "CrashLoopBackOff troubleshooting pod"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"CrashLoopBackOff troubleshooting pod\", \"results\": [{\"title\": \"Infographic Three Pillars royalty-free images - Shutterstock\", \"url\": \"https://www.shutterstock.com/search/infographic-three-pillars?msockid=0f1d0609d6d06e1a150b1e12d7c56ff9\", \"snippet\": \"Find 5+ Hundred Infographic Three Pillars stock images in HD and millions of other royalty-free stock photos, 3D objects, illustrations …\"}, {\"title\": \"Infographic 3 Pillars royalty-free images - Shutterstock\", \"url\": \"https://www.shutterstock.com/search/infographic-3-pillars?msockid=0f1d0609d6d06e1a150b1e12d7c56ff9\", \"snippet\": \"Find 408 Infographic 3 Pillars stock images in HD and millions of other royalty-free stock photos, 3D objects, illustrations and vectors …\"}, {\"title\": \"3 Pillars Infographic. Free PPT \u0026 Google Slides Template\", \"url\": \"https://www.slidescarnival.com/template/3-pillars-infographic/331358\", \"snippet\": \"This professionally designed infographic template is perfect for business professionals looking to make a striking impact. With vibrant …\"}, {\"title\": \"Three pillars infographic Images - Free Download on Magnific …\", \"url\": \"https://www.magnific.com/free-photos-vectors/three-pillars-infographic\", \"snippet\": \"Find \u0026 Download Free Graphic Resources for Three pillars infographic Vectors, Stock Photos \u0026 PSD files. Free for commercial use …\"}, {\"title\": \"Modern Three Pillar Business Framework Infographic ... - Dreamstime\", \"url\": \"https://www.dreamstime.com/illustration/modern-three-pillar-business-framework-infographic.html\", \"snippet\": \"Download 50 Modern Three Pillar Business Framework Infographic Stock Illustrations, Vectors \u0026 Clipart for FREE or amazingly low …\"}, {\"title\": \"three pillars Infographic diagram chart template for business ...\", \"url\": \"https://www.vecteezy.com/vector-art/53096754-three-pillars-infographic-diagram-chart-template-for-business-presentation-illustration\", \"snippet\": \"Looking for an editable template? Download the three pillars Infographic diagram chart template for business presentation illustration. …\"}, {\"title\": \"Three Pillars Infographic - Pinterest\", \"url\": \"https://www.pinterest.com/ideas/three-pillars-infographic/916012006246/\", \"snippet\": \"Find and save ideas about three pillars infographic on Pinterest.\"}, {\"title\": \"Free Pillars PowerPoint Templates and Google Slides Themes\", \"url\": \"https://www.slideegg.com/powerpoint/pillars-powerpoint-templates\", \"snippet\": \"Our Pillars PowerPoint templates boast visually engaging, editable pillar images, and infographics that convey your message with …\"}, {\"title\": \"3 Pillars Infographic - Pinterest\", \"url\": \"https://www.pinterest.com/ideas/3-pillars-infographic/951769506203/\", \"snippet\": \"Find and save ideas about 3 pillars infographic on Pinterest.\"}, {\"title\": \"Three Pillar Infographic PowerPoint Presentation and Slides\", \"url\": \"https://www.slideteam.net/tag/three-pillar-infographic-powerpoint-templates-ppt-slides-images-graphics-and-themes\", \"snippet\": \"Choose simple yet stunning designs from our Three Pillar Infographic presentation templates and google slides.\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 3052,
+            "completion_tokens": 71
+          },
+          "chars": 266
+        },
+        {
+          "reasoning": "The web search didn't return relevant results; maybe need more specific query like \"kubectl describe pod CrashLoopBackOff\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "kubectl describe pod CrashLoopBackOff debug"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"kubectl describe pod CrashLoopBackOff debug\", \"results\": [{\"title\": \"Command line tool (kubectl) | Kubernetes\", \"url\": \"https://kubernetes.io/docs/reference/kubectl/\", \"snippet\": \"Jun 30, 2026 · Kubernetes provides a command line tool for communicating with a Kubernetes cluster's control plane, using the …\"}, {\"title\": \"Install and Set Up kubectl on Windows | Kubernetes\", \"url\": \"https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/\", \"snippet\": \"May 15, 2025 · To install kubectl on Windows you can use either Chocolatey package manager, Scoop command-line installer, or …\"}, {\"title\": \"Install and Set Up kubectl - Kubernetes\", \"url\": \"https://k8s-docs.netlify.app/en/docs/tasks/tools/install-kubectl/\", \"snippet\": \"Mar 25, 2020 · The Kubernetes command-line tool, kubectl, allows you to run commands against Kubernetes clusters. You can use …\"}, {\"title\": \"Kubernetes - Kubectl Commands - GeeksforGeeks\", \"url\": \"https://www.geeksforgeeks.org/devops/kubernetes-kubectl-commands/\", \"snippet\": \"Oct 12, 2026 · The Kubernetes command-line tool, kubectl, allows you to run commands against Kubernetes clusters. You can use …\"}, {\"title\": \"Kubernetes - Kubectl - GeeksforGeeks\", \"url\": \"https://www.geeksforgeeks.org/devops/kubernetes-kubectl/\", \"snippet\": \"Apr 9, 2026 · Kubectl (often pronounced cube-control or cube-c-t-l) is the command-line interface (CLI) for Kubernetes. It acts as …\"}, {\"title\": \"Set up kubectl and eksctl - Amazon EKS\", \"url\": \"https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html\", \"snippet\": \"Learn how to install or update the kubectl and eksctl command line tools to work with Kubernetes and Amazon EKS features.\"}, {\"title\": \"Install kubectl and configure cluster access - Google Cloud\", \"url\": \"https://docs.cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl\", \"snippet\": \"Nov 10, 2026 · This page provides instructions to install the kubectl command-line tool that's used to manage and access Google …\"}, {\"title\": \"Kubernetes - Kubectl - Online Tutorials Library\", \"url\": \"https://www.tutorialspoint.com/kubernetes/kubernetes_kubectl.htm\", \"snippet\": \"Kubectl is the command line utility to interact with Kubernetes API. It is an interface which is used to communicate and manage pods …\"}, {\"title\": \"Install Tools | Kubernetes\", \"url\": \"https://kubernetes.io/docs/tasks/tools/\", \"snippet\": \"Jan 12, 2026 · The Kubernetes command-line tool, kubectl, allows you to run commands against Kubernetes clusters. You can use …\"}, {\"title\": \"kubectl | Kubernetes\", \"url\": \"https://kubernetes.io/docs/reference/kubectl/kubectl/\", \"snippet\": \"Jul 24, 2026 · SynopsisCommand line tool for communicating with a Kubernetes cluster's control plane, using the Kubernetes API.\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 3851,
+            "completion_tokens": 64
+          },
+          "chars": 205
+        },
+        {
+          "reasoning": "The web search results are not giving specific articles about debugging CrashLoopBackOff. Likely need to fetch a more specific page, like a blog or StackOverflow. Let's search for \"CrashLoopBackOff kubectl logs\"",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "CrashLoopBackOff kubectl logs explain"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"CrashLoopBackOff kubectl logs explain\", \"results\": [{\"title\": \"Welcome to the Minecraft Official Site | Minecraft\", \"url\": \"https://www.minecraft.net/\", \"snippet\": \"Explore new gaming adventures, accessories, \u0026 merchandise on the Minecraft Official Site. Buy \u0026 download the game here, or …\"}, {\"title\": \"Creator Pages arrive on the Marketplace - Minecraft\", \"url\": \"https://www.minecraft.net/en-us/article/creator-pages-arrive-on-the-marketplace\", \"snippet\": \"Nov 3, 2026 · Creator Pages are a new Minecraft Marketplace feature that gives creators a place to showcase their offerings and …\"}, {\"title\": \"How To Set Up A Multiplayer Game – Minecraft Education\", \"url\": \"https://edusupport.minecraft.net/hc/en-us/articles/360047555531-How-To-Set-Up-A-Multiplayer-Game\", \"snippet\": \"Can I setup a dedicated server for multiplayer in Minecraft Education? Minecraft Education is not currently compatible with server …\"}, {\"title\": \"Beta and Preview Information and Changelogs - Minecraft\", \"url\": \"https://feedback.minecraft.net/hc/en-us/sections/360001185332-Beta-and-Preview-Information-and-Changelogs\", \"snippet\": \"00900 Launcher 02078 Minecraft Franchise 00275 Release Changelogs 00466 Beta and Preview Information and Changelogs …\"}, {\"title\": \"Download and Install the Minecraft Launcher | Minecraft Help\", \"url\": \"https://help.minecraft.net/hc/en-us/articles/23907917790093-How-to-Download-and-Install-the-Minecraft-Launcher\", \"snippet\": \"The Minecraft Launcher is the easiest way to download, manage, and update your Minecraft game installations and is supported on …\"}, {\"title\": \"Minecraft Education\", \"url\": \"https://edusupport.minecraft.net/hc/en-us\", \"snippet\": \"Minecraft Education Support Center Technical support, customer resources, and community forums.\"}, {\"title\": \"Minecraft Education Add-Ons Collection\", \"url\": \"https://education.minecraft.net/en-us/resources/minecraft_education_add_ons_collection\", \"snippet\": \"Add-Ons Collection Interact with ancient civilizations, watch mathematics concepts come to life, and easily transform a simple grassy …\"}, {\"title\": \"Get Minecraft for Your Classroom | Minecraft Education\", \"url\": \"https://education.minecraft.net/\", \"snippet\": \"Get Minecraft Education for your classroom. Find out how using this game will take your students’ learning to the next level.\"}, {\"title\": \"Knowledge Base – Minecraft Feedback\", \"url\": \"https://feedback.minecraft.net/hc/en-us/categories/115000410252-Knowledge-Base\", \"snippet\": \"Do you have an idea that would make Minecraft even better? Want to learn what the community wants? Check out our feedback site …\"}, {\"title\": \"Minecraft - Atlas\", \"url\": \"https://atlas.minecraft.net/\", \"snippet\": \"OR Login with your Microsoft Account\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 4614,
+            "completion_tokens": 84
+          },
+          "chars": 287
+        },
+        {
+          "reasoning": "The web search results returned irrelevant (Minecraft). We need better query. Let's search specifically for \"Kubernetes CrashLoopBackOff debugging steps\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "Kubernetes CrashLoopBackOff troubleshooting steps"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"Kubernetes CrashLoopBackOff troubleshooting steps\", \"results\": [{\"title\": \"Kubernetes\", \"url\": \"https://kubernetes.io/\", \"snippet\": \"Kubernetes, also known as K8s, is an open source system for automating deployment, scaling, and management of containerized …\"}, {\"title\": \"Kubernetes - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Kubernetes\", \"snippet\": \"Common attributes of Container Attached Storage include the use of extensions to Kubernetes, such as custom resource definitions, …\"}, {\"title\": \"Kubernetes Documentation\", \"url\": \"https://kubernetes.io/docs/home/\", \"snippet\": \"Kubernetes is an open source container orchestration engine for automating deployment, scaling, and management of containerized …\"}, {\"title\": \"Introduction to Kubernetes (K8s) - GeeksforGeeks\", \"url\": \"https://www.geeksforgeeks.org/devops/introduction-to-kubernetes-k8s/\", \"snippet\": \"Oct 3, 2026 · A Kubernetes cluster is a group of computers (called nodes) that work together to run your containerized applications. …\"}, {\"title\": \"What is Kubernetes? - Red Hat\", \"url\": \"https://www.redhat.com/en/topics/containers/what-is-kubernetes\", \"snippet\": \"Jun 26, 2026 · Kubernetes is an open source container orchestration platform that automates the deployment, management, and …\"}, {\"title\": \"Kubernetes Tutorial - GeeksforGeeks\", \"url\": \"https://www.geeksforgeeks.org/devops/kubernetes-tutorial/\", \"snippet\": \"Jun 25, 2026 · Developed at Google in 2014, Kubernetes draws on Google’s production experience and is now maintained by the …\"}, {\"title\": \"What Is Kubernetes? | Microsoft Azure\", \"url\": \"https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-kubernetes/?msockid=21e81080e49c609d2925089be5a461c5\", \"snippet\": \"Kubernetes is open-source software that automates the deployment, management, and scaling of containerized applications. It …\"}, {\"title\": \"What is Kubernetes? - Google Cloud\", \"url\": \"https://cloud.google.com/learn/what-is-kubernetes\", \"snippet\": \"Kubernetes (sometimes shortened to K8s with the 8 standing for the number of letters between the \\\"K\\\" and the \\\"s\\\") is an open …\"}, {\"title\": \"Get started with Kubernetes - Azure Kubernetes Service\", \"url\": \"https://learn.microsoft.com/en-us/azure/aks/get-started-kubernetes\", \"snippet\": \"Jul 19, 2025 · This guide provides resources to help you learn the basics of Kubernetes, a portable, extensible, open-source platform …\"}, {\"title\": \"What is Kubernetes? - IBM\", \"url\": \"https://www.ibm.com/think/topics/kubernetes\", \"snippet\": \"Mar 11, 2024 · Kubernetes is an open source container orchestration platform that automates deployment, management and scaling …\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 5297,
+            "completion_tokens": 67
+          },
+          "chars": 242
+        },
+        {
+          "reasoning": "The web search results are not giving specific article content; likely need to fetch a relevant page. Let's search for \"CrashLoopBackOff troubleshooting kubectl describe pod\"",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 5,
+                "query": "CrashLoopBackOff troubleshooting kubectl logs"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"CrashLoopBackOff troubleshooting kubectl logs\", \"results\": [{\"title\": \"Chicken Tikka Masala Recipe - Swasthi's Recipes\", \"url\": \"https://www.indianhealthyrecipes.com/chicken-tikka-masala/\", \"snippet\": \"May 9, 2024 · This Chicken Tikka Masala is spicy, creamy, flavorful and crazy delicious! You won’t want to stop with one serving! My …Read more\"}, {\"title\": \"The Best Chicken Tikka Masala Recipe - Food Network\", \"url\": \"https://www.foodnetwork.com/recipes/food-network-kitchen/the-best-chicken-tikka-masala-7264944\", \"snippet\": \"Food Network Kitchen’s best chicken tikka masala recipe features boneless, skinless chicken thighs that get charred under the …Read more\"}, {\"title\": \"Chicken Tikka Masala Recipe\", \"url\": \"https://www.allrecipes.com/recipe/45736/chicken-tikka-masala/\", \"snippet\": \"Sep 5, 2026 · Chicken tikka masala made easy with this great-tasting recipe — simply marinate chicken breast in yogurt and spices …Read more\"}, {\"title\": \"Authentic Chicken Tikka Masala - Ministry of Curry\", \"url\": \"https://ministryofcurry.com/chicken-tikka-masala/\", \"snippet\": \"Apr 15, 2025 · Homemade Chicken Tikka Masala recipe for a flavorful, restaurant-style curry featuring juicy, marinated chicken …Read more\"}, {\"title\": \"The Best Chicken Tikka Masala Recipe - Serious Eats\", \"url\": \"https://www.seriouseats.com/chicken-tikka-masala-for-the-grill-recipe\", \"snippet\": \"2 days ago · Our secret to incredible Chicken Tikka Masala is a salty yogurt-based marinade followed by intense charring on a hot grill.\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 6025,
+            "completion_tokens": 72
+          },
+          "chars": 257
+        },
+        {
+          "reasoning": "The web search results are not returning relevant Kubernetes info due to perhaps a bug or generic results. We need to provide answer based on knowledge; we can synthesize answer without needing data from system. The user asked: \"@web How do I debug a pod in CrashLoopBackOff?\" So they want instructions. We can give steps: describe pod, get events, check logs with previous container, check init containers, check restart count, check readiness/liveness probes, check image, check resources, exec into pod if possible, use kubectl run -i --tty for debugging, check config maps, check environment variables, check node status, etc. Provide a concise guide.\n\nNo need to use internal data. Provide answer.",
+          "text": "### Debugging a pod that’s stuck in **CrashLoopBackOff**\n\n`CrashLoopBackOff` means the container starts, crashes, and the kubelet keeps trying to restart it.  The goal is to find out **why the container is exiting**.  Follow these steps (most of them use `kubectl`):\n\n---\n\n#### 1. Get a quick overview  \n\n```bash\nkubectl get pod \u003cpod-name\u003e -n \u003cnamespace\u003e\n```\n\nYou’ll see the restart count and the current state (e.g. `CrashLoopBackOff`).\n\n---\n\n#### 2. Inspect the pod’s details  \n\n```bash\nkubectl describe pod \u003cpod-name\u003e -n \u003cnamespace\u003e\n```\n\n* Look at **Events** at the bottom – they often show the exact reason the container exited (e.g. `Failed to start container`, `Back‑off restarting failed container`).\n* Check the **Status** section for the exit code and reason (`ExitCode`, `Reason`, `Message`).\n\n---\n\n#### 3. View the container logs  \n\n* **Current logs** (most recent attempt):\n\n  ```bash\n  kubectl logs \u003cpod-name\u003e -n \u003cnamespace\u003e\n  ```\n\n* **Previous logs** (the attempt that just crashed):\n\n  ```bash\n  kubectl logs \u003cpod-name\u003e -n \u003cnamespace\u003e --previous\n  ```\n\nIf the logs are empty, the container may be crashing **before** it can write anything (e.g. a bad entry‑point, missing binary, or immediate segfault).\n\n---\n\n#### 4. Check init containers (if any)  \n\nInit containers run before the main container. A failure there can also leave the pod in `CrashLoopBackOff`.\n\n```bash\nkubectl logs \u003cpod-name\u003e -n \u003cnamespace\u003e -c \u003cinit-container-name\u003e\n```\n\n---\n\n#### 5. Verify the pod spec  \n\n```bash\nkubectl get pod \u003cpod-name\u003e -n \u003cnamespace\u003e -o yaml\n```\n\nKey things to review:\n\n| Item | Why it matters |\n|------|----------------|\n| **image** | Typos, wrong tag, or missing image. Pull the image locally (`docker pull …`) and run it to see if it starts. |\n| **command / args** | An incorrect entry‑point or missing arguments can cause an immediate exit. |\n| **environment variables** | Missing or wrong values (e.g., DB URLs, secrets) can cause the app to abort. |\n| **resource limits/requests** | If limits are too low, the container may be OOM‑killed. |\n| **liveness / readiness probes** | Mis‑configured probes can kill a healthy container. |\n| **volume mounts** | Wrong mount paths or missing files (config maps, secrets) can cause start‑up failures. |\n\n---\n\n#### 6. Look for OOM‑kill or node‑level problems  \n\n```bash\nkubectl get events -n \u003cnamespace\u003e --field-selector reason=OOMKilled\n```\n\nOr check the node’s `dmesg` / system logs if you suspect the node killed the container.\n\n---\n\n#### 7. Run an interactive debugging container  \n\nIf the image is simple enough (or you have a compatible debug image), you can replace the failing container with a shell to explore the filesystem and environment:\n\n```bash\nkubectl run debug-pod \\\n  --rm -i --tty \\\n  --image=busybox \\\n  --restart=Never \\\n  --command -- sh\n```\n\nOr temporarily edit the pod (or deployment) to add `command: [\"sleep\",\"infinity\"]` so you can `kubectl exec` into it:\n\n```bash\nkubectl exec -it \u003cpod-name\u003e -n \u003cnamespace\u003e -- /bin/sh\n```\n\nThen you can:\n\n* `cat` config files or environment files.\n* Check permissions on mounted volumes.\n* Run the actual start command manually to see the error.\n\n---\n\n#### 8. Review related resources  \n\n* **ConfigMaps / Secrets** – ensure they exist and are mounted correctly.\n* **Service / Ingress** – if the container expects network connectivity, verify DNS and service endpoints.\n* **RBAC / ServiceAccount** – missing permissions can cause the app to exit with “permission denied”.\n\n---\n\n#### 9. Reproduce locally  \n\nPull the same image and run it on your workstation with the same command and env vars:\n\n```bash\ndocker run --rm -e VAR1=... -v $(pwd)/config:/app/config \u003cimage\u003e:\u003ctag\u003e\n```\n\nIf it fails locally, you’ll see the same error more quickly.\n\n---\n\n#### {{int:8:12}}. Common culprits \u0026 quick fixes  \n\n| Symptom | Likely cause | Quick check / fix |\n|---------|--------------|-------------------|\n| `exit code 1` with no log output | Bad `command` or missing binary | Verify `command` and image contents (`docker run -it \u003cimage\u003e /bin/sh`). |\n| `CrashLoopBackOff` after a few restarts, logs show “OOMKilled” | Memory limit too low | Increase `resources.limits.memory`. |\n| Repeated “Readiness probe failed” | Probe path/port wrong | `kubectl describe pod` → `Readiness probe` details; adjust. |\n| “Error: could not find config file” | ConfigMap not mounted / wrong path | Check `volumeMounts` and the path used by the app. |\n| Immediate exit with `Segmentation fault` | Binary built for wrong architecture or corrupted image | Pull the image locally and run `file` on the binary. |\n| “Permission denied” when accessing a file | Incorrect securityContext or file permissions | Verify `fsGroup`, `runAsUser`, and volume permissions. |\n\n---\n\n### TL;DR Checklist\n\n1. `kubectl describe pod …` – read events \u0026 exit reason.  \n2. `kubectl logs … --previous` – see the last crash logs.  \n3. Verify **image**, **command/args**, **env vars**, **probes**, **resources**, **volumes** in the pod spec.  \n4. Look for OOM‑kill or node‑level events.  \n5. If needed, run an interactive debug pod (`kubectl exec` or `kubectl run` with a shell).  \n6. Re‑produce the start command locally to see the exact error.  \n\nFollowing these steps will usually reveal the root cause of a `CrashLoopBackOff` and let you fix the pod definition or the application code. Good luck!",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 6481,
+            "completion_tokens": 1507
+          },
+          "chars": 6114
+        }
+      ]
+    }
+  ]
+}

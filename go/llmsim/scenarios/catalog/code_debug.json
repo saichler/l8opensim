@@ -1,0 +1,98 @@
+{
+  "flavor": "code_debug",
+  "mode": "tanto",
+  "validators": [
+    "code"
+  ],
+  "expect_tools": [],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "go-nil",
+      "params": {},
+      "turns": [
+        "My Go service crashes with this:\n```\npanic: runtime error: invalid memory address or nil pointer dereference\n[signal SIGSEGV: segmentation violation code=0x1 addr=0x18 pc=0x4a2b3c]\ngoroutine 1 [running]:\nmain.(*Server).handle(0x0, ...)\n\t/app/server.go:42 +0x1c\n```\nWhat is wrong?"
+      ]
+    },
+    {
+      "id": "py-keyerror",
+      "params": {},
+      "turns": [
+        "Why does this fail?\n```\nTraceback (most recent call last):\n  File \"app.py\", line 12, in <module>\n    print(config['database']['host'])\nKeyError: 'database'\n```"
+      ]
+    },
+    {
+      "id": "js-undefined",
+      "params": {},
+      "turns": [
+        "I get `TypeError: Cannot read properties of undefined (reading 'map')` in my React component that renders `props.items.map(...)`. How do I fix it?"
+      ]
+    },
+    {
+      "id": "go-deadlock",
+      "params": {},
+      "turns": [
+        "fatal error: all goroutines are asleep - deadlock!\n```go\nfunc main() {\n    ch := make(chan int)\n    ch <- 1\n    fmt.Println(<-ch)\n}\n```\nWhy?"
+      ]
+    },
+    {
+      "id": "k8s-crashloop",
+      "params": {},
+      "turns": [
+        "My pod is in CrashLoopBackOff and the logs say `exec /app/server: exec format error`. What is the problem?"
+      ]
+    },
+    {
+      "id": "py-import",
+      "params": {},
+      "turns": [
+        "ModuleNotFoundError: No module named 'requests' but I installed it with pip. What is going on?"
+      ]
+    },
+    {
+      "id": "go-race",
+      "params": {},
+      "turns": [
+        "The race detector reports `WARNING: DATA RACE` on a map I write from several goroutines. How do I fix this?"
+      ]
+    },
+    {
+      "id": "sql-deadlock",
+      "params": {},
+      "turns": [
+        "PostgreSQL error: `deadlock detected` when two transactions update the same rows in different order. How do I avoid it?"
+      ]
+    },
+    {
+      "id": "docker-port",
+      "params": {},
+      "turns": [
+        "My container runs but I can't reach it on localhost:8080. I started it with `docker run myapp`. Why?"
+      ]
+    },
+    {
+      "id": "go-json",
+      "params": {},
+      "turns": [
+        "My Go struct marshals to `{}` with encoding/json:\n```go\ntype user struct {\n    name string\n    age  int\n}\n```\nWhy is it empty?"
+      ]
+    },
+    {
+      "id": "ssl-error",
+      "params": {},
+      "turns": [
+        "curl fails with `SSL certificate problem: unable to get local issuer certificate`. How do I fix it properly?"
+      ]
+    },
+    {
+      "id": "go-fix-followup",
+      "params": {},
+      "turns": [
+        "Why does this Go code print the same value 3 times?\n```go\nfor i := 0; i < 3; i++ {\n    defer func() { fmt.Println(i) }()\n}\n```",
+        "Show me the fixed version."
+      ]
+    }
+  ]
+}

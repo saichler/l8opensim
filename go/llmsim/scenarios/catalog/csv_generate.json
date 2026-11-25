@@ -1,0 +1,103 @@
+{
+  "flavor": "csv_generate",
+  "mode": "tanto",
+  "validators": [
+    "csv"
+  ],
+  "expect_tools": [],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "employees",
+      "params": {
+        "rows": [
+          "20",
+          "50"
+        ]
+      },
+      "turns": [
+        "Generate a CSV of {{rows}} fictitious employees with id, name, email, department, salary and hire date. It is synthetic test data for a demo, not records from the system: attach it as employees.csv."
+      ]
+    },
+    {
+      "id": "products",
+      "params": {},
+      "turns": [
+        "Create a sample CSV of 30 products with sku, name, category, price and stock. It is synthetic test data for a demo, not records from the system: attach it as products.csv."
+      ]
+    },
+    {
+      "id": "invoices",
+      "params": {},
+      "turns": [
+        "Generate a CSV of 25 fictitious invoices: invoice number, customer, date, amount, status. It is synthetic test data for a demo, not records from the system: attach it as invoices.csv."
+      ]
+    },
+    {
+      "id": "sensors",
+      "params": {},
+      "turns": [
+        "Make a CSV with 40 rows of fictitious temperature sensor readings: timestamp, sensor id, temperature, humidity. It is synthetic test data for a demo, not records from the system: attach it as sensor_readings.csv."
+      ]
+    },
+    {
+      "id": "customers",
+      "params": {},
+      "turns": [
+        "Generate sample customer data as CSV: 30 rows with id, first name, last name, city, signup date. It is synthetic test data for a demo, not records from the system: attach it as customers.csv."
+      ]
+    },
+    {
+      "id": "servers",
+      "params": {},
+      "turns": [
+        "Create a CSV of 20 fictitious servers with hostname, ip, cpu cores, memory GB, os and location. It is synthetic test data for a demo, not records from the system: attach it as servers.csv."
+      ]
+    },
+    {
+      "id": "orders-file",
+      "params": {},
+      "turns": [
+        "Generate a CSV file of 30 fictitious orders. It is synthetic test data for a demo, not records from the system: attach it as orders.csv."
+      ]
+    },
+    {
+      "id": "students",
+      "params": {},
+      "turns": [
+        "Generate a CSV of 25 fictitious students with id, name, grade and score. It is synthetic test data for a demo, not records from the system: attach it as students.csv."
+      ]
+    },
+    {
+      "id": "transactions",
+      "params": {},
+      "turns": [
+        "Create sample bank transactions as CSV: 40 rows with date, description, amount, balance. It is synthetic test data for a demo, not records from the system: attach it as transactions.csv."
+      ]
+    },
+    {
+      "id": "inventory",
+      "params": {},
+      "turns": [
+        "Generate a CSV of 30 warehouse inventory items with item id, name, quantity, location and reorder level. It is synthetic test data for a demo, not records from the system: attach it as inventory.csv."
+      ]
+    },
+    {
+      "id": "tickets",
+      "params": {},
+      "turns": [
+        "Make a CSV of 20 fictitious support tickets with id, title, priority, status and created date. It is synthetic test data for a demo, not records from the system: attach it as tickets.csv."
+      ]
+    },
+    {
+      "id": "followup-column",
+      "params": {},
+      "turns": [
+        "Generate a CSV of 20 fictitious employees with id, name and salary. It is synthetic test data for a demo, not records from the system: attach it as employees.csv.",
+        "Add a column with a 10% raise and attach the full CSV again."
+      ]
+    }
+  ]
+}

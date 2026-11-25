@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-04/v0/s2",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:17:21Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user asked for a weekly report.\n\nNext part of the conversation:\nUser: Write the weekly network report as markdown.\n\nAssistant: Attached weekly_report.md with device status, alarms and top issues.\n\nUser: Add the alarm counts per severity.\n\nAssistant: Updated: critical 4, major 9, minor 6, warning 11.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary that replaces current one. Current summary says: \"The user asked for a weekly report.\"\n\nNow we have new conversation: user wants weekly network report as markdown; assistant attached weekly_report.md with device status, alarms and top issues. Then user asks add alarm counts per severity. Assistant updates: critical 4, major 9, minor 6, warning {{int:8:14}}.\n\nWe need to include facts: weekly network report, markdown, includes device status, alarms, top issues, alarm counts per severity: critical 4, major 9, minor 6, warning {{int:8:14}}.\n\nNo placeholders needed. No greetings. Keep open questions? None. So final summary.\n\n",
+          "text": "User requested a weekly network report in markdown. Assistant provided weekly_report.md containing device status, alarms, and top issues. User asked to include alarm counts per severity; Assistant updated the report with counts: critical 4, major 9, minor 6, warning {{int:8:14}}.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 292,
+            "completion_tokens": 205
+          },
+          "chars": 917
+        }
+      ]
+    }
+  ]
+}

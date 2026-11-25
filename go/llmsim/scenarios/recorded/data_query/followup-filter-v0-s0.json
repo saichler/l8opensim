@@ -1,0 +1,130 @@
+{
+  "id": "data_query/followup-filter/v0/s0",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:41:46Z",
+  "params": {
+    "vendor": [
+      "Cisco",
+      "Juniper"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "List the routers that are online.",
+      "steps": [
+        {
+          "reasoning": "We need to list routers that are online. Likely model NetworkDevice with type/router and status online. Need to describe model to see fields.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 58
+          },
+          "chars": 180
+        },
+        {
+          "reasoning": "We need list routers that are online. Need to know which devices are routers; likely deviceType field indicates type. Need to filter where deviceType = 'router' and deviceStatus = 'online' maybe. The field is equipmentinfo.deviceType and equipmentinfo.deviceStatus.\n\nWe'll query NetworkDevice with where conditions.\n\nL8Query: select * from NetworkDevice where equipmentinfo.deviceType='router' and equipmentinfo.deviceStatus='online' limit {{int:80:120}}\n\nWe should export as CSV for user.\n\nUse export_csv.\n\n",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "online_routers.csv",
+                "query": "select * from NetworkDevice where equipmentinfo.deviceType='router' and equipmentinfo.deviceStatus='online' limit 100"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"id\",\"equipmentinfo.vendor\",\"equipmentinfo.model\",\"equipmentinfo.series\",\"equipmentinfo.sysName\",\"equipmentinfo.ipAddress\",\"equipmentinfo.serialNumber\",\"equipmentinfo.version\",\"equipmentinfo.firmwareVersion\",\"equipmentinfo.location\",\"equipmentinfo.deviceType\",\"equipmentinfo.deviceStatus\",\"equipmentinfo.uptime\",\"equipmentinfo.lastSeen\",\"equipmentinfo.interfaceCount\"],\"file_name\":\"online_routers.csv\",\"rows\":5}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2031,
+            "completion_tokens": 166
+          },
+          "chars": 669
+        },
+        {
+          "text": "Here is the list of routers that are currently online.\n\n**Attached file:** `online_routers.csv` – 5 router records with their basic details.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2187,
+            "completion_tokens": 35
+          },
+          "chars": 142
+        }
+      ]
+    },
+    {
+      "user_message": "Now only the Cisco ones, and add their software version.",
+      "steps": [
+        {
+          "reasoning": "We need to list routers that are online and vendor {{p:vendor}}, include software version. Need to know model fields. First describe_model for NetworkDevice.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1847,
+            "completion_tokens": 58
+          },
+          "chars": 189
+        },
+        {
+          "reasoning": "We need to list routers online, {{p:vendor}} only, include software version. Need to know which field indicates status online. Likely equipmentinfo.deviceStatus? Or maybe status field. We'll filter where equipmentinfo.deviceStatus = 'online' and equipmentinfo.vendor = '{{p:vendor}}'. Also need software version: maybe equipmentinfo.version or firmwareVersion. We'll include version field.\n\nWe need to export CSV with fields: maybe sysName, ipAddress, version (software version). We'll include vendor too.\n\nWe need to query: select * from NetworkDevice where equipmentinfo.deviceStatus='online' and equipmentinfo.vendor='{{p:vendor}}' limit {{int:80:120}}? but we can export all. Use export_csv with columns: [\"equipmentinfo.sysName\",\"equipmentinfo.ipAddress\",\"equipmentinfo.version\"].\n\nFirst we need to confirm field names for status. The describe gave deviceStatus. So use that.\n\nNow call export_csv.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "columns": [
+                  "equipmentinfo.sysName",
+                  "equipmentinfo.ipAddress",
+                  "equipmentinfo.version"
+                ],
+                "file_name": "{{p:vendor:lower}}_online_routers.csv",
+                "query": "select * from NetworkDevice where equipmentinfo.deviceStatus='online' and equipmentinfo.vendor='{{p:vendor}}'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"equipmentinfo.sysName\",\"equipmentinfo.ipAddress\",\"equipmentinfo.version\"],\"file_name\":\"cisco_online_routers.csv\",\"rows\":1}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2084,
+            "completion_tokens": 265
+          },
+          "chars": 1119
+        },
+        {
+          "text": "Attached is **{{p:vendor:lower}}_online_routers.csv** containing the {{p:vendor}} routers that are online, with their hostname, IP address, and software version.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2205,
+            "completion_tokens": 33
+          },
+          "chars": 141
+        }
+      ]
+    }
+  ]
+}

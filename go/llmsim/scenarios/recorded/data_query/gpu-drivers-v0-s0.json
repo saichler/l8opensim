@@ -1,0 +1,64 @@
+{
+  "id": "data_query/gpu-drivers/v0/s0",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:40:41Z",
+  "turns": [
+    {
+      "user_message": "Which GPU servers run a driver older than 550?",
+      "steps": [
+        {
+          "reasoning": "We need to list GPU servers (GpuDevice) where driver version is older than {{int:440:660}}. Need to know field names. Use describe_model for GpuDevice.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "GpuDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"deviceInfo.hostname\",\"type\":\"string\"},{\"path\":\"deviceInfo.vendor\",\"type\":\"string\"},{\"path\":\"deviceInfo.model\",\"type\":\"string\"},{\"path\":\"deviceInfo.ipAddress\",\"type\":\"string\"},{\"path\":\"deviceInfo.serialNumber\",\"type\":\"string\"},{\"path\":\"deviceInfo.location\",\"type\":\"string\"},{\"path\":\"deviceInfo.osVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.kernelVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.driverVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.cudaVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.dcgmVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"deviceInfo.uptime\",\"type\":\"string\"},{\"path\":\"deviceInfo.lastSeen\",\"type\":\"string\"},{\"path\":\"deviceInfo.gpuCount\",\"type\":\"int\"}],\"model\":\"GpuDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1798,
+            "completion_tokens": 58
+          },
+          "chars": 174
+        },
+        {
+          "reasoning": "We need to find GPU servers where driverVersion is older than {{int:440:660}}. driverVersion is string, likely numeric like \"{{int:436:654}}\". Need to compare lexically? Probably numeric compare. L8Query may support conditions; we can use where deviceInfo.driverVersion \u003c {{int:440:660}}? Not sure syntax. The docs didn't specify condition syntax, but typical L8Query may allow comparisons. We'll try.\n\nWe need to list servers (maybe hostnames). Use select deviceInfo.hostname, deviceInfo.driverVersion from GpuDevice where deviceInfo.driverVersion \u003c {{int:440:660}}. But need to ensure string compare works; maybe it's numeric string, compare as number.\n\nLet's try query.\n\n",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select deviceInfo.hostname,deviceInfo.driverVersion from GpuDevice where deviceInfo.driverVersion \u003c 550"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":2,\"model\":\"GpuDevice\",\"records\":[{\"deviceInfo\":{\"driverVersion\":\"535.183.01\",\"hostname\":\"gpu-node-02\"}},{\"deviceInfo\":{\"driverVersion\":\"535.183.01\",\"hostname\":\"gpu-node-05\"}}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2050,
+            "completion_tokens": 177
+          },
+          "chars": 753
+        },
+        {
+          "reasoning": "The user asked: \"Which GPU servers run a driver older than {{int:440:660}}?\" The result shows two records with driverVersion 535.183.01 (which is less than {{int:440:660}}) and hostnames gpu-node-02 and gpu-node-05. We should return those hostnames. Possibly also include driver versions. Provide answer.",
+          "text": "The GPU servers with a driver version older than {{int:440:660}} are:\n\n- **gpu-node-02** – driver 535.183.01  \n- **gpu-node-05** – driver 535.183.01",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2161,
+            "completion_tokens": 121
+          },
+          "chars": 426
+        }
+      ]
+    }
+  ]
+}

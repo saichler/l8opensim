@@ -1,0 +1,121 @@
+{
+  "flavor": "record_crud",
+  "mode": "tanto",
+  "validators": [],
+  "expect_tools": [],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "add-note",
+      "params": {
+        "device": [
+          "core-rtr-02",
+          "core-rtr-09"
+        ]
+      },
+      "turns": [
+        "Add a note to the alarm on {{device}}: 'Waiting for the field team'."
+      ]
+    },
+    {
+      "id": "ack-alarm",
+      "params": {},
+      "turns": [
+        "Acknowledge the critical alarm on core-rtr-04.",
+        "Yes, go ahead."
+      ]
+    },
+    {
+      "id": "delete-test-targets",
+      "params": {},
+      "turns": [
+        "Delete the polling targets that are down.",
+        "Yes, delete them."
+      ]
+    },
+    {
+      "id": "update-location",
+      "params": {
+        "site": [
+          "Austin",
+          "Dallas",
+          "Houston",
+          "Seattle",
+          "Denver",
+          "Chicago"
+        ]
+      },
+      "turns": [
+        "Change the location of device core-rtr-11 to {{site}}."
+      ]
+    },
+    {
+      "id": "create-target",
+      "params": {},
+      "turns": [
+        "Create a new polling target tgt-100 for SNMP."
+      ]
+    },
+    {
+      "id": "rename-device",
+      "params": {},
+      "turns": [
+        "Rename device core-rtr-06 to edge-rtr-06."
+      ]
+    },
+    {
+      "id": "clear-alarm",
+      "params": {},
+      "turns": [
+        "Clear the 'Fan Failure' alarms.",
+        "Yes, go ahead and clear them."
+      ]
+    },
+    {
+      "id": "delete-cancel",
+      "params": {},
+      "turns": [
+        "Delete all events of type login.",
+        "No, cancel that."
+      ]
+    },
+    {
+      "id": "bulk-update",
+      "params": {},
+      "turns": [
+        "Set the status of all Arista devices to maintenance.",
+        "Yes, go ahead."
+      ]
+    },
+    {
+      "id": "create-alarm-note",
+      "params": {},
+      "turns": [
+        "Create a record noting that the BGP issue in Dallas is under investigation."
+      ]
+    },
+    {
+      "id": "update-target",
+      "params": {},
+      "turns": [
+        "Update polling target tgt-005 to use the ssh-default links.",
+        "Yes."
+      ]
+    },
+    {
+      "id": "delete-one",
+      "params": {
+        "n": [
+          "003",
+          "007"
+        ]
+      },
+      "turns": [
+        "Delete alarm alm-{{n}}.",
+        "Yes, delete it."
+      ]
+    }
+  ]
+}

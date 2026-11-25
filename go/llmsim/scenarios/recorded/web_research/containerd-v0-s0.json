@@ -1,0 +1,191 @@
+{
+  "id": "web_research/containerd/v0/s0",
+  "flavor": "web_research",
+  "model": "gpt-oss-120b",
+  "quality": "flawed",
+  "recorded_at": "2026-11-24T20:47:32Z",
+  "turns": [
+    {
+      "user_message": "@web What is new in the latest containerd release?",
+      "steps": [
+        {
+          "reasoning": "The user asks: \"@web What is new in the latest containerd release?\" They want web search. Use web_search.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 5,
+                "query": "latest containerd release what's new"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"latest containerd release what's new\", \"results\": [{\"title\": \"Fox News - Breaking News Updates | Latest News Headlines | Photos ...\", \"url\": \"https://www.foxnews.com/?msockid=108b3d1ae41860ae1b7c2501e52261c3\", \"snippet\": \"Latest Current News: U.S., World, Entertainment, Health, Business, Technology, Politics, Sports.\"}, {\"title\": \"Breaking News, Latest News and Videos | CNN\", \"url\": \"https://www.cnn.com/\", \"snippet\": \"View the latest news and breaking news today for U.S., world, weather, entertainment, politics and health at CNN.com.\"}, {\"title\": \"Associated Press News: Breaking News, Latest Headlines and Videos\", \"url\": \"https://apnews.com/\", \"snippet\": \"Read the latest headlines, breaking news, and videos at APNews.com, the definitive source for independent journalism from every …Read more\"}, {\"title\": \"ABC News - Breaking News, Latest News and Videos\", \"url\": \"https://abcnews.com/\", \"snippet\": \"Stay on top of the latest news with vertical video, personalized push alerts, and ABC News Live. Is Nvidia too big to fail? Should you …Read more\"}, {\"title\": \"Google News - Headlines\", \"url\": \"https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZxYUdjU0FtVnVHZ0pWVXlnQVAB\", \"snippet\": \"Read full articles, watch videos, browse thousands of titles and more on the \\\"Headlines\\\" topic with Google News.\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1903,
+            "completion_tokens": 66
+          },
+          "chars": 179
+        },
+        {
+          "reasoning": "The web search returned unrelated news results; need better query. Use specific query \"containerd release notes\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "containerd release notes latest version"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"containerd release notes latest version\", \"results\": [{\"title\": \"Michael Klare - Wikipedia\", \"url\": \"https://en.m.wikipedia.org/wiki/Michael_Klare\", \"snippet\": \"Klare serves on the board of directors of the Arms Control Association. He is a regular contributor to many publications including The …Read more\"}, {\"title\": \"Michael Klare, author of The Race for What's Left\", \"url\": \"http://michaelklare.com/\", \"snippet\": \"As the Five College Professor of Peace and World Security Studies, based at Hampshire College, he teaches courses on resource …Read more\"}, {\"title\": \"Michael Klare, Board Secretary and Senior Visiting Fellow\", \"url\": \"https://www.armscontrol.org/about/Michael_Klare\", \"snippet\": \"Michael Klare is currently the secretary for the Arms Control Association board of directors and a senior visiting fellow working on …Read more\"}, {\"title\": \"Michael Klare - Hampshire College\", \"url\": \"https://www.hampshire.edu/academics/faculty/michael-klare\", \"snippet\": \"Michael Klare, Five College professor emeritus of peace and world security studies, and director of the Five College Program in …Read more\"}, {\"title\": \"Michael Klare : Department of Political Science : UMass Amherst\", \"url\": \"https://www.umass.edu/political-science/about/directory/michael-klare\", \"snippet\": \"Michael Klare is an adjunct faculty member in the Department of Political Science and the Five College Professor Emeritus of Peace …Read more\"}, {\"title\": \"Michael T. Klare - The Nation\", \"url\": \"https://www.thenation.com/authors/michael-t-klare/\", \"snippet\": \"Michael T. Klare is a professor of peace and world security studies at Hampshire College and the defense correspondent of The …Read more\"}, {\"title\": \"Michael T. Klare, Author at ZNetwork\", \"url\": \"https://znetwork.org/author/michaelklare/\", \"snippet\": \"Michael Klare, Five College professor emeritus of peace and world security studies, and director of the Five College Program in …Read more\"}, {\"title\": \"Michael Klare\", \"url\": \"https://www.securityincontext.org/team/michael-klare-1\", \"snippet\": \"Michael Klare, Five College professor emeritus of peace and world security studies and senior visiting fellow at the Arms Control …Read more\"}, {\"title\": \"Biography of Author Michael Klare\", \"url\": \"http://michaelklare.com/michael-klare-biography/\", \"snippet\": \"Learn more about the life of Michael Klare, author of The Race for What's left, and director of Peace and World Security Studies at …Read more\"}, {\"title\": \"Michael KLARE | Hampshire College, Amherst Center | School of …\", \"url\": \"https://www.researchgate.net/profile/Michael-Klare\", \"snippet\": \"In this study, Michael Klare examines the dichotomy in the U.S. response to conventional and unconventional arms proliferation. With …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2317,
+            "completion_tokens": 58
+          },
+          "chars": 191
+        },
+        {
+          "reasoning": "The web search results returned irrelevant items ({{name:1}}). Likely the search query didn't work due to some filter. Need to refine search query: \"containerd release notes 2024\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "containerd 1.7 release notes"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"containerd 1.7 release notes\", \"results\": [{\"title\": \"Love Poem Generator - Create a Love Poem Instantly\", \"url\": \"https://poemanalysis.com/poem-generator/love/\", \"snippet\": \"With the Love Poem Generator, craft personalized and creative poems effortlessly, adding various themes, tones, languages, and more.\"}, {\"title\": \"Free AI Poem Generator - Create a Poem Instantly\", \"url\": \"https://poemanalysis.com/poem-generator/\", \"snippet\": \"Create a personalised poem from your own prompt. Choose a theme, tone, poetic form and language with our AI poem generator.\"}, {\"title\": \"Love Poem Generator: Free AI Love Poems | GeneratePoem\", \"url\": \"https://generatepoem.io/love-poem-generator/\", \"snippet\": \"Nov 3, 2026 · Write a love poem that sounds like you, not a greeting card. Free love poem generator with examples and tips, no sign …Read more\"}, {\"title\": \"How to Write a Love Poem: 11 Steps (with Pictures) - wikiHow\", \"url\": \"https://www.wikihow.com/Write-a-Love-Poem\", \"snippet\": \"Apr 14, 2025 · To write a love poem, start by brainstorming ideas and thoughts. Then, write the poem using sensory detail and …Read more\"}, {\"title\": \"Create a Love Poem | Love Poem Generator - PoetrySoup.com\", \"url\": \"https://www.poetrysoup.com/poems/love_poem_generator.aspx\", \"snippet\": \"Create a unique and perfect love poem, using your special words, for your loved one. Using this poem generator to get love points …Read more\"}, {\"title\": \"Love Poem Generator\", \"url\": \"https://www.poem-generator.org.uk/love/\", \"snippet\": \"Our love poem generator brings the traditional 'Roses Are Red' poem structure to life using adjectives chosen by you, combined with …Read more\"}, {\"title\": \"How To Write a Love Poem: Theory, Steps and Template\", \"url\": \"https://poetrysocietyny.org/how-to-poet/2024/5/13/how-to-write-a-love-poem\", \"snippet\": \"May 20, 2024 · There are infinite ways to write a love poem. These are examples of directions, but even writing your lover’s name …Read more\"}, {\"title\": \"AI Poem Generator - Free Poem Maker - Editpad\", \"url\": \"https://www.ilovenote.net/tool/poem-generator\", \"snippet\": \"Our AI Poem Maker can help you turn your love feelings into a romantic poem for your life partner. Just mention the particular …Read more\"}, {\"title\": \"Love Poems - Poetry Foundation\", \"url\": \"https://www.poetryfoundation.org/collections/145134/love-poems\", \"snippet\": \"Whether you’re searching for a poem for an occasion like an anniversary, a wedding, or Valentine’s Day, or because you need a pick …Read more\"}, {\"title\": \"Poem Generator: Free AI Poem \u0026 Poetry Writer | GeneratePoem\", \"url\": \"https://generatepoem.io/\", \"snippet\": \"An AI poem generator turns a topic and a few choices into a first draft of poetry. You give it the central subject, and it builds language …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 3030,
+            "completion_tokens": 78
+          },
+          "chars": 250
+        },
+        {
+          "reasoning": "The web searches returned irrelevant results (likely due to search engine restrictions). Need better query. Use more specific like \"containerd release 1.7.0 release notes\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "containerd 1.7.0 release notes"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"containerd 1.7.0 release notes\", \"results\": [{\"title\": \"STMicroelectronics. Let’s make it happen.\", \"url\": \"https://www.st.com/content/st_com/en.html\", \"snippet\": \"We are a global semiconductor company, working with customers to turn bold ideas into innovative products. Our technology may be …\"}, {\"title\": \"St. George Roman Catholic Church - St George Roman Catholic …\", \"url\": \"http://stgeorgeaj.com/\", \"snippet\": \"We are excited to present to you all the incredible features this new site has to offer - the ability to download the weekly bulletin, a …\"}, {\"title\": \"Apache Junction AZ Real Estate \u0026 Homes For Sale - Zillow\", \"url\": \"https://www.zillow.com/apache-junction-az/?msockid=330c8cdcae9f6ea5284d94c7afb86f1a\", \"snippet\": \"Zillow has 939 homes for sale in Apache Junction AZ. View listing photos, review sales history, and use our detailed real estate filters …\"}, {\"title\": \"STMicroelectronics - Wikipedia\", \"url\": \"https://en.m.wikipedia.org/wiki/STMicroelectronics\", \"snippet\": \"STMicroelectronics NV (commonly referred to as ST or STMicro) is a European multinational semiconductor contract manufacturing …\"}, {\"title\": \"ST - Wikipedia\", \"url\": \"https://en.m.wikipedia.org/wiki/ST\", \"snippet\": \"ST, St, or St. may also refer to: This disambiguation page lists articles associated with the title ST. If an internal link incorrectly led …\"}, {\"title\": \"Apache Junction, AZ - Official Website | Official Website\", \"url\": \"https://www.apachejunctionaz.gov/\", \"snippet\": \"Looking to live, move or start a business in Apache Junction, Arizona? This is the web site home page for Apache Junction, Arizona.\"}, {\"title\": \"Browse - STMicroelectronics - STMicroelectronics\", \"url\": \"https://www.st.com/content/st_com/en/browse.html\", \"snippet\": \"Contact our Sales Offices \u0026 Distributors Who we are Management Governance overview Ethics and compliance Suppliers to ST ST …\"}, {\"title\": \"St. George Apache Junction - YouTube\", \"url\": \"https://www.youtube.com/channel/UCnAwKSjKl0vDVMItmueNV8Q\", \"snippet\": \"2 days ago · Welcome to our parish's YouTube Channel! We are excited to present to you Daily and Sunday Mass.\"}, {\"title\": \"4924 E ROUNDUP Street #1 (A), Apache Junction, AZ 85119 - Zillow\", \"url\": \"https://www.zillow.com/homedetails/4924-E-Roundup-St-1-A-Apache-Junction-AZ-85119/459507222_zpid/?msockid=330c8cdcae9f6ea5284d94c7afb86f1a\", \"snippet\": \"Jan 6, 2026 · 4924 E ROUNDUP Street #1 (A), Apache Junction, AZ 85119 is currently not for sale. The vacant lot last sold on 2026 …\"}, {\"title\": \"Mass Times \u0026 Office Hours - St George Roman Catholic Parish, …\", \"url\": \"http://stgeorgeaj.com/about-masstimes\", \"snippet\": \"Saturday 10:00am. Across from the Office.\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 3820,
+            "completion_tokens": 76
+          },
+          "chars": 241
+        },
+        {
+          "reasoning": "The web search results are not returning relevant containerd info, likely due to some issue. We might need to specify more specific query: \"containerd release 1.7.2\" or \"containerd 1.8 release notes\". Let's try again with a more generic query.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "containerd release notes 1.8"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"containerd release notes 1.8\", \"results\": [{\"title\": \"ESPN - Serving Sports Fans. Anytime. Anywhere.\", \"url\": \"https://www.espn.com/\", \"snippet\": \"Visit ESPN for live scores, highlights and sports news. Stream exclusive games on ESPN and play fantasy sports.\"}, {\"title\": \"College Football on ESPN - Scores, Stats and Highlights\", \"url\": \"https://www.espn.com/college-football/\", \"snippet\": \"Visit ESPN for NCAA live scores, video highlights and latest news. Stream exclusive college football games on ESPN and play …\"}, {\"title\": \"Football on ESPN - Scores, Stats and Highlights\", \"url\": \"https://global.espn.com/football/\", \"snippet\": \"Visit ESPN for football live scores, highlights and news from all major football leagues. Stream games on ESPN and play Fantasy …\"}, {\"title\": \"Home - ESPN\", \"url\": \"https://m.espn.com/general/index\", \"snippet\": \"Ron Rivera rings the bell after final day of cancer treatment Washington coach Ron Rivera receives an ovation as he walks down the …\"}, {\"title\": \"ESPN\", \"url\": \"https://secure.web.plus.espn.com/identity/login\", \"snippet\": \"Log in to Disney+ with your MyDisney account. If you don't have one, you will be prompted to create an account before signing up\"}, {\"title\": \"ESPN+\", \"url\": \"https://plus.espn.com/nflbundle\", \"snippet\": \"ESPN's Unlimited plan subscribers have access to all ESPN networks and services, including ESPN, ESPN2, ESPNU, ESPNEWS, …\"}, {\"title\": \"ESPN Deportes - Lo Último del Mundo Deportivo\", \"url\": \"https://espndeportes.espn.com/\", \"snippet\": \"ESPN lo último del mundo deportivo. Información completa de todo tipo de deporte incluyendo Fútbol Mexicano, Fútbol Argentino, …\"}, {\"title\": \"Live Sports Streaming, Original Shows \u0026 Award-Winning …\", \"url\": \"https://plus.espn.com/nfl\", \"snippet\": \"ESPN's Unlimited plan subscribers have access to all ESPN networks and services, including ESPN, ESPN2, ESPNU, ESPNEWS, …\"}, {\"title\": \"What is ESPN Unlimited? – ESPN Fan Support\", \"url\": \"https://support.espn.com/hc/en-us/articles/40375339514260-What-is-ESPN-Unlimited\", \"snippet\": \"Aug 4, 2026 · ESPN Unlimited plan subscribers have access to all ESPN networks and ESPN+, with sports like NFL, NBA, NHL, …\"}, {\"title\": \"News - ESPN\", \"url\": \"https://m.espn.com/general/news\", \"snippet\": \"Hurts surprises family with donation toward a new home Eagles QB Jalen Hurts surprises a family, whose child is battling cancer, …\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 4609,
+            "completion_tokens": 97
+          },
+          "chars": 310
+        },
+        {
+          "reasoning": "The web search results are irrelevant (they returned news sites). Probably need to refine query to include containerd release notes official site. Use \"containerd release notes\" and maybe specify \"github.com/containerd/containerd/releases\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "containerd releases github.com/containerd/containerd"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"containerd releases github.com/containerd/containerd\", \"results\": [{\"title\": \"Free Gay Porn Videos from Pornhub: HD to Vintage Pornos\", \"url\": \"https://www.pornhub.com/gayporn\", \"snippet\": \"Gay porn with sexy nude male pornstars. Visit Pornhub.com for free gay sex videos bursting with big dick homosexual hunks. Hot …\"}, {\"title\": \"Watch Gay Porn Videos Free in HD | Pornhub\", \"url\": \"https://www.pornhub.com/gay/video/search?search=gay+porn\", \"snippet\": \"Stream endless gay porn videos in full HD on Pornhub. Huge library of amateur and professional scenes updated daily. Play free now.\"}, {\"title\": \"Porno Gay: Videos XXX, mamadas, penes grandes y sexo | Pornhub\", \"url\": \"https://es.pornhub.com/gayporn\", \"snippet\": \"Porno Gay en Pornhub. Películas de sexo, mamadas, sodomia, penes grandes. Vídeos XXX caseros, amateur de sexo anal entre …\"}, {\"title\": \"Free Porn Videos \u0026 Sex Movies - Porno, XXX, Porn Tube | Pornhub\", \"url\": \"https://ww.pornhub.com/\", \"snippet\": \"Pornhub provides you with unlimited free porn videos with the hottest pornstars. Enjoy the largest amateur porn community on the …\"}, {\"title\": \"Vidéo Porno Gay Gratuite: Streaming Gay Tube Vidéos X | Pornhub\", \"url\": \"https://fr.pornhub.com/gayporn\", \"snippet\": \"Vidéos de Sexe Gay Gratuites en Streaming. Les Meilleurs Films de Porno Gay, des Hommes Nus qui fourre des autres …\"}, {\"title\": \"Free Gay Porn Videos \u0026 XXX Movies - Male Sex Videos Tube - xHamster\", \"url\": \"https://xhamster.com/gay\", \"snippet\": \"Enjoy free gay porn \u0026 XXX rated sex videos on xHamster tube. Horny young twinks, big cock hunks, and mature daddy bears in hot …\"}, {\"title\": \"Gay Porn Homepage, Free Gay Sex Videos - XVIDEOS.COM\", \"url\": \"https://www.xvideos.com/gay\", \"snippet\": \"Masturbation of a large penis and a loud orgasm of a Russian gay man! His whole face is covered in sperm! 3 min Hungry For Big …\"}, {\"title\": \"Nieuwste Gay Porno Video's - Pornhub.com\", \"url\": \"https://nl.pornhub.com/gay/video?o=cm\", \"snippet\": \"De heetste pornosterren gaan naakt en hebben hardcore seks in de beste gay films online. Pornhub.com is trots op het verzamelen …\"}, {\"title\": \"Video di Porno Gay e Uomini Gay e Filmi di Sesso | PornHub\", \"url\": \"https://it.pornhub.com/gayporn\", \"snippet\": \"Visitate Pornhub.com per i video di sesso gay gratuiti con cazzi grossi e omosessuali. Twink sexy e orsi gay maturi fanno sesso …\"}, {\"title\": \"Free Porn Hub Gay Porn Videos | xHamster\", \"url\": \"https://xhamster.com/gay/tags/porn-hub\", \"snippet\": \"Check out free Porn Hub gay porn videos on xHamster. Watch all Porn Hub gay XXX vids right now!\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 5289,
+            "completion_tokens": 85
+          },
+          "chars": 331
+        },
+        {
+          "reasoning": "The web searches are returning unrelated results (some porn). Perhaps need better query with quotes. Let's search for \"containerd 1.7 release notes\" but maybe need include site:github.com/containerd. Let's try again.\n\n",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "containerd 1.7 release notes site:github.com/containerd/containerd"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"containerd 1.7 release notes site:github.com/containerd/containerd\", \"results\": [{\"title\": \"List of songs recorded by Katy Perry - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/List_of_songs_recorded_by_Katy_Perry\", \"snippet\": \"The American singer Katy Perry has recorded songs for seven studio albums. After singing at church during her childhood, she …Read more\"}, {\"title\": \"Katy Perry Songs - The Greatest Hits - YouTube\", \"url\": \"https://www.youtube.com/playlist?list=PLp_G0HWfCo5rJsCeNMuuYCoqUmPa5M2YX\", \"snippet\": \"The biggest hits of pop superstar Katy Perry in one hit compilation playlist! CLICK SAVE and SHARE this compilation of Katy Perry …Read more\"}, {\"title\": \"Complete List of Katy Perry Songs From A to Z\", \"url\": \"https://www.classicrockhistory.com/complete-list-of-katy-perry-songs-from-a-to-z/\", \"snippet\": \"Complete List of Katy Perry Songs From A to Z presents every officially released Katy Perry song alphabetically with album details.\"}, {\"title\": \"Katy Perry Songs - Genius\", \"url\": \"https://genius.com/artists/Katy-perry/songs\", \"snippet\": \"Katy Perry has 903 songs with the most popular being Feels, Earth and California Gurls.\"}, {\"title\": \"Katy Perry – All Songs - YouTube Music\", \"url\": \"https://music.youtube.com/playlist?list=PLJyrYrkmVsfQzCBxEKW8sNF2E75n4SDH-\", \"snippet\": \"Who Am I Living For? STARSTRUKK (feat. Katy Perry) Swish Swish (feat. Nicki Minaj) Chained To The Rhythm (feat. Skip Marley) …Read more\"}, {\"title\": \"20 Katy Perry Songs You Can’t Stop Singing - YouTube\", \"url\": \"https://www.youtube.com/watch?v=YSEMwqAZSN8\", \"snippet\": \"Jun 9, 2025 · Enjoy unforgettable live performances, exclusive behind-the-scenes content, and fun, personal moments. From …Read more\"}, {\"title\": \"Katy Perry's 20 Biggest Hits - Rolling Stone\", \"url\": \"https://www.rollingstone.com/music/music-lists/katy-perrys-20-biggest-hits-11401/\", \"snippet\": \"Jul 30, 2014 · In honor of her third Rolling Stone cover, here's a rundown of the 20 biggest hits that got her there. 20. “Not Like the …Read more\"}, {\"title\": \"20 Best Katy Perry Songs of All Time (Greatest Hits)\", \"url\": \"https://globalmusicvibe.com/songs/best-katy-perry-songs/\", \"snippet\": \"Oct 20, 2025 · Discover the 20 best Katy Perry songs of all time, from Firework to Dark Horse. A deep dive into her greatest hits …Read more\"}, {\"title\": \"Katy Perry Song List\", \"url\": \"https://www.song-list.net/katyperry/songs\", \"snippet\": \"A list of songs by Katy Perry⭐, which albums they are on and where to find them on Amazon and Apple Music. Get the best songs …Read more\"}, {\"title\": \"List of songs recorded by Katy Perry\", \"url\": \"https://simple.wikipedia.org/wiki/List_of_songs_recorded_by_Katy_Perry\", \"snippet\": \"List of songs recorded by Katy Perry Katy Perry performing in 2017 This is a list of songs recorded by American singer Katy Perry.\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 6067,
+            "completion_tokens": 93
+          },
+          "chars": 323
+        },
+        {
+          "reasoning": "The web search results are messed up (some irrelevant). Might need to fetch a specific URL, perhaps containerd's release page. Let's try searching for \"containerd release notes 1.7.1\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "containerd 1.7.1 release notes"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"containerd 1.7.1 release notes\", \"results\": [{\"title\": \"Titanic (1997 film) - Wikipedia\", \"url\": \"https://en.m.wikipedia.org/wiki/Titanic_(1997_film)\", \"snippet\": \"Incorporating both historical and fictional aspects, it is based on accounts of the sinking of RMS Titanic in 1912. Leonardo DiCaprio …Read more\"}, {\"title\": \"Titanic (1997) - IMDb\", \"url\": \"https://m.imdb.com/title/tt0120338/\", \"snippet\": \"Dec 19, 1997 · Titanic: Directed by James Cameron. With Leonardo DiCaprio, Kate Winslet, Billy Zane, Kathy Bates. A young …Read more\"}, {\"title\": \"Watch Titanic for Free Online | Pluto TV\", \"url\": \"https://pluto.tv/us/on-demand/movies/616872fc0b4e8f001a960443/?msockid=06e94d87e949636f0b21559ce8fa62eb\", \"snippet\": \"Leonardo DiCaprio and Oscar-nominee Kate Winslet light up the screen as Jack and Rose, the young lovers who find one another …Read more\"}, {\"title\": \"List of films about the Titanic - Wikipedia\", \"url\": \"https://en.m.wikipedia.org/wiki/List_of_films_about_the_Titanic\", \"snippet\": \"On television, the Titanic has been featured in genres ranging from epic dramas to short cartoon parodies. Co-written by and starring …Read more\"}, {\"title\": \"Titanic streaming: where to watch movie online? - JustWatch\", \"url\": \"https://www.justwatch.com/in/movie/titanic\", \"snippet\": \"2 days ago · Find out how and where to watch \\\"Titanic\\\" online on Netflix, Prime Video, and Hotstar today – including 4K and free …Read more\"}, {\"title\": \"Titanic (1997) | Moviefone\", \"url\": \"https://www.moviefone.com/movie/titanic/5332/main/\", \"snippet\": \"Dec 19, 1997 · 101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic, 84 years later. A young Rose boards …Read more\"}, {\"title\": \"Watch Titanic | Netflix\", \"url\": \"https://www.netflix.com/title/1181461\", \"snippet\": \"On a doomed luxury liner, first-class passenger Rose finds a love to last a lifetime when she falls for penniless artist Jack just as …Read more\"}, {\"title\": \"Titanic (1997) full Movie | Leonardo DiCaprio, Kate Winslet ... - YouTube\", \"url\": \"https://m.youtube.com/watch?v=haw0Gg_57ac\", \"snippet\": \"Jun 10, 2025 · \\\"Titanic\\\" (1997), directed by James Cameron, is an epic romance and disaster film set against the ill-fated maiden …Read more\"}, {\"title\": \"Titanic | Movie, Characters, Summary, Cast, \u0026 Facts | Britannica\", \"url\": \"https://www.britannica.com/topic/Titanic-film-1997\", \"snippet\": \"Nov 14, 2026 · Titanic, American romantic adventure film, released in 1997, that centers on the sinking of the RMS Titanic. James …Read more\"}, {\"title\": \"TITANIC (1997) FULL MOVIE [ ENGLISH HD ] JACK AND ROSE\", \"url\": \"https://m.youtube.com/watch?v=TOhJO_ZpwAo\", \"snippet\": \"Mar 31, 2019 · Brock Lovett (Bill Paxton) is a somewhat ruthless treasure hunter searching for profit under the sea in the debris of the …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 6917,
+            "completion_tokens": 83
+          },
+          "chars": 253
+        },
+        {
+          "reasoning": "The web search results are nonsense (mostly unrelated). Likely need to fetch a proper page. Perhaps use fetch_url on a known release page: containerd GitHub releases page: https://github.com/containerd/containerd/releases.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 7792,
+            "completion_tokens": 91
+          },
+          "chars": 222
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "id": "data_aggregate/alarms-by-severity/v0/s2",
+  "flavor": "data_aggregate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:34:20Z",
+  "turns": [
+    {
+      "user_message": "Count the active alarms by severity.",
+      "steps": [
+        {
+          "reasoning": "We need to count active alarms by severity. Need to know fields of Alarm model. Use describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "Alarm"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"alarmId\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"description\",\"type\":\"string\"},{\"path\":\"state\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"nodeId\",\"type\":\"string\"},{\"path\":\"nodeName\",\"type\":\"string\"},{\"path\":\"location\",\"type\":\"string\"},{\"path\":\"firstOccurrence\",\"type\":\"int\"},{\"path\":\"lastOccurrence\",\"type\":\"int\"},{\"path\":\"occurrenceCount\",\"type\":\"int\"},{\"path\":\"isRootCause\",\"type\":\"bool\"},{\"path\":\"acknowledgedBy\",\"type\":\"string\"}],\"model\":\"Alarm\",\"primaryKey\":\"alarmId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 49
+          },
+          "chars": 130
+        },
+        {
+          "reasoning": "We need to count active alarms by severity. Field state likely indicates if alarm is active; active probably state = \"ACTIVE\" or something. We need to count per severity where state is active. Use aggregate count(*) group-by severity with where state='ACTIVE' (assuming). Let's query.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select severity, count(*) from Alarm where state='ACTIVE' group-by severity"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"count(*)\":5,\"group\":{\"severity\":\"SEVERITY_CRITICAL\"}},{\"count(*)\":8,\"group\":{\"severity\":\"SEVERITY_MAJOR\"}},{\"count(*)\":2,\"group\":{\"severity\":\"SEVERITY_MINOR\"}},{\"count(*)\":6,\"group\":{\"severity\":\"SEVERITY_WARNING\"}}],\"model\":\"Alarm\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1984,
+            "completion_tokens": 97
+          },
+          "chars": 378
+        },
+        {
+          "text": "**Active Alarms by Severity**\n\n- SEVERITY_CRITICAL: 5  \n- SEVERITY_MAJOR: 8  \n- SEVERITY_MINOR: 2  \n- SEVERITY_WARNING: 6  ",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2112,
+            "completion_tokens": 48
+          },
+          "chars": 123
+        }
+      ]
+    }
+  ]
+}

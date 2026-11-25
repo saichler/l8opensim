@@ -1,0 +1,24 @@
+{
+  "id": "code_app/bash-backup/v0/s0",
+  "flavor": "code_app",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T18:45:12Z",
+  "turns": [
+    {
+      "user_message": "Write a bash script that backs up a directory to a timestamped tar.gz and keeps the last 7 backups.",
+      "steps": [
+        {
+          "reasoning": "We need to output a bash script. No data queries needed. Just write script. Ensure it creates timestamped tar.gz, stores in backup directory, and prunes older ones keeping last 7. Provide script.",
+          "text": "Here is a simple Bash script that will back up a given source directory into a timestamp‑named `tar.gz` file and automatically keep only the most recent 7 backups:\n\n```bash\n#!/usr/bin/env bash\n# backup.sh – Create a timestamped tar.gz backup and retain the last 7 backups.\n\n# ---------- Configuration ----------\n# Directory you want to back up (change as needed)\nSRC_DIR=\"/path/to/source\"\n\n# Directory where backups will be stored (must exist)\nDEST_DIR=\"/path/to/backups\"\n\n# Number of recent backups to keep\nKEEP=7\n# -----------------------------------\n\nset -euo pipefail\n\n# Ensure source and destination exist\nif [[ ! -d \"$SRC_DIR\" ]]; then\n  echo \"Error: source directory \\\"$SRC_DIR\\\" does not exist.\" \u003e\u00262\n  exit 1\nfi\n\nif [[ ! -d \"$DEST_DIR\" ]]; then\n  echo \"Error: destination directory \\\"$DEST_DIR\\\" does not exist.\" \u003e\u00262\n  exit 1\nfi\n\n# Create a timestamp (e.g., 2023-11-24_15-30-00)\nTIMESTAMP=$(date +\"%Y-%m-%d_%H-%M-%S\")\n\n# Build the backup filename\nBACKUP_NAME=\"$(basename \"$SRC_DIR\")_$TIMESTAMP.tar.gz\"\nBACKUP_PATH=\"$DEST_DIR/$BACKUP_NAME\"\n\n# Create the tar.gz archive\necho \"Creating backup: $BACKUP_PATH\"\ntar -czf \"$BACKUP_PATH\" -C \"$(dirname \"$SRC_DIR\")\" \"$(basename \"$SRC_DIR\")\"\n\necho \"Backup created successfully.\"\n\n# ---------- Prune old backups ----------\n# Find backup files matching the pattern and sort them chronologically\n# (oldest first). Then delete everything beyond the $KEEP most recent.\necho \"Pruning old backups, keeping the most recent $KEEP...\"\ncd \"$DEST_DIR\"\n\n# List files that match the naming scheme (adjust the pattern if you change it)\nbackup_files=$(ls -1 \"${BACKUP_NAME%_*}\"_*.tar.gz 2\u003e/dev/null || true)\n\n# Count how many backups exist\nbackup_count=$(echo \"$backup_files\" | wc -l)\n\nif (( backup_count \u003e KEEP )); then\n  # Number of files to delete\n  delete_count=$((backup_count - KEEP))\n\n  # Delete the oldest ones\n  echo \"$backup_files\" | sort | head -n \"$delete_count\" | while IFS= read -r old_file; do\n    echo \"Removing old backup: $old_file\"\n    rm -f \"$old_file\"\n  done\nelse\n  echo \"No old backups to prune.\"\nfi\n\necho \"Backup rotation complete.\"\n```\n\n### How to use\n\n1. **Save the script**  \n   ```bash\n   curl -o backup.sh https://example.com/path/to/backup.sh   # or copy/paste manually\n   chmod +x backup.sh\n   ```\n\n2. **Edit the configuration section** (near the top of the script):\n   - `SRC_DIR` – the directory you want to back up.\n   - `DEST_DIR` – where the backup archives should be stored.\n   - `KEEP` – how many recent backups to retain (default is 7).\n\n3. **Run it**  \n   ```bash\n   ./backup.sh\n   ```\n\nYou can schedule the script with `cron` (or any other scheduler) to run automatically, e.g., daily at 2 am:\n\n```cron\n0 2 * * * /path/to/backup.sh \u003e\u003e /var/log/backup.log 2\u003e\u00261\n```\n\nThe script will:\n\n- Create a `tar.gz` archive named `\u003csource‑folder\u003e_YYYY-MM-DD_HH‑MM‑SS.tar.gz`.\n- Store it in the destination directory.\n- Remove the oldest archives, keeping only the latest **7** (or the number you set).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1810,
+            "completion_tokens": 855
+          },
+          "chars": 3172
+        }
+      ]
+    }
+  ]
+}

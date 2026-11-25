@@ -1,0 +1,24 @@
+{
+  "id": "csv_analyze/inventory-low/v0/s0",
+  "flavor": "csv_analyze",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:20:47Z",
+  "turns": [
+    {
+      "user_message": "Which items need reordering in this CSV?\n```csv\nitem,qty,reorder_level\nbolts,500,200\nnuts,120,150\nwashers,80,100\nscrews,900,300\nrivets,40,50\n```",
+      "steps": [
+        {
+          "reasoning": "The user provided a CSV with items, quantities, and reorder levels. They ask: \"Which items need reordering in this CSV?\" We just need to compare qty to reorder_level: if qty \u003c= reorder_level? Usually reorder needed when qty is less than or equal to reorder level. Let's compute:\n\nbolts: qty {{int:400:600}}, reorder {{int:160:240}} -\u003e not needed.\nnuts: {{int:96:144}} vs {{int:120:180}} -\u003e qty less than reorder =\u003e needs reorder.\nwashers: {{int:64:96}} vs {{int:80:120}} -\u003e needs reorder.\nscrews: {{int:720:1080}} vs {{int:240:360}} -\u003e not needed.\nrivets: {{int:32:48}} vs {{int:40:60}} -\u003e needs reorder.\n\nSo items needing reorder: nuts, washers, rivets.\n\nWe should respond with list.",
+          "text": "The following items have a quantity at or below their reorder level, so they should be reordered:\n\n- nuts ({{int:96:144}} \u003c {{int:120:180}})  \n- washers ({{int:64:96}} \u003c {{int:80:120}})  \n- rivets ({{int:32:48}} \u003c {{int:40:60}})  ",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1842,
+            "completion_tokens": 205
+          },
+          "chars": 743
+        }
+      ]
+    }
+  ]
+}

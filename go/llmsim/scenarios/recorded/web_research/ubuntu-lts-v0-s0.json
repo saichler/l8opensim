@@ -1,0 +1,191 @@
+{
+  "id": "web_research/ubuntu-lts/v0/s0",
+  "flavor": "web_research",
+  "model": "gpt-oss-120b",
+  "quality": "flawed",
+  "recorded_at": "2026-11-24T20:46:38Z",
+  "turns": [
+    {
+      "user_message": "@web When does Ubuntu 22.04 LTS reach end of standard support?",
+      "steps": [
+        {
+          "reasoning": "The user asks: \"@web When does Ubuntu 22.04 LTS reach end of standard support?\" So need to do web search. Use web_search.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 5,
+                "query": "Ubuntu 22.04 LTS end of standard support date"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"Ubuntu 22.04 LTS end of standard support date\", \"results\": [{\"title\": \"Download - Get Ubuntu\", \"url\": \"https://ubuntu.com/download\", \"snippet\": \"Download Ubuntu Desktop, Server, Core, and flavors for PCs, servers, IoT devices, and cloud.\"}, {\"title\": \"Download Ubuntu Desktop\", \"url\": \"https://ubuntu.com/download/desktop\", \"snippet\": \"Ubuntu is an open source software operating system that runs from the desktop, to the cloud, to all your internet connected things.\"}, {\"title\": \"Ubuntu 26.04.1 LTS (Resolute Raccoon)\", \"url\": \"https://releases.ubuntu.com/resolute/\", \"snippet\": \"The desktop image allows you to try Ubuntu without changing your computer at all, and at your option to install it permanently later. …Read more\"}, {\"title\": \"Ubuntu - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Ubuntu\", \"snippet\": \"Ubuntu Desktop (formally named as Ubuntu Desktop Edition, and simply called Ubuntu) is the variant officially recommended for …Read more\"}, {\"title\": \"Ubuntu philosophy - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Ubuntu_philosophy\", \"snippet\": \"Ubuntu has been in existence in orature (oral literature) and in the culture of Bantu peoples. It appeared in South African written …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1908,
+            "completion_tokens": 79
+          },
+          "chars": 204
+        },
+        {
+          "reasoning": "Need to fetch relevant page maybe Wikipedia. Let's open Wikipedia.",
+          "tool_calls": [
+            {
+              "name": "fetch_url",
+              "arguments": {
+                "max_chars": 2000,
+                "url": "https://en.wikipedia.org/wiki/Ubuntu"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"url\": \"https://en.wikipedia.org/wiki/Ubuntu\", \"title\": \"Ubuntu - Wikipedia\", \"content_type\": \"text/html; charset=UTF-8\", \"total_chars\": 85962, \"start\": 0, \"returned_chars\": 2000, \"truncated\": true, \"next_start\": 2000, \"text\": \"Jump to content\\n\\nSearch\\n\\n##\\n\\n# Ubuntu\\n\\n155 languages\\n\\nAfrikaans\\n\\nAlemannisch\\n\\nአማርኛ\\n\\nÆnglisc\\n\\nالعربية\\n\\nঅসমীয়া\\n\\nAsturianu\\n\\nAymar aru\\n\\nAzərbaycanca\\n\\nتۆرکجه\\n\\nБашҡортса\\n\\nŽemaitėška\\n\\nBikol Central\\n\\nБеларуская (тарашкевіца)\\n\\nБеларуская\\n\\nБългарски\\n\\nBamanankan\\n\\nবাংলা\\n\\nBrezhoneg\\n\\nBosanski\\n\\nCatalà\\n\\n閩東語 / Mìng-dĕ̤ng-ngṳ̄\\n\\nНохчийн\\n\\nCebuano\\n\\nکوردی\\n\\nCorsu\\n\\nQırımtatarca\\n\\nČeština\\n\\nKaszëbsczi\\n\\nЧӑвашла\\n\\nCymraeg\\n\\nDansk\\n\\nDeutsch\\n\\nDolnoserbski\\n\\nEʋegbe\\n\\nΕλληνικά\\n\\nEsperanto\\n\\nEspañol\\n\\nEesti\\n\\nEuskara\\n\\nفارسی\\n\\nSuomi\\n\\nFøroyskt\\n\\nFrançais\\n\\nFrysk\\n\\nGaeilge\\n\\nGalego\\n\\nگیلکی\\n\\nAvañe'ẽ\\n\\nગુજરાતી\\n\\nעברית\\n\\nहिन्दी\\n\\nHrvatski\\n\\nHornjoserbsce\\n\\nKreyòl ayisyen\\n\\nMagyar\\n\\nՀայերեն\\n\\nInterlingua\\n\\nBahasa Indonesia\\n\\nIgbo\\n\\nIlokano\\n\\nÍslenska\\n\\nItaliano\\n\\n日本語\\n\\nLa .lojban.\\n\\nJawa\\n\\nქართული\\n\\nKongo\\n\\nҚазақша\\n\\nភាសាខ្មែរ\\n\\nಕನ್ನಡ\\n\\n한국어\\n\\nKurdî\\n\\nКыргызча\\n\\nLatina\\n\\nLëtzebuergesch\\n\\nLimburgs\\n\\nLombard\\n\\nLingála\\n\\nລາວ\\n\\nLietuvių\\n\\nLatviešu\\n\\nBasa Banyumasan\\n\\nMalagasy\\n\\nМакедонски\\n\\nമലയാളം\\n\\nМонгол\\n\\nमराठी\\n\\nBahasa Melayu\\n\\nမြန်မာဘာသာ\\n\\nNedersaksies\\n\\nPlattdüütsch\\n\\nनेपाली\\n\\nNederlands\\n\\nNorsk nynorsk\\n\\nNorsk bokmål\\n\\nNovial\\n\\nOccitan\\n\\nOromoo\\n\\nଓଡ଼ିଆ\\n\\nИрон\\n\\nਪੰਜਾਬੀ\\n\\nPangasinan\\n\\nPolski\\n\\nPortuguês\\n\\nRuna Simi\\n\\nRumantsch\\n\\nRomână\\n\\nРусский\\n\\nСаха тыла\\n\\nSardu\\n\\nSicilianu\\n\\nScots\\n\\nسنڌي\\n\\nSrpskohrvatski / српскохрватски\\n\\nတႆး\\n\\nසිංහල\\n\\nSimple English\\n\\nSlovenčina\\n\\nSlovenščina\\n\\nGagana Samoa\\n\\nShqip\\n\\nСрпски / srpski\\n\\nSeeltersk\\n\\nSunda\\n\\nSvenska\\n\\nŚlůnski\\n\\nதமிழ்\\n\\nತುಳು\\n\\nతెలుగు\\n\\nTetun\\n\\nТоҷикӣ\\n\\nไทย\\n\\nTagalog\\n\\nToki pona\\n\\nTok Pisin\\n\\nTürkçe\\n\\nТатарча / tatarça\\n\\nReo tahiti\\n\\nУдмурт\\n\\nУкраїнська\\n\\nاردو\\n\\nOʻzbekcha / ўзбекча\\n\\nVèneto\\n\\nTiếng Việt\\n\\nWest-Vlams\\n\\nWinaray\\n\\n吴语\\n\\nייִדיש\\n\\nZeêuws\\n\\n文言\\n\\n閩南語 / Bân-lâm-gí\\n\\n粵語\\n\\n中文\\n\\nIsiZulu\\n\\nEdit links\\n\\nFrom Wikipedia, the free encyclopedia\\n\\nLinux distribution developed by Canonical\\n\\nThis article relies excessively on references to primary sources. Please improve this article by adding secondary or tertiary sources.\\n\\nFind sources: \\\"Ubuntu\\\" – news · newspapers · books · scholar · JSTOR (July 2026) (Learn how and when to remove this message)\\n\\nFor the African philosophy, see \"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2264,
+            "completion_tokens": 52
+          },
+          "chars": 138
+        },
+        {
+          "reasoning": "We need to find when Ubuntu 22.04 LTS reaches end of standard support. The Wikipedia page likely contains a table of releases with support dates. We need to search within the page for \"22.04\" and \"standard support\". Let's fetch more around that section.",
+          "tool_calls": [
+            {
+              "name": "fetch_url",
+              "arguments": {
+                "max_chars": 2000,
+                "url": "https://en.wikipedia.org/wiki/Ubuntu"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"url\": \"https://en.wikipedia.org/wiki/Ubuntu\", \"title\": \"Ubuntu - Wikipedia\", \"content_type\": \"text/html; charset=UTF-8\", \"total_chars\": 85962, \"start\": 0, \"returned_chars\": 2000, \"truncated\": true, \"next_start\": 2000, \"text\": \"Jump to content\\n\\nSearch\\n\\n##\\n\\n# Ubuntu\\n\\n155 languages\\n\\nAfrikaans\\n\\nAlemannisch\\n\\nአማርኛ\\n\\nÆnglisc\\n\\nالعربية\\n\\nঅসমীয়া\\n\\nAsturianu\\n\\nAymar aru\\n\\nAzərbaycanca\\n\\nتۆرکجه\\n\\nБашҡортса\\n\\nŽemaitėška\\n\\nBikol Central\\n\\nБеларуская (тарашкевіца)\\n\\nБеларуская\\n\\nБългарски\\n\\nBamanankan\\n\\nবাংলা\\n\\nBrezhoneg\\n\\nBosanski\\n\\nCatalà\\n\\n閩東語 / Mìng-dĕ̤ng-ngṳ̄\\n\\nНохчийн\\n\\nCebuano\\n\\nکوردی\\n\\nCorsu\\n\\nQırımtatarca\\n\\nČeština\\n\\nKaszëbsczi\\n\\nЧӑвашла\\n\\nCymraeg\\n\\nDansk\\n\\nDeutsch\\n\\nDolnoserbski\\n\\nEʋegbe\\n\\nΕλληνικά\\n\\nEsperanto\\n\\nEspañol\\n\\nEesti\\n\\nEuskara\\n\\nفارسی\\n\\nSuomi\\n\\nFøroyskt\\n\\nFrançais\\n\\nFrysk\\n\\nGaeilge\\n\\nGalego\\n\\nگیلکی\\n\\nAvañe'ẽ\\n\\nગુજરાતી\\n\\nעברית\\n\\nहिन्दी\\n\\nHrvatski\\n\\nHornjoserbsce\\n\\nKreyòl ayisyen\\n\\nMagyar\\n\\nՀայերեն\\n\\nInterlingua\\n\\nBahasa Indonesia\\n\\nIgbo\\n\\nIlokano\\n\\nÍslenska\\n\\nItaliano\\n\\n日本語\\n\\nLa .lojban.\\n\\nJawa\\n\\nქართული\\n\\nKongo\\n\\nҚазақша\\n\\nភាសាខ្មែរ\\n\\nಕನ್ನಡ\\n\\n한국어\\n\\nKurdî\\n\\nКыргызча\\n\\nLatina\\n\\nLëtzebuergesch\\n\\nLimburgs\\n\\nLombard\\n\\nLingála\\n\\nລາວ\\n\\nLietuvių\\n\\nLatviešu\\n\\nBasa Banyumasan\\n\\nMalagasy\\n\\nМакедонски\\n\\nമലയാളം\\n\\nМонгол\\n\\nमराठी\\n\\nBahasa Melayu\\n\\nမြန်မာဘာသာ\\n\\nNedersaksies\\n\\nPlattdüütsch\\n\\nनेपाली\\n\\nNederlands\\n\\nNorsk nynorsk\\n\\nNorsk bokmål\\n\\nNovial\\n\\nOccitan\\n\\nOromoo\\n\\nଓଡ଼ିଆ\\n\\nИрон\\n\\nਪੰਜਾਬੀ\\n\\nPangasinan\\n\\nPolski\\n\\nPortuguês\\n\\nRuna Simi\\n\\nRumantsch\\n\\nRomână\\n\\nРусский\\n\\nСаха тыла\\n\\nSardu\\n\\nSicilianu\\n\\nScots\\n\\nسنڌي\\n\\nSrpskohrvatski / српскохрватски\\n\\nတႆး\\n\\nසිංහල\\n\\nSimple English\\n\\nSlovenčina\\n\\nSlovenščina\\n\\nGagana Samoa\\n\\nShqip\\n\\nСрпски / srpski\\n\\nSeeltersk\\n\\nSunda\\n\\nSvenska\\n\\nŚlůnski\\n\\nதமிழ்\\n\\nತುಳು\\n\\nతెలుగు\\n\\nTetun\\n\\nТоҷикӣ\\n\\nไทย\\n\\nTagalog\\n\\nToki pona\\n\\nTok Pisin\\n\\nTürkçe\\n\\nТатарча / tatarça\\n\\nReo tahiti\\n\\nУдмурт\\n\\nУкраїнська\\n\\nاردو\\n\\nOʻzbekcha / ўзбекча\\n\\nVèneto\\n\\nTiếng Việt\\n\\nWest-Vlams\\n\\nWinaray\\n\\n吴语\\n\\nייִדיש\\n\\nZeêuws\\n\\n文言\\n\\n閩南語 / Bân-lâm-gí\\n\\n粵語\\n\\n中文\\n\\nIsiZulu\\n\\nEdit links\\n\\nFrom Wikipedia, the free encyclopedia\\n\\nLinux distribution developed by Canonical\\n\\nThis article relies excessively on references to primary sources. Please improve this article by adding secondary or tertiary sources.\\n\\nFind sources: \\\"Ubuntu\\\" – news · newspapers · books · scholar · JSTOR (July 2026) (Learn how and when to remove this message)\\n\\nFor the African philosophy, see \"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 3703,
+            "completion_tokens": 96
+          },
+          "chars": 325
+        },
+        {
+          "reasoning": "The fetched content didn't include the relevant part about release schedule. Need to search for \"Ubuntu 22.04 LTS end of standard support\". Let's do a targeted search.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "Ubuntu 22.04 LTS end of standard support April 2027"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"Ubuntu 22.04 LTS end of standard support April 2027\", \"results\": [{\"title\": \"Download - Get Ubuntu\", \"url\": \"https://ubuntu.com/download\", \"snippet\": \"Download Ubuntu Desktop, Server, Core, and flavors for PCs, servers, IoT devices, and cloud.\"}, {\"title\": \"Download Ubuntu Desktop\", \"url\": \"https://ubuntu.com/download/desktop\", \"snippet\": \"Ubuntu is an open source software operating system that runs from the desktop, to the cloud, to all your internet connected things.\"}, {\"title\": \"Ubuntu 26.04.1 LTS (Resolute Raccoon)\", \"url\": \"https://releases.ubuntu.com/resolute/\", \"snippet\": \"The desktop image allows you to try Ubuntu without changing your computer at all, and at your option to install it permanently later. …\"}, {\"title\": \"Ubuntu - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Ubuntu\", \"snippet\": \"Ubuntu Desktop (formally named as Ubuntu Desktop Edition, and simply called Ubuntu) is the variant officially recommended for …\"}, {\"title\": \"Ubuntu philosophy - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Ubuntu_philosophy\", \"snippet\": \"Ubuntu has been in existence in orature (oral literature) and in the culture of Bantu peoples. It appeared in South African written …\"}, {\"title\": \"Ubuntu 22.04.5 LTS (Jammy Jellyfish)\", \"url\": \"https://releases.ubuntu.com/jammy/\", \"snippet\": \"The desktop image allows you to try Ubuntu without changing your computer at all, and at your option to install it permanently later. …\"}, {\"title\": \"Getting started with Ubuntu\", \"url\": \"https://wiki.ubuntu.com/Getting_started_with_Ubuntu\", \"snippet\": \"If you are new to Ubuntu, there are multiple ways for you to get started. This page provides a broad overview of different methods, …\"}, {\"title\": \"Ubuntu系统下载 | Ubuntu\", \"url\": \"https://cn.ubuntu.com/download\", \"snippet\": \"下载 Ubuntu 桌面、Ubuntu Server、物联网设备版、Ubuntu Core 及所有官方发行版本。 Ubuntu 是开源软件平台，可运行于 PC、服 …\"}, {\"title\": \"Ubuntu OS | Canonical\", \"url\": \"https://canonical.com/solutions/ubuntu-os\", \"snippet\": \"Ubuntu is the world's most popular Linux distribution. Unify your tech stack with the enterprise OS that is favoured for servers, IoT …\"}, {\"title\": \"The enterprise Linux for open source innovation | Ubuntu\", \"url\": \"https://ubuntu.com/\", \"snippet\": \"Ubuntu is the modern, enterprise Linux operating system for servers, desktop, cloud, and IoT. Supported for up to 15 years\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 5142,
+            "completion_tokens": 81
+          },
+          "chars": 257
+        },
+        {
+          "reasoning": "The web searches didn't directly give the answer. Could try fetch a specific page about Ubuntu LTS lifecycle.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "Ubuntu 22.04 LTS end of standard support date"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"Ubuntu 22.04 LTS end of standard support date\", \"results\": [{\"title\": \"Download - Get Ubuntu\", \"url\": \"https://ubuntu.com/download\", \"snippet\": \"Download Ubuntu Desktop, Server, Core, and flavors for PCs, servers, IoT devices, and cloud.\"}, {\"title\": \"Download Ubuntu Desktop\", \"url\": \"https://ubuntu.com/download/desktop\", \"snippet\": \"Ubuntu is an open source software operating system that runs from the desktop, to the cloud, to all your internet connected things.\"}, {\"title\": \"Ubuntu 26.04.1 LTS (Resolute Raccoon)\", \"url\": \"https://releases.ubuntu.com/resolute/\", \"snippet\": \"The desktop image allows you to try Ubuntu without changing your computer at all, and at your option to install it permanently later. …Read more\"}, {\"title\": \"Ubuntu - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Ubuntu\", \"snippet\": \"Ubuntu Desktop (formally named as Ubuntu Desktop Edition, and simply called Ubuntu) is the variant officially recommended for …Read more\"}, {\"title\": \"Ubuntu philosophy - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Ubuntu_philosophy\", \"snippet\": \"Ubuntu has been in existence in orature (oral literature) and in the culture of Bantu peoples. It appeared in South African written …Read more\"}, {\"title\": \"Ubuntu 22.04.5 LTS (Jammy Jellyfish)\", \"url\": \"https://releases.ubuntu.com/jammy/\", \"snippet\": \"The desktop image allows you to try Ubuntu without changing your computer at all, and at your option to install it permanently later. …Read more\"}, {\"title\": \"Getting started with Ubuntu\", \"url\": \"https://wiki.ubuntu.com/Getting_started_with_Ubuntu\", \"snippet\": \"If you are new to Ubuntu, there are multiple ways for you to get started. This page provides a broad overview of different methods, …Read more\"}, {\"title\": \"Ubuntu系统下载 | Ubuntu\", \"url\": \"https://cn.ubuntu.com/download\", \"snippet\": \"下载 Ubuntu 桌面、Ubuntu Server、物联网设备版、Ubuntu Core 及所有官方发行版本。 Ubuntu 是开源软件平台，可运行于 PC、服 …Read more\"}, {\"title\": \"Ubuntu OS | Canonical\", \"url\": \"https://canonical.com/solutions/ubuntu-os\", \"snippet\": \"Ubuntu is the world's most popular Linux distribution. Unify your tech stack with the enterprise OS that is favoured for servers, IoT …Read more\"}, {\"title\": \"The enterprise Linux for open source innovation | Ubuntu\", \"url\": \"https://ubuntu.com/\", \"snippet\": \"Ubuntu is the modern, enterprise Linux operating system for servers, desktop, cloud, and IoT. Supported for up to 15 years\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 5811,
+            "completion_tokens": 64
+          },
+          "chars": 193
+        },
+        {
+          "reasoning": "The web search results not giving the specific date. Might need to fetch a page about Ubuntu 22.04 LTS release support. Could use ubuntu.com support page. Let's search for \"Ubuntu 22.04 LTS support schedule\".\n",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "Ubuntu 22.04 LTS support schedule"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"Ubuntu 22.04 LTS support schedule\", \"results\": [{\"title\": \"Download - Get Ubuntu\", \"url\": \"https://ubuntu.com/download\", \"snippet\": \"Download Ubuntu Desktop, Server, Core, and flavors for PCs, servers, IoT devices, and cloud.\"}, {\"title\": \"Download Ubuntu Desktop\", \"url\": \"https://ubuntu.com/download/desktop\", \"snippet\": \"Ubuntu is an open source software operating system that runs from the desktop, to the cloud, to all your internet connected things.\"}, {\"title\": \"Ubuntu 26.04.1 LTS (Resolute Raccoon)\", \"url\": \"https://releases.ubuntu.com/resolute/\", \"snippet\": \"The desktop image allows you to try Ubuntu without changing your computer at all, and at your option to install it permanently later. …\"}, {\"title\": \"Ubuntu - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Ubuntu\", \"snippet\": \"Ubuntu Desktop (formally named as Ubuntu Desktop Edition, and simply called Ubuntu) is the variant officially recommended for …\"}, {\"title\": \"Ubuntu philosophy - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Ubuntu_philosophy\", \"snippet\": \"Ubuntu has been in existence in orature (oral literature) and in the culture of Bantu peoples. It appeared in South African written …\"}, {\"title\": \"Ubuntu 22.04.5 LTS (Jammy Jellyfish)\", \"url\": \"https://releases.ubuntu.com/jammy/\", \"snippet\": \"The desktop image allows you to try Ubuntu without changing your computer at all, and at your option to install it permanently later. …\"}, {\"title\": \"Getting started with Ubuntu\", \"url\": \"https://wiki.ubuntu.com/Getting_started_with_Ubuntu\", \"snippet\": \"If you are new to Ubuntu, there are multiple ways for you to get started. This page provides a broad overview of different methods, …\"}, {\"title\": \"Ubuntu系统下载 | Ubuntu\", \"url\": \"https://cn.ubuntu.com/download\", \"snippet\": \"下载 Ubuntu 桌面、Ubuntu Server、物联网设备版、Ubuntu Core 及所有官方发行版本。 Ubuntu 是开源软件平台，可运行于 PC、服 …\"}, {\"title\": \"Ubuntu OS | Canonical\", \"url\": \"https://canonical.com/solutions/ubuntu-os\", \"snippet\": \"Ubuntu is the world's most popular Linux distribution. Unify your tech stack with the enterprise OS that is favoured for servers, IoT …\"}, {\"title\": \"The enterprise Linux for open source innovation | Ubuntu\", \"url\": \"https://ubuntu.com/\", \"snippet\": \"Ubuntu is the modern, enterprise Linux operating system for servers, desktop, cloud, and IoT. Supported for up to 15 years\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 6488,
+            "completion_tokens": 88
+          },
+          "chars": 281
+        },
+        {
+          "reasoning": "The web searches didn't retrieve the specific info; need better query maybe \"Ubuntu 22.04 LTS end of standard support April 2027\". Let's try search with that phrase.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "\"Ubuntu 22.04\" \"end of standard support\" "
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"\\\"Ubuntu 22.04\\\" \\\"end of standard support\\\"\", \"results\": [{\"title\": \"Download - Get Ubuntu\", \"url\": \"https://ubuntu.com/download\", \"snippet\": \"Download Ubuntu Desktop, Server, Core, and flavors for PCs, servers, IoT devices, and cloud.\"}, {\"title\": \"Download Ubuntu Desktop\", \"url\": \"https://ubuntu.com/download/desktop\", \"snippet\": \"Ubuntu is an open source software operating system that runs from the desktop, to the cloud, to all your internet connected things.\"}, {\"title\": \"Ubuntu 26.04.1 LTS (Resolute Raccoon)\", \"url\": \"https://releases.ubuntu.com/resolute/\", \"snippet\": \"The desktop image allows you to try Ubuntu without changing your computer at all, and at your option to install it permanently later. …Read more\"}, {\"title\": \"Ubuntu - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Ubuntu\", \"snippet\": \"Ubuntu Desktop (formally named as Ubuntu Desktop Edition, and simply called Ubuntu) is the variant officially recommended for …Read more\"}, {\"title\": \"Ubuntu philosophy - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Ubuntu_philosophy\", \"snippet\": \"Ubuntu has been in existence in orature (oral literature) and in the culture of Bantu peoples. It appeared in South African written …Read more\"}, {\"title\": \"Ubuntu 22.04.5 LTS (Jammy Jellyfish)\", \"url\": \"https://releases.ubuntu.com/jammy/\", \"snippet\": \"The desktop image allows you to try Ubuntu without changing your computer at all, and at your option to install it permanently later. …Read more\"}, {\"title\": \"Getting started with Ubuntu\", \"url\": \"https://wiki.ubuntu.com/Getting_started_with_Ubuntu\", \"snippet\": \"If you are new to Ubuntu, there are multiple ways for you to get started. This page provides a broad overview of different methods, …Read more\"}, {\"title\": \"Ubuntu系统下载 | Ubuntu\", \"url\": \"https://cn.ubuntu.com/download\", \"snippet\": \"下载 Ubuntu 桌面、Ubuntu Server、物联网设备版、Ubuntu Core 及所有官方发行版本。 Ubuntu 是开源软件平台，可运行于 PC、服 …Read more\"}, {\"title\": \"Ubuntu OS | Canonical\", \"url\": \"https://canonical.com/solutions/ubuntu-os\", \"snippet\": \"Ubuntu is the world's most popular Linux distribution. Unify your tech stack with the enterprise OS that is favoured for servers, IoT …Read more\"}, {\"title\": \"The enterprise Linux for open source innovation | Ubuntu\", \"url\": \"https://ubuntu.com/\", \"snippet\": \"Ubuntu is the modern, enterprise Linux operating system for servers, desktop, cloud, and IoT. Supported for up to 15 years\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 7145,
+            "completion_tokens": 80
+          },
+          "chars": 249
+        },
+        {
+          "reasoning": "The web search results are not giving direct answer due to maybe blocked or not indexed. Could try search with \"Ubuntu 22.04 LTS standard support ends\".\n",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "Ubuntu 22.04 LTS standard support ends"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"Ubuntu 22.04 LTS standard support ends\", \"results\": [{\"title\": \"Download - Get Ubuntu\", \"url\": \"https://ubuntu.com/download\", \"snippet\": \"Download Ubuntu Desktop, Server, Core, and flavors for PCs, servers, IoT devices, and cloud.\"}, {\"title\": \"Download Ubuntu Desktop\", \"url\": \"https://ubuntu.com/download/desktop\", \"snippet\": \"Ubuntu is an open source software operating system that runs from the desktop, to the cloud, to all your internet connected things.\"}, {\"title\": \"Ubuntu 26.04.1 LTS (Resolute Raccoon)\", \"url\": \"https://releases.ubuntu.com/resolute/\", \"snippet\": \"The desktop image allows you to try Ubuntu without changing your computer at all, and at your option to install it permanently later. …Read more\"}, {\"title\": \"Ubuntu - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Ubuntu\", \"snippet\": \"Ubuntu Desktop (formally named as Ubuntu Desktop Edition, and simply called Ubuntu) is the variant officially recommended for …Read more\"}, {\"title\": \"Ubuntu philosophy - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Ubuntu_philosophy\", \"snippet\": \"Ubuntu has been in existence in orature (oral literature) and in the culture of Bantu peoples. It appeared in South African written …Read more\"}, {\"title\": \"Ubuntu 22.04.5 LTS (Jammy Jellyfish)\", \"url\": \"https://releases.ubuntu.com/jammy/\", \"snippet\": \"The desktop image allows you to try Ubuntu without changing your computer at all, and at your option to install it permanently later. …Read more\"}, {\"title\": \"Getting started with Ubuntu\", \"url\": \"https://wiki.ubuntu.com/Getting_started_with_Ubuntu\", \"snippet\": \"If you are new to Ubuntu, there are multiple ways for you to get started. This page provides a broad overview of different methods, …Read more\"}, {\"title\": \"Ubuntu系统下载 | Ubuntu\", \"url\": \"https://cn.ubuntu.com/download\", \"snippet\": \"下载 Ubuntu 桌面、Ubuntu Server、物联网设备版、Ubuntu Core 及所有官方发行版本。 Ubuntu 是开源软件平台，可运行于 PC、服 …Read more\"}, {\"title\": \"Ubuntu OS | Canonical\", \"url\": \"https://canonical.com/solutions/ubuntu-os\", \"snippet\": \"Ubuntu is the world's most popular Linux distribution. Unify your tech stack with the enterprise OS that is favoured for servers, IoT …Read more\"}, {\"title\": \"The enterprise Linux for open source innovation | Ubuntu\", \"url\": \"https://ubuntu.com/\", \"snippet\": \"Ubuntu is the modern, enterprise Linux operating system for servers, desktop, cloud, and IoT. Supported for up to 15 years\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 7827,
+            "completion_tokens": 74
+          },
+          "chars": 230
+        },
+        {
+          "reasoning": "The web searches didn't fetch specific info. Maybe need to fetch a more direct page like ubuntu.com/website/lts. Let's search that.\n",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 8500,
+            "completion_tokens": 64
+          },
+          "chars": 132
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": "explore_models/targets/v0/s1",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:51:29Z",
+  "turns": [
+    {
+      "user_message": "What are polling targets and what fields do they have?",
+      "steps": [
+        {
+          "reasoning": "We need to answer user: \"What are polling targets and what fields do they have?\" We should describe conceptually what polling targets are (likely L8PTarget model) and then list its fields. Must use describe_model tool to get fields. Let's call describe_model for L8PTarget.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "L8PTarget"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"targetId\",\"type\":\"string\"},{\"path\":\"linksId\",\"type\":\"string\"},{\"path\":\"state\",\"type\":\"string\"},{\"path\":\"inventoryType\",\"type\":\"string\"}],\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1798,
+            "completion_tokens": 91
+          },
+          "chars": 308
+        },
+        {
+          "reasoning": "We need to answer: \"What are polling targets and what fields do they have?\" Provide description and list fields. We have field names from describe_model: targetId, linksId, state, inventoryType. We should also maybe explain what polling targets are conceptually: part of system that defines what to poll. Provide fields.\n\nNo need to use other tools.",
+          "text": "**Polling targets** are the entities that define which devices or resources the Probler system should periodically poll for status, metrics, and inventory information. Each polling target tells the system *what* to query (the inventory type) and *how* to reach it (via the associated link), and it tracks the current state of that polling operation.\n\n**Fields of the `L8PTarget` model**\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `targetId` | string | The unique identifier for the polling target (primary key). |\n| `linksId` | string | The identifier of the link (network connection or endpoint) used to reach the target. |\n| `state` | string | The current operational state of the polling target (e.g., `ACTIVE`, `DISABLED`, `ERROR`). |\n| `inventoryType` | string | The type of inventory that this target provides (e.g., `NETWORK_DEVICE`, `GPU_DEVICE`, `K8S_CLUSTER`). |\n\nThese fields together allow you to create, view, and manage polling targets within Probler.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1895,
+            "completion_tokens": 313
+          },
+          "chars": 1348
+        }
+      ]
+    }
+  ]
+}

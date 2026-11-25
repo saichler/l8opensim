@@ -1,0 +1,84 @@
+{
+  "id": "csv_export/offline-csv/v0/s0",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:25:21Z",
+  "turns": [
+    {
+      "user_message": "Export the offline devices to a CSV file.",
+      "steps": [
+        {
+          "reasoning": "User wants offline devices exported to CSV. Need to know which model holds devices: NetworkDevice likely. Need to filter offline status. Need to see fields for NetworkDevice to know status field. Use describe_model for NetworkDevice.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1796,
+            "completion_tokens": 74
+          },
+          "chars": 272
+        },
+        {
+          "reasoning": "We need to export offline devices. Likely status field is equipmentinfo.deviceStatus maybe indicates status like \"offline\". So we need query where equipmentinfo.deviceStatus='offline'? Need to see exact values. Could list distinct statuses. Let's query count of statuses.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select equipmentinfo.deviceStatus,count(*) from NetworkDevice group-by equipmentinfo.deviceStatus"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"count(*)\":1,\"group\":{\"equipmentinfo.deviceStatus\":\"DEVICE_STATUS_CRITICAL\"}},{\"count(*)\":3,\"group\":{\"equipmentinfo.deviceStatus\":\"DEVICE_STATUS_OFFLINE\"}},{\"count(*)\":13,\"group\":{\"equipmentinfo.deviceStatus\":\"DEVICE_STATUS_ONLINE\"}},{\"count(*)\":2,\"group\":{\"equipmentinfo.deviceStatus\":\"DEVICE_STATUS_WARNING\"}}],\"model\":\"NetworkDevice\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2033,
+            "completion_tokens": 92
+          },
+          "chars": 387
+        },
+        {
+          "reasoning": "User wants to export offline devices to CSV. Need to query NetworkDevice where equipmentinfo.deviceStatus = offline. The status value likely string \"DEVICE_STATUS_OFFLINE\". Use export_csv. No need for columns specified but could include relevant fields. Use default.\n\n",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "offline_devices.csv",
+                "query": "select * from NetworkDevice where equipmentinfo.deviceStatus=DEVICE_STATUS_OFFLINE"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"id\",\"equipmentinfo.vendor\",\"equipmentinfo.model\",\"equipmentinfo.series\",\"equipmentinfo.sysName\",\"equipmentinfo.ipAddress\",\"equipmentinfo.serialNumber\",\"equipmentinfo.version\",\"equipmentinfo.firmwareVersion\",\"equipmentinfo.location\",\"equipmentinfo.deviceType\",\"equipmentinfo.deviceStatus\",\"equipmentinfo.uptime\",\"equipmentinfo.lastSeen\",\"equipmentinfo.interfaceCount\"],\"file_name\":\"offline_devices.csv\",\"rows\":3}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2173,
+            "completion_tokens": 103
+          },
+          "chars": 406
+        },
+        {
+          "text": "Here is the CSV file containing all devices whose status is **DEVICE_STATUS_OFFLINE**.\n\n**Attached:** `offline_devices.csv` (3 records)",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2318,
+            "completion_tokens": 34
+          },
+          "chars": 135
+        }
+      ]
+    }
+  ]
+}

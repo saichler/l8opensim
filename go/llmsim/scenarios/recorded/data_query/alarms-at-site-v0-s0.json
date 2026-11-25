@@ -1,0 +1,74 @@
+{
+  "id": "data_query/alarms-at-site/v0/s0",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:41:35Z",
+  "params": {
+    "site": [
+      "Austin",
+      "Dallas",
+      "Houston",
+      "Seattle",
+      "Denver",
+      "Chicago"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Show the alarms for devices in Austin.",
+      "steps": [
+        {
+          "reasoning": "We need to show alarms for devices in {{p:site}}. Need to know data model: Alarm likely has fields referencing device (maybe deviceId) and location? Let's describe Alarm model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "Alarm"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"alarmId\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"description\",\"type\":\"string\"},{\"path\":\"state\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"nodeId\",\"type\":\"string\"},{\"path\":\"nodeName\",\"type\":\"string\"},{\"path\":\"location\",\"type\":\"string\"},{\"path\":\"firstOccurrence\",\"type\":\"int\"},{\"path\":\"lastOccurrence\",\"type\":\"int\"},{\"path\":\"occurrenceCount\",\"type\":\"int\"},{\"path\":\"isRootCause\",\"type\":\"bool\"},{\"path\":\"acknowledgedBy\",\"type\":\"string\"}],\"model\":\"Alarm\",\"primaryKey\":\"alarmId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 63
+          },
+          "chars": 203
+        },
+        {
+          "reasoning": "We need to show alarms for devices in {{p:site}}. Alarms have location field; likely location includes city. We need to query Alarm where location contains {{p:site}}. The query language? L8Query supports where conditions; we need to know syntax for string contains? Not specified. Possibly equality. Maybe location field is a string like \"{{p:site}}, TX\". We could filter with location=\"{{p:site}}\". Let's try simple equality.\n\nWe need to retrieve alarm records. Use select * from Alarm where location='{{p:site}}'. No limit needed? select * with limit maybe required? It says select * needs id filter or limit n (\u003c={{int:80:120}}). For export we can use export_csv without limit; but for select we need limit. We can use export_csv to get all matching records. Let's do export_csv with query selecting alarms with location='{{p:site}}'.\n\n",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "{{p:site:lower}}_alarms.csv",
+                "query": "select * from Alarm where location='{{p:site}}'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"alarmId\",\"name\",\"description\",\"state\",\"severity\",\"nodeId\",\"nodeName\",\"location\",\"firstOccurrence\",\"lastOccurrence\",\"occurrenceCount\",\"isRootCause\",\"acknowledgedBy\"],\"file_name\":\"austin_alarms.csv\",\"rows\":5}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1985,
+            "completion_tokens": 213
+          },
+          "chars": 902
+        },
+        {
+          "text": "Attached is **{{p:site:lower}}_alarms.csv** containing the alarms for devices located in {{p:site}} (5 records).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2099,
+            "completion_tokens": 26
+          },
+          "chars": 98
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "writing/email-followup/v0/s1",
+  "flavor": "writing",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:57:15Z",
+  "turns": [
+    {
+      "user_message": "Write an email asking the vendor for a quote for 4 new switches.",
+      "steps": [
+        {
+          "reasoning": "The user wants to write an email asking the vendor for a quote for 4 new switches. This is a request to produce a draft email. No data needed. Just produce email text.",
+          "text": "Subject: Request for Quote – 4 New Network Switches  \n\nHi [Vendor Name],\n\nI hope you’re doing well.\n\nWe are planning to expand our network infrastructure and would like to request a formal quote for the following equipment:\n\n- **Quantity:** 4 network switches  \n- **Desired specifications:** (please include any recommended models that meet our typical requirements for {{int:8:12}} GbE uplinks, PoE+, and modular expansion)\n\nCould you please provide the following details in your quote:\n\n1. Unit price and total cost for the four switches  \n2. Shipping and handling fees (including estimated delivery time)  \n3. Warranty terms and any support options available  \n4. Payment terms  \n5. Any volume discounts or promotional offers that may apply  \n\nIf you need any additional information (e.g., required rack space, power specifications, or preferred firmware version), please let me know and I’ll be happy to provide it.\n\nThank you for your assistance. We look forward to reviewing your proposal.\n\nBest regards,\n\n[Your Name]  \n[Your Title]  \n[Your Company]  \n[Phone Number]  \n[Email Address]  ",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1802,
+            "completion_tokens": 275
+          },
+          "chars": 1257
+        }
+      ]
+    },
+    {
+      "user_message": "Make it shorter and more formal.",
+      "steps": [
+        {
+          "reasoning": "Need to rewrite email shorter and more formal. Provide final answer.",
+          "text": "Subject: Request for Quote – Four Network Switches  \n\nDear [Vendor Name],\n\nWe are seeking a quotation for four (4) network switches meeting our standard specifications ({{int:8:12}} GbE uplinks, PoE+, modular expansion). Please include:\n\n1. Unit and total pricing  \n2. Shipping, delivery timeframe, and handling fees  \n3. Warranty and support options  \n4. Payment terms  \n5. Applicable volume discounts or promotions  \n\nKindly advise if further details are required.\n\nThank you for your prompt attention.\n\nSincerely,  \n\n[Your Name]  \n[Your Title]  \n[Your Company]  \n[Phone] | [Email]",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2046,
+            "completion_tokens": 152
+          },
+          "chars": 645
+        }
+      ]
+    }
+  ]
+}

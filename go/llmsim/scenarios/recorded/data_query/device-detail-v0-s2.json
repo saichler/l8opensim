@@ -1,0 +1,91 @@
+{
+  "id": "data_query/device-detail/v0/s2",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:40:10Z",
+  "params": {
+    "n": [
+      "01",
+      "05",
+      "12"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Show me the details of device core-rtr-01.",
+      "steps": [
+        {
+          "reasoning": "We need to fetch details of a device with name core-rtr-01. Likely a NetworkDevice. Need to know field names; use describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1799,
+            "completion_tokens": 61
+          },
+          "chars": 168
+        },
+        {
+          "reasoning": "We need details of device core-rtr-01. Likely the id field equals core-rtr-01. Need to select * from NetworkDevice where id=core-rtr-01. Use select * with limit? Since we have filter, fine. We'll query.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select * from NetworkDevice where id='core-rtr-01'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":0,\"model\":\"NetworkDevice\",\"records\":[]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2036,
+            "completion_tokens": 93
+          },
+          "chars": 271
+        },
+        {
+          "reasoning": "The query returned count 0, meaning no record with id core-rtr-01. Perhaps the device is stored under a different field, like equipmentinfo.sysName or deviceInfo... Need to list all devices maybe to find matching sysName.\n\nWe need to find device details by name core-rtr-01. Likely equipmentinfo.sysName field contains that. Let's query where equipmentinfo.sysName='core-rtr-01'.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select * from NetworkDevice where equipmentinfo.sysName='core-rtr-01'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":1,\"model\":\"NetworkDevice\",\"records\":[{\"equipmentinfo\":{\"deviceStatus\":\"DEVICE_STATUS_ONLINE\",\"deviceType\":\"DEVICE_TYPE_SWITCH\",\"firmwareVersion\":\"3.1.1\",\"interfaceCount\":46,\"ipAddress\":\"10.20.30.1\",\"lastSeen\":\"2026-11-23T10:54:51Z\",\"location\":\"Denver\",\"model\":\"VSP4450\",\"serialNumber\":\"SN9E987A99\",\"series\":\"MX\",\"sysName\":\"core-rtr-01\",\"uptime\":\"90d 2h\",\"vendor\":\"Palo Alto\",\"version\":\"4.30.2F\"},\"id\":\"nd-001\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2097,
+            "completion_tokens": 128
+          },
+          "chars": 467
+        },
+        {
+          "reasoning": "We have a record for core-rtr-01: id nd-001. The user asks \"Show me the details of device core-rtr-01.\" We have the full details. We need to present them. Use the fields from equipmentinfo. Provide a summary. Since we have the record, we can display details. We should include all fields. Provide a formatted answer.",
+          "text": "Here are the details for the device **core‑rtr‑01**:\n\n| Field | Value |\n|-------|-------|\n| **ID** | nd-001 |\n| **Vendor** | Palo Alto |\n| **Model** | VSP4450 |\n| **Series** | MX |\n| **System Name** | core‑rtr‑01 |\n| **IP Address** | 10.20.30.1 |\n| **Serial Number** | SN9E987A99 |\n| **Software Version** | 4.30.2F |\n| **Firmware Version** | 3.1.1 |\n| **Device Type** | SWITCH |\n| **Device Status** | ONLINE |\n| **Location** | {{city:1}} |\n| **Uptime** | 90d 2h |\n| **Last Seen** | 2026‑{{int:8:14}}‑{{int:18:28}} 10:54:51 UTC |\n| **Interface Count** | {{int:36:56}} |\n\nIf you need any additional information (e.g., interface details, configuration export, or related alarms), just let me know!",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2290,
+            "completion_tokens": 307
+          },
+          "chars": 992
+        }
+      ]
+    }
+  ]
+}

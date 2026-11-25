@@ -1,0 +1,24 @@
+{
+  "id": "code_debug/py-import/v0/s2",
+  "flavor": "code_debug",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T18:57:59Z",
+  "turns": [
+    {
+      "user_message": "ModuleNotFoundError: No module named 'requests' but I installed it with pip. What is going on?",
+      "steps": [
+        {
+          "reasoning": "The user is asking a Python error: ModuleNotFoundError despite pip install. This is a troubleshooting question, not about data. We can answer with explanation. No need to use tools.",
+          "text": "`ModuleNotFoundError: No module named 'requests'` even after you ran `pip install requests` usually means that the Python interpreter you’re using to run your script is **not the same environment where you installed the package**. Here are the most common reasons and how to fix them:\n\n---\n\n### 1. Multiple Python installations / virtual environments\n- **Cause:** `pip` may be linked to a different Python executable (e.g., system Python vs. a virtualenv, or Python 2 vs. Python 3).\n- **Check:** Run the following commands to see which Python and pip are being used:\n\n  ```bash\n  # Which Python runs your script?\n  which python        # Unix/macOS\n  where python        # Windows\n\n  # Which pip installed the package?\n  which pip           # Unix/macOS\n  where pip           # Windows\n\n  # Or more reliably, use the Python‑specific pip:\n  python -m pip --version\n  ```\n\n- **Fix:** Install the package with the same interpreter you’ll use to run the code:\n\n  ```bash\n  # If you run the script with `python3`\n  python3 -m pip install requests\n\n  # If you’re inside a virtualenv, activate it first\n  source venv/bin/activate   # Unix/macOS\n  .\\venv\\Scripts\\activate    # Windows\n  python -m pip install requests\n  ```\n\n---\n\n### 2. Running the script with `python` vs. `python3`\n- **Cause:** On many systems `python` points to Python 2.7, while `pip` may install for Python 3 (or vice‑versa).  \n- **Fix:** Use the matching command:\n\n  ```bash\n  python3 script.py          # run with Python 3\n  python3 -m pip install requests\n  ```\n\n---\n\n### 3. Installing into a user site‑packages directory\n- **Cause:** If you used `pip install --user requests`, the package is placed in a user‑specific directory that may not be on `sys.path` for the interpreter you’re using.\n- **Fix:** Either omit `--user` (install system‑wide or in the active virtualenv) or ensure the user site‑packages directory is on `PYTHONPATH`. Usually the simplest is:\n\n  ```bash\n  python -m pip install --upgrade --user requests\n  ```\n\n---\n\n### 4. Permissions / environment issues (e.g., inside Docker, CI, or a restricted environment)\n- **Cause:** The environment might not persist the installation, or the container image you’re running doesn’t have the package.\n- **Fix:** Re‑install inside the container or add the package to the Dockerfile / requirements.txt:\n\n  ```Dockerfile\n  RUN pip install --no-cache-dir requests\n  ```\n\n---\n\n### 5. Verify the installation\nAfter installing, you can double‑check that `requests` is visible to the interpreter:\n\n```bash\npython - \u003c\u003c'PY'\nimport sys, pkgutil\nprint(\"Python:\", sys.version)\nprint(\"Requests found:\", pkgutil.find_loader(\"requests\") is not None)\nPY\n```\n\nIf the script prints `Requests found: True`, the import should work.\n\n---\n\n## Quick Checklist\n\n1. **Identify the interpreter** you’ll use to run the script (`python`, `python3`, or a virtualenv’s `python`).\n2. **Install with that interpreter**:\n\n   ```bash\n   \u003cinterpreter\u003e -m pip install requests\n   ```\n\n3. **Run the script** with the same interpreter:\n\n   ```bash\n   \u003cinterpreter\u003e your_script.py\n   ```\n\n---\n\n### Example Fix (most common scenario)\n\n```bash\n# Activate your virtual environment (if any)\nsource venv/bin/activate   # Linux/macOS\n# or\n.\\venv\\Scripts\\activate    # Windows\n\n# Install using the interpreter from the venv\npython -m pip install requests\n\n# Run your script\npython your_script.py\n```\n\n---\n\nIf you still see the error after trying the steps above, let me know:\n\n- Which command you used to install (`pip`, `python -m pip`, etc.).\n- How you’re invoking the script (`python script.py`, `python3`, a IDE run configuration, etc.).\n- Whether you’re inside a virtual environment, Docker container, or other isolated environment.\n\nWith that information I can give a more targeted suggestion.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1810,
+            "completion_tokens": 976
+          },
+          "chars": 4004
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "csv_analyze/latency-avg/v0/s0",
+  "flavor": "csv_analyze",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:20:08Z",
+  "turns": [
+    {
+      "user_message": "What is the average p99 latency in this CSV?\n```csv\nendpoint,p50_ms,p99_ms,errors\n/login,40,180,2\n/search,85,950,14\n/checkout,120,400,1\n/profile,30,90,0\n/upload,300,4200,37\n```",
+      "steps": [
+        {
+          "reasoning": "The user asks: \"What is the average p99 latency in this CSV?\" They provided CSV data. We need to compute average of p99_ms column. Values: {{int:144:216}}, {{int:760:1140}}, {{int:320:480}}, {{int:72:108}}, {{int:3360:5040}}. Sum = {{int:144:216}}+{{int:760:1140}}={{int:904:1356}}, +{{int:320:480}}={{int:1224:1836}}, +{{int:72:108}}={{int:1296:1944}}, +{{int:3360:5040}}={{int:4656:6984}}. Average = {{int:4656:6984}} / 5 = {{int:931:1397}}. So answer: average p99 latency is {{int:931:1397}} ms.\n\nWe can just compute manually, no tool needed. Provide answer.",
+          "text": "The average p99 latency across the five endpoints is **1,164 ms**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1854,
+            "completion_tokens": 147
+          },
+          "chars": 419
+        }
+      ]
+    }
+  ]
+}

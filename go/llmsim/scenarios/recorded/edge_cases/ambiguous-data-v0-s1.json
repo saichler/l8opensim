@@ -1,0 +1,24 @@
+{
+  "id": "edge_cases/ambiguous-data/v0/s1",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:42:27Z",
+  "turns": [
+    {
+      "user_message": "Show me the thing from yesterday.",
+      "steps": [
+        {
+          "reasoning": "The user says \"Show me the thing from yesterday.\" This is ambiguous. We need to ask clarifying question: what kind of thing? Could be a record they referenced previously? No prior context. So we need to ask for clarification.",
+          "text": "I’m not sure which data you’d like to see. Could you let me know what type of record (e.g., network devices, GPU servers, Kubernetes clusters, alarms, events, etc.) and any specific criteria (such as a name, ID, or field) you’re looking for from yesterday?",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 120
+          },
+          "chars": 487
+        }
+      ]
+    }
+  ]
+}

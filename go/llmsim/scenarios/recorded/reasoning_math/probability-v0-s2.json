@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/probability/v0/s2",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:09:44Z",
+  "turns": [
+    {
+      "user_message": "If each of 3 independent links has 99.9% availability, what is the probability that all are up? And at least one?",
+      "steps": [
+        {
+          "reasoning": "The user asks a probability question: if each of 3 independent links has 99.9% availability, what is the probability that all are up? And at least one? This is a straightforward calculation, not requiring data. I should answer: each link up probability = 0.999. For all three up: 0.999^3 = about 0.997. Compute: 0.999^2 = 0.998001, times 0.999 = 0.997002999. So approx 99.7003% (or 0.9970). At least one up: 1 - probability none up. Probability none up = (1 - 0.999)^3 = 0.001^3 = 1e-9 = 0.000000001 (0.0000001%). So at least one up = 1 - 1e-9 = 0.999999999, approx 99.9999999%. Provide answers.",
+          "text": "**All three links up**\n\nEach link is up with probability 0.999.  \nBecause the links are independent:\n\n\\[\nP(\\text{all three up}) = 0.999 \\times 0.999 \\times 0.999 = 0.999^{3}\n                     \\approx 0.997003\n\\]\n\nSo the probability that all three are up is **≈ 99.70 %** (0.9970).\n\n---\n\n**At least one link up**\n\nFirst find the probability that *none* are up:\n\n\\[\nP(\\text{none up}) = (1 - 0.999)^{3} = 0.001^{3} = 1 \\times {{int:8:12}}^{-9}\n\\]\n\nThen:\n\n\\[\nP(\\text{at least one up}) = 1 - P(\\text{none up})\n                          = 1 - {{int:8:12}}^{-9}\n                          \\approx 0.999999999\n\\]\n\nSo the probability that at least one link is up is **≈ 99.9999999 %** (0.999999999).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1816,
+            "completion_tokens": 446
+          },
+          "chars": 1281
+        }
+      ]
+    }
+  ]
+}

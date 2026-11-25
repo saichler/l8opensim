@@ -1,0 +1,62 @@
+{
+  "id": "edge_cases/unknown-model/v0/s2",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:46:44Z",
+  "turns": [
+    {
+      "user_message": "How many invoices did we bill last month?",
+      "steps": [
+        {
+          "reasoning": "We need to answer \"How many invoices did we bill last month?\" We need to know which model holds invoices. The listed models are NetworkDevice, GpuDevice, K8SCluster, K8SNode, K8SPod, K8SDeployment, Alarm, EventRecord, L8PTarget. No Invoice model. Perhaps invoices are in EventRecord? Unlikely. Maybe they omitted. We must check list_modules.",
+          "tool_calls": [
+            {
+              "name": "list_modules",
+              "arguments": {}
+            }
+          ],
+          "tool_results": [
+            "{\"models\":[{\"area\":\"Inventory\",\"model\":\"NetworkDevice\",\"primaryKey\":\"id\",\"service\":\"NetDev\"},{\"area\":\"Inventory\",\"model\":\"GpuDevice\",\"primaryKey\":\"id\",\"service\":\"GpuDev\"},{\"area\":\"Kubernetes\",\"model\":\"K8SCluster\",\"primaryKey\":\"name\",\"service\":\"K8sClstr\"},{\"area\":\"Kubernetes\",\"model\":\"K8SNode\",\"primaryKey\":\"name\",\"service\":\"K8sNode\"},{\"area\":\"Kubernetes\",\"model\":\"K8SPod\",\"primaryKey\":\"key\",\"service\":\"K8sPod\"},{\"area\":\"Kubernetes\",\"model\":\"K8SDeployment\",\"primaryKey\":\"key\",\"service\":\"K8sDeploy\"},{\"area\":\"Alarms\",\"model\":\"Alarm\",\"primaryKey\":\"alarmId\",\"service\":\"Alarm\"},{\"area\":\"Alarms\",\"model\":\"EventRecord\",\"primaryKey\":\"eventId\",\"service\":\"Events\"},{\"area\":\"Collection\",\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\",\"service\":\"Targets\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1796,
+            "completion_tokens": 108
+          },
+          "chars": 355
+        },
+        {
+          "reasoning": "We need to answer: \"How many invoices did we bill last month?\" Invoices likely are in a model not listed. The models we have: NetworkDevice, GpuDevice, K8SCluster, K8SNode, K8SPod, K8SDeployment, Alarm, EventRecord, L8PTarget. No Invoice model. Possibly invoices are stored as EventRecord? Or maybe not. We should ask user for clarification. But we could check if any model includes invoice field. Use describe_model on each to see fields. Let's inspect maybe Alarm? But unlikely. Let's list describe_model for each.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2041,
+            "completion_tokens": 150
+          },
+          "chars": 555
+        },
+        {
+          "reasoning": "The user asks: \"How many invoices did we bill last month?\" This involves invoices; none of the listed models seem directly about invoices. The models are NetworkDevice, GpuDevice, K8SCluster, etc., plus Alarm, EventRecord, L8PTarget. No Invoice model. Possibly invoices are stored in EventRecord? Unlikely. There might be an Invoice model not listed; but list_modules gave all models. So we cannot answer because there is no invoice data. According to rules, we should say we don't have that data.\n\nThus respond: I don't see any invoice-related model; cannot answer.",
+          "text": "I’m not seeing any invoice‑related data model (such as an Invoice or Billing table) among the available models, so I can’t retrieve a count of invoices billed last month. If there’s another data source you’d like me to query, please let me know!",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2278,
+            "completion_tokens": 191
+          },
+          "chars": 823
+        }
+      ]
+    }
+  ]
+}

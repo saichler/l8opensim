@@ -1,0 +1,65 @@
+{
+  "id": "code_app/sql-schema/v0/s0",
+  "flavor": "code_app",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T21:00:31Z",
+  "turns": [
+    {
+      "user_message": "Write the SQL schema and a Go repository layer for a simple inventory app with devices and sites.",
+      "steps": [
+        {
+          "reasoning": "Write the SQL schema and a Go repository layer for a simple inventory app with devices and sites.\n\nWe need to comply with policy: user asks for code. That's allowed. No disallowed content. Should produce SQL schema and Go repository layer. Probably provide files.\n\nWe can create_file for schema.sql and repository code.\n\nNo need for tools? Could just output text. Probably best to create files using create_file tool.\n\nWe need to write SQL schema and Go repository layer. Could create two files: schema.sql and inventory_repo.go\n\nUse create_file.\n\nMaybe also describe.\n\nNo database interaction required. Just code generation.\n\nFollow instruction: To give user a text file you write, call create_file. The file is attached to your answer.\n\nSo create_file with file_name schema.sql and content.\n\nAlso create_file for Go repo.\n\nWe should ensure proper format.\n\nProvide brief description.\n\nLet's create schema with devices and sites tables: sites(id PK, name, address...), devices(id PK, name, serial_number, site_id FK, type, status, created_at...).\n\nGo repository layer: define structs, DB interface, repository methods using database/sql.\n\nProbably use PostgreSQL.\n\nProvide code.\n\nMake sure to create_file.\n\nCould create two calls sequentially. Need to make one function call at a time. Could create first file then second.\n\nLet's create schema.sql first.\n\nThen create_file for go repo.\n\n",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "-- Simple inventory app schema: sites and devices\n-- PostgreSQL compatible\n\nCREATE TABLE IF NOT EXISTS sites (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    name VARCHAR({{int:204:306}}) NOT NULL UNIQUE,\n    address TEXT,\n    city VARCHAR({{int:204:306}}),\n    country VARCHAR({{int:80:120}}),\n    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()\n);\n\nCREATE TABLE IF NOT EXISTS devices (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    site_id UUID NOT NULL REFERENCES sites(id) ON DELETE CASCADE,\n    name VARCHAR({{int:204:306}}) NOT NULL,\n    serial_number VARCHAR({{int:204:306}}) UNIQUE,\n    device_type VARCHAR({{int:80:120}}) NOT NULL,\n    status VARCHAR({{int:40:60}}) NOT NULL DEFAULT 'active' CHECK (status IN ('active','inactive','maintenance','retired')),\n    model VARCHAR({{int:204:306}}),\n    vendor VARCHAR({{int:204:306}}),\n    purchase_date DATE,\n    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()\n);\n\nCREATE INDEX idx_devices_site_id ON devices(site_id);\nCREATE INDEX idx_devices_status ON devices(status);\nCREATE INDEX idx_devices_serial_number ON devices(serial_number);\n\n-- Trigger to update updated_at\nCREATE OR REPLACE FUNCTION set_updated_at()\nRETURNS TRIGGER AS $$\nBEGIN\n    NEW.updated_at = NOW();\n    RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql;\n\nDROP TRIGGER IF EXISTS sites_updated_at ON sites;\nCREATE TRIGGER sites_updated_at\nBEFORE UPDATE ON sites\nFOR EACH ROW EXECUTE FUNCTION set_updated_at();\n\nDROP TRIGGER IF EXISTS devices_updated_at ON devices;\nCREATE TRIGGER devices_updated_at\nBEFORE UPDATE ON devices\nFOR EACH ROW EXECUTE FUNCTION set_updated_at();\n",
+                "file_name": "schema.sql"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1592,\"file_name\":\"schema.sql\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2443,
+            "completion_tokens": 694
+          },
+          "chars": 3078
+        },
+        {
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "package inventory\n\nimport (\n    \"context\"\n    \"database/sql\"\n    \"errors\"\n    \"time\"\n)\n\nvar (\n    ErrNotFound = errors.New(\"record not found\")\n)\n\ntype Site struct {\n    ID        string     `db:\"id\"`\n    Name      string     `db:\"name\"`\n    Address   *string    `db:\"address\"`\n    City      *string    `db:\"city\"`\n    Country   *string    `db:\"country\"`\n    CreatedAt time.Time  `db:\"created_at\"`\n    UpdatedAt time.Time  `db:\"updated_at\"`\n}\n\ntype Device struct {\n    ID           string     `db:\"id\"`\n    SiteID       string     `db:\"site_id\"`\n    Name         string     `db:\"name\"`\n    SerialNumber *string    `db:\"serial_number\"`\n    DeviceType   string     `db:\"device_type\"`\n    Status       string     `db:\"status\"`\n    Model        *string    `db:\"model\"`\n    Vendor       *string    `db:\"vendor\"`\n    PurchaseDate *time.Time `db:\"purchase_date\"`\n    CreatedAt    time.Time  `db:\"created_at\"`\n    UpdatedAt    time.Time  `db:\"updated_at\"`\n}\n\ntype SiteWithDevices struct {\n    Site\n    Devices []Device\n}\n\ntype Repo struct {\n    db *sql.DB\n}\n\nfunc NewRepo(db *sql.DB) *Repo {\n    return \u0026Repo{db: db}\n}\n\n// Sites\n\nfunc (r *Repo) CreateSite(ctx context.Context, s Site) (Site, error) {\n    query := `INSERT INTO sites (name, address, city, country)\n              VALUES ($1,$2,$3,$4)\n              RETURNING id, name, address, city, country, created_at, updated_at`\n    err := r.db.QueryRowContext(ctx, query, s.Name, s.Address, s.City, s.Country).\n        Scan(\u0026s.ID, \u0026s.Name, \u0026s.Address, \u0026s.City, \u0026s.Country, \u0026s.CreatedAt, \u0026s.UpdatedAt)\n    return s, err\n}\n\nfunc (r *Repo) GetSite(ctx context.Context, id string) (Site, error) {\n    var s Site\n    err := r.db.QueryRowContext(ctx,\n        `SELECT id, name, address, city, country, created_at, updated_at FROM sites WHERE id=$1`,\n        id).Scan(\u0026s.ID, \u0026s.Name, \u0026s.Address, \u0026s.City, \u0026s.Country, \u0026s.CreatedAt, \u0026s.UpdatedAt)\n    if err == sql.ErrNoRows {\n        return Site{}, ErrNotFound\n    }\n    return s, err\n}\n\nfunc (r *Repo) ListSites(ctx context.Context) ([]Site, error) {\n    rows, err := r.db.QueryContext(ctx,\n        `SELECT id, name, address, city, country, created_at, updated_at FROM sites ORDER BY name`)\n    if err != nil {\n        return nil, err\n    }\n    defer rows.Close()\n    var out []Site\n    for rows.Next() {\n        var s Site\n        if err := rows.Scan(\u0026s.ID, \u0026s.Name, \u0026s.Address, \u0026s.City, \u0026s.Country, \u0026s.CreatedAt, \u0026s.UpdatedAt); err != nil {\n            return nil, err\n        }\n        out = append(out, s)\n    }\n    return out, rows.Err()\n}\n\nfunc (r *Repo) UpdateSite(ctx context.Context, s Site) error {\n    res, err := r.db.ExecContext(ctx,\n        `UPDATE sites SET name=$1, address=$2, city=$3, country=$4, updated_at=NOW() WHERE id=$5`,\n        s.Name, s.Address, s.City, s.Country, s.ID)\n    if err != nil {\n        return err\n    }\n    n, _ := res.RowsAffected()\n    if n == 0 {\n        return ErrNotFound\n    }\n    return nil\n}\n\nfunc (r *Repo) DeleteSite(ctx context.Context, id string) error {\n    res, err := r.db.ExecContext(ctx, `DELETE FROM sites WHERE id=$1`, id)\n    if err != nil {\n        return err\n    }\n    n, _ := res.RowsAffected()\n    if n == 0 {\n        return ErrNotFound\n    }\n    return nil\n}\n\n// Devices\n\nfunc (r *Repo) CreateDevice(ctx context.Context, d Device) (Device, error) {\n    query := `INSERT INTO devices (site_id, name, serial_number, device_type, status, model, vendor, purchase_date)\n              VALUES ($1,$2,$3,$4,$5,$6,$7,$8)\n              RETURNING id, site_id, name, serial_number, device_type, status, model, vendor, purchase_date, created_at, updated_at`\n    err := r.db.QueryRowContext(ctx, query,\n        d.SiteID, d.Name, d.SerialNumber, d.DeviceType, d.Status, d.Model, d.Vendor, d.PurchaseDate).\n        Scan(\u0026d.ID, \u0026d.SiteID, \u0026d.Name, \u0026d.SerialNumber, \u0026d.DeviceType, \u0026d.Status, \u0026d.Model, \u0026d.Vendor, \u0026d.PurchaseDate, \u0026d.CreatedAt, \u0026d.UpdatedAt)\n    return d, err\n}\n\nfunc (r *Repo) GetDevice(ctx context.Context, id string) (Device, error) {\n    var d Device\n    err := r.db.QueryRowContext(ctx,\n        `SELECT id, site_id, name, serial_number, device_type, status, model, vendor, purchase_date, created_at, updated_at FROM devices WHERE id=$1`,\n        id).Scan(\u0026d.ID, \u0026d.SiteID, \u0026d.Name, \u0026d.SerialNumber, \u0026d.DeviceType, \u0026d.Status, \u0026d.Model, \u0026d.Vendor, \u0026d.PurchaseDate, \u0026d.CreatedAt, \u0026d.UpdatedAt)\n    if err == sql.ErrNoRows {\n        return Device{}, ErrNotFound\n    }\n    return d, err\n}\n\nfunc (r *Repo) ListDevicesBySite(ctx context.Context, siteID string) ([]Device, error) {\n    rows, err := r.db.QueryContext(ctx,\n        `SELECT id, site_id, name, serial_number, device_type, status, model, vendor, purchase_date, created_at, updated_at\n         FROM devices WHERE site_id=$1 ORDER BY name`, siteID)\n    if err != nil {\n        return nil, err\n    }\n    defer rows.Close()\n    var out []Device\n    for rows.Next() {\n        var d Device\n        if err := rows.Scan(\u0026d.ID, \u0026d.SiteID, \u0026d.Name, \u0026d.SerialNumber, \u0026d.DeviceType, \u0026d.Status, \u0026d.Model, \u0026d.Vendor, \u0026d.PurchaseDate, \u0026d.CreatedAt, \u0026d.UpdatedAt); err != nil {\n            return nil, err\n        }\n        out = append(out, d)\n    }\n    return out, rows.Err()\n}\n\nfunc (r *Repo) UpdateDevice(ctx context.Context, d Device) error {\n    res, err := r.db.ExecContext(ctx,\n        `UPDATE devices SET site_id=$1, name=$2, serial_number=$3, device_type=$4, status=$5, model=$6, vendor=$7, purchase_date=$8, updated_at=NOW()\n         WHERE id=$9`,\n        d.SiteID, d.Name, d.SerialNumber, d.DeviceType, d.Status, d.Model, d.Vendor, d.PurchaseDate, d.ID)\n    if err != nil {\n        return err\n    }\n    n, _ := res.RowsAffected()\n    if n == 0 {\n        return ErrNotFound\n    }\n    return nil\n}\n\nfunc (r *Repo) DeleteDevice(ctx context.Context, id string) error {\n    res, err := r.db.ExecContext(ctx, `DELETE FROM devices WHERE id=$1`, id)\n    if err != nil {\n        return err\n    }\n    n, _ := res.RowsAffected()\n    if n == 0 {\n        return ErrNotFound\n    }\n    return nil\n}\n\n// Combined read\n\nfunc (r *Repo) GetSiteWithDevices(ctx context.Context, id string) (SiteWithDevices, error) {\n    s, err := r.GetSite(ctx, id)\n    if err != nil {\n        return SiteWithDevices{}, err\n    }\n    devs, err := r.ListDevicesBySite(ctx, id)\n    if err != nil {\n        return SiteWithDevices{}, err\n    }\n    return SiteWithDevices{Site: s, Devices: devs}, nil\n}\n",
+                "file_name": "inventory_repo.go"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":6365,\"file_name\":\"inventory_repo.go\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2887,
+            "completion_tokens": 1873
+          },
+          "chars": 6941
+        },
+        {
+          "reasoning": "We have written two files. The user asked \"Write the SQL schema and a Go repository layer\". We have done that. Probably provide summary.\n\nWe should not assume anything else. Provide brief description.\n\n",
+          "text": "Attached:\n\n* **schema.sql** – PostgreSQL schema for `sites` and `devices` with FK cascade, indexes, and an `updated_at` trigger.\n* **inventory_repo.go** – Go repository layer using `database/sql`. Includes `Site`, `Device`, `SiteWithDevices` models and `Repo` with Create/Get/List/Update/Delete for both tables plus `GetSiteWithDevices`.\n\nBoth files are attached for download.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 4797,
+            "completion_tokens": 139
+          },
+          "chars": 582
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-01/v0/s2",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:16:41Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user is reviewing network health in Austin.\n\nNext part of the conversation:\nUser: Which devices in Austin are offline?\n\nAssistant: Two devices are offline in Austin: core-rtr-03 and core-rtr-07.\n\nUser: Any alarms on them?\n\nAssistant: core-rtr-03 has an active critical 'Interface Down' alarm; core-rtr-07 has a major 'Power Supply Failure' alarm.\n\nUser: Thanks. Only show me critical things from now on.\n\nAssistant: Understood, I will focus on critical items.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary replacing current one, keeping facts, decisions, entities, IDs, user preferences, constraints, open questions, any L8Query results. The conversation:\n\nCurrent summary: \"The user is reviewing network health in {{city:1}}.\"\n\nNow user asked: \"Which devices in {{city:1}} are offline?\" Assistant responded with two devices offline: core-rtr-03 and core-rtr-07.\n\nUser: \"Any alarms on them?\" Assistant: core-rtr-03 has an active critical 'Interface Down' alarm; core-rtr-07 has a major 'Power Supply Failure' alarm.\n\nUser: \"Thanks. Only show me critical things from now on.\" Assistant: \"Understood, I will focus on critical items.\"\n\nThus new summary should reflect: user reviewing network health in {{city:1}}, offline devices core-rtr-03 and core-rtr-07, alarm statuses: core-rtr-03 critical Interface Down, core-rtr-07 major Power Supply Failure. User preference: only show critical items from now on. Also maybe note that core-rtr-07 alarm is major, not critical, but user wants only critical, so maybe only core-rtr-03 is relevant. Keep open questions? None.\n\nThus final summary: mention those facts, decision: focus on critical items only. Entities: core-rtr-03, core-rtr-07. Alarms: Interface Down (critical, active), Power Supply Failure (major). Preference: only critical items. No greetings. Provide plain text.\n\n",
+          "text": "The user is reviewing network health in {{city:1}}. Offline devices in {{city:1}} are core-rtr-03 and core-rtr-07. core-rtr-03 has an active critical “Interface Down” alarm. core-rtr-07 has a major “Power Supply Failure” alarm. The user now wants to see only critical items moving forward.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 333,
+            "completion_tokens": 383
+          },
+          "chars": 1624
+        }
+      ]
+    }
+  ]
+}

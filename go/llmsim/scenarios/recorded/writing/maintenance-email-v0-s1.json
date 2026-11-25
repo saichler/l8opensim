@@ -1,0 +1,31 @@
+{
+  "id": "writing/maintenance-email/v0/s1",
+  "flavor": "writing",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:51:35Z",
+  "params": {
+    "site": [
+      "Austin",
+      "Dallas",
+      "Seattle"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Write an email to the team announcing a network maintenance window in Austin this Saturday from 22:00 to 02:00.",
+      "steps": [
+        {
+          "reasoning": "The user wants an email content. No data queries needed. Just write the email.",
+          "text": "Subject: Scheduled Network Maintenance – {{p:site}} Data Center (Saturday 22:00‑02:00)\n\nHi Team,\n\nPlease be advised that a planned network maintenance window will take place at our {{p:site}} data center this Saturday:\n\n- **Date:** Saturday, [Insert Date]  \n- **Time:** 22:00 – 02:00 (local {{p:site}} time)  \n- **Scope:** Core switch firmware upgrades, VLAN re‑balancing, and firewall rule refreshes.\n\n**Impact**\n\n- Network connectivity may be intermittent or briefly unavailable during the window.\n- Critical services have been reviewed and will be temporarily rerouted where possible.\n- All non‑essential traffic will be throttled to reduce load on the affected segments.\n\n**What you need to do**\n\n- Verify that any scheduled jobs, backups, or deployments that rely on the {{p:site}} network are completed before 22:00.\n- Notify any external partners or customers who may be affected.\n- If you encounter any issues after the maintenance window, please open a ticket in the ITSM portal with “Post‑Maintenance Network Issue” as the category.\n\nWe appreciate your cooperation and understanding as we perform these essential upgrades to improve reliability and performance.\n\nIf you have any questions or concerns, feel free to reach out to the Network Operations team.\n\nThanks,  \n[Your Name]  \nNetwork Operations Lead  \nProbler Datacenter Services  ",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1813,
+            "completion_tokens": 303
+          },
+          "chars": 1431
+        }
+      ]
+    }
+  ]
+}

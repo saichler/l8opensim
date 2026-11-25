@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/power/v0/s0",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:11:08Z",
+  "turns": [
+    {
+      "user_message": "A rack has 20 servers drawing 450 W each and PDUs of 7.2 kW. How many PDUs are needed with N+1 redundancy? Step by step.",
+      "steps": [
+        {
+          "reasoning": "We need to answer calculation: rack with {{int:16:24}} servers each {{int:360:540}} W =\u003e total load = {{int:16:24}} * {{int:360:540}} = {{int:7200:10800}} W = 9 kW. PDUs each rated 7.2 kW. Need N+1 redundancy: we need enough PDUs to handle the load plus one extra for redundancy. So first compute number of PDUs needed without redundancy: load / capacity = 9 kW / 7.2 kW = 1.25 =\u003e need 2 PDUs (since can't have fraction). With N+1 redundancy, we need N (the number to meet load) plus one extra. If N=2 (since 2 needed to meet load), then N+1 = 3 PDUs. However some might interpret N as minimal number of PDUs needed (2) then add one for redundancy =\u003e 3. Provide step-by-step. No data needed from system. Just answer.",
+          "text": "**Step‑by‑step calculation**\n\n| Step | What we do | Calculation | Result |\n|------|------------|-------------|--------|\n| 1️⃣ | Compute the total power draw of the servers | {{int:16:24}} servers × {{int:360:540}} W per server | **9 000 W** (or **9 kW**) |\n| 2️⃣ | Find the capacity of one PDU | Given as **7.2 kW** (7 {{int:160:240}} W) |\n| 3️⃣ | Determine how many PDUs are required to carry the load *without* redundancy | 9 kW ÷ 7.2 kW = 1.25 | Since you can’t have a fraction of a PDU, round **up** → **2 PDUs** |\n| 4️⃣ | Add the “+1” for N+1 redundancy (one extra PDU for fail‑over) | 2 PDUs (needed) + 1 extra | **3 PDUs** |\n\n**Result:**  \nTo power a rack of {{int:16:24}} servers ({{int:360:540}} W each) with PDUs rated at 7.2 kW and maintain N+1 redundancy, you need **3 PDUs**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1825,
+            "completion_tokens": 460
+          },
+          "chars": 1450
+        }
+      ]
+    }
+  ]
+}

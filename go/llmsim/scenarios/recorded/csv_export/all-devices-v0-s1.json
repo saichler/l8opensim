@@ -1,0 +1,70 @@
+{
+  "id": "csv_export/all-devices/v0/s1",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:24:16Z",
+  "turns": [
+    {
+      "user_message": "Export all network devices to a CSV file with vendor, model, IP and status.",
+      "steps": [
+        {
+          "reasoning": "We need to export all network devices (NetworkDevice) to CSV with vendor, model, IP, status fields. Need to know field names. Use describe_model for NetworkDevice.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1804,
+            "completion_tokens": 65
+          },
+          "chars": 202
+        },
+        {
+          "reasoning": "We need to export all network devices to CSV with vendor, model, IP, status. Based on fields: equipmentinfo.vendor, equipmentinfo.model, equipmentinfo.ipAddress, equipmentinfo.deviceStatus (likely status). Use export_csv with columns list. No limit.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "columns": [
+                  "equipmentinfo.vendor",
+                  "equipmentinfo.model",
+                  "equipmentinfo.ipAddress",
+                  "equipmentinfo.deviceStatus"
+                ],
+                "file_name": "network_devices.csv",
+                "query": "select * from NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"equipmentinfo.vendor\",\"equipmentinfo.model\",\"equipmentinfo.ipAddress\",\"equipmentinfo.deviceStatus\"],\"file_name\":\"network_devices.csv\",\"rows\":19}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2041,
+            "completion_tokens": 128
+          },
+          "chars": 444
+        },
+        {
+          "text": "Attached network_devices.csv with {{int:15:23}} network device records (vendor, model, IP address, and status).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2151,
+            "completion_tokens": 25
+          },
+          "chars": 100
+        }
+      ]
+    }
+  ]
+}

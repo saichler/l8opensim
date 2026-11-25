@@ -1,0 +1,114 @@
+{
+  "id": "data_query/gpus-at-site/v0/s2",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:38:03Z",
+  "params": {
+    "site": [
+      "Austin",
+      "Dallas",
+      "Houston",
+      "Seattle",
+      "Denver",
+      "Chicago"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Show me the GPU servers in Austin.",
+      "steps": [
+        {
+          "reasoning": "We need to list GPU servers in {{p:site}}. First need to know model fields for GpuDevice. Use describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "GpuDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"deviceInfo.hostname\",\"type\":\"string\"},{\"path\":\"deviceInfo.vendor\",\"type\":\"string\"},{\"path\":\"deviceInfo.model\",\"type\":\"string\"},{\"path\":\"deviceInfo.ipAddress\",\"type\":\"string\"},{\"path\":\"deviceInfo.serialNumber\",\"type\":\"string\"},{\"path\":\"deviceInfo.location\",\"type\":\"string\"},{\"path\":\"deviceInfo.osVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.kernelVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.driverVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.cudaVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.dcgmVersion\",\"type\":\"string\"},{\"path\":\"deviceInfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"deviceInfo.uptime\",\"type\":\"string\"},{\"path\":\"deviceInfo.lastSeen\",\"type\":\"string\"},{\"path\":\"deviceInfo.gpuCount\",\"type\":\"int\"}],\"model\":\"GpuDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 53
+          },
+          "chars": 140
+        },
+        {
+          "reasoning": "We need to show GPU servers in {{p:site}}. Likely location stored in deviceInfo.location field. So we need to select * from GpuDevice where deviceInfo.location=\"{{p:site}}\". Need to know location values format maybe \"{{p:site}}\". Use where condition. Let's query.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select * from GpuDevice where deviceInfo.location='{{p:site}}' limit 100"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":0,\"model\":\"GpuDevice\",\"records\":[]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2047,
+            "completion_tokens": 93
+          },
+          "chars": 338
+        },
+        {
+          "reasoning": "The query returned zero records. Possibly location field may be stored differently, maybe \"deviceInfo.location\" contains city, but maybe not exact string or case? Could be location includes city and other details. Could try a contains? There's no like operator described. Could try just query without where and then filter manually? But we shouldn't fetch many records. Could try count of total to see if any exist.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select count(*) from GpuDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"count(*)\":8}],\"model\":\"GpuDevice\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2110,
+            "completion_tokens": 111
+          },
+          "chars": 464
+        },
+        {
+          "reasoning": "We need to show GPU servers in {{p:site}}. The query returned zero records, but there are 8 total GPU devices. Likely location field may have different value, maybe includes city and rack etc. Could try a like or partial match? The system likely supports simple equality only. Could inspect distinct locations. Use group-by location to see what locations exist.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select deviceInfo.location, count(*) from GpuDevice group-by deviceInfo.location"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"count(*)\":3,\"group\":{\"deviceInfo.location\":\"Chicago\"}},{\"count(*)\":1,\"group\":{\"deviceInfo.location\":\"Dallas\"}},{\"count(*)\":3,\"group\":{\"deviceInfo.location\":\"Houston\"}},{\"count(*)\":1,\"group\":{\"deviceInfo.location\":\"New York\"}}],\"model\":\"GpuDevice\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2168,
+            "completion_tokens": 111
+          },
+          "chars": 456
+        },
+        {
+          "reasoning": "We have 8 GPU servers total, distribution across locations: {{city:1}} 3, {{city:2}} 1, {{city:3}} 3, {{city:4}} 1. No {{p:site}}. So answer that there are none.",
+          "text": "There are no GPU servers recorded in {{p:site}}. The system currently has eight GPU servers, located in {{city:1}} (3), {{city:2}} (1), {{city:3}} (3), and New York (1).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2294,
+            "completion_tokens": 87
+          },
+          "chars": 302
+        }
+      ]
+    }
+  ]
+}

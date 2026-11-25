@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/probability/v0/s1",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:09:39Z",
+  "turns": [
+    {
+      "user_message": "If each of 3 independent links has 99.9% availability, what is the probability that all are up? And at least one?",
+      "steps": [
+        {
+          "reasoning": "We need to answer the probability that all three independent links up given each has 99.9% availability. So probability all up = 0.999^3 = approx 0.997001 (99.7001%). At least one up = 1 - probability all down. Probability a single link down = 1 - 0.999 = 0.001. Probability all three down = 0.001^3 = 1e-9 = 0.000000001 (0.0000001%). So at least one up = 1 - 1e-9 = 0.999999999 (99.9999999%). Provide answer.",
+          "text": "- Probability that **all three** links are up:  \n\n\\[\n0.999 \\times 0.999 \\times 0.999 = 0.999^{3} \\approx 0.997001\n\\]\n\nSo the chance is **≈ 99.7001 %**.\n\n- Probability that **at least one** link is up:  \n\nFirst find the chance that *all* three are down:\n\n\\[\n(1 - 0.999)^{3} = 0.001^{3} = 0.000000001\n\\]\n\nThen subtract from 1:\n\n\\[\n1 - 0.000000001 = 0.999999999\n\\]\n\nSo the chance is **≈ 99.9999999 %**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1816,
+            "completion_tokens": 309
+          },
+          "chars": 820
+        }
+      ]
+    }
+  ]
+}

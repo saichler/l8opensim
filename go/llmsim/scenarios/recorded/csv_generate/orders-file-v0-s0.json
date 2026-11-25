@@ -1,0 +1,115 @@
+{
+  "id": "csv_generate/orders-file/v0/s0",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:30:01Z",
+  "csv": [
+    {
+      "header": [
+        "orderId",
+        "customerName",
+        "orderDate",
+        "totalAmount",
+        "status"
+      ],
+      "columns": [
+        {
+          "kind": "seq",
+          "min": 1
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Acme Corp",
+            "Globex Inc",
+            "Initech",
+            "Umbrella Co",
+            "Stark Industries",
+            "Wayne Enterprises",
+            "Oscorp",
+            "Wonka Industries",
+            "Gringotts",
+            "Cyberdyne Systems",
+            "Tyrell Corp",
+            "Prestige Worldwide",
+            "Blue Sun",
+            "Black Mesa",
+            "Massive Dynamic",
+            "Vehement Capital Partners",
+            "Good Burger",
+            "Planet Express",
+            "Pied Piper",
+            "Los Pollos Hermanos",
+            "The Krusty Krab",
+            "Central Perk",
+            "The Happy Place",
+            "Dunder Mifflin",
+            "Bluth Company",
+            "Nakatomi Trading",
+            "Sirius Cybernetics Corp",
+            "FizzBuzz Inc",
+            "Monsters Inc",
+            "The Good Place"
+          ]
+        },
+        {
+          "kind": "date"
+        },
+        {
+          "kind": "float",
+          "min": 300,
+          "max": 3400,
+          "decimals": 2
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Pending",
+            "Shipped",
+            "Delivered",
+            "Cancelled"
+          ]
+        }
+      ],
+      "rows": 30
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Generate a CSV file of 30 fictitious orders. It is synthetic test data for a demo, not records from the system: attach it as orders.csv.",
+      "steps": [
+        {
+          "reasoning": "We need to generate a CSV of {{int:24:36}} fictitious orders, synthetic test data, not from system. We should not use export_csv because that would query existing records. Instead we need to create a file with synthetic data via create_file. Provide CSV content with {{int:24:36}} rows. Need to define columns. Since it's orders, maybe fields: orderId, customerName, orderDate, totalAmount (maybe money token?), status. Since synthetic, we can generate dummy values. Use placeholder tokens? We can just write simple values. Use create_file tool.\n\nWe must attach file orders.csv. So we will generate CSV content with header and {{int:24:36}} rows. Let's produce simple data.\n\nWe'll create content as a string.\n\nProceed to call create_file.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "orderId,customerName,orderDate,totalAmount,status\n{{csv:0}}",
+                "file_name": "orders.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1422,\"file_name\":\"orders.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1819,
+            "completion_tokens": 795
+          },
+          "chars": 2207
+        },
+        {
+          "text": "Attached **orders.csv** containing {{int:24:36}} synthetic order records.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2486,
+            "completion_tokens": 16
+          },
+          "chars": 62
+        }
+      ]
+    }
+  ]
+}

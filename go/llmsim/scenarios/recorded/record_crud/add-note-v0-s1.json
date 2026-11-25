@@ -1,0 +1,93 @@
+{
+  "id": "record_crud/add-note/v0/s1",
+  "flavor": "record_crud",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:13:01Z",
+  "params": {
+    "device": [
+      "core-rtr-02",
+      "core-rtr-09"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Add a note to the alarm on core-rtr-02: 'Waiting for the field team'.",
+      "steps": [
+        {
+          "reasoning": "User wants to add a note to an alarm on {{p:device}}: \"Waiting for the field team\". We need to find the Alarm record for {{p:device}}, then update it with a note. Need to know field for notes. Let's describe Alarm model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "Alarm"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"alarmId\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"description\",\"type\":\"string\"},{\"path\":\"state\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"nodeId\",\"type\":\"string\"},{\"path\":\"nodeName\",\"type\":\"string\"},{\"path\":\"location\",\"type\":\"string\"},{\"path\":\"firstOccurrence\",\"type\":\"int\"},{\"path\":\"lastOccurrence\",\"type\":\"int\"},{\"path\":\"occurrenceCount\",\"type\":\"int\"},{\"path\":\"isRootCause\",\"type\":\"bool\"},{\"path\":\"acknowledgedBy\",\"type\":\"string\"}],\"model\":\"Alarm\",\"primaryKey\":\"alarmId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1807,
+            "completion_tokens": 84
+          },
+          "chars": 249
+        },
+        {
+          "reasoning": "We need to add a note to the alarm on {{p:device}}. The Alarm model fields: alarmId, name, description, state, severity, nodeId, nodeName, location, firstOccurrence, lastOccurrence, occurrenceCount, isRootCause, acknowledgedBy. There's no explicit 'note' field. Perhaps we need to update description field to add note? Or there may be a 'notes' field not listed. Since description exists, maybe we can append note. The request: \"Add a note to the alarm on {{p:device}}: 'Waiting for the field team'.\" Probably we should update the description or maybe add to a note field if exists. Since not in model, we can add to description.\n\nFirst we need to find the alarm for nodeName {{p:device}}. So query Alarm where nodeName='{{p:device}}'. Then update description: maybe description currently something, we need to append note. But we don't know current description; we could fetch it. Let's query count? Actually fetch the record.\n\n",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select * from Alarm where nodeName='{{p:device}}' limit 1"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":1,\"model\":\"Alarm\",\"records\":[{\"acknowledgedBy\":\"operator1\",\"alarmId\":\"alm-002\",\"description\":\"Repeated state changes detected\",\"firstOccurrence\":1794997671225,\"isRootCause\":false,\"lastOccurrence\":1795303371225,\"location\":\"Austin\",\"name\":\"High CPU\",\"nodeId\":\"nd-002\",\"nodeName\":\"core-rtr-02\",\"occurrenceCount\":25,\"severity\":\"SEVERITY_MINOR\",\"state\":\"ALARM_STATE_CLEARED\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1997,
+            "completion_tokens": 255
+          },
+          "chars": 1000
+        },
+        {
+          "reasoning": "We need to add a note to the alarm. The model fields include description, but not a \"note\" field. Perhaps we should update description? Or maybe there is a field for notes not listed. The described fields: alarmId, name, description, state, severity, nodeId, nodeName, location, firstOccurrence, lastOccurrence, occurrenceCount, isRootCause, acknowledgedBy. No note field. Perhaps we can add a note by updating the description or using a custom field? The user wants to \"Add a note to the alarm\". Since there is no note field, we could append to description. We'll update the description to include the note. The current description: \"Repeated state changes detected\". We'll update description to \"Repeated state changes detected. Note: Waiting for the field team.\" Use update_record with alarmId and new description.",
+          "tool_calls": [
+            {
+              "name": "update_record",
+              "arguments": {
+                "data": {
+                  "alarmId": "alm-002",
+                  "description": "Repeated state changes detected. Note: Waiting for the field team."
+                },
+                "model": "Alarm"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"action\":\"update\",\"model\":\"Alarm\",\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2155,
+            "completion_tokens": 235
+          },
+          "chars": 959
+        },
+        {
+          "text": "The note has been added to the alarm for **core‑rtr‑02**. The description now reads:\n\n*Repeated state changes detected. Note: Waiting for the field team.*",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2230,
+            "completion_tokens": 41
+          },
+          "chars": 158
+        }
+      ]
+    }
+  ]
+}

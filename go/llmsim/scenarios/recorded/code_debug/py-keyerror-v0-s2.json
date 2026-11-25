@@ -1,0 +1,24 @@
+{
+  "id": "code_debug/py-keyerror/v0/s2",
+  "flavor": "code_debug",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T21:04:06Z",
+  "turns": [
+    {
+      "user_message": "Why does this fail?\n```\nTraceback (most recent call last):\n  File \"app.py\", line 12, in \u003cmodule\u003e\n    print(config['database']['host'])\nKeyError: 'database'\n```",
+      "steps": [
+        {
+          "reasoning": "Why does this fail?\n```\nTraceback (most recent call last):\n  File \"app.py\", line 12, in \u003cmodule\u003e\n    print(config['database']['host'])\nKeyError: 'database'\n```\n\nUser asks why does this fail? It's a Python KeyError. Config dict doesn't have 'database' key. Probably config missing, or config loaded incorrectly. Provide explanation. No tools needed? Probably just answer.\n\nThe prompt about L8Query etc. Might be irrelevant. The user just asks about Python error. We can explain.\n\nWe should respond with explanation: config dict doesn't contain key 'database', maybe config file missing, typo, etc. Suggest using .get, try/except, etc.\n\nNo tools needed. Follow guidelines.",
+          "text": "That `KeyError: 'database'` means the dictionary you stored in `config` does not have a key named `'database'`.\n\nIn Python, `config['database']` tries to do a direct lookup. If the key isn't present, Python raises `KeyError` instead of returning `None`.\n\nOn line {{int:9:15}} you are doing a chained lookup:\n```python\nprint(config['database']['host'])\n```\nSo the failure is happening at the first lookup: `config['database']` doesn't exist, therefore Python never even gets to `['host']`.\n\nCommon reasons this happens:\n* `config` was loaded from a file / env and the file is missing, empty, or has a different structure than you expect\n* A typo in the config source, e.g. `'databases'` instead of `'database'`, or `'Database'`\n* The config is being overwritten / not yet populated before line {{int:9:15}} runs\n* You are using a default / test config that doesn't contain the `database` section\n\nHow to check / fix:\n\n```python\n# Safe access\nprint(config.get('database', {}).get('host'))\n\n# Or explicit check\nif 'database' in config and 'host' in config['database']:\n    print(config['database']['host'])\nelse:\n    raise ValueError(\"database.host missing from config\")\n```\n\nPrint the actual config first to see what keys you do have:\n```python\nprint(config.keys())\nprint(config)\n```\n\nThat will show you whether the key is missing entirely, misspelled, or nested differently.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2467,
+            "completion_tokens": 475
+          },
+          "chars": 2023
+        }
+      ]
+    }
+  ]
+}

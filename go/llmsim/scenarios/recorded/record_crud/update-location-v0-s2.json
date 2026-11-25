@@ -1,0 +1,99 @@
+{
+  "id": "record_crud/update-location/v0/s2",
+  "flavor": "record_crud",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:14:40Z",
+  "params": {
+    "site": [
+      "Austin",
+      "Dallas",
+      "Houston",
+      "Seattle",
+      "Denver",
+      "Chicago"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Change the location of device core-rtr-11 to Austin.",
+      "steps": [
+        {
+          "reasoning": "We need to change location field of a NetworkDevice with hostname core-rtr-11 (maybe deviceInfo.hostname). We need to find the record ID then update.\n\nFirst, describe model NetworkDevice.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1800,
+            "completion_tokens": 69
+          },
+          "chars": 226
+        },
+        {
+          "reasoning": "We need to change location of device core-rtr-11 to {{p:site}}. Need to update NetworkDevice where equipmentinfo.sysName? Actually likely device identifier is id? The device name might be in equipmentinfo.sysName or maybe id is core-rtr-11. We need to update equipmentinfo.location field.\n\nWe need to know the record's id. Could query for that device. Use select * where equipmentinfo.sysName='core-rtr-11' or maybe id='core-rtr-11'. Not sure. We'll try both. First try to find record.\n\n",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select id,equipmentinfo.sysName,equipmentinfo.location from NetworkDevice where equipmentinfo.sysName='core-rtr-11' limit 1"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":1,\"model\":\"NetworkDevice\",\"records\":[{\"equipmentinfo\":{\"location\":\"San Antonio\",\"sysName\":\"core-rtr-11\"},\"id\":\"nd-011\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2037,
+            "completion_tokens": 168
+          },
+          "chars": 625
+        },
+        {
+          "reasoning": "We need to change location field for that device to \"{{p:site}}\". We need to update record using update_record. The model is NetworkDevice. Primary key field is id. The location field path is equipmentinfo.location. So we need to send update_record with data containing id and equipmentinfo.location set to \"{{p:site}}\". Possibly need to include whole equipmentinfo object? Usually update_record expects fields to update; we can include nested object. We'll do:\n\n{\n model: \"NetworkDevice\",\n data: {\n   id: \"nd-011\",\n   equipmentinfo: {\n      location: \"{{p:site}}\"\n   }\n }\n}\n\nProceed.",
+          "tool_calls": [
+            {
+              "name": "update_record",
+              "arguments": {
+                "data": {
+                  "equipmentinfo": {
+                    "location": "Austin"
+                  },
+                  "id": "nd-011"
+                },
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"action\":\"update\",\"model\":\"NetworkDevice\",\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2140,
+            "completion_tokens": 184
+          },
+          "chars": 671
+        },
+        {
+          "text": "The location of device **core‑rtr‑{{int:8:14}}** has been updated to **{{p:site}}**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2209,
+            "completion_tokens": 24
+          },
+          "chars": 74
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/capacity/v0/s1",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:09:22Z",
+  "turns": [
+    {
+      "user_message": "We have 8 GPU servers with 8 GPUs each, each job needs 3 GPUs and jobs can't span servers. How many jobs can run at once? Explain step by step.",
+      "steps": [
+        {
+          "reasoning": "The user asks a simple calculation: 8 GPU servers, each with 8 GPUs. Each job needs 3 GPUs, jobs cannot span servers. So per server, number of jobs = floor(8 / 3) = 2 jobs (since 2*3=6 GPUs used, 2 GPUs leftover unused). So total jobs = 8 servers * 2 jobs = {{int:12:20}} jobs can run concurrently. Explain step by step. No data needed. Provide answer.",
+          "text": "**Step‑by‑step reasoning**\n\n1. **Determine the GPUs per server**  \n   - Each server has **8 GPUs**.\n\n2. **Find out how many whole jobs can fit on one server**  \n   - A job needs **3 GPUs**.  \n   - The maximum number of whole (non‑splittable) jobs that can be placed on a server is the integer division of GPUs per server by GPUs per job:  \n\n     \\[\n     \\text{Jobs per server} = \\left\\lfloor \\frac{8\\ \\text{GPUs}}{3\\ \\text{GPUs/job}} \\right\\rfloor = 2\n     \\]\n\n   - Two jobs use \\(2 \\times 3 = 6\\) GPUs, leaving 2 GPUs idle on that server (they can’t be used because a job can’t span servers).\n\n3. **Scale this to all servers**  \n   - There are **8 servers**, each able to run 2 jobs simultaneously.  \n\n     \\[\n     \\text{Total concurrent jobs} = 8\\ \\text{servers} \\times 2\\ \\text{jobs/server} = {{int:12:20}}\\ \\text{jobs}\n     \\]\n\n4. **Result**  \n   - **A maximum of {{int:12:20}} jobs can run at once** under the given constraints.\n\nSo, with 8 GPU servers each containing 8 GPUs, and each job requiring 3 GPUs without spanning servers, you can run **{{int:12:20}} jobs concurrently**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1824,
+            "completion_tokens": 417
+          },
+          "chars": 1404
+        }
+      ]
+    }
+  ]
+}

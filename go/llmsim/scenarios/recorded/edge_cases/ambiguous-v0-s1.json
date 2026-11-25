@@ -1,0 +1,24 @@
+{
+  "id": "edge_cases/ambiguous/v0/s1",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:42:15Z",
+  "turns": [
+    {
+      "user_message": "Fix it.",
+      "steps": [
+        {
+          "reasoning": "The user says \"Fix it.\" Very vague. We need context: maybe previous conversation about something broken? There's no prior messages besides this. We have no clue what to fix. Possibly they refer to a problem with a record? We need to ask clarifying question. According to guidelines, we can ask for clarification.",
+          "text": "I’m not sure what needs fixing. Could you let me know which record, query, or part of the system you’d like me to correct or update? Providing a bit more detail will help me resolve the issue for you.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1790,
+            "completion_tokens": 120
+          },
+          "chars": 516
+        }
+      ]
+    }
+  ]
+}

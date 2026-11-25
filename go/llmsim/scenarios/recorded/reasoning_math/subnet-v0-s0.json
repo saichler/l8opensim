@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/subnet/v0/s0",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:10:13Z",
+  "turns": [
+    {
+      "user_message": "Step by step: how many /26 subnets fit in a /22, and how many hosts each?",
+      "steps": [
+        {
+          "reasoning": "We need to answer question: step by step: how many /26 subnets fit in a /22, and how many hosts each? This is a networking calculation. No need to use tools. Provide explanation.\n\nAnswer: /22 has 2^(32-22)=2^{{int:8:12}}={{int:819:1229}} addresses. /26 has 2^(32-26)=2^6={{int:51:77}} addresses. Number of subnets = 1024/64 = {{int:12:20}} subnets. Hosts per /26 subnet = {{int:51:77}} - 2 = {{int:49:75}} usable hosts (network and broadcast reserved). Provide step-by-step explanation.",
+          "text": "**Step‑by‑step calculation**\n\n| CIDR | Prefix length | Host‑bits | Total addresses = 2^(host‑bits) |\n|------|---------------|----------|---------------------------------|\n| /22  | {{int:17:27}}            | {{int:8:12}}       | 2¹⁰ = **1 {{int:16:24}}** |\n| /26  | {{int:20:32}}            | 6        | 2⁶ = **{{int:51:77}}** |\n\n1. **How many /26 subnets fit inside a /22?**  \n   - A /22 contains 1 {{int:16:24}} addresses.  \n   - Each /26 subnet contains {{int:51:77}} addresses.  \n   - Number of subnets = 1 {{int:16:24}} ÷ {{int:51:77}} = **{{int:12:20}}**.  \n\n2. **How many usable hosts are in each /26 subnet?**  \n   - In any IPv4 subnet, the first address is the **network address** and the last address is the **broadcast address**; these cannot be assigned to hosts.  \n   - Usable hosts = total addresses – 2 = {{int:51:77}} – 2 = **{{int:49:75}}** hosts per /26 subnet.\n\n---\n\n**Result**\n\n- **{{int:12:20}}** separate /26 subnets can be carved out of a single /22 network.  \n- Each /26 subnet provides **{{int:49:75}} usable host IP addresses** ({{int:51:77}} total addresses, minus network and broadcast).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1809,
+            "completion_tokens": 411
+          },
+          "chars": 1401
+        }
+      ]
+    }
+  ]
+}

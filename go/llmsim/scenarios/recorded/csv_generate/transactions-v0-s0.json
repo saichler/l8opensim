@@ -1,0 +1,93 @@
+{
+  "id": "csv_generate/transactions/v0/s0",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:31:07Z",
+  "csv": [
+    {
+      "header": [
+        "date",
+        "description",
+        "amount",
+        "balance"
+      ],
+      "columns": [
+        {
+          "kind": "date"
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Opening Balance",
+            "Deposit Salary",
+            "Withdrawal ATM",
+            "Payment Grocery",
+            "Transfer to Savings",
+            "Deposit Interest",
+            "Payment Utilities",
+            "Deposit Bonus",
+            "Payment Rent",
+            "Deposit Freelance",
+            "Payment Internet",
+            "Payment Car Insurance",
+            "Deposit Gift",
+            "Payment Dining",
+            "Deposit Refund",
+            "Payment Subscription"
+          ]
+        },
+        {
+          "kind": "float",
+          "min": -800,
+          "max": 2000,
+          "decimals": 2
+        },
+        {
+          "kind": "float",
+          "min": 1000,
+          "max": 4505.33,
+          "decimals": 2
+        }
+      ],
+      "rows": 39
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Create sample bank transactions as CSV: 40 rows with date, description, amount, balance. It is synthetic test data for a demo, not records from the system: attach it as transactions.csv.",
+      "steps": [
+        {
+          "reasoning": "The user wants synthetic CSV with {{int:32:48}} rows of sample bank transactions: date, description, amount, balance. Not from the system, so we need to generate synthetic data ourselves. We cannot fabricate using system data, but we can create a CSV file ourselves via create_file. The user wants attached file named transactions.csv. So we need to generate {{int:32:48}} rows of data. We need to produce plausible dates, descriptions, amounts, balances. We can generate a simple series.\n\nWe'll create a CSV text with header: date,description,amount,balance\n\nWe'll generate dates maybe from recent days. Use format YYYY-MM-DD. For demo, we can use sequential days starting from {{date:1}} to {{date:2}} ({{int:32:48}} days). Descriptions can be like \"Deposit\", \"Withdrawal\", \"Payment\", \"Transfer\". Amount can be positive for deposits, negative for withdrawals. Balance can start at {{int:800:1200}} and adjust.\n\nWe'll generate manually in analysis, then attach via create_file.\n\nLet's produce sample rows:\n\nDate,Description,Amount,Balance\n{{date:1}},Opening Balance,0,1000.00\n{{date:3}},Deposit Salary,2000.00,3000.00\n{{date:4}},Withdrawal ATM,-200.00,2800.00\n{{date:5}},Payment Grocery,-150.45,2649.55\n{{date:6}},Transfer to Savings,-500.00,2149.55\n{{date:7}},Deposit Interest,15.23,2164.78\n{{date:8}},Payment Utilities,-120.00,2044.78\n{{date:9}},Withdrawal ATM,-100.00,1944.78\n{{date:10}},Deposit Bonus,300.00,2244.78\n{{date:11}},Payment Rent,-800.00,1444.78\n... Continue up to {{int:32:48}} rows.\n\nWe need to generate {{int:32:48}} rows total, including header? The user said {{int:32:48}} rows with fields, so likely {{int:32:48}} data rows (excluding header). We'll generate {{int:32:48}} data rows.\n\nLet's craft {{int:32:48}} rows with varying amounts.\n\nI'll generate using simple pattern.\n\nWe'll produce CSV content.\n\nAfter creating content, call create_file.\n\n",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "date,description,amount,balance\n{{csv:0}}",
+                "file_name": "transactions.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1687,\"file_name\":\"transactions.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1827,
+            "completion_tokens": 1273
+          },
+          "chars": 3538
+        },
+        {
+          "text": "Attached **transactions.csv** containing {{int:32:48}} rows of sample bank transaction data (date, description, amount, balance).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2639,
+            "completion_tokens": 27
+          },
+          "chars": 118
+        }
+      ]
+    }
+  ]
+}

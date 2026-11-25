@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/queue/v0/s2",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:12:27Z",
+  "turns": [
+    {
+      "user_message": "Requests arrive at 900 per second and each takes 20 ms on one worker. How many workers do we need to keep utilization under 70%?",
+      "steps": [
+        {
+          "reasoning": "We need to calculate workers needed given arrival rate λ = {{int:720:1080}} requests per second. Service time per request = {{int:16:24}} ms = 0.02 seconds. So service rate per worker μ = 1 / 0.02 = {{int:40:60}} requests per second per worker. Utilization per worker ρ = λ / (c * μ) where c is number of workers. Want ρ \u003c= 0.70. So λ/(c*μ) \u003c=0.7 =\u003e c \u003e= λ/(0.7*μ) = 900/(0.7*{{int:40:60}}) = 900/({{int:28:42}}) = 25.714... So need at least {{int:20:32}} workers. Provide answer.",
+          "text": "Each worker can handle 1 / 0.02 s = {{int:40:60}} requests per second.  \nTo keep utilization ≤ {{int:56:84}} %:\n\n\\[\n\\frac{λ}{c·μ} \\le 0.70 \\;\\;\\Rightarrow\\;\\; c \\ge \\frac{λ}{0.70·μ}\n      = \\frac{{{int:720:1080}}}{0.70 × {{int:40:60}}}\n      = \\frac{{{int:720:1080}}}{{{int:28:42}}}\n      ≈ 25.7\n\\]\n\nSo you need **{{int:20:32}} workers** (rounding up to the next whole worker) to keep utilization under {{int:56:84}} %.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1818,
+            "completion_tokens": 280
+          },
+          "chars": 780
+        }
+      ]
+    }
+  ]
+}

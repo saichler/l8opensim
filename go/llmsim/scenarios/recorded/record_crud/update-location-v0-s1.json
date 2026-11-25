@@ -1,0 +1,96 @@
+{
+  "id": "record_crud/update-location/v0/s1",
+  "flavor": "record_crud",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T22:43:17Z",
+  "params": {
+    "site": [
+      "Austin",
+      "Dallas",
+      "Houston",
+      "Seattle",
+      "Denver",
+      "Chicago"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Change the location of device core-rtr-11 to Austin.",
+      "steps": [
+        {
+          "reasoning": "Change the location of device core-rtr-11 to {{p:site}}.\n\nWe need to change location of device core-rtr-11 to {{p:site}}. Model NetworkDevice? Likely NetworkDevice. Need to find field names. Describe model NetworkDevice.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2437,
+            "completion_tokens": 99
+          },
+          "chars": 251
+        },
+        {
+          "reasoning": "We need to change location of device core-rtr-11 to {{p:site}}. We need to find record where maybe sysName? Or id? The device name maybe equipmentinfo.sysName = \"core-rtr-11\". Or id? Could be id = core-rtr-11? Typically id is primary key. Could try query where equipmentinfo.sysName = \"core-rtr-11\". Let's query.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select * from NetworkDevice where equipmentinfo.sysName = 'core-rtr-11' limit 10"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":1,\"model\":\"NetworkDevice\",\"records\":[{\"equipmentinfo\":{\"deviceStatus\":\"DEVICE_STATUS_WARNING\",\"deviceType\":\"DEVICE_TYPE_ROUTER\",\"firmwareVersion\":\"4.0.0\",\"interfaceCount\":33,\"ipAddress\":\"10.20.30.11\",\"lastSeen\":\"2026-11-22T04:54:51Z\",\"location\":\"San Antonio\",\"model\":\"7280R3\",\"serialNumber\":\"SN25B0E444\",\"series\":\"VSP\",\"sysName\":\"core-rtr-11\",\"uptime\":\"69d 23h\",\"vendor\":\"Juniper\",\"version\":\"17.9.4\"},\"id\":\"nd-011\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2673,
+            "completion_tokens": 153
+          },
+          "chars": 407
+        },
+        {
+          "tool_calls": [
+            {
+              "name": "update_record",
+              "arguments": {
+                "data": {
+                  "equipmentinfo.location": "Austin",
+                  "id": "nd-011"
+                },
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"action\":\"update\",\"model\":\"NetworkDevice\",\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2900,
+            "completion_tokens": 74
+          },
+          "chars": 95
+        },
+        {
+          "text": "Location updated.\n\nDevice core-rtr-11 (id nd-011) now has equipmentinfo.location = {{p:site}}.\n",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 3008,
+            "completion_tokens": 27
+          },
+          "chars": 91
+        }
+      ]
+    }
+  ]
+}

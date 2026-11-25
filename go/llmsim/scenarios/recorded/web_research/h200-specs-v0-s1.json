@@ -1,0 +1,191 @@
+{
+  "id": "web_research/h200-specs/v0/s1",
+  "flavor": "web_research",
+  "model": "gpt-oss-120b",
+  "quality": "flawed",
+  "recorded_at": "2026-11-24T20:39:34Z",
+  "turns": [
+    {
+      "user_message": "@web What are the specs of the NVIDIA H200 GPU?",
+      "steps": [
+        {
+          "reasoning": "The user asks: \"@web What are the specs of the NVIDIA H200 GPU?\" This requires web search. Use web_search.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 5,
+                "query": "NVIDIA H200 GPU specifications"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 GPU specifications\", \"results\": [{\"title\": \"Official Baltimore Orioles Website | MLB.com\", \"url\": \"https://www.mlb.com/ORIOLES?msockid=3ae389251ea061b20cd4913e1f286074\", \"snippet\": \"The official website of the Baltimore Orioles with the most up-to-date information on news, tickets, schedule, stadium, roster, rumors, …Read more\"}, {\"title\": \"Baltimore Orioles - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Baltimore_Orioles\", \"snippet\": \"The Baltimore Orioles are an American professional baseball team based in Baltimore. The Orioles compete in Major League …Read more\"}, {\"title\": \"2026 Baltimore Orioles Statistics | Baseball-Reference.com\", \"url\": \"https://www.baseball-reference.com/teams/BAL/2026.shtml\", \"snippet\": \"Baltimore Orioles latest stats and more including batting stats, pitching stats, team fielding totals and more on Baseball-Reference.com\"}, {\"title\": \"Latest Orioles News | Baltimore Orioles - MLB.com\", \"url\": \"https://www.mlb.com/orioles/news?msockid=3ae389251ea061b20cd4913e1f286074\", \"snippet\": \"4 days ago · The official Orioles news source including trades, rumors, scores, standings, stats, game recaps, highlights, injuries and …Read more\"}, {\"title\": \"Baltimore Orioles: Breaking News, Rumors \u0026 Highlights | Yardbarker\", \"url\": \"https://www.yardbarker.com/mlb/teams/baltimore_orioles/3\", \"snippet\": \"The Baltimore Orioles are far from a contender in the American League -- or even in the AL East, for that matter. But that hasn't …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1904,
+            "completion_tokens": 67
+          },
+          "chars": 174
+        },
+        {
+          "reasoning": "The web search results are irrelevant (maybe API issue). Need to try again with different query.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 GPU specs"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 GPU specs\", \"results\": [{\"title\": \"High School Reunion Tube Search (153 videos) - NudeVista\", \"url\": \"https://www.nudevista.com/?q=high+school+reunion\u0026s=t\", \"snippet\": \"153 results for high school reunion tube, ordered by relevance, newest, popularity, duration or random\"}, {\"title\": \"High school reunion Porn Videos \u0026 XXX Movies — PornOne ex vPorn\", \"url\": \"https://pornone.com/search?q=high+school+reunion\", \"snippet\": \"Watch free high school reunion porn videos on HD quality in PornOne. Find out all related sex movies and clips, last added few …Read more\"}, {\"title\": \"Reunion High School Porn Videos - xHamster\", \"url\": \"https://xhamster.com/search/reunion+high+school\", \"snippet\": \"Fuck to get a good grade in school. Watch reunion high school porn videos. Explore tons of XXX movies with sex scenes in 2026 on …Read more\"}, {\"title\": \"High School Reunion #1 (Brooke Ashley, Isis Taylor, Kimberly ... - TNAFlix\", \"url\": \"https://www.tnaflix.com/anal-porn/High-School-Reunion-1/video8450270\", \"snippet\": \"Description: Watch them as they suck and fuck to prove that they've accomplished something in the ten years since high school! …Read more\"}, {\"title\": \"High School Reunion Porn - School Reunion \u0026 High School Videos\", \"url\": \"https://www.eporner.com/tag/high-school-reunion/\", \"snippet\": \"We have 40 videos with High School Reunion, School Reunion, High School, 18 High School, Hot Tub High School, High School …Read more\"}, {\"title\": \"High School Reunion (USA 1975, CJ Laing, Arlana Gucci)\", \"url\": \"https://www.eporner.com/video-UEwHvYG9CrL/high-school-reunion-usa-1975-cj-laing-arlana-gucci/\", \"snippet\": \"Watch High School Reunion (USA 1975, CJ Laing, Arlana Gucci). Duration: 72:58, available in: 720p, 480p, 360p, 240p, 60FPS. …Read more\"}, {\"title\": \"High School Reunion – Eating Pussy, Cowgirl, Ass Porn | xHamster\", \"url\": \"https://xhamster.com/videos/high-school-reunion-xheE6z5\", \"snippet\": \"Watch High School Reunion porn. Category: Eating Pussy, Cowgirl, Ass. Enjoy this XXX sex video and more!\"}, {\"title\": \"Watch High School Reunion Adult Vids - Tnaflix.com\", \"url\": \"https://www.tnaflix.com/search?what=high%20school%20reunion\", \"snippet\": \"Dive into steamy high school reunion fantasies with horny alumni banging, group hookups, and taboo seductions in HD videos. …Read more\"}, {\"title\": \"school-reunion videos - XVIDEOS.COM\", \"url\": \"https://www.xvideos.com/tags/school-reunion\", \"snippet\": \"reunião de escola termina com sexo grupal, bucetada na cara e muita porra na boca das safadas.\"}, {\"title\": \"High School Reunion (1975) - RedPorn.Tv\", \"url\": \"https://redporn.tv/video/80222000/high-school-reunion-1975/\", \"snippet\": \"Indulge in High School Reunion (1975) shared from Amateur8 playing on RedPorn. Catch fresh Vintage scenes streamed in crystal …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2340,
+            "completion_tokens": 56
+          },
+          "chars": 156
+        },
+        {
+          "reasoning": "The web search returned irrelevant results (MLB, porn). Likely need to adjust query. Perhaps add \"NVIDIA H200 data center GPU\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 data center GPU specifications"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 data center GPU specifications\", \"results\": [{\"title\": \"Tri-West Flooring\", \"url\": \"https://www.triwestltd.com/\", \"snippet\": \"Tri-West provides a wide selection of top flooring brands to the Western United States. Returning customer? Place a secure online …Read more\"}, {\"title\": \"Products — Tri-West Flooring\", \"url\": \"https://www.triwestltd.com/products\", \"snippet\": \"For Current Customers - Request Rhythm Access HOW TO USE DÉCOR 24 – TRAINING VIDEO Corporate Phone (562) 692-9166 …Read more\"}, {\"title\": \"DNav Online - Tri-West Flooring\", \"url\": \"https://tri400.triwestltd.com/danciko/d24/\", \"snippet\": \"Powered by Kerridge Commercial Systemssoftware solutions.\"}, {\"title\": \"Tri-West Flooring - Home - shop.triwestltd.com\", \"url\": \"https://shop.triwestltd.com/\", \"snippet\": \"Search products, check availability, and quickly find the items you need. Submit orders anytime and streamline your purchasing …Read more\"}, {\"title\": \"Tri-West LTD | LinkedIn\", \"url\": \"https://www.linkedin.com/company/tri-west-ltd\", \"snippet\": \"Tri-West, LTD founded in 1981 has grown into one of the nation's top floor covering wholesalers dedicated to service, quality and …Read more\"}, {\"title\": \"Tri-West Contract\", \"url\": \"https://www.triwestcontract.com/\", \"snippet\": \"Providing flooring solutions for any commercial and multi-family space.\"}, {\"title\": \"Tri-West Flooring\", \"url\": \"https://tri400.triwestltd.com/danciko/d24/main/\", \"snippet\": \"\"}, {\"title\": \"Tri-West Contract - About\", \"url\": \"https://www.triwestcontract.com/about\", \"snippet\": \"TRI-WEST was founded in 1981 to distribute Armstrong Flooring products to Retailers and Flooring contractors in the Southern …Read more\"}, {\"title\": \"Tri-West LTD - Company Profile \u0026 Staff Directory | ContactOut\", \"url\": \"https://contactout.com/company/tri-west-ltd-6252065\", \"snippet\": \"Tri-West, LTD, established in 1981, has emerged as one of the leading floor covering wholesalers in the United States, particularly …Read more\"}, {\"title\": \"Careers - TriWest\", \"url\": \"https://www.triwest.com/en/careers/\", \"snippet\": \"Team TriWest is a diverse community made up of individuals from all walks of life connected by a deep-rooted mission to serve our …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 3175,
+            "completion_tokens": 69
+          },
+          "chars": 208
+        },
+        {
+          "reasoning": "The web searches are returning irrelevant results (Baltimore Orioles etc). Likely because search engine blocked? We may need to specify more precise query. Let's try again with \"NVIDIA H200 GPU specs site:nvidia.com\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 GPU specifications site:nvidia.com"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 GPU specifications site:nvidia.com\", \"results\": [{\"title\": \"MLB Scores, 2026 Season - ESPN\", \"url\": \"https://www.espn.com/mlb/scoreboard\", \"snippet\": \"Oct 28, 2026 · Live scores for every 2026 MLB season game on ESPN. Includes box scores, video highlights, play breakdowns and …\"}, {\"title\": \"MLB Scores: Scoreboard, Results and Highlights\", \"url\": \"https://www.mlb.com/scores/?msockid=336829e6b0236116056631fdb1396091\", \"snippet\": \"Oct 28, 2026 · Get up-to-date MLB scores from today’s games, as well as scores from all the 2026 MLB season games.\"}, {\"title\": \"MLB on ESPN - Scores, Stats and Highlights\", \"url\": \"https://www.espn.com/mlb/\", \"snippet\": \"Visit ESPN for MLB live scores, video highlights and latest news. Stream exclusive games on ESPN and play Fantasy Baseball.\"}, {\"title\": \"MLB.com | The Official Site of Major League Baseball\", \"url\": \"https://www.mlb.com/?scores\u0026msockid=336829e6b0236116056631fdb1396091\", \"snippet\": \"Coverage includes audio and video clips, interviews, statistics, schedules and exclusive stories.\"}, {\"title\": \"MLB Scores - Baseball Game Results - CBS Sports\", \"url\": \"https://www.cbssports.com/mlb/scoreboard/\", \"snippet\": \"Get the latest Major League Baseball box scores, stats, and live game results. Follow your favorite teams and players on …\"}, {\"title\": \"MLB Scores, 2026 Season - Yahoo Sports\", \"url\": \"https://sports.yahoo.com/mlb/scoreboard/\", \"snippet\": \"Get live MLB scores, game results, and news on Yahoo Sports.\"}, {\"title\": \"MLB Scores \u0026 Scoreboard | FanGraphs Baseball\", \"url\": \"https://www.fangraphs.com/scores\", \"snippet\": \"Nov 10, 2026 · Live MLB scores, game updates, and win probability graphs. Track every game in real time on the FanGraphs …\"}, {\"title\": \"MLB News, Scores, Standings, Schedules, Videos and more - Yahoo Sports\", \"url\": \"https://sports.yahoo.com/mlb/\", \"snippet\": \"MLB and the MLBPA traded proposals and public barbs Monday in their ongoing CBA talks ahead of a Dec. 1 expiration deadline.\"}, {\"title\": \"MLB Scores, 2026 Season - - ESPN (SG)\", \"url\": \"https://www.espn.com.sg/mlb/scoreboard\", \"snippet\": \"Live scores for every 2026 MLB season game on - ESPN (SG). Includes box scores, video highlights, play breakdowns and updated …\"}, {\"title\": \"Live MLB Scores: Box Scores, Live Updates, Game Recaps, …\", \"url\": \"https://www.nbcsports.com/mlb/scores\", \"snippet\": \"Get all the latest MLB score updates live from NBC Sports.\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 3804,
+            "completion_tokens": 86
+          },
+          "chars": 302
+        },
+        {
+          "reasoning": "The web search is failing to return relevant results, probably due to some content filtering or issues. We might need to try a different query. Let's try \"H200 GPU Nvidia specs\" without site filter.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "\"NVIDIA H200\" GPU specifications"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"\\\"NVIDIA H200\\\" GPU specifications\", \"results\": [{\"title\": \"Los Angeles Sport Calendar \u0026 Tickets 2026-2027 (Updated Daily ...\", \"url\": \"https://seatgeek.com/cities/la/sports?msockid=2d475a99a22662220ea44282a3b563a3\", \"snippet\": \"Nov 25, 2026 · Discover sports in Los Angeles, and buy tickets at the best price on SeatGeek. Find the top things to do in your city, …Read more\"}, {\"title\": \"Los Angeles Sports Tickets - Upcoming sporting event tickets in Los ...\", \"url\": \"https://www.ticketmaster.com/discover/los-angeles?categoryId=KZFzniwnSyZfZ7v7nE\u0026msockid=2d475a99a22662220ea44282a3b563a3\", \"snippet\": \"Oct 4, 2026 · Find your favorite sports event tickets, schedules and seating charts in the Los Angeles area.\"}, {\"title\": \"Sports in Los Angeles this weekend - SeatGeek\", \"url\": \"https://seatgeek.com/cities/la/sports/this-weekend?msockid=2d475a99a22662220ea44282a3b563a3\", \"snippet\": \"Discover sports in Los Angeles this weekend, and buy tickets at the best price on SeatGeek. Find the top things to do in your city this …Read more\"}, {\"title\": \"Los Angeles Sports Events | Schedule 2026–2027\", \"url\": \"https://los-angeles.events/sports/\", \"snippet\": \"Nov 16, 2026 · Browse sports events taking place across Los Angeles, nearby cities, stadiums, arenas, racetracks, and regional …Read more\"}, {\"title\": \"Sports Events in Los Angeles - California on EventSeeker\", \"url\": \"https://eventseeker.com/los-angeles/sport-events\", \"snippet\": \"20 hours ago · Roosevelt Mustangs vs Beaumont Cougars Basketball 2:00 PM @ Eleanor Roosevelt High School Eastvale, CA …Read more\"}, {\"title\": \"Sports Events in Los Angeles | Matches, Games \u0026 Tickets\", \"url\": \"https://allevents.in/los-%c3%81ngeles/sports\", \"snippet\": \"Get up, start running or join the next marathon, triathlon or cycling events near Los Angeles. Find out sports events near you in Los …Read more\"}, {\"title\": \"Upcoming Sports events Events in Los Angeles, CA\", \"url\": \"https://stayhappening.com/los+angeles--sports\", \"snippet\": \"Sports events in Los Angeles Check out happening sports events all around Los Angeles, CA\"}, {\"title\": \"Discover Sports Events \u0026 Activities in Los Angeles, CA | Eventbrite\", \"url\": \"https://www.eventbrite.com/d/ca--los-angeles/sports/?msockid=2d475a99a22662220ea44282a3b563a3\", \"snippet\": \"Looking for sports events or things to do in Los Angeles, CA? The sprawling geography of the region shapes how athletic gatherings …Read more\"}, {\"title\": \"Los Angeles, CA Sports Events This Weekend | Eventbrite\", \"url\": \"https://www.eventbrite.com/d/ca--los-angeles/events--this-weekend/sports/?msockid=2d475a99a22662220ea44282a3b563a3\", \"snippet\": \"Save this event: Women Empowered Self-Defense Jiu Jitsu: 10-Day trial \u0026 Free Shirt promo!\"}, {\"title\": \"Los Angeles Sports Events in November 2026\", \"url\": \"https://los-angeles.events/sports/november/\", \"snippet\": \"Nov 25, 2026 · Browse all sports events in Los Angeles. Explore upcoming games, matches, fights, tournaments, venues, tickets, …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 4542,
+            "completion_tokens": 79
+          },
+          "chars": 271
+        },
+        {
+          "reasoning": "The web search didn't return relevant results due to some issue (maybe blocked). We might need to try a different query. Let's search for \"NVIDIA H200 data center GPU\" maybe more specific.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 data center GPU"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 data center GPU\", \"results\": [{\"title\": \"How to remove and stop trending searches - Google Help\", \"url\": \"https://support.google.com/websearch/thread/198531009/how-to-remove-and-stop-trending-searches?hl=en\", \"snippet\": \"Jan 23, 2023 · Open whatever browser you use and go to google.com. Click Settings, found at the bottom right corner of your …\"}, {\"title\": \"Explore the searches that are Trending now - Trends Help\", \"url\": \"https://support.google.com/trends/answer/3076011?hl=en\", \"snippet\": \"Overview From the Google Trends “ Trending now ” page, you can: Explore trending searches for 100+ countries and regions (where …\"}, {\"title\": \"MSDN\", \"url\": \"https://social.msdn.microsoft.com/Forums/en/tfsprocess/thread/570e7322-6876-40f5-a9bc-f693dbac91c0\", \"snippet\": \"\"}, {\"title\": \"MSDN\", \"url\": \"https://social.msdn.microsoft.com/forums/en-us/6f981426-d084-4ee3-a967-4e41929ec1d6\", \"snippet\": \"\"}, {\"title\": \"Get started with Google Trends - Trends Help\", \"url\": \"https://support.google.com/trends/answer/6248105?hl=en\", \"snippet\": \"Google Trends walkthrough To check popular topics and searches, you can use Google Trends. Learn about the Google Trends …\"}, {\"title\": \"Suddenly, my Google search results are terrible. Chrome is up to date ...\", \"url\": \"https://support.google.com/websearch/thread/8098915/suddenly-my-google-search-results-are-terrible-chrome-is-up-to-date-what-should-i-do?hl=en\", \"snippet\": \"Jun 15, 2019 · It has everything to do with Google making money off of their search engine. Since Google is now all about money …\"}, {\"title\": \"About popular times, wait times \u0026 visit duration data\", \"url\": \"https://support.google.com/business/answer/6263531?hl=en\", \"snippet\": \"About visit data To determine popular times, wait times, and visit duration, Google uses aggregated and anonymized data from users …\"}, {\"title\": \"Trending Charts on YouTube - YouTube Help - Google Help\", \"url\": \"https://support.google.com/youtube/answer/7239739?hl=en\", \"snippet\": \"Trending Charts on YouTube YouTube Charts provide a dynamic daily spotlight on the most popular content from across the globe. …\"}, {\"title\": \"Google search bar redirects to Bing on Android\", \"url\": \"https://support.google.com/chrome/thread/8998490/google-search-bar-redirects-to-bing-on-android?hl=en\", \"snippet\": \"Jun 30, 2019 · When typing something into the Google search bar the search results are shown in Bing, not Google. This only …\"}, {\"title\": \"Scopri le ricerche attualmente di tendenza - Guida di Trends\", \"url\": \"https://support.google.com/trends/answer/3076011?hl=it\", \"snippet\": \"Scopri le ricerche attualmente di tendenza Trending Now: Stay on Top of Google Search Trends Google Search Central Guarda su\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 5445,
+            "completion_tokens": 78
+          },
+          "chars": 254
+        },
+        {
+          "reasoning": "The web searches are failing due to unrelated results. Likely need to fetch a specific page. Might need to search with more specific query: \"NVIDIA H200 GPU architecture specs\" maybe.\n\nLet's try again with a known site: news.nvidia.com.",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 GPU architecture site:nvidia.com"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 GPU architecture site:nvidia.com\", \"results\": [{\"title\": \"Clara Mae - Wikipedia\", \"url\": \"https://en.wikipedia.org/wiki/Clara_Mae\", \"snippet\": \"Clara Fredrika Hagman (born 9 July 1991), known professionally as Clara Mae, is a Swedish singer and songwriter currently signed …Read more\"}, {\"title\": \"Clara Hagman - Wikipedia\", \"url\": \"https://en.wikipedia.org/?title=Clara_Hagman\u0026redirect=no\", \"snippet\": \"From a page move: This is a redirect from a page that has been moved (renamed). This page was kept as a redirect to avoid …Read more\"}, {\"title\": \"Clara Hagman – Wikipedia\", \"url\": \"https://sv.wikipedia.org/wiki/Clara_Hagman\", \"snippet\": \"Clara Hagman ... Clara Fredrika Hagman, även känd som Clara Mae, född 9 juli 1991 i Gävle, är en svensk sångerska.\"}, {\"title\": \"Clara Hagman - Age, Bio, Family | Famous Birthdays\", \"url\": \"https://www.famousbirthdays.com/people/clara-hagman.html\", \"snippet\": \"Jul 9, 1991 · Musician who's hit songs include \\\"Thank God These Walls Can't Talk,\\\" \\\"Can't Do Both,\\\" \\\"I'm Not Her,\\\" and \\\"I Forgot.\\\" …Read more\"}, {\"title\": \"Clara Hagman | Wiki, Net Worth, Awards \u0026 iFAMOUS Rankings (2026)\", \"url\": \"https://ifann.net/wiki/clara-hagman\", \"snippet\": \"Nov 2, 2026 · Clara Fredrika Hagman is a Swedish singer and songwriter known professionally as Clara Mae. Born in Gävle in 1991, …Read more\"}, {\"title\": \"Clara Hagman - Alchetron, The Free Social Encyclopedia\", \"url\": \"https://alchetron.com/Clara-Hagman\", \"snippet\": \"Apr 25, 2026 · Clara Hagman (born 9 July 1991 in Gävle, Sweden) is a Swedish singer and former member of the pop group Ace of …Read more\"}, {\"title\": \"Clara Hagman - IMDb\", \"url\": \"https://www.imdb.com/name/nm8908376/\", \"snippet\": \"Clara Hagman is known for Ace of Base: All for You (2010).\"}, {\"title\": \"Where Are The Members Of Ace Of Base Now? - Grunge\", \"url\": \"https://www.grunge.com/1169575/where-are-the-members-of-ace-of-base-now/\", \"snippet\": \"Jan 17, 2023 · Clara Hagman was a member of Ace of Base when the group released their final studio album \\\"The Golden Ratio\\\" in …Read more\"}, {\"title\": \"Clara Hagman — Biography, Discography, Albums \u0026 Expert Reviews - AllMusic\", \"url\": \"https://www.allmusic.com/artist/clara-hagman-mn0003578483\", \"snippet\": \"Composer, Lyricist. Clara Hagman's complete discography, biography, and expert reviews. Learn all about Clara Hagman on AllMusic.\"}, {\"title\": \"Exclusive Interview with ‘Clara Mae’ - Illustrate Magazine\", \"url\": \"https://illustratemagazine.com/exclusive-interview-with-clara-mae/\", \"snippet\": \"Jun 6, 2022 · Clara Hagman (born July 9, 1991), better known by her stage name Clara Mae, is a Swedish singer and songwriter …Read more\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 6226,
+            "completion_tokens": 93
+          },
+          "chars": 319
+        },
+        {
+          "reasoning": "The web searches returned irrelevant results (mostly sports). Possibly blocked or missing. Could try different query like \"H200 GPU NVIDIA\".",
+          "tool_calls": [
+            {
+              "name": "web_search",
+              "arguments": {
+                "max_results": 10,
+                "query": "NVIDIA H200 GPU"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"query\": \"NVIDIA H200 GPU\", \"results\": [{\"title\": \".net - How can I generate UUID in C# - Stack Overflow\", \"url\": \"https://stackoverflow.com/questions/8477664/how-can-i-generate-uuid-in-c-sharp\", \"snippet\": \"Dec 12, 2011 · You will probably want to do System.Guid.NewGuid ().ToString (\\\"B\\\").ToUpper () if you want to be compatible with …\"}, {\"title\": \"How to Generate a UUID in C# - Delft Stack\", \"url\": \"https://www.delftstack.com/howto/csharp/generate-uuid-in-csharp/\", \"snippet\": \"Feb 3, 2022 · The article explores UUIDs (Universally Unique Identifiers) in C#, covering their significance and practical applications …\"}, {\"title\": \"Generate a UUID in C#\", \"url\": \"https://www.uuidgenerator.net/dev-corner/c-sharp\", \"snippet\": \"Quickly and easily generate individual or bulk sets of universally unique identifiers (UUIDs).\"}, {\"title\": \"Guid.NewGuid Method (System) | Microsoft Learn\", \"url\": \"https://learn.microsoft.com/en-us/dotnet/api/system.guid.newguid?view=net-10.0\", \"snippet\": \"The method creates a Version 4 Universally Unique Identifier (UUID) as described in RFC 4122, Sec. 4.4. The returned Guid is …\"}, {\"title\": \"How to generate UUID version 4 using c# - Stack Overflow\", \"url\": \"https://stackoverflow.com/questions/55823448/how-to-generate-uuid-version-4-using-c-sharp\", \"snippet\": \"Apr 24, 2019 · My requirement is to generate version 4 UUID from C# code for google API session token and i am not sure …\"}, {\"title\": \"Generate a UUID in C# – Examples \u0026 Implementation | ToolPorta\", \"url\": \"https://toolporta.com/developers/uuid/csharp\", \"snippet\": \"Sep 18, 2026 · Generate, format, parse, and validate UUIDs and GUIDs in C# and .NET with native Guid methods and .NET 9 …\"}, {\"title\": \"How to Use GUIDs in C#? - C# Corner\", \"url\": \"https://www.c-sharpcorner.com/article/a-comprehensive-guide-with-code-examples-how-to-use-guids-in-c-sharp-programming\", \"snippet\": \"Mar 20, 2024 · Learn how to create, format, compare, and parse GUIDs in C# using the System.Guid struct, including common uses …\"}, {\"title\": \"How to Generate a UUID in C# - code.live\", \"url\": \"https://code.live/tutorials/how-to-generate-a-uuid-in-csharp\", \"snippet\": \"Apr 16, 2026 · How to generate a UUID in C#: step-by-step tutorial with a working code example, common pitfalls, and a quick …\"}, {\"title\": \"How to generate UUID in C# - iDiTect.com\", \"url\": \"https://www.iditect.com/faq/csharp/how-to-generate-uuid-in-c.html\", \"snippet\": \"In C#, you can generate a UUID (Universally Unique Identifier) using the Guid struct in the .NET Framework. The Guid struct …\"}, {\"title\": \"Creating a UUID v7 Generator in C# | by Olivier Martinet | Medium\", \"url\": \"https://medium.com/@oliviermartinet/creating-a-uuid-v7-generator-in-c-a95b23cf6a99\", \"snippet\": \"Mar 6, 2024 · The latest version, UUID v7, combines timestamp information with random bits to create a unique identifier. In this …\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 7082,
+            "completion_tokens": 63
+          },
+          "chars": 194
+        },
+        {
+          "reasoning": "The web searches are returning irrelevant results, likely due to some filtering. Possibly need to add more specific query like \"NVIDIA H200 GPU specs site:news\". Let's try a more targeted search for news articles.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 7946,
+            "completion_tokens": 80
+          },
+          "chars": 213
+        }
+      ]
+    }
+  ]
+}

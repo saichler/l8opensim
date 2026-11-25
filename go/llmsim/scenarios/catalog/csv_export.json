@@ -1,0 +1,125 @@
+{
+  "flavor": "csv_export",
+  "mode": "tanto",
+  "validators": [
+    "tool_sequence"
+  ],
+  "expect_tools": [
+    "export_csv"
+  ],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "devices-by-site",
+      "params": {
+        "entity": [
+          "network devices",
+          "GPU servers"
+        ],
+        "site": [
+          "Austin",
+          "Dallas",
+          "Houston",
+          "Seattle",
+          "Denver",
+          "Chicago"
+        ]
+      },
+      "turns": [
+        "Export all {{entity}} in {{site}} to CSV."
+      ]
+    },
+    {
+      "id": "all-devices",
+      "params": {},
+      "turns": [
+        "Export all network devices to a CSV file with vendor, model, IP and status."
+      ]
+    },
+    {
+      "id": "alarms-csv",
+      "params": {},
+      "turns": [
+        "Give me a spreadsheet of all active alarms."
+      ]
+    },
+    {
+      "id": "pods-csv",
+      "params": {
+        "cluster": [
+          "prod-east",
+          "prod-west",
+          "staging"
+        ]
+      },
+      "turns": [
+        "Export the pods of the {{cluster}} cluster as a CSV for download."
+      ]
+    },
+    {
+      "id": "nodes-csv",
+      "params": {},
+      "turns": [
+        "I need a CSV of all Kubernetes nodes with their versions."
+      ]
+    },
+    {
+      "id": "gpu-inventory",
+      "params": {},
+      "turns": [
+        "Export the GPU inventory to CSV: hostname, model, GPU count, driver and CUDA versions."
+      ]
+    },
+    {
+      "id": "offline-csv",
+      "params": {},
+      "turns": [
+        "Export the offline devices to a CSV file."
+      ]
+    },
+    {
+      "id": "events-csv",
+      "params": {},
+      "turns": [
+        "Export the events of the last week to CSV."
+      ]
+    },
+    {
+      "id": "targets-csv",
+      "params": {},
+      "turns": [
+        "Download the polling targets as a CSV."
+      ]
+    },
+    {
+      "id": "deployments-csv",
+      "params": {},
+      "turns": [
+        "Export all deployments with their ready counts to a CSV file."
+      ]
+    },
+    {
+      "id": "vendor-csv",
+      "params": {
+        "vendor": [
+          "Cisco",
+          "Juniper",
+          "Arista"
+        ]
+      },
+      "turns": [
+        "Export the {{vendor}} devices to Excel."
+      ]
+    },
+    {
+      "id": "followup-columns",
+      "params": {},
+      "turns": [
+        "Export all network devices to CSV.",
+        "Export it again with only the hostname, IP address and uptime columns."
+      ]
+    }
+  ]
+}

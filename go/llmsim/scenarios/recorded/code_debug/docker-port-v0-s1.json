@@ -1,0 +1,24 @@
+{
+  "id": "code_debug/docker-port/v0/s1",
+  "flavor": "code_debug",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:01:20Z",
+  "turns": [
+    {
+      "user_message": "My container runs but I can't reach it on localhost:8080. I started it with `docker run myapp`. Why?",
+      "steps": [
+        {
+          "reasoning": "We need to respond as Tanto, L8 assistant. The user is asking a Docker networking issue: container runs but can't reach on localhost:8080, started with \"docker run myapp\". Probably missing port mapping. Provide explanation: need -p 8080:8080, ensure app listening on 0.0.0.0, not localhost, etc. Provide guidance. No need to use tools. So answer.",
+          "text": "When you run a container with just `docker run myapp`, Docker starts the process inside its own isolated network namespace. By default the container’s ports are **not** published to your host’s network, so anything the container is listening on (e.g., port {{int:6464:9696}}) is only reachable from inside the container itself.\n\n### What’s happening\n\n| Step | What Docker does | Result |\n|------|-------------------|--------|\n| `docker run myapp` | Starts a new container with its own private network (`bridge` mode) | The container can talk to other containers on the same network, but its ports are hidden from the host. |\n| Your app inside the container starts listening on `0.0.0.0:8080` (or `127.0.0.1:8080`) | The port is open **inside** the container only. | Trying `http://localhost:8080` on the host returns “connection refused” because nothing is bound to that port on the host. |\n\n### How to expose the port\n\n1. **Publish the container port to the host** when you start the container:\n\n   ```bash\n   docker run -p 8080:8080 myapp\n   ```\n\n   - The syntax is `-p \u003chostPort\u003e:\u003ccontainerPort\u003e`.\n   - After this, `http://localhost:8080` on the host forwards traffic to port {{int:6464:9696}} inside the container.\n\n2. **Make sure the application inside the container binds to the correct interface**.  \n   - If the app is only listening on `127.0.0.1` (localhost) **inside** the container, Docker’s port‑forwarding won’t be able to reach it.  \n   - Change the app’s bind address to `0.0.0.0` (all interfaces) or to the container’s IP address. Most frameworks let you configure this with an environment variable or a command‑line flag, e.g.:\n\n     ```bash\n     # Example for a Node.js app\n     node server.js --host 0.0.0.0 --port 8080\n     ```\n\n3. **Verify the mapping** (optional):\n\n   ```bash\n   docker ps\n   ```\n\n   You’ll see something like:\n\n   ```\n   CONTAINER ID   IMAGE   COMMAND   ...   PORTS                     NAMES\n   a1b2c3d4e5f6   myapp   \"...\"           0.0.0.0:8080-\u003e8080/tcp   hopeful_morse\n   ```\n\n   The `0.0.0.0:8080-\u003e8080/tcp` entry confirms that port {{int:6464:9696}} on the host is forwarded to port {{int:6464:9696}} in the container.\n\n### Common pitfalls\n\n| Symptom | Likely cause | Fix |\n|---------|--------------|-----|\n| `curl localhost:8080` returns *connection refused* even after `-p 8080:8080` | App bound to `127.0.0.1` inside container | Change bind address to `0.0.0.0`. |\n| Docker shows the port mapping but you still can’t reach it | Firewall on the host blocks inbound traffic on that port | Open the port in your host firewall (e.g., `ufw allow {{int:6464:9696}}`). |\n| You need to reach the container from another machine on the LAN | Mapping to `0.0.0.0` is required; `localhost` only works on the same host | Use `-p 0.0.0.0:8080:8080` (default) and access via the host’s IP address. |\n| You want the container to listen on a different host port (e.g., {{int:64:96}}) | Use a different host‑side port in the `-p` flag | `docker run -p 80:8080 myapp` (host {{int:64:96}} → container {{int:6464:9696}}). |\n\n### Quick checklist\n\n1. **Port mapping:** `docker run -p 8080:8080 …`\n2. **App bind address:** `0.0.0.0` inside the container.\n3. **Host firewall:** Allow inbound traffic on the host port.\n4. **Verify:** `docker ps` → see `0.0.0.0:8080-\u003e8080/tcp`.\n\nOnce those steps are in place, opening `http://localhost:8080` on your host should reach the service running inside the container. If you still have trouble, feel free to share the Docker run command you used and any logs the container prints; we can dig deeper from there.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1813,
+            "completion_tokens": 1066
+          },
+          "chars": 3870
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/capacity/v0/s2",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:09:27Z",
+  "turns": [
+    {
+      "user_message": "We have 8 GPU servers with 8 GPUs each, each job needs 3 GPUs and jobs can't span servers. How many jobs can run at once? Explain step by step.",
+      "steps": [
+        {
+          "reasoning": "We need to calculate number of jobs given servers and GPU count per server. There are 8 GPU servers, each has 8 GPUs. Each job needs 3 GPUs, cannot span servers, so per server you can fit floor(8/3)=2 jobs (since 2*3=6 GPUs used, 2 GPUs leftover cannot be used). So each server supports 2 jobs. Total jobs = 8 servers * 2 = {{int:12:20}} jobs. Explain step by step. No data needed.",
+          "text": "**Step‑by‑step calculation**\n\n1. **Determine the GPU capacity of one server**  \n   - Each GPU server has **8 GPUs**.\n\n2. **Find out how many whole jobs can fit on a single server**  \n   - One job requires **3 GPUs**.  \n   - The number of whole jobs that can be placed on a server is the integer division of the server’s GPUs by the GPUs per job:  \n\n\\[\n\\text{jobs per server} = \\left\\lfloor \\frac{8\\text{ GPUs}}{3\\text{ GPUs/job}} \\right\\rfloor = 2\\text{ jobs}\n\\]\n\n   - After placing 2 jobs (2 × 3 = 6 GPUs), 2 GPUs remain idle, because a job cannot be split across servers.\n\n3. **Multiply by the number of servers**  \n   - There are **8 GPU servers** in total.  \n   - Total concurrent jobs = 8 servers × 2 jobs/server = **{{int:12:20}} jobs**.\n\n---\n\n**Answer:** With 8 servers that each hold 8 GPUs, and each job needing 3 GPUs (and not allowed to span servers), you can run **{{int:12:20}} jobs simultaneously**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1824,
+            "completion_tokens": 369
+          },
+          "chars": 1287
+        }
+      ]
+    }
+  ]
+}

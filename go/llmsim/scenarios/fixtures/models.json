@@ -1,0 +1,880 @@
+{
+ "_note": "Fixture data the recorder uses to answer Tanto's data tools during recording. Field paths follow probler's protobuf JSON names.",
+ "models": [
+  {
+   "name": "NetworkDevice",
+   "service": "NetDev",
+   "area": "Inventory",
+   "primary_key": "id",
+   "count": 19,
+   "fields": [
+    {
+     "path": "id",
+     "type": "string",
+     "gen": "id:nd-"
+    },
+    {
+     "path": "equipmentinfo.vendor",
+     "type": "string",
+     "values": [
+      "Cisco",
+      "Juniper",
+      "Arista",
+      "Nokia",
+      "Huawei",
+      "Extreme",
+      "Palo Alto",
+      "Fortinet",
+      "Dell"
+     ]
+    },
+    {
+     "path": "equipmentinfo.model",
+     "type": "string",
+     "values": [
+      "ASR9K",
+      "MX960",
+      "7280R3",
+      "7750 SR-12",
+      "NE8000",
+      "VSP4450",
+      "PA-3220",
+      "FortiGate 600E",
+      "S5248F"
+     ]
+    },
+    {
+     "path": "equipmentinfo.series",
+     "type": "string",
+     "values": [
+      "ASR",
+      "MX",
+      "7000",
+      "SR",
+      "NE",
+      "VSP",
+      "PA",
+      "FortiGate",
+      "S"
+     ]
+    },
+    {
+     "path": "equipmentinfo.sysName",
+     "type": "string",
+     "gen": "host:core-rtr-"
+    },
+    {
+     "path": "equipmentinfo.ipAddress",
+     "type": "string",
+     "gen": "ip:10.20.30."
+    },
+    {
+     "path": "equipmentinfo.serialNumber",
+     "type": "string",
+     "gen": "serial:SN"
+    },
+    {
+     "path": "equipmentinfo.version",
+     "type": "string",
+     "values": [
+      "17.9.4",
+      "22.4R3",
+      "4.30.2F",
+      "23.3.R1",
+      "8.211",
+      "9.1.2",
+      "11.0.3",
+      "7.2.8",
+      "10.5.6"
+     ]
+    },
+    {
+     "path": "equipmentinfo.firmwareVersion",
+     "type": "string",
+     "values": [
+      "1.2.0",
+      "2.0.4",
+      "3.1.1",
+      "4.0.0"
+     ]
+    },
+    {
+     "path": "equipmentinfo.location",
+     "type": "string",
+     "values": [
+      "Austin",
+      "Dallas",
+      "Houston",
+      "San Antonio",
+      "Seattle",
+      "Denver",
+      "Chicago",
+      "New York"
+     ]
+    },
+    {
+     "path": "equipmentinfo.deviceType",
+     "type": "string",
+     "values": [
+      "DEVICE_TYPE_ROUTER",
+      "DEVICE_TYPE_SWITCH",
+      "DEVICE_TYPE_FIREWALL"
+     ]
+    },
+    {
+     "path": "equipmentinfo.deviceStatus",
+     "type": "string",
+     "values": [
+      "DEVICE_STATUS_ONLINE",
+      "DEVICE_STATUS_ONLINE",
+      "DEVICE_STATUS_ONLINE",
+      "DEVICE_STATUS_ONLINE",
+      "DEVICE_STATUS_ONLINE",
+      "DEVICE_STATUS_ONLINE",
+      "DEVICE_STATUS_OFFLINE",
+      "DEVICE_STATUS_WARNING",
+      "DEVICE_STATUS_CRITICAL"
+     ]
+    },
+    {
+     "path": "equipmentinfo.uptime",
+     "type": "string",
+     "gen": "uptime"
+    },
+    {
+     "path": "equipmentinfo.lastSeen",
+     "type": "string",
+     "gen": "date"
+    },
+    {
+     "path": "equipmentinfo.interfaceCount",
+     "type": "int",
+     "gen": "int:8:96"
+    }
+   ]
+  },
+  {
+   "name": "GpuDevice",
+   "service": "GpuDev",
+   "area": "Inventory",
+   "primary_key": "id",
+   "count": 8,
+   "fields": [
+    {
+     "path": "id",
+     "type": "string",
+     "gen": "id:gpu-"
+    },
+    {
+     "path": "deviceInfo.hostname",
+     "type": "string",
+     "gen": "host:gpu-node-"
+    },
+    {
+     "path": "deviceInfo.vendor",
+     "type": "string",
+     "values": [
+      "NVIDIA"
+     ]
+    },
+    {
+     "path": "deviceInfo.model",
+     "type": "string",
+     "values": [
+      "DGX A100",
+      "DGX H100",
+      "HGX H200"
+     ]
+    },
+    {
+     "path": "deviceInfo.ipAddress",
+     "type": "string",
+     "gen": "ip:20.20.30."
+    },
+    {
+     "path": "deviceInfo.serialNumber",
+     "type": "string",
+     "gen": "serial:GPU"
+    },
+    {
+     "path": "deviceInfo.location",
+     "type": "string",
+     "values": [
+      "Austin",
+      "Dallas",
+      "Houston",
+      "San Antonio",
+      "Seattle",
+      "Denver",
+      "Chicago",
+      "New York"
+     ]
+    },
+    {
+     "path": "deviceInfo.osVersion",
+     "type": "string",
+     "values": [
+      "Ubuntu 22.04.4 LTS",
+      "Ubuntu 24.04 LTS"
+     ]
+    },
+    {
+     "path": "deviceInfo.kernelVersion",
+     "type": "string",
+     "values": [
+      "5.15.0-105-generic",
+      "6.8.0-45-generic"
+     ]
+    },
+    {
+     "path": "deviceInfo.driverVersion",
+     "type": "string",
+     "values": [
+      "535.183.01",
+      "550.90.07",
+      "560.35.03"
+     ]
+    },
+    {
+     "path": "deviceInfo.cudaVersion",
+     "type": "string",
+     "values": [
+      "12.2",
+      "12.4",
+      "12.6"
+     ]
+    },
+    {
+     "path": "deviceInfo.dcgmVersion",
+     "type": "string",
+     "values": [
+      "3.3.6",
+      "3.3.8"
+     ]
+    },
+    {
+     "path": "deviceInfo.deviceStatus",
+     "type": "string",
+     "values": [
+      "DEVICE_STATUS_ONLINE",
+      "DEVICE_STATUS_ONLINE",
+      "DEVICE_STATUS_ONLINE",
+      "DEVICE_STATUS_ONLINE",
+      "DEVICE_STATUS_ONLINE",
+      "DEVICE_STATUS_WARNING",
+      "DEVICE_STATUS_OFFLINE"
+     ]
+    },
+    {
+     "path": "deviceInfo.uptime",
+     "type": "string",
+     "gen": "uptime"
+    },
+    {
+     "path": "deviceInfo.lastSeen",
+     "type": "string",
+     "gen": "date"
+    },
+    {
+     "path": "deviceInfo.gpuCount",
+     "type": "int",
+     "gen": "choice:8"
+    }
+   ]
+  },
+  {
+   "name": "K8SCluster",
+   "service": "K8sClstr",
+   "area": "Kubernetes",
+   "primary_key": "name",
+   "count": 3,
+   "fields": [
+    {
+     "path": "name",
+     "type": "string",
+     "values": [
+      "prod-east",
+      "prod-west",
+      "staging"
+     ],
+     "gen": "seqvalue"
+    },
+    {
+     "path": "k8sVersion",
+     "type": "string",
+     "values": [
+      "v1.29.6",
+      "v1.30.4",
+      "v1.31.1"
+     ]
+    },
+    {
+     "path": "platform",
+     "type": "string",
+     "values": [
+      "kubeadm",
+      "EKS",
+      "GKE"
+     ]
+    },
+    {
+     "path": "summary.totalNodes",
+     "type": "int",
+     "gen": "int:3:12"
+    },
+    {
+     "path": "summary.readyNodes",
+     "type": "int",
+     "gen": "int:3:12"
+    },
+    {
+     "path": "summary.totalPods",
+     "type": "int",
+     "gen": "int:40:400"
+    },
+    {
+     "path": "summary.runningPods",
+     "type": "int",
+     "gen": "int:35:390"
+    },
+    {
+     "path": "summary.failedPods",
+     "type": "int",
+     "gen": "int:0:6"
+    },
+    {
+     "path": "summary.pendingPods",
+     "type": "int",
+     "gen": "int:0:5"
+    },
+    {
+     "path": "summary.totalDeployments",
+     "type": "int",
+     "gen": "int:10:80"
+    },
+    {
+     "path": "summary.availableDeployments",
+     "type": "int",
+     "gen": "int:10:80"
+    },
+    {
+     "path": "summary.totalNamespaces",
+     "type": "int",
+     "gen": "int:5:25"
+    },
+    {
+     "path": "summary.warningEvents",
+     "type": "int",
+     "gen": "int:0:40"
+    }
+   ]
+  },
+  {
+   "name": "K8SNode",
+   "service": "K8sNode",
+   "area": "Kubernetes",
+   "primary_key": "name",
+   "count": 12,
+   "fields": [
+    {
+     "path": "name",
+     "type": "string",
+     "gen": "host:worker-"
+    },
+    {
+     "path": "status",
+     "type": "string",
+     "values": [
+      "K8S_NODE_STATUS_READY",
+      "K8S_NODE_STATUS_READY",
+      "K8S_NODE_STATUS_READY",
+      "K8S_NODE_STATUS_READY",
+      "K8S_NODE_STATUS_READY",
+      "K8S_NODE_STATUS_NOT_READY"
+     ]
+    },
+    {
+     "path": "roles",
+     "type": "string",
+     "values": [
+      "control-plane",
+      "worker",
+      "worker",
+      "worker"
+     ]
+    },
+    {
+     "path": "age",
+     "type": "string",
+     "gen": "age"
+    },
+    {
+     "path": "version",
+     "type": "string",
+     "values": [
+      "v1.29.6",
+      "v1.30.4",
+      "v1.31.1"
+     ]
+    },
+    {
+     "path": "internalIp",
+     "type": "string",
+     "gen": "ip:10.0.1."
+    },
+    {
+     "path": "osImage",
+     "type": "string",
+     "values": [
+      "Ubuntu 22.04.4 LTS",
+      "Flatcar 3815.2.5"
+     ]
+    },
+    {
+     "path": "kernelVersion",
+     "type": "string",
+     "values": [
+      "5.15.0-105-generic",
+      "6.6.30-flatcar"
+     ]
+    },
+    {
+     "path": "containerRuntime",
+     "type": "string",
+     "values": [
+      "containerd://1.7.18",
+      "containerd://1.7.22"
+     ]
+    },
+    {
+     "path": "clusterName",
+     "type": "string",
+     "values": [
+      "prod-east",
+      "prod-west",
+      "staging"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "K8SPod",
+   "service": "K8sPod",
+   "area": "Kubernetes",
+   "primary_key": "key",
+   "count": 60,
+   "fields": [
+    {
+     "path": "key",
+     "type": "string",
+     "gen": "id:pod-"
+    },
+    {
+     "path": "name",
+     "type": "string",
+     "gen": "pod"
+    },
+    {
+     "path": "namespace",
+     "type": "string",
+     "values": [
+      "default",
+      "kube-system",
+      "monitoring",
+      "payments",
+      "web",
+      "data"
+     ]
+    },
+    {
+     "path": "ready.count",
+     "type": "int",
+     "gen": "int:0:3"
+    },
+    {
+     "path": "ready.outof",
+     "type": "int",
+     "gen": "int:1:3"
+    },
+    {
+     "path": "status",
+     "type": "string",
+     "values": [
+      "K8S_POD_STATUS_RUNNING",
+      "K8S_POD_STATUS_RUNNING",
+      "K8S_POD_STATUS_RUNNING",
+      "K8S_POD_STATUS_RUNNING",
+      "K8S_POD_STATUS_RUNNING",
+      "K8S_POD_STATUS_RUNNING",
+      "K8S_POD_STATUS_RUNNING",
+      "K8S_POD_STATUS_RUNNING",
+      "K8S_POD_STATUS_PENDING",
+      "K8S_POD_STATUS_FAILED"
+     ]
+    },
+    {
+     "path": "restarts.count",
+     "type": "int",
+     "gen": "int:0:25"
+    },
+    {
+     "path": "restarts.ago",
+     "type": "string",
+     "values": [
+      "2m",
+      "15m",
+      "3h",
+      "1d",
+      ""
+     ]
+    },
+    {
+     "path": "age",
+     "type": "string",
+     "gen": "age"
+    },
+    {
+     "path": "ip",
+     "type": "string",
+     "gen": "ip:10.244.3."
+    },
+    {
+     "path": "node",
+     "type": "string",
+     "gen": "host:worker-"
+    },
+    {
+     "path": "clusterName",
+     "type": "string",
+     "values": [
+      "prod-east",
+      "prod-west",
+      "staging"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "K8SDeployment",
+   "service": "K8sDeploy",
+   "area": "Kubernetes",
+   "primary_key": "key",
+   "count": 20,
+   "fields": [
+    {
+     "path": "key",
+     "type": "string",
+     "gen": "id:dep-"
+    },
+    {
+     "path": "name",
+     "type": "string",
+     "values": [
+      "api",
+      "web",
+      "worker",
+      "billing",
+      "search",
+      "auth",
+      "ingest",
+      "reports"
+     ]
+    },
+    {
+     "path": "namespace",
+     "type": "string",
+     "values": [
+      "default",
+      "payments",
+      "web",
+      "data"
+     ]
+    },
+    {
+     "path": "ready",
+     "type": "string",
+     "values": [
+      "3/3",
+      "2/2",
+      "1/1",
+      "2/3",
+      "0/1"
+     ]
+    },
+    {
+     "path": "upToDate",
+     "type": "string",
+     "values": [
+      "3",
+      "2",
+      "1"
+     ]
+    },
+    {
+     "path": "available",
+     "type": "string",
+     "values": [
+      "3",
+      "2",
+      "1",
+      "0"
+     ]
+    },
+    {
+     "path": "age",
+     "type": "string",
+     "gen": "age"
+    },
+    {
+     "path": "clusterName",
+     "type": "string",
+     "values": [
+      "prod-east",
+      "prod-west",
+      "staging"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Alarm",
+   "service": "Alarm",
+   "area": "Alarms",
+   "primary_key": "alarmId",
+   "count": 30,
+   "fields": [
+    {
+     "path": "alarmId",
+     "type": "string",
+     "gen": "id:alm-"
+    },
+    {
+     "path": "name",
+     "type": "string",
+     "values": [
+      "Interface Down",
+      "High CPU",
+      "BGP Session Down",
+      "GPU Temperature High",
+      "Power Supply Failure",
+      "Fan Failure",
+      "Link Flapping",
+      "Memory Utilization High",
+      "Pod CrashLoopBackOff",
+      "Node Not Ready"
+     ]
+    },
+    {
+     "path": "description",
+     "type": "string",
+     "values": [
+      "Threshold exceeded for 5 minutes",
+      "Peer unreachable",
+      "Redundancy lost",
+      "Repeated state changes detected"
+     ]
+    },
+    {
+     "path": "state",
+     "type": "string",
+     "values": [
+      "ALARM_STATE_ACTIVE",
+      "ALARM_STATE_ACTIVE",
+      "ALARM_STATE_ACTIVE",
+      "ALARM_STATE_ACKNOWLEDGED",
+      "ALARM_STATE_CLEARED"
+     ]
+    },
+    {
+     "path": "severity",
+     "type": "string",
+     "values": [
+      "SEVERITY_CRITICAL",
+      "SEVERITY_MAJOR",
+      "SEVERITY_MAJOR",
+      "SEVERITY_MINOR",
+      "SEVERITY_WARNING"
+     ]
+    },
+    {
+     "path": "nodeId",
+     "type": "string",
+     "gen": "id:nd-"
+    },
+    {
+     "path": "nodeName",
+     "type": "string",
+     "gen": "host:core-rtr-"
+    },
+    {
+     "path": "location",
+     "type": "string",
+     "values": [
+      "Austin",
+      "Dallas",
+      "Houston",
+      "San Antonio",
+      "Seattle",
+      "Denver",
+      "Chicago",
+      "New York"
+     ]
+    },
+    {
+     "path": "firstOccurrence",
+     "type": "int",
+     "gen": "ts"
+    },
+    {
+     "path": "lastOccurrence",
+     "type": "int",
+     "gen": "ts"
+    },
+    {
+     "path": "occurrenceCount",
+     "type": "int",
+     "gen": "int:1:40"
+    },
+    {
+     "path": "isRootCause",
+     "type": "bool",
+     "gen": "bool"
+    },
+    {
+     "path": "acknowledgedBy",
+     "type": "string",
+     "values": [
+      "",
+      "",
+      "operator1",
+      "admin"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "EventRecord",
+   "service": "Events",
+   "area": "Alarms",
+   "primary_key": "eventId",
+   "count": 40,
+   "fields": [
+    {
+     "path": "eventId",
+     "type": "string",
+     "gen": "id:evt-"
+    },
+    {
+     "path": "category",
+     "type": "string",
+     "values": [
+      "EVENT_CATEGORY_NETWORK",
+      "EVENT_CATEGORY_SYSTEM",
+      "EVENT_CATEGORY_SECURITY"
+     ]
+    },
+    {
+     "path": "eventType",
+     "type": "string",
+     "values": [
+      "linkDown",
+      "linkUp",
+      "configChange",
+      "login",
+      "threshold",
+      "reboot"
+     ]
+    },
+    {
+     "path": "severity",
+     "type": "string",
+     "values": [
+      "SEVERITY_INFO",
+      "SEVERITY_WARNING",
+      "SEVERITY_MINOR",
+      "SEVERITY_MAJOR",
+      "SEVERITY_CRITICAL"
+     ]
+    },
+    {
+     "path": "sourceId",
+     "type": "string",
+     "gen": "id:nd-"
+    },
+    {
+     "path": "sourceName",
+     "type": "string",
+     "gen": "host:core-rtr-"
+    },
+    {
+     "path": "sourceType",
+     "type": "string",
+     "values": [
+      "NetworkDevice",
+      "GpuDevice",
+      "K8SNode"
+     ]
+    },
+    {
+     "path": "message",
+     "type": "string",
+     "values": [
+      "Interface Gi0/0/1 changed state to down",
+      "Configuration saved by admin",
+      "CPU above 90% for 5 minutes",
+      "User login from 10.1.1.5",
+      "Device rebooted"
+     ]
+    },
+    {
+     "path": "occurredAt",
+     "type": "int",
+     "gen": "ts"
+    }
+   ]
+  },
+  {
+   "name": "L8PTarget",
+   "service": "Targets",
+   "area": "Collection",
+   "primary_key": "targetId",
+   "count": 22,
+   "fields": [
+    {
+     "path": "targetId",
+     "type": "string",
+     "gen": "id:tgt-"
+    },
+    {
+     "path": "linksId",
+     "type": "string",
+     "values": [
+      "snmp-default",
+      "ssh-default",
+      "rest-default"
+     ]
+    },
+    {
+     "path": "state",
+     "type": "string",
+     "values": [
+      "L8P_TARGET_STATE_UP",
+      "L8P_TARGET_STATE_UP",
+      "L8P_TARGET_STATE_UP",
+      "L8P_TARGET_STATE_UP",
+      "L8P_TARGET_STATE_DOWN"
+     ]
+    },
+    {
+     "path": "inventoryType",
+     "type": "string",
+     "values": [
+      "L8P_TARGET_TYPE_NETWORK_DEVICE",
+      "L8P_TARGET_TYPE_GPU",
+      "L8P_TARGET_TYPE_K8S"
+     ]
+    }
+   ]
+  }
+ ]
+}

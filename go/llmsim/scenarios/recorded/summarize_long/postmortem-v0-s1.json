@@ -1,0 +1,24 @@
+{
+  "id": "summarize_long/postmortem/v0/s1",
+  "flavor": "summarize_long",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:31:53Z",
+  "turns": [
+    {
+      "user_message": "Summarize this incident report:\n\nOn Tuesday at 14:05 UTC the payments API started returning 503 errors. Monitoring alerted at 14:07. The on-call engineer found that a configuration change deployed at 13:58 lowered the database connection pool from 200 to 20. Traffic peaked at 14:00 and requests queued waiting for connections until the load balancer timed them out. The change was rolled back at 14:31 and error rates returned to normal by 14:36. About 18 percent of payment attempts failed during the incident. Action items: add validation for pool sizes in the deployment pipeline, alert on connection pool saturation, and require a second reviewer for database configuration changes.",
+      "steps": [
+        {
+          "reasoning": "We need to summarize the incident report. No data access needed. Just produce summary.",
+          "text": "**Incident Summary**\n\n- **Timeframe**:  \n  - Incident started at **14:05 UTC** when the payments API began returning {{int:402:604}} errors.  \n  - Monitoring triggered an alert at **14:07 UTC**.  \n  - The faulty configuration was rolled back at **14:31 UTC**, and error rates normalized by **14:36 UTC**.\n\n- **Root Cause**:  \n  - A deployment at **13:58 UTC** unintentionally reduced the database connection pool size from **{{int:160:240}}** to **{{int:16:24}}**.  \n  - Traffic peaked at **14:00 UTC**, causing request queues to fill as connections were exhausted, leading to load‑balancer timeouts and {{int:402:604}} responses.\n\n- **Impact**:  \n  - Approximately **{{int:14:22}} %** of payment attempts failed during the outage.\n\n- **Remediation Actions**:  \n  1. **Add validation** for connection‑pool sizes in the deployment pipeline.  \n  2. **Implement alerts** for database‑connection‑pool saturation.  \n  3. **Require a second reviewer** for any changes to database configuration.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1931,
+            "completion_tokens": 261
+          },
+          "chars": 1038
+        }
+      ]
+    }
+  ]
+}

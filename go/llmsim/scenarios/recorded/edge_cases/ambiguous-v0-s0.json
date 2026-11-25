@@ -1,0 +1,24 @@
+{
+  "id": "edge_cases/ambiguous/v0/s0",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:42:10Z",
+  "turns": [
+    {
+      "user_message": "Fix it.",
+      "steps": [
+        {
+          "reasoning": "The user says \"Fix it.\" No context. Likely they previously had an issue. We need to ask clarifying question? The system says we need to respond. Probably the user wants to fix something but we lack context. Should ask for clarification.",
+          "text": "I’m happy to help, but I need a bit more information to understand what needs fixing. Could you let me know what you’d like me to fix—e.g., a specific query, a record, a report, or something else? Please provide any relevant details or the current output you’re seeing, and I’ll take care of it.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1790,
+            "completion_tokens": 131
+          },
+          "chars": 541
+        }
+      ]
+    }
+  ]
+}

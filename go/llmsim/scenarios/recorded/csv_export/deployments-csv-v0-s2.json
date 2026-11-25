@@ -1,0 +1,64 @@
+{
+  "id": "csv_export/deployments-csv/v0/s2",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:26:16Z",
+  "turns": [
+    {
+      "user_message": "Export all deployments with their ready counts to a CSV file.",
+      "steps": [
+        {
+          "reasoning": "We need to export all deployments with their ready counts. We need to know fields in K8SDeployment. Let's describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SDeployment"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"key\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"namespace\",\"type\":\"string\"},{\"path\":\"ready\",\"type\":\"string\"},{\"path\":\"upToDate\",\"type\":\"string\"},{\"path\":\"available\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SDeployment\",\"primaryKey\":\"key\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1799,
+            "completion_tokens": 57
+          },
+          "chars": 160
+        },
+        {
+          "reasoning": "We need to export all deployments with their ready counts to CSV. The fields include ready (string). Probably ready is like \"1/3\". Export all records. Use export_csv with query select * from K8SDeployment. No limit needed. Provide columns: maybe name, namespace, ready, upToDate, available, age, clusterName. We'll export all fields default, but include ready. Use default export all fields. Provide file name deployments.csv.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "deployments.csv",
+                "query": "select * from K8SDeployment"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"key\",\"name\",\"namespace\",\"ready\",\"upToDate\",\"available\",\"age\",\"clusterName\"],\"file_name\":\"deployments.csv\",\"rows\":20}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1935,
+            "completion_tokens": 137
+          },
+          "chars": 505
+        },
+        {
+          "text": "The CSV file **deployments.csv** with {{int:16:24}} deployment records (including their ready counts) is attached.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2023,
+            "completion_tokens": 26
+          },
+          "chars": 103
+        }
+      ]
+    }
+  ]
+}

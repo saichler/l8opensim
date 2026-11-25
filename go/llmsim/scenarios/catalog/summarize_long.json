@@ -1,0 +1,96 @@
+{
+  "flavor": "summarize_long",
+  "mode": "tanto",
+  "validators": [],
+  "expect_tools": [],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "release-notes",
+      "params": {},
+      "turns": [
+        "Summarize this document:\n\nRelease 4.2 of the platform introduces a new scheduler that reduces job start latency by 35 percent, support for ARM64 worker nodes, and a redesigned dashboard. The storage layer now supports snapshots every 15 minutes with retention policies per namespace. Breaking changes: the v1beta1 API is removed and clients must migrate to v1; the default log level changed from debug to info. Known issues: the dashboard may show stale metrics for up to two minutes after a node restart, and snapshot restore is not yet supported for volumes larger than 2 TB. Upgrade path: upgrade the control plane first, then drain and upgrade workers one at a time. The team recommends testing the migration to the v1 API in a staging environment before upgrading production clusters. Security fixes include patches for two medium-severity vulnerabilities in the API gateway and an updated TLS configuration that disables TLS 1.0 and 1.1 by default."
+      ]
+    },
+    {
+      "id": "release-bullets",
+      "params": {},
+      "turns": [
+        "Summarize this in 5 bullet points:\n\nRelease 4.2 of the platform introduces a new scheduler that reduces job start latency by 35 percent, support for ARM64 worker nodes, and a redesigned dashboard. The storage layer now supports snapshots every 15 minutes with retention policies per namespace. Breaking changes: the v1beta1 API is removed and clients must migrate to v1; the default log level changed from debug to info. Known issues: the dashboard may show stale metrics for up to two minutes after a node restart, and snapshot restore is not yet supported for volumes larger than 2 TB. Upgrade path: upgrade the control plane first, then drain and upgrade workers one at a time. The team recommends testing the migration to the v1 API in a staging environment before upgrading production clusters. Security fixes include patches for two medium-severity vulnerabilities in the API gateway and an updated TLS configuration that disables TLS 1.0 and 1.1 by default."
+      ]
+    },
+    {
+      "id": "postmortem",
+      "params": {},
+      "turns": [
+        "Summarize this incident report:\n\nOn Tuesday at 14:05 UTC the payments API started returning 503 errors. Monitoring alerted at 14:07. The on-call engineer found that a configuration change deployed at 13:58 lowered the database connection pool from 200 to 20. Traffic peaked at 14:00 and requests queued waiting for connections until the load balancer timed them out. The change was rolled back at 14:31 and error rates returned to normal by 14:36. About 18 percent of payment attempts failed during the incident. Action items: add validation for pool sizes in the deployment pipeline, alert on connection pool saturation, and require a second reviewer for database configuration changes."
+      ]
+    },
+    {
+      "id": "postmortem-exec",
+      "params": {},
+      "turns": [
+        "Give me a two-sentence executive summary of this:\n\nOn Tuesday at 14:05 UTC the payments API started returning 503 errors. Monitoring alerted at 14:07. The on-call engineer found that a configuration change deployed at 13:58 lowered the database connection pool from 200 to 20. Traffic peaked at 14:00 and requests queued waiting for connections until the load balancer timed them out. The change was rolled back at 14:31 and error rates returned to normal by 14:36. About 18 percent of payment attempts failed during the incident. Action items: add validation for pool sizes in the deployment pipeline, alert on connection pool saturation, and require a second reviewer for database configuration changes."
+      ]
+    },
+    {
+      "id": "release-risks",
+      "params": {},
+      "turns": [
+        "Summarize the risks in this release note:\n\nRelease 4.2 of the platform introduces a new scheduler that reduces job start latency by 35 percent, support for ARM64 worker nodes, and a redesigned dashboard. The storage layer now supports snapshots every 15 minutes with retention policies per namespace. Breaking changes: the v1beta1 API is removed and clients must migrate to v1; the default log level changed from debug to info. Known issues: the dashboard may show stale metrics for up to two minutes after a node restart, and snapshot restore is not yet supported for volumes larger than 2 TB. Upgrade path: upgrade the control plane first, then drain and upgrade workers one at a time. The team recommends testing the migration to the v1 API in a staging environment before upgrading production clusters. Security fixes include patches for two medium-severity vulnerabilities in the API gateway and an updated TLS configuration that disables TLS 1.0 and 1.1 by default."
+      ]
+    },
+    {
+      "id": "both",
+      "params": {},
+      "turns": [
+        "Summarize these two documents and say how they relate:\n\nDocument 1:\nRelease 4.2 of the platform introduces a new scheduler that reduces job start latency by 35 percent, support for ARM64 worker nodes, and a redesigned dashboard. The storage layer now supports snapshots every 15 minutes with retention policies per namespace. Breaking changes: the v1beta1 API is removed and clients must migrate to v1; the default log level changed from debug to info. Known issues: the dashboard may show stale metrics for up to two minutes after a node restart, and snapshot restore is not yet supported for volumes larger than 2 TB. Upgrade path: upgrade the control plane first, then drain and upgrade workers one at a time. The team recommends testing the migration to the v1 API in a staging environment before upgrading production clusters. Security fixes include patches for two medium-severity vulnerabilities in the API gateway and an updated TLS configuration that disables TLS 1.0 and 1.1 by default.\n\nDocument 2:\nOn Tuesday at 14:05 UTC the payments API started returning 503 errors. Monitoring alerted at 14:07. The on-call engineer found that a configuration change deployed at 13:58 lowered the database connection pool from 200 to 20. Traffic peaked at 14:00 and requests queued waiting for connections until the load balancer timed them out. The change was rolled back at 14:31 and error rates returned to normal by 14:36. About 18 percent of payment attempts failed during the incident. Action items: add validation for pool sizes in the deployment pipeline, alert on connection pool saturation, and require a second reviewer for database configuration changes."
+      ]
+    },
+    {
+      "id": "release-tldr",
+      "params": {},
+      "turns": [
+        "TL;DR of this please:\n\nRelease 4.2 of the platform introduces a new scheduler that reduces job start latency by 35 percent, support for ARM64 worker nodes, and a redesigned dashboard. The storage layer now supports snapshots every 15 minutes with retention policies per namespace. Breaking changes: the v1beta1 API is removed and clients must migrate to v1; the default log level changed from debug to info. Known issues: the dashboard may show stale metrics for up to two minutes after a node restart, and snapshot restore is not yet supported for volumes larger than 2 TB. Upgrade path: upgrade the control plane first, then drain and upgrade workers one at a time. The team recommends testing the migration to the v1 API in a staging environment before upgrading production clusters. Security fixes include patches for two medium-severity vulnerabilities in the API gateway and an updated TLS configuration that disables TLS 1.0 and 1.1 by default."
+      ]
+    },
+    {
+      "id": "postmortem-actions",
+      "params": {},
+      "turns": [
+        "Summarize the action items from this report:\n\nOn Tuesday at 14:05 UTC the payments API started returning 503 errors. Monitoring alerted at 14:07. The on-call engineer found that a configuration change deployed at 13:58 lowered the database connection pool from 200 to 20. Traffic peaked at 14:00 and requests queued waiting for connections until the load balancer timed them out. The change was rolled back at 14:31 and error rates returned to normal by 14:36. About 18 percent of payment attempts failed during the incident. Action items: add validation for pool sizes in the deployment pipeline, alert on connection pool saturation, and require a second reviewer for database configuration changes."
+      ]
+    },
+    {
+      "id": "release-upgrade",
+      "params": {},
+      "turns": [
+        "Summarize what an operator must do to upgrade, from this text:\n\nRelease 4.2 of the platform introduces a new scheduler that reduces job start latency by 35 percent, support for ARM64 worker nodes, and a redesigned dashboard. The storage layer now supports snapshots every 15 minutes with retention policies per namespace. Breaking changes: the v1beta1 API is removed and clients must migrate to v1; the default log level changed from debug to info. Known issues: the dashboard may show stale metrics for up to two minutes after a node restart, and snapshot restore is not yet supported for volumes larger than 2 TB. Upgrade path: upgrade the control plane first, then drain and upgrade workers one at a time. The team recommends testing the migration to the v1 API in a staging environment before upgrading production clusters. Security fixes include patches for two medium-severity vulnerabilities in the API gateway and an updated TLS configuration that disables TLS 1.0 and 1.1 by default."
+      ]
+    },
+    {
+      "id": "postmortem-timeline",
+      "params": {},
+      "turns": [
+        "Summarize this as a timeline:\n\nOn Tuesday at 14:05 UTC the payments API started returning 503 errors. Monitoring alerted at 14:07. The on-call engineer found that a configuration change deployed at 13:58 lowered the database connection pool from 200 to 20. Traffic peaked at 14:00 and requests queued waiting for connections until the load balancer timed them out. The change was rolled back at 14:31 and error rates returned to normal by 14:36. About 18 percent of payment attempts failed during the incident. Action items: add validation for pool sizes in the deployment pipeline, alert on connection pool saturation, and require a second reviewer for database configuration changes."
+      ]
+    },
+    {
+      "id": "release-followup",
+      "params": {},
+      "turns": [
+        "Summarize this document:\n\nRelease 4.2 of the platform introduces a new scheduler that reduces job start latency by 35 percent, support for ARM64 worker nodes, and a redesigned dashboard. The storage layer now supports snapshots every 15 minutes with retention policies per namespace. Breaking changes: the v1beta1 API is removed and clients must migrate to v1; the default log level changed from debug to info. Known issues: the dashboard may show stale metrics for up to two minutes after a node restart, and snapshot restore is not yet supported for volumes larger than 2 TB. Upgrade path: upgrade the control plane first, then drain and upgrade workers one at a time. The team recommends testing the migration to the v1 API in a staging environment before upgrading production clusters. Security fixes include patches for two medium-severity vulnerabilities in the API gateway and an updated TLS configuration that disables TLS 1.0 and 1.1 by default.",
+        "Now summarize only the breaking changes in one sentence."
+      ]
+    },
+    {
+      "id": "attached",
+      "params": {},
+      "turns": [
+        "[Attached file \"notes.txt\"]\nOn Tuesday at 14:05 UTC the payments API started returning 503 errors. Monitoring alerted at 14:07. The on-call engineer found that a configuration change deployed at 13:58 lowered the database connection pool from 200 to 20. Traffic peaked at 14:00 and requests queued waiting for connections until the load balancer timed them out. The change was rolled back at 14:31 and error rates returned to normal by 14:36. About 18 percent of payment attempts failed during the incident. Action items: add validation for pool sizes in the deployment pipeline, alert on connection pool saturation, and require a second reviewer for database configuration changes.\n[End of attached file \"notes.txt\"]\nSummarize the attached file."
+      ]
+    }
+  ]
+}

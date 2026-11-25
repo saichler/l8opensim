@@ -1,0 +1,24 @@
+{
+  "id": "qa_chat/latency/v0/s2",
+  "flavor": "qa_chat",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:05:17Z",
+  "turns": [
+    {
+      "user_message": "Why is p99 latency more important than the average?",
+      "steps": [
+        {
+          "reasoning": "The user asks a conceptual question: Why is p99 latency more important than average? No tool needed. Provide explanation.",
+          "text": "**p99 latency (the 99th‑percentile) tells you the worst‑case experience for almost all users, while the average can be misleading.**  \n\n| Aspect | Average (mean) latency | p99 latency |\n|--------|------------------------|-------------|\n| **What it measures** | Sum of all request times ÷ number of requests. | The latency value below which {{int:79:119}} % of requests fall (only the slowest 1 % are higher). |\n| **Sensitivity to outliers** | Heavily affected by a few very fast or very slow requests. A handful of long tails can pull the average up or down, masking the typical user experience. | Insensitive to the bulk of fast requests; it focuses on the tail, highlighting the slowest responses that actually impact users. |\n| **User‑perceived performance** | Users who happen to hit a fast request see low latency, but many may still suffer long pauses that the average hides. | Most users (≈{{int:79:119}} %) will see latency at or below the p99 value, so it gives a realistic upper bound on what a typical user can expect. |\n| **Service‑level objectives (SLOs) \u0026 SLAs** | Many organizations set SLOs on percentiles (e.g., “{{int:79:119}} % of requests under {{int:160:240}} ms”) because they guarantee a consistent experience. | Directly aligns with such SLOs; meeting the p99 target means you’re meeting the promise you’ve made to customers. |\n| **Troubleshooting** | A high average could be due to a small number of outliers, making it hard to know if the system is generally healthy. | A rising p99 instantly signals that the tail is getting worse – often the first sign of capacity, contention, or bugs that need attention. |\n| **Capacity planning** | Planning on average latency may under‑provision resources, leading to occasional spikes that hurt users. | Planning on p99 ensures you have enough headroom for the worst‑case load that actually occurs. |\n\n### In short\n- **Average latency** smooths out the data and can hide rare but painful delays.\n- **p99 latency** surfaces the “slow tail” that most users will experience, making it a better metric for reliability, user satisfaction, and meeting performance commitments. \n\nThat’s why many engineering teams focus on p99 (or even p95/p999) rather than just the mean when evaluating and optimizing system performance.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1798,
+            "completion_tokens": 542
+          },
+          "chars": 2395
+        }
+      ]
+    }
+  ]
+}

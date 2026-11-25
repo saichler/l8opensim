@@ -1,0 +1,64 @@
+{
+  "id": "csv_export/offline-csv/v0/s2",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:25:33Z",
+  "turns": [
+    {
+      "user_message": "Export the offline devices to a CSV file.",
+      "steps": [
+        {
+          "reasoning": "We need to export offline devices. Which model? Likely NetworkDevice. Need to know field for status. Use describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1796,
+            "completion_tokens": 55
+          },
+          "chars": 159
+        },
+        {
+          "reasoning": "We need to export offline devices. Need to know status field. In description, there is equipmentinfo.deviceStatus field, presumably values like \"online\"/\"offline\". So query: select * from NetworkDevice where equipmentinfo.deviceStatus='offline'. Then export_csv.\n\nWe can specify columns maybe include relevant fields: vendor, model, ipAddress, deviceStatus, lastSeen. Use default perhaps okay. We'll export all fields.\n\nLet's call export_csv.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "offline_devices.csv",
+                "query": "select * from NetworkDevice where equipmentinfo.deviceStatus='offline'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"id\",\"equipmentinfo.vendor\",\"equipmentinfo.model\",\"equipmentinfo.series\",\"equipmentinfo.sysName\",\"equipmentinfo.ipAddress\",\"equipmentinfo.serialNumber\",\"equipmentinfo.version\",\"equipmentinfo.firmwareVersion\",\"equipmentinfo.location\",\"equipmentinfo.deviceType\",\"equipmentinfo.deviceStatus\",\"equipmentinfo.uptime\",\"equipmentinfo.lastSeen\",\"equipmentinfo.interfaceCount\"],\"file_name\":\"offline_devices.csv\",\"rows\":3}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2033,
+            "completion_tokens": 139
+          },
+          "chars": 568
+        },
+        {
+          "text": "Attached is **offline_devices.csv** containing 3 offline network devices with their key details.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2175,
+            "completion_tokens": 22
+          },
+          "chars": 96
+        }
+      ]
+    }
+  ]
+}

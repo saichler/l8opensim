@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/puzzle/v0/s1",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:10:56Z",
+  "turns": [
+    {
+      "user_message": "Puzzle: you have 3 switches outside a room with 3 bulbs, you can enter once. How do you know which switch controls which bulb?",
+      "steps": [
+        {
+          "reasoning": "We need to answer puzzle. No tools needed. Provide solution.",
+          "text": "**Solution**\n\n1. **Label the switches** – call them A, B, C so you can keep track of which one you’re working with.\n\n2. **Turn on two switches** – flip A and B to the **ON** position. Leave C off.\n\n3. **Wait a minute or two** – this gives the bulbs that are lit enough time to heat up.\n\n4. **Enter the room**  \n\n   * The bulb that is **on and hot** is controlled by switch A (or B – you’ll determine which in the next step).  \n   * The bulb that is **on but cool** is controlled by the other switch that you left on.  \n   * The bulb that is **off and cool** is controlled by the switch you never turned on (switch C).\n\n5. **Distinguish the two “on” bulbs**  \n\n   * Feel each lit bulb. The one that is **warm/hot** belongs to the switch that has been on the longest (the first one you turned on).  \n   * The other lit bulb (still warm but not as hot) belongs to the second switch you turned on.\n\n6. **Assign the switches**  \n\n   * If you turned on A first, then the hottest bulb = switch A, the other lit bulb = switch B, and the cool‑off bulb = switch C.  \n   * If you turned on B first, swap the assignments accordingly.\n\nThus, by using the combination of **on/off state** and **heat** you can uniquely identify which of the three switches controls each bulb, even though you are only allowed to enter the room once.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1817,
+            "completion_tokens": 376
+          },
+          "chars": 1433
+        }
+      ]
+    }
+  ]
+}

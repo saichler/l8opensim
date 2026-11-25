@@ -1,0 +1,23 @@
+{
+  "id": "qa_chat/tls/v0/s1",
+  "flavor": "qa_chat",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T22:32:16Z",
+  "turns": [
+    {
+      "user_message": "Explain how TLS certificates work in simple terms.",
+      "steps": [
+        {
+          "text": "Sure thing! Here’s the plain-English version:\n\n1. **Public-key cryptography at its core**  \n   * Each site has a pair of keys: a **private key** (secret, stays on the server) and a **public key** (can be shared with anyone).  \n   * Data encrypted with the public key can only be decrypted with the private key, and a signature made with the private key can be verified with the public key.\n\n2. **A certificate is an ID card for a public key**  \n   * A Certificate Authority (CA) — a trusted third party — signs a **TLS certificate** that binds a domain name (e.g., `example.com`) to the site’s public key.  \n   * Your browser/OS trusts some CAs. If the certificate is signed by a trusted CA and matches the domain you’re visiting, the browser trusts that the public key really belongs to that site.\n\n3. **The TLS handshake (the quick chat before data flows)**  \n   * **Client hello:** Your browser says “Hi, I support TLS, here’s a random number.”  \n   * **Server hello:** The server replies with its certificate (domain + public key + CA signature) and its own random number.  \n   * **Validation:** The browser checks the certificate is trusted, not expired, and matches the domain.  \n   * **Key agreement:** Both sides use the public key + the random numbers to secretly agree on a **session key** without ever sending it over the wire (often via ephemeral Diffie-Hellman).  \n   * **Finished:** Both sides confirm the handshake, and now the session key encrypts all further traffic.\n\n4. **Encryption in use**  \n   * After the handshake, every request/response is encrypted with the session key (symmetric encryption, fast).  \n   * The private key never leaves the server; only the public key is public.  \n   * The CA signature guarantees authenticity; the session key guarantees confidentiality and integrity.\n\n5. **Why it matters**  \n   * **Authentication:** You know you’re talking to the real `example.com`, not an impostor.  \n   * **Confidentiality:** Eavesdroppers see only encrypted blobs.  \n   * **Integrity:** Tampering is detected because the encryption includes a MAC.\n\nThat’s it: a trusted ID card for a public key + a quick key-agreement chat = encrypted, authenticated web traffic. Want an analogy (e.g., padlock \u0026 key) or a diagram?",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2433,
+            "completion_tokens": 516
+          },
+          "chars": 2268
+        }
+      ]
+    }
+  ]
+}

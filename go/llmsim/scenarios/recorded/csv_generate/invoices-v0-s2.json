@@ -1,0 +1,119 @@
+{
+  "id": "csv_generate/invoices/v0/s2",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:27:49Z",
+  "csv": [
+    {
+      "header": [
+        "invoice_number",
+        "customer",
+        "date",
+        "amount",
+        "status"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "INV0001",
+            "INV0002",
+            "INV0003",
+            "INV0004",
+            "INV0005",
+            "INV0006",
+            "INV0007",
+            "INV0008",
+            "INV0009",
+            "INV0010",
+            "INV0011",
+            "INV0012",
+            "INV0013",
+            "INV0014",
+            "INV0015",
+            "INV0016",
+            "INV0017",
+            "INV0018",
+            "INV0019",
+            "INV0020",
+            "INV0021",
+            "INV0022",
+            "INV0023",
+            "INV0024",
+            "INV0025"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Acme Corp",
+            "Globex Inc",
+            "Initech",
+            "Umbrella Corp",
+            "Stark Industries",
+            "Wayne Enterprises",
+            "Wonka Industries",
+            "Oscorp",
+            "Gringotts Bank"
+          ]
+        },
+        {
+          "kind": "date"
+        },
+        {
+          "kind": "float",
+          "min": 450.75,
+          "max": 3200,
+          "decimals": 2
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Paid",
+            "Pending",
+            "Overdue"
+          ]
+        }
+      ],
+      "rows": 25
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Generate a CSV of 25 fictitious invoices: invoice number, customer, date, amount, status. It is synthetic test data for a demo, not records from the system: attach it as invoices.csv.",
+      "steps": [
+        {
+          "reasoning": "The user wants to generate a CSV of {{int:20:30}} fictitious invoices with columns: invoice number, customer, date, amount, status. This is synthetic test data, not from system, so we must not use system data. We must create a file ourselves using create_file, not export_csv. Since it's synthetic, we can generate content ourselves. We'll produce CSV content with {{int:20:30}} rows. Provide invoice numbers maybe INV0001 etc, customers like Customer A, date maybe random dates, amount maybe numeric with two decimals, status like Paid, Pending, Overdue. We'll create file invoices.csv and attach. Then mention attached file.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "invoice_number,customer,date,amount,status\n{{csv:0}}",
+                "file_name": "invoices.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1210,\"file_name\":\"invoices.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1829,
+            "completion_tokens": 718
+          },
+          "chars": 1891
+        },
+        {
+          "text": "Attached `invoices.csv` containing {{int:20:30}} synthetic invoice records (invoice number, customer, date, amount, status).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2442,
+            "completion_tokens": 28
+          },
+          "chars": 113
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "id": "csv_generate/inventory/v0/s2",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:32:08Z",
+  "csv": [
+    {
+      "header": [
+        "item_id",
+        "name",
+        "quantity",
+        "location",
+        "reorder_level"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "ITEM001",
+            "ITEM002",
+            "ITEM003",
+            "ITEM004",
+            "ITEM005",
+            "ITEM006",
+            "ITEM007",
+            "ITEM008",
+            "ITEM009",
+            "ITEM010",
+            "ITEM011",
+            "ITEM012",
+            "ITEM013",
+            "ITEM014",
+            "ITEM015",
+            "ITEM016",
+            "ITEM017",
+            "ITEM018",
+            "ITEM019",
+            "ITEM020",
+            "ITEM021",
+            "ITEM022",
+            "ITEM023",
+            "ITEM024",
+            "ITEM025",
+            "ITEM026",
+            "ITEM027",
+            "ITEM028",
+            "ITEM029",
+            "ITEM030"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Widget A",
+            "Gadget B",
+            "Component C",
+            "Part D",
+            "Accessory E",
+            "Widget F",
+            "Gadget G",
+            "Component H",
+            "Part I",
+            "Accessory J",
+            "Widget K",
+            "Gadget L",
+            "Component M",
+            "Part N",
+            "Accessory O",
+            "Widget P",
+            "Gadget Q",
+            "Component R",
+            "Part S",
+            "Accessory T",
+            "Widget U",
+            "Gadget V",
+            "Component W",
+            "Part X",
+            "Accessory Y",
+            "Widget Z",
+            "Gadget AA",
+            "Component BB",
+            "Part CC",
+            "Accessory DD"
+          ]
+        },
+        {
+          "kind": "int",
+          "min": 20,
+          "max": 200
+        },
+        {
+          "kind": "city"
+        },
+        {
+          "kind": "int",
+          "min": 5,
+          "max": 50
+        }
+      ],
+      "rows": 30
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Generate a CSV of 30 warehouse inventory items with item id, name, quantity, location and reorder level. It is synthetic test data for a demo, not records from the system: attach it as inventory.csv.",
+      "steps": [
+        {
+          "reasoning": "User wants synthetic CSV not from system. We need to generate a file with {{int:24:36}} items, with columns item id, name, quantity, location, reorder level. Since not from system, we can't use export_csv (which pulls from DB). Instead we should create a text file with CSV content via create_file. Need to generate synthetic data. We'll produce {{int:24:36}} rows with plausible values. Use simple IDs like ITEM001, etc. Provide file name inventory.csv. Then attach.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "item_id,name,quantity,location,reorder_level\n{{csv:0}}",
+                "file_name": "inventory.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1127,\"file_name\":\"inventory.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1830,
+            "completion_tokens": 562
+          },
+          "chars": 1655
+        },
+        {
+          "text": "Attached **inventory.csv** containing {{int:24:36}} synthetic warehouse inventory items with columns: item_id, name, quantity, location, reorder_level.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2316,
+            "completion_tokens": 31
+          },
+          "chars": 140
+        }
+      ]
+    }
+  ]
+}

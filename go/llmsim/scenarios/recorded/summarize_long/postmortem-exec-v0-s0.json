@@ -1,0 +1,24 @@
+{
+  "id": "summarize_long/postmortem-exec/v0/s0",
+  "flavor": "summarize_long",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T22:59:03Z",
+  "turns": [
+    {
+      "user_message": "Give me a two-sentence executive summary of this:\n\nOn Tuesday at 14:05 UTC the payments API started returning 503 errors. Monitoring alerted at 14:07. The on-call engineer found that a configuration change deployed at 13:58 lowered the database connection pool from 200 to 20. Traffic peaked at 14:00 and requests queued waiting for connections until the load balancer timed them out. The change was rolled back at 14:31 and error rates returned to normal by 14:36. About 18 percent of payment attempts failed during the incident. Action items: add validation for pool sizes in the deployment pipeline, alert on connection pool saturation, and require a second reviewer for database configuration changes.",
+      "steps": [
+        {
+          "reasoning": "Give me a two-sentence executive summary of this:\n\nOn Tuesday at 14:05 UTC...\n\nWe need to give a two-sentence executive summary. No tools needed? Probably just summarize. The instruction says use tools for data. This is just text summarization. No need to query. Provide two-sentence executive summary.\n\nWe should output two sentences.\n\nMake sure concise.",
+          "text": "On Tuesday at 14:05 UTC the payments API returned {{int:402:604}} errors after a 13:58 config change reduced the database connection pool from {{int:160:240}} to {{int:16:24}}, causing request queuing and ~18% payment failure during peak traffic. The change was rolled back at 14:31 with error rates normal by 14:36, and remediation requires deployment validation for pool sizes, connection-pool saturation alerting, and mandatory second review for database config changes.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2572,
+            "completion_tokens": 179
+          },
+          "chars": 793
+        }
+      ]
+    }
+  ]
+}

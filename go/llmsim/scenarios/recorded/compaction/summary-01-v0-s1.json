@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-01/v0/s1",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:16:34Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user is reviewing network health in Austin.\n\nNext part of the conversation:\nUser: Which devices in Austin are offline?\n\nAssistant: Two devices are offline in Austin: core-rtr-03 and core-rtr-07.\n\nUser: Any alarms on them?\n\nAssistant: core-rtr-03 has an active critical 'Interface Down' alarm; core-rtr-07 has a major 'Power Supply Failure' alarm.\n\nUser: Thanks. Only show me critical things from now on.\n\nAssistant: Understood, I will focus on critical items.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary, replacing current one. Include facts, decisions, entities and IDs, user preferences, open questions, L8Query results.\n\nCurrent summary: \"The user is reviewing network health in {{city:1}}.\"\n\nNow we need to incorporate new facts:\n\n- User asks \"Which devices in {{city:1}} are offline?\" Assistant responds: two devices offline: core-rtr-03 and core-rtr-07.\n\n- User asks \"Any alarms on them?\" Assistant: core-rtr-03 has an active critical 'Interface Down' alarm; core-rtr-07 has a major 'Power Supply Failure' alarm.\n\n- User: \"Thanks. Only show me critical things from now on.\" Assistant acknowledges.\n\nThus we need to note:\n\n- Entities: devices core-rtr-03, core-rtr-07 (presumably IDs). Possibly placeholder tokens not needed.\n\n- Alarms: core-rtr-03 critical 'Interface Down' alarm (active). core-rtr-07 major 'Power Supply Failure' alarm (but not critical). The user wants only critical items from now on.\n\n- Decision: focus on critical items only.\n\n- Open questions: none currently.\n\n- L8Query: probably a query to retrieve offline devices in {{city:1}}. We should note that query result produced: core-rtr-03, core-rtr-07.\n\nThus new summary: combine these.\n\nLet's produce final summary.",
+          "text": "The user is reviewing network health in {{city:1}}. Offline devices in {{city:1}}: core-rtr-03 and core-rtr-07. Alarms: core-rtr-03 has an active critical “Interface Down” alarm; core-rtr-07 has a major “Power Supply Failure” alarm. User preference: from now on, only show critical items. No pending questions. (Result of L8Query for offline devices in {{city:1}}: core-rtr-03, core-rtr-07).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 333,
+            "completion_tokens": 390
+          },
+          "chars": 1595
+        }
+      ]
+    }
+  ]
+}

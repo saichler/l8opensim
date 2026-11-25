@@ -1,0 +1,105 @@
+{
+  "id": "record_crud/delete-one/v0/s2",
+  "flavor": "record_crud",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:19:17Z",
+  "params": {
+    "n": [
+      "003",
+      "007"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Delete alarm alm-003.",
+      "steps": [
+        {
+          "reasoning": "We need to delete a record. The user wants to delete alarm with id alm-{{p:n}}. Must confirm explicit user confirmation. The user explicitly said \"Delete alarm alm-{{p:n}}.\" That is a direct instruction, considered explicit confirmation? According to rules: \"Never delete records without the user's explicit confirmation in this conversation.\" The user gave instruction to delete, that is explicit. So we can proceed.\n\nWe need to know primary key field name for Alarm model. Let's describe model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "Alarm"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"alarmId\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"description\",\"type\":\"string\"},{\"path\":\"state\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"nodeId\",\"type\":\"string\"},{\"path\":\"nodeName\",\"type\":\"string\"},{\"path\":\"location\",\"type\":\"string\"},{\"path\":\"firstOccurrence\",\"type\":\"int\"},{\"path\":\"lastOccurrence\",\"type\":\"int\"},{\"path\":\"occurrenceCount\",\"type\":\"int\"},{\"path\":\"isRootCause\",\"type\":\"bool\"},{\"path\":\"acknowledgedBy\",\"type\":\"string\"}],\"model\":\"Alarm\",\"primaryKey\":\"alarmId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1793,
+            "completion_tokens": 123
+          },
+          "chars": 519
+        },
+        {
+          "reasoning": "User wants to delete alarm alm-{{p:n}}. According to rules, cannot delete without explicit confirmation. We need to ask user to confirm deletion.",
+          "text": "I can delete the alarm with ID `alm-{{p:n}}`, but I’ll only do that after you confirm you really want it removed. Please let me know if you’d like me to proceed.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1983,
+            "completion_tokens": 78
+          },
+          "chars": 304
+        }
+      ]
+    },
+    {
+      "user_message": "Yes, delete it.",
+      "steps": [
+        {
+          "reasoning": "We need to delete record from Alarm model where primary key equals alm-{{p:n}}. Use delete_record tool. Need to provide query selecting that record. Probably \"select * from Alarm where id='alm-{{p:n}}'\". Need confirm primary key field name. Let's describe model Alarm first.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "Alarm"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"alarmId\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"description\",\"type\":\"string\"},{\"path\":\"state\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"nodeId\",\"type\":\"string\"},{\"path\":\"nodeName\",\"type\":\"string\"},{\"path\":\"location\",\"type\":\"string\"},{\"path\":\"firstOccurrence\",\"type\":\"int\"},{\"path\":\"lastOccurrence\",\"type\":\"int\"},{\"path\":\"occurrenceCount\",\"type\":\"int\"},{\"path\":\"isRootCause\",\"type\":\"bool\"},{\"path\":\"acknowledgedBy\",\"type\":\"string\"}],\"model\":\"Alarm\",\"primaryKey\":\"alarmId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1848,
+            "completion_tokens": 84
+          },
+          "chars": 297
+        },
+        {
+          "reasoning": "Now need to delete the record. Use delete_record with query selecting alarmId='alm-{{p:n}}'.",
+          "tool_calls": [
+            {
+              "name": "delete_record",
+              "arguments": {
+                "model": "Alarm",
+                "query": "select * from Alarm where alarmId='alm-{{p:n}}'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"deleted\":1,\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2038,
+            "completion_tokens": 65
+          },
+          "chars": 172
+        },
+        {
+          "text": "The alarm **alm-{{p:n}}** has been deleted.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2096,
+            "completion_tokens": 15
+          },
+          "chars": 39
+        }
+      ]
+    }
+  ]
+}

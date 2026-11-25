@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-09/v0/s0",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:18:08Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user is comparing Kubernetes versions across clusters.\n\nNext part of the conversation:\nUser: Which version does each cluster run?\n\nAssistant: prod-east v1.30.4, prod-west v1.29.6, staging v1.31.1.\n\nUser: Which nodes in prod-west are not ready?\n\nAssistant: worker-06 and worker-12 are not ready.\n\nUser: I'll upgrade prod-west next week, only nodes that are ready first.\n\nAssistant: Noted: upgrade prod-west next week, ready nodes first.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary incorporating facts, decisions, entities and IDs, preferences, constraints, open questions, and any L8Query that produced a result the user cares about.\n\nCurrent summary: \"The user is comparing Kubernetes versions across clusters.\"\n\nNow new content: user asked which version each cluster runs. Assistant gave list: prod-east v1.30.4, prod-west v1.29.6, staging v1.31.1. That's a fact.\n\nUser asked which nodes in prod-west are not ready. Assistant: worker-06 and worker-12 are not ready. That's a fact.\n\nUser says: \"I'll upgrade prod-west next week, only nodes that are ready first.\" Assistant: noted.\n\nSo summary should include: Kubernetes versions per cluster, not-ready nodes in prod-west, upgrade plan for prod-west next week, upgrade only ready nodes first.\n\nAlso any open questions? None. No further queries.\n\nWe keep placeholder tokens unchanged, none present.\n\nWe need to keep at most ~{{int:1200:1800}} tokens, plain text.\n\nThus new summary:\n\n- User comparing Kubernetes versions across clusters.\n- Versions: prod-east v1.30.4; prod-west v1.29.6; staging v1.31.1.\n- In prod-west, nodes worker-06 and worker-12 are not ready.\n- User plans to upgrade prod-west next week, upgrading only the ready nodes first.\n\nThat covers everything.",
+          "text": "User is comparing Kubernetes versions across clusters. Current versions: prod-east runs v1.30.4, prod-west runs v1.29.6, staging runs v1.31.1. In prod-west, nodes worker-06 and worker-12 are not ready. User plans to upgrade prod‑west next week, upgrading only the ready nodes first.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 331,
+            "completion_tokens": 372
+          },
+          "chars": 1542
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "writing/email-followup/v0/s0",
+  "flavor": "writing",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:56:56Z",
+  "turns": [
+    {
+      "user_message": "Write an email asking the vendor for a quote for 4 new switches.",
+      "steps": [
+        {
+          "reasoning": "The user wants an email requesting a quote for 4 new switches. We need to write an email. No data needed. Just produce a textual email. We can just output the email content. No need to use tools.",
+          "text": "Subject: Request for Quote – 4 New Network Switches  \n\nDear [Vendor Name] Team,\n\nI hope you’re doing well. We are planning to upgrade our network infrastructure and would like to request a formal quote for the following items:\n\n| Quantity | Item Description | Desired Model/Series (if any) | Required Delivery Date |\n|----------|------------------|------------------------------|------------------------|\n| 4        | Network Switch   | – (please advise on the best option for a 1 Gbps/10 Gbps uplink environment with at least {{int:19:29}} × 10/100/1000 Mbps ports) | [Insert Desired Date] |\n\nCould you please provide the following details in your quotation:\n\n1. Unit price and total cost (including taxes and any applicable fees)  \n2. Warranty terms and support options  \n3. Lead time for delivery and installation (if offered)  \n4. Shipping costs to our facility (address below)  \n5. Any volume discounts or promotional pricing available  \n\n**Delivery Address:**  \n[Your Company Name]  \n[Street Address]  \n[City, State, ZIP]  \n[Country]\n\nIf you need any additional information to prepare the quote, please let me know. We are aiming to finalize the purchase within the next two weeks, so a timely response would be greatly appreciated.\n\nThank you for your assistance. I look forward to receiving your proposal.\n\nBest regards,\n\n[Your Full Name]  \n[Your Job Title]  \n[Your Company Name]  \n[Phone Number]  \n[Email Address]  ",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1802,
+            "completion_tokens": 371
+          },
+          "chars": 1625
+        }
+      ]
+    },
+    {
+      "user_message": "Make it shorter and more formal.",
+      "steps": [
+        {
+          "reasoning": "We need to produce a shorter, more formal email. Just write the email. No tool usage.",
+          "text": "Subject: Request for Quotation – Four Network Switches  \n\nDear [Vendor Name] Team,\n\nWe are seeking a quotation for four (4) network switches suitable for a 1 Gbps/10 Gbps uplink environment with a minimum of {{int:19:29}} × 10/100/1000 Mbps ports.\n\nPlease include in your quotation:\n\n1. Unit and total pricing (including taxes, fees, and shipping)  \n2. Warranty and support terms  \n3. Lead time for delivery to the address below  \n4. Any applicable volume discounts  \n\nDelivery Address:  \n[Your Company Name]  \n[Street Address]  \n[City, State, ZIP]  \n[Country]\n\nKindly provide the requested information at your earliest convenience, as we intend to finalize the purchase within two weeks.\n\nThank you for your prompt attention.\n\nSincerely,\n\n[Your Full Name]  \n[Your Title]  \n[Your Company]  \n[Phone] | [Email]",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2135,
+            "completion_tokens": 224
+          },
+          "chars": 895
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-07/v0/s0",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:17:47Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user prefers answers as tables.\n\nNext part of the conversation:\nUser: How many alarms per site?\n\nAssistant: | Site | Alarms |\n|---|---|\n| Austin | 7 |\n| Dallas | 5 |\n| Seattle | 4 |\n\nUser: Which alarm is the most frequent?\n\nAssistant: 'Link Flapping' with 42 occurrences.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary that replaces current one. Keep facts: user prefers answers as tables. Then we have answered a question: number of alarms per site: data for {{city:1}} 7, {{city:2}} 5, {{city:3}} 4. Then user asked most frequent alarm: 'Link Flapping' with {{int:33:51}} occurrences. So summary should include these facts and possibly note the answer. Also any open questions? None. No constraints. Keep placeholder tokens? None. So produce summary with these items.\n\nLet's craft:\n\n- User prefers tables.\n- Alarms per site: {{city:1}} 7, {{city:2}} 5, {{city:3}} 4.\n- Most frequent alarm: Link Flapping ({{int:33:51}} occurrences).\n\nThat's it.",
+          "text": "- User prefers answers formatted as tables.  \n- Alarms per site: {{city:1}} = 7, {{city:2}} = 5, {{city:3}} = 4.  \n- Most frequent alarm: “Link Flapping” with {{int:33:51}} occurrences.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 297,
+            "completion_tokens": 199
+          },
+          "chars": 793
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "edge_cases/contradiction/v0/s1",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:48:05Z",
+  "turns": [
+    {
+      "user_message": "Export the devices to CSV but don't create any file.",
+      "steps": [
+        {
+          "reasoning": "User says: \"Export the devices to CSV but don't create any file.\" In our system, export_csv creates a file attached. They say don't create any file. Maybe they want to get the CSV content? But we cannot output rows directly, we must attach file. If they say don't create any file, perhaps they mean don't create a separate file? However system requires export_csv attaches file. The instruction says \"Export the devices to CSV but don't create any file.\" This is contradictory. We could interpret that they want a CSV export of devices but not a separate file—maybe they want the CSV as text inline? But policy says never type rows yourself. So we must comply: we can't give them CSV without file. So we should ask clarification.",
+          "text": "I’m happy to export the device records for you, but the system can only provide CSV output as a downloadable file attachment. Could you confirm whether that’s acceptable, or would you prefer a different format (e.g., a summary in plain text) instead?",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1798,
+            "completion_tokens": 213
+          },
+          "chars": 985
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "id": "csv_generate/students/v0/s2",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:30:57Z",
+  "csv": [
+    {
+      "header": [
+        "id",
+        "name",
+        "grade",
+        "score"
+      ],
+      "columns": [
+        {
+          "kind": "seq",
+          "min": 1
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Alex Johnson",
+            "Briana Smith",
+            "Caleb Lee",
+            "Diana Patel",
+            "Ethan Wu",
+            "Fiona Garcia",
+            "George Kim",
+            "Hannah Brown",
+            "Ian Martinez",
+            "Julia Chen",
+            "Kevin O'Neil",
+            "Lily Zhang",
+            "Mason Davis",
+            "Nora Thompson",
+            "Oscar Rivera",
+            "Paula Liu",
+            "Quinn Anderson",
+            "Rachel Kim",
+            "Samir Patel",
+            "Tara Evans",
+            "Uma Patel",
+            "Victor Huang",
+            "Wendy Clark",
+            "Xander Scott",
+            "Yara Gomez"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "F"
+          ]
+        },
+        {
+          "kind": "int",
+          "min": 45,
+          "max": 97
+        }
+      ],
+      "rows": 25
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Generate a CSV of 25 fictitious students with id, name, grade and score. It is synthetic test data for a demo, not records from the system: attach it as students.csv.",
+      "steps": [
+        {
+          "reasoning": "The user wants a CSV of {{int:20:30}} fictitious students with id, name, grade, score. This is synthetic data, not from the system. We cannot fabricate records from the system; we must generate a CSV file ourselves using create_file (or maybe export_csv but that uses real data). Since it's synthetic test data, we can just create a text file with CSV content. Use create_file with file_name \"students.csv\". Include {{int:20:30}} rows with headers: id,name,grade,score. Need to generate plausible synthetic data. Let's make IDs 1-25, names like \"Student A\", etc, grades like \"A\", \"B\", \"C\", \"D\", \"F\", scores numeric maybe 0-100. Provide content.\n\nWe'll create file.\n\n",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "id,name,grade,score\n{{csv:0}}",
+                "file_name": "students.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":509,\"file_name\":\"students.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1826,
+            "completion_tokens": 403
+          },
+          "chars": 1230
+        },
+        {
+          "reasoning": "The user asked to generate CSV of fictitious students, not from system. That's acceptable to just create file, which we did. Now respond with brief description.",
+          "text": "Attached **students.csv** containing {{int:20:30}} synthetic student records with columns id, name, grade, score.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2093,
+            "completion_tokens": 67
+          },
+          "chars": 270
+        }
+      ]
+    }
+  ]
+}

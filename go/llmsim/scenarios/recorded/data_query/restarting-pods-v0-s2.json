@@ -1,0 +1,64 @@
+{
+  "id": "data_query/restarting-pods/v0/s2",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:41:26Z",
+  "turns": [
+    {
+      "user_message": "Which pods restarted more than 10 times?",
+      "steps": [
+        {
+          "reasoning": "We need to query K8SPod records where restartCount \u003e {{int:8:12}}. Need to know field names. Let's describe_model K8SPod.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SPod"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"key\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"namespace\",\"type\":\"string\"},{\"path\":\"ready.count\",\"type\":\"int\"},{\"path\":\"ready.outof\",\"type\":\"int\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"restarts.count\",\"type\":\"int\"},{\"path\":\"restarts.ago\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"ip\",\"type\":\"string\"},{\"path\":\"node\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SPod\",\"primaryKey\":\"key\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1796,
+            "completion_tokens": 61
+          },
+          "chars": 143
+        },
+        {
+          "reasoning": "We need pods with restarts.count \u003e {{int:8:12}}. Use select * from K8SPod where restarts.count\u003e{{int:8:12}}. No limit needed? We can limit {{int:80:120}}. Then export CSV to give list. Provide file.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "pods_restarted_over_10.csv",
+                "query": "select * from K8SPod where restarts.count\u003e10 limit 100"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"key\",\"name\",\"namespace\",\"ready.count\",\"ready.outof\",\"status\",\"restarts.count\",\"restarts.ago\",\"age\",\"ip\",\"node\",\"clusterName\"],\"file_name\":\"pods_restarted_over_10.csv\",\"rows\":31}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1978,
+            "completion_tokens": 103
+          },
+          "chars": 289
+        },
+        {
+          "text": "I’ve exported the list of pods that have restarted more than {{int:8:12}} times.\n\n**Attached:** `pods_restarted_over_10.csv` ({{int:24:38}} pods) – includes the pod key, name, namespace, ready counts, status, restart count, time since last restart, age, IP, node, and cluster name.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2097,
+            "completion_tokens": 70
+          },
+          "chars": 268
+        }
+      ]
+    }
+  ]
+}

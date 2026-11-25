@@ -1,0 +1,156 @@
+{
+  "id": "csv_generate/products/v0/s0",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:27:17Z",
+  "csv": [
+    {
+      "header": [
+        "sku",
+        "name",
+        "category",
+        "price",
+        "stock"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "P001",
+            "P002",
+            "P003",
+            "P004",
+            "P005",
+            "P006",
+            "P007",
+            "P008",
+            "P009",
+            "P010",
+            "P011",
+            "P012",
+            "P013",
+            "P014",
+            "P015",
+            "P016",
+            "P017",
+            "P018",
+            "P019",
+            "P020",
+            "P021",
+            "P022",
+            "P023",
+            "P024",
+            "P025",
+            "P026",
+            "P027",
+            "P028",
+            "P029",
+            "P030"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Widget Alpha",
+            "Widget Beta",
+            "Gadget Gamma",
+            "Gadget Delta",
+            "Tool Epsilon",
+            "Tool Zeta",
+            "Device Eta",
+            "Device Theta",
+            "Accessory Iota",
+            "Accessory Kappa",
+            "Component Lambda",
+            "Component Mu",
+            "Part Nu",
+            "Part Xi",
+            "Module Omicron",
+            "Module Pi",
+            "Instrument Rho",
+            "Instrument Sigma",
+            "Apparatus Tau",
+            "Apparatus Upsilon",
+            "Gizmo Phi",
+            "Gizmo Chi",
+            "Contraption Psi",
+            "Contraption Omega",
+            "Device Alpha2",
+            "Tool Beta2",
+            "Gadget Gamma2",
+            "Widget Delta2",
+            "Accessory Epsilon2",
+            "Component Zeta2"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Category A",
+            "Category B",
+            "Category C",
+            "Category D",
+            "Category E",
+            "Category F",
+            "Category G",
+            "Category H",
+            "Category I",
+            "Category J",
+            "Category K",
+            "Category L"
+          ]
+        },
+        {
+          "kind": "float",
+          "min": 3.99,
+          "max": 58.75,
+          "decimals": 2
+        },
+        {
+          "kind": "int",
+          "min": 25,
+          "max": 800
+        }
+      ],
+      "rows": 30
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Create a sample CSV of 30 products with sku, name, category, price and stock. It is synthetic test data for a demo, not records from the system: attach it as products.csv.",
+      "steps": [
+        {
+          "reasoning": "The user wants a synthetic CSV file of {{int:24:36}} products with fields: sku, name, category, price, stock. This is not data from the system, so we need to generate synthetic data ourselves. We cannot use export_csv because that pulls from system models, not synthetic. We need to create a text file manually with CSV content and attach via create_file. So we must generate {{int:24:36}} rows. Use simple synthetic data: SKUs like P001, P002..., names like \"Product 1\", categories like \"Category A\", price maybe numeric with two decimals, stock integer.\n\nWe should create file \"products.csv\". Provide content as CSV with header line: sku,name,category,price,stock\n\nThen {{int:24:36}} rows.\n\nWe'll then call create_file with that content.\n\n",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "sku,name,category,price,stock\n{{csv:0}}",
+                "file_name": "products.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1194,\"file_name\":\"products.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1827,
+            "completion_tokens": 672
+          },
+          "chars": 1984
+        },
+        {
+          "text": "Attached **products.csv** containing {{int:24:36}} synthetic product records with columns: sku, name, category, price, and stock.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2362,
+            "completion_tokens": 29
+          },
+          "chars": 118
+        }
+      ]
+    }
+  ]
+}

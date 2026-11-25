@@ -1,0 +1,131 @@
+{
+  "id": "csv_generate/orders-file/v0/s1",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:30:11Z",
+  "csv": [
+    {
+      "header": [
+        "order_id",
+        "customer_name",
+        "order_date",
+        "total_amount",
+        "currency",
+        "status"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "ORD001",
+            "ORD002",
+            "ORD003",
+            "ORD004",
+            "ORD005",
+            "ORD006",
+            "ORD007",
+            "ORD008",
+            "ORD009",
+            "ORD010",
+            "ORD011",
+            "ORD012",
+            "ORD013",
+            "ORD014",
+            "ORD015",
+            "ORD016",
+            "ORD017",
+            "ORD018",
+            "ORD019",
+            "ORD020",
+            "ORD021",
+            "ORD022",
+            "ORD023",
+            "ORD024",
+            "ORD025",
+            "ORD026",
+            "ORD027",
+            "ORD028",
+            "ORD029",
+            "ORD030"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Acme Corp",
+            "Globex Inc",
+            "Initech",
+            "Stark Industries",
+            "Wayne Enterprises",
+            "Oscorp",
+            "Wonka Industries",
+            "Gringotts",
+            "Oscillosoft"
+          ]
+        },
+        {
+          "kind": "date"
+        },
+        {
+          "kind": "int",
+          "min": 2900,
+          "max": 24500
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "USD"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Completed",
+            "Pending",
+            "Shipped",
+            "Cancelled"
+          ]
+        }
+      ],
+      "rows": 30
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Generate a CSV file of 30 fictitious orders. It is synthetic test data for a demo, not records from the system: attach it as orders.csv.",
+      "steps": [
+        {
+          "reasoning": "The user wants a CSV file of {{int:24:36}} fictitious orders. This is synthetic test data, not from the system. We cannot fabricate data using system queries; we must generate synthetic data ourselves. We should use create_file to write the CSV content ourselves, not export_csv (since export_csv exports real records). The instruction: \"Generate a CSV file of {{int:24:36}} fictitious orders. It is synthetic test data for a demo, not records from the system: attach it as orders.csv.\" So we need to produce a CSV file with {{int:24:36}} rows, with appropriate columns for orders. We need to decide fields: maybe orderId, customerName, orderDate, totalAmount, currency, status. Since it's synthetic, we can just create them. We'll create a CSV with header and {{int:24:36}} rows. Use create_file.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "order_id,customer_name,order_date,total_amount,currency,status\n{{csv:0}}",
+                "file_name": "orders.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1525,\"file_name\":\"orders.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1819,
+            "completion_tokens": 847
+          },
+          "chars": 2358
+        },
+        {
+          "text": "Attached `orders.csv` containing {{int:24:36}} synthetic order records for your demo.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2521,
+            "completion_tokens": 19
+          },
+          "chars": 74
+        }
+      ]
+    }
+  ]
+}

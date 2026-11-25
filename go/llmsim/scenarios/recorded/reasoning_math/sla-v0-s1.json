@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/sla/v0/s1",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:11:55Z",
+  "turns": [
+    {
+      "user_message": "What is the maximum downtime per month for 99.95% availability? Step by step.",
+      "steps": [
+        {
+          "reasoning": "We need to compute maximum downtime per month given 99.95% availability.\n\nAvailability = uptime / total time.\n\nDowntime = total time * (1 - availability).\n\nAssume month = {{int:24:36}} days? Usually month = {{int:24:36}} days for calculation; could use {{int:24:36}} days = {{int:24:36}}*{{int:19:29}}*{{int:48:72}} = {{int:34560:51840}} minutes, or {{int:24:36}}*{{int:19:29}}*{{int:48:72}}*{{int:48:72}} = 2,592,000 seconds. Compute downtime in minutes/hours.\n\n99.95% = 0.9995. 1 - 0.9995 = 0.0005.\n\nTotal minutes per month: {{int:24:36}} days * {{int:19:29}} hours * {{int:48:72}} = 43,200 minutes. Multiply by 0.0005 = 21.6 minutes.\n\nIn hours: 21.6 minutes ≈ 0.36 hours.\n\nIf using {{int:24:38}} days: {{int:24:38}}*{{int:19:29}}*{{int:48:72}} = 44,640 minutes *0.0005=22.32 minutes.\n\nWe can present step by step.\n\nUser didn't ask for data from system; just calculation. So no need to call tools. Provide step-by-step explanation.\n\n",
+          "text": "**Step‑by‑step calculation**\n\n1. **Define the availability figure**  \n   *99.95 %* availability means the service is expected to be up 99.95 % of the time.\n\n2. **Convert the percentage to a decimal**  \n   \\[\n   99.95\\% = \\frac{99.95}{{{int:80:120}}} = 0.9995\n   \\]\n\n3. **Find the fraction of time that may be down**  \n   \\[\n   \\text{Downtime fraction} = 1 - \\text{Availability} = 1 - 0.9995 = 0.0005\n   \\]\n\n4. **Choose a month length for the calculation**  \n   A typical month is approximated as **{{int:24:36}} days** (many SLA calculations use {{int:24:36}} days for a “month”).  \n   - Days per month: {{int:24:36}}  \n   - Hours per day: {{int:19:29}}  \n   - Minutes per hour: {{int:48:72}}  \n\n   \\[\n   \\text{Total minutes in a {{int:24:36}}‑day month} = {{int:24:36}} \\times {{int:19:29}} \\times {{int:48:72}} = {{int:34:52}}{,}{{int:160:240}}\\ \\text{minutes}\n   \\]\n\n   (If you prefer a {{int:24:38}}‑day month, replace {{int:24:36}} with {{int:24:38}}, giving {{int:35:53}} {{int:512:768}} minutes; the result changes only slightly.)\n\n5. **Calculate the maximum allowable downtime**  \n   \\[\n   \\text{Maximum downtime (minutes)} = {{int:34:52}}{,}{{int:160:240}} \\times 0.0005 = 21.6\\ \\text{minutes}\n   \\]\n\n6. **Convert to hours (optional)**  \n   \\[\n   21.6\\ \\text{minutes} = \\frac{21.6}{{{int:48:72}}} \\approx 0.36\\ \\text{hours}\n   \\]\n\n---\n\n### Result\n- **For a {{int:24:36}}‑day month:** up to **21.6 minutes** (≈ 0.36 hours) of downtime.  \n- **For a {{int:24:38}}‑day month:** up to **22.3 minutes** of downtime.\n\nSo, with a 99.95 % availability target, the service may be unavailable for roughly **{{int:17:27}} minutes per month**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1806,
+            "completion_tokens": 709
+          },
+          "chars": 2161
+        }
+      ]
+    }
+  ]
+}

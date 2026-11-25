@@ -1,0 +1,24 @@
+{
+  "id": "qa_chat/dns/v0/s2",
+  "flavor": "qa_chat",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:04:04Z",
+  "turns": [
+    {
+      "user_message": "Why does DNS use both UDP and TCP?",
+      "steps": [
+        {
+          "reasoning": "The user asks a conceptual question about DNS using both UDP and TCP. This is not about data queries. So we can answer directly without using tools. Provide explanation.",
+          "text": "DNS (Domain Name System) was designed to be fast, lightweight, and reliable for the typical query‑response pattern of resolving hostnames. To achieve that, it uses **both UDP and TCP**, each for different purposes:\n\n| Protocol | Why DNS uses it | Typical usage in DNS |\n|----------|----------------|----------------------|\n| **UDP** (User Datagram Protocol) | • Connection‑less → no handshake, so a single round‑trip is enough.\u003cbr\u003e• Small header (8 bytes) and low overhead, making the query/response fast.\u003cbr\u003e• Works well for the vast majority of look‑ups, which fit in a single packet (≤ {{int:409:615}} bytes in the original spec, larger with EDNS‑0). | • Standard queries and responses for most record types (A, AAAA, CNAME, MX, etc.).\u003cbr\u003e• Recursive resolvers send a UDP query to an authoritative server and expect a single UDP reply. |\n| **TCP** (Transmission Control Protocol) | • Reliable, ordered delivery with flow control.\u003cbr\u003e• Supports larger messages (beyond the UDP size limit) without fragmentation.\u003cbr\u003e• Provides a built‑in mechanism for retransmission and acknowledgment. | • **Zone transfers** (AXFR/IXFR) where a full or incremental copy of a zone must be sent – these can be many kilobytes or megabytes.\u003cbr\u003e• **Responses that exceed the UDP size limit** (e.g., DNSSEC‑signed records, many TXT or DNSKEY records). The server sets the TC (truncated) flag, prompting the client to retry over TCP.\u003cbr\u003e• **DNS over TLS (DoT) or DNS over HTTPS (DoH)**, which are built on top of TCP (or QUIC) for privacy and integrity. |\n\n### How the fallback works\n1. **Client sends a UDP query.**  \n2. If the answer fits (≤ {{int:409:615}} bytes or the EDNS0 advertised limit), the server replies over UDP.  \n3. If the answer is larger, the server sets the **TC (truncated)** flag in the UDP response.  \n4. The client then **re‑issues the same query over TCP**, where the full answer can be transmitted.\n\n### Summary\n- **UDP** gives DNS its speed and low overhead for the common case of small queries.  \n- **TCP** is used when reliability, larger payloads, or stateful operations (like zone transfers) are required.  \n\nTogether they let DNS stay both efficient and robust.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1796,
+            "completion_tokens": 566
+          },
+          "chars": 2372
+        }
+      ]
+    }
+  ]
+}

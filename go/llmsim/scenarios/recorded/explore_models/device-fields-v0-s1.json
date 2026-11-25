@@ -1,0 +1,44 @@
+{
+  "id": "explore_models/device-fields/v0/s1",
+  "flavor": "explore_models",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T22:25:50Z",
+  "turns": [
+    {
+      "user_message": "Describe the network device model for me.",
+      "steps": [
+        {
+          "reasoning": "Describe the network device model for me.\n\nWe need to describe model NetworkDevice. Use describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2432,
+            "completion_tokens": 71
+          },
+          "chars": 142
+        },
+        {
+          "reasoning": "Describe the network device model for me.\n\nWe need to describe the model. Use describe_model output. Provide summary of fields.\n\nPossibly list fields.\n\nNo further query needed. Just describe.\n\nWe should give human readable description.\n\nPotentially also list modules? The user asked describe network device model. Provide fields.\n\nMake sure comply with rules. No fabrication.\n\nProvide description.\n\n",
+          "text": "The **NetworkDevice** model stores the physical inventory and runtime info for network devices.\n\n**Primary key**\n- `id` (string)\n\n**Fields (all under `equipmentinfo`)**\n- `equipmentinfo.vendor` (string) – device vendor\n- `equipmentinfo.model` (string) – hardware model\n- `equipmentinfo.series` (string) – product series\n- `equipmentinfo.sysName` (string) – system name\n- `equipmentinfo.ipAddress` (string) – management IP address\n- `equipmentinfo.serialNumber` (string) – serial number\n- `equipmentinfo.version` (string) – version\n- `equipmentinfo.firmwareVersion` (string) – firmware version\n- `equipmentinfo.location` (string) – physical location\n- `equipmentinfo.deviceType` (string) – type of device e.g. switch, router\n- `equipmentinfo.deviceStatus` (string) – operational status\n- `equipmentinfo.uptime` (string) – uptime\n- `equipmentinfo.lastSeen` (string) – last seen timestamp\n- `equipmentinfo.interfaceCount` (int) – number of interfaces\n\nYou can query it with L8Query, e.g. `select * from NetworkDevice limit {{int:8:12}}`, and export with `export_csv`.\n",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2668,
+            "completion_tokens": 352
+          },
+          "chars": 1482
+        }
+      ]
+    }
+  ]
+}

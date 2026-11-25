@@ -1,0 +1,24 @@
+{
+  "id": "csv_analyze/uptime/v0/s1",
+  "flavor": "csv_analyze",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:21:40Z",
+  "turns": [
+    {
+      "user_message": "Which services had the worst availability in this CSV?\n```csv\nservice,uptime_pct,incidents\napi,99.95,1\ndb,99.2,4\ncache,99.99,0\nqueue,98.7,6\nweb,99.9,2\n```",
+      "steps": [
+        {
+          "reasoning": "The user provided a CSV with service, uptime_pct, incidents. They ask: \"Which services had the worst availability in this CSV?\" They likely want to identify the services with lowest uptime_pct (worst availability). We have the data in the message. We can compute. No need to query system; just read CSV.\n\nServices and uptime:\n\napi 99.95\ndb 99.2\ncache 99.99\nqueue 98.7\nweb 99.9\n\nWorst availability: lowest uptime_pct = queue (98.7). Next worst maybe db (99.2). So answer: queue is worst, then db.\n\nUser didn't ask to export anything, just answer. So we can respond with explanation.\n\n",
+          "text": "The service with the lowest availability (i.e., the worst uptime) in the provided data is **`queue`**, which has an uptime of **98.7 %**.  \n\nThe next‑lowest uptime is for **`db`** at **99.2 %**. All other services have higher availability:\n\n- **cache** – 99.99 %\n- **web** – 99.9 %\n- **api** – 99.95 %\n\nSo, the worst‑available service is **queue**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1850,
+            "completion_tokens": 269
+          },
+          "chars": 951
+        }
+      ]
+    }
+  ]
+}

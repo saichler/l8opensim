@@ -1,0 +1,44 @@
+{
+  "id": "explore_models/pod-fields/v0/s0",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:51:42Z",
+  "turns": [
+    {
+      "user_message": "Which fields can I filter pods by?",
+      "steps": [
+        {
+          "reasoning": "We need to list fields of K8SPod model. Use describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SPod"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"key\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"namespace\",\"type\":\"string\"},{\"path\":\"ready.count\",\"type\":\"int\"},{\"path\":\"ready.outof\",\"type\":\"int\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"restarts.count\",\"type\":\"int\"},{\"path\":\"restarts.ago\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"ip\",\"type\":\"string\"},{\"path\":\"node\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SPod\",\"primaryKey\":\"key\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 47
+          },
+          "chars": 91
+        },
+        {
+          "reasoning": "We need to answer which fields can be filtered pods by. Provide list of filterable fields: basically all fields can be used in where clause. So list field paths: key, name, namespace, ready.count, ready.outof, status, restarts.count, restarts.ago, age, ip, node, clusterName.\n\nProvide answer.",
+          "text": "You can filter K8S pods on any of the fields defined for the **K8SPod** model. The available field paths are:\n\n- **key**\n- **name**\n- **namespace**\n- **ready.count**\n- **ready.outof**\n- **status**\n- **restarts.count**\n- **restarts.ago**\n- **age**\n- **ip**\n- **node**\n- **clusterName**\n\nThese are the fields you can reference in a `where` clause when querying pods.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1977,
+            "completion_tokens": 185
+          },
+          "chars": 660
+        }
+      ]
+    }
+  ]
+}

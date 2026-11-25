@@ -1,0 +1,71 @@
+{
+  "id": "data_query/device-detail/v0/s1",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:40:02Z",
+  "params": {
+    "n": [
+      "01",
+      "05",
+      "12"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Show me the details of device core-rtr-01.",
+      "steps": [
+        {
+          "reasoning": "We need to get details of a device with identifier core-rtr-01. Likely it's a NetworkDevice. We need to query NetworkDevice where deviceInfo.hostname = \"core-rtr-01\"? Need to check field names. Use describe_model for NetworkDevice.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1799,
+            "completion_tokens": 83
+          },
+          "chars": 270
+        },
+        {
+          "reasoning": "We need to show details of device core-rtr-01. Likely a NetworkDevice record where equipmentinfo.sysName = core-rtr-01 (maybe sysName). Need to query NetworkDevice with filter. Use select * from NetworkDevice where equipmentinfo.sysName='core-rtr-01' limit 1 (or no limit). Since we need details, we can export CSV with all fields, but user wants details, can attach CSV. We'll do export_csv query.\n\nWe need to ensure we use correct field path: equipmentinfo.sysName. Use where equipmentinfo.sysName=core-rtr-01 (maybe quoting needed?). Probably string literal without quotes? In examples they used D001 without quotes. So use without quotes.\n\nLet's run export_csv.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "core_rtr_01_details.csv",
+                "query": "select * from NetworkDevice where equipmentinfo.sysName=core-rtr-01"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"id\",\"equipmentinfo.vendor\",\"equipmentinfo.model\",\"equipmentinfo.series\",\"equipmentinfo.sysName\",\"equipmentinfo.ipAddress\",\"equipmentinfo.serialNumber\",\"equipmentinfo.version\",\"equipmentinfo.firmwareVersion\",\"equipmentinfo.location\",\"equipmentinfo.deviceType\",\"equipmentinfo.deviceStatus\",\"equipmentinfo.uptime\",\"equipmentinfo.lastSeen\",\"equipmentinfo.interfaceCount\"],\"file_name\":\"core_rtr_01_details.csv\",\"rows\":1}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2036,
+            "completion_tokens": 211
+          },
+          "chars": 792
+        },
+        {
+          "text": "Attached is **core_rtr_01_details.csv** containing the full record for the device with system name `core-rtr-01`.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2190,
+            "completion_tokens": 32
+          },
+          "chars": 113
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "id": "csv_generate/products/v0/s2",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:27:28Z",
+  "csv": [
+    {
+      "header": [
+        "sku",
+        "name",
+        "category",
+        "price",
+        "stock"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "SKU001",
+            "SKU002",
+            "SKU003",
+            "SKU004",
+            "SKU005",
+            "SKU006",
+            "SKU007",
+            "SKU008",
+            "SKU009",
+            "SKU010",
+            "SKU011",
+            "SKU012",
+            "SKU013",
+            "SKU014",
+            "SKU015",
+            "SKU016",
+            "SKU017",
+            "SKU018",
+            "SKU019",
+            "SKU020",
+            "SKU021",
+            "SKU022",
+            "SKU023",
+            "SKU024",
+            "SKU025",
+            "SKU026",
+            "SKU027",
+            "SKU028",
+            "SKU029",
+            "SKU030"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Alpha Widget",
+            "Beta Gadget",
+            "Gamma Gizmo",
+            "Delta Widget",
+            "Epsilon Gadget",
+            "Zeta Gizmo",
+            "Theta Widget",
+            "Iota Gadget",
+            "Kappa Gizmo",
+            "Lambda Widget",
+            "Mu Gadget",
+            "Nu Gizmo",
+            "Xi Widget",
+            "Omicron Gadget",
+            "Pi Gizmo",
+            "Rho Widget",
+            "Sigma Gadget",
+            "Tau Gizmo",
+            "Upsilon Widget",
+            "Phi Gadget",
+            "Chi Gizmo",
+            "Psi Widget",
+            "Omega Gadget",
+            "AlphaPlus Gizmo",
+            "BetaPlus Widget",
+            "GammaPlus Gadget",
+            "DeltaPlus Gizmo",
+            "EpsilonPlus Widget",
+            "ZetaPlus Gadget",
+            "ThetaPlus Gizmo"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Widgets",
+            "Gadgets",
+            "Gizmos"
+          ]
+        },
+        {
+          "kind": "float",
+          "min": 9.99,
+          "max": 35.75,
+          "decimals": 2
+        },
+        {
+          "kind": "int",
+          "min": 55,
+          "max": 300
+        }
+      ],
+      "rows": 30
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Create a sample CSV of 30 products with sku, name, category, price and stock. It is synthetic test data for a demo, not records from the system: attach it as products.csv.",
+      "steps": [
+        {
+          "reasoning": "The user wants to create a synthetic CSV file with {{int:24:36}} products, fields: sku, name, category, price, stock. This is not from the system; we need to generate synthetic data ourselves. Use create_file to create a CSV file named products.csv with {{int:24:36}} rows. Provide a brief description. Should we include header row? Yes typical CSV includes header. We'll generate some sample data. Ensure proper formatting. Provide content string. Then attach file.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "sku,name,category,price,stock\n{{csv:0}}",
+                "file_name": "products.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1147,\"file_name\":\"products.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1827,
+            "completion_tokens": 594
+          },
+          "chars": 1673
+        },
+        {
+          "text": "Here is the synthetic sample CSV with {{int:24:36}} product records for your demo. The file is attached as **products.csv**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2349,
+            "completion_tokens": 29
+          },
+          "chars": 113
+        }
+      ]
+    }
+  ]
+}

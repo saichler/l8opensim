@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/sla/v0/s2",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:12:11Z",
+  "turns": [
+    {
+      "user_message": "What is the maximum downtime per month for 99.95% availability? Step by step.",
+      "steps": [
+        {
+          "reasoning": "User asks: \"What is the maximum downtime per month for 99.95% availability? Step by step.\"\n\nThis is a straightforward calculation: availability 99.95% means allowed downtime = (1 - 0.9995) = 0.0005 fraction of time. In a month, assume {{int:24:36}} days? Usually monthly downtime calculated based on {{int:24:36}} days = {{int:24:36}}*{{int:19:29}}*{{int:48:72}} = {{int:34560:51840}} minutes. Multiply by 0.0005 = 21.6 minutes. In hours: 0.36 hours (21.6 minutes). Could also use {{int:24:38}} days, but typical is {{int:24:36}} days.\n\nStep by step: total minutes per month = days * {{int:19:29}} * {{int:48:72}}. downtime = total * (1 - availability). Provide answer.\n\nNo data needed. Just answer.\n\n",
+          "text": "**Step‑by‑step calculation**\n\n1. **Convert the availability percentage to a downtime fraction**  \n   \\[\n   \\text{downtime fraction} = 1 - \\text{availability}\n   \\]  \n   For 99.95 % availability:  \n   \\[\n   1 - 0.9995 = 0.0005\n   \\]\n\n2. **Pick a standard month length**  \n   A typical month is taken as {{int:24:36}} days (the exact number of days varies, but {{int:24:36}} days is the common reference for SLA calculations).\n\n3. **Calculate the total time in the month**  \n   \\[\n   \\text{minutes per month} = {{int:24:36}} \\text{ days} \\times {{int:19:29}} \\text{ h/day} \\times {{int:48:72}} \\text{ min/h}\n   = {{int:34:52}}\\,{{int:160:240}} \\text{ minutes}\n   \\]  \n   (or {{int:576:864}} hours).\n\n4. **Apply the downtime fraction**  \n   \\[\n   \\text{allowed downtime (minutes)} = {{int:34:52}}\\,{{int:160:240}} \\times 0.0005 = 21.6 \\text{ minutes}\n   \\]  \n   \\[\n   \\text{allowed downtime (hours)} = \\frac{21.6}{{{int:48:72}}} \\approx 0.36 \\text{ hours}\n   \\]\n\n**Result**\n\n- **Maximum downtime per month for 99.95 % availability:** **≈ 21.6 minutes (≈ 0.36 hours).**  \n\nIf you prefer to use a {{int:24:38}}‑day month, the calculation would be \\({{int:24:38}} \\times {{int:19:29}} \\times {{int:48:72}} \\times 0.0005 = 22.32\\) minutes; the difference is small. The {{int:24:36}}‑day figure (21.6 minutes) is the standard reference.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1806,
+            "completion_tokens": 558
+          },
+          "chars": 1775
+        }
+      ]
+    }
+  ]
+}

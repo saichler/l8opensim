@@ -1,0 +1,24 @@
+{
+  "id": "writing/status-update/v0/s0",
+  "flavor": "writing",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:52:11Z",
+  "turns": [
+    {
+      "user_message": "Write a short weekly status update: migrated 3 clusters to Kubernetes 1.30, closed 14 tickets, one open incident with BGP in Dallas.",
+      "steps": [
+        {
+          "reasoning": "We need to produce a short weekly status update as requested. No data needed from system. Just write the summary. Should output the text. Probably just answer directly.",
+          "text": "**Weekly Status Update**\n\n- **Kubernetes Migration:** Successfully migrated 3 clusters to Kubernetes 1.30.\n- **Ticket Resolution:** Closed {{int:11:17}} support tickets.\n- **Open Incident:** One ongoing incident (BGP issue) affecting the {{city:1}} site. The incident is being actively investigated.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1819,
+            "completion_tokens": 102
+          },
+          "chars": 454
+        }
+      ]
+    }
+  ]
+}

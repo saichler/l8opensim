@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-06/v0/s0",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:17:37Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user is planning a maintenance window in Dallas on Saturday.\n\nNext part of the conversation:\nUser: List the devices in Dallas.\n\nAssistant: Dallas has 3 devices: core-rtr-04, core-rtr-08 and core-rtr-16.\n\nUser: Draft the maintenance email.\n\nAssistant: Here is the draft email announcing maintenance on Saturday 22:00-02:00 for the three Dallas devices.\n\nUser: Change the time to 23:00.\n\nAssistant: Updated the email to 23:00-03:00.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary. The previous summary: \"The user is planning a maintenance window in {{city:1}} on Saturday.\" Now we have more info: list of devices: core-rtr-04, core-rtr-08, core-rtr-16. Drafted email for maintenance Saturday 22:00-02:00, then changed time to 23:00-03:00. So summary should capture: user planning maintenance window in {{city:1}} on Saturday, devices list, email draft with time updated to 23:00-03:00. Keep facts, decisions. No greetings. So final summary: \"User plans maintenance window in {{city:1}} on Saturday; devices involved are core-rtr-04, core-rtr-08, core-rtr-16; draft email prepared announcing maintenance on Saturday from 23:00 to 03:00 for those devices.\" Ensure to capture that time changed. No need mention original time. So output.",
+          "text": "User is planning a maintenance window in {{city:1}} on Saturday. The devices involved are core-rtr-04, core-rtr-08, and core-rtr-16. A maintenance announcement email has been drafted, now scheduled for Saturday from 23:00 to 03:00 for those three {{city:1}} devices.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 334,
+            "completion_tokens": 265
+          },
+          "chars": 1036
+        }
+      ]
+    }
+  ]
+}

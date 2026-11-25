@@ -1,0 +1,64 @@
+{
+  "id": "edge_cases/other-language/v0/s0",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:47:26Z",
+  "turns": [
+    {
+      "user_message": "¿Cuántos dispositivos de red están caídos?",
+      "steps": [
+        {
+          "reasoning": "We need count of network devices with status down (caído). Need to know field names. Use describe_model for NetworkDevice.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1797,
+            "completion_tokens": 55
+          },
+          "chars": 162
+        },
+        {
+          "reasoning": "User asks: \"¿Cuántos dispositivos de red están caídos?\" Means: How many network devices are down? Need to count where status indicates down. Look at fields: equipmentinfo.deviceStatus likely holds status (e.g., \"up\", \"down\", \"offline\", \"inactive\"?). We need count of records where deviceStatus is something indicating down. Likely values: \"down\", \"offline\", \"error\". We don't know. We can query count grouped by status to see possible values. Use count(*) group-by equipmentinfo.deviceStatus.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select count(*), equipmentinfo.deviceStatus from NetworkDevice group-by equipmentinfo.deviceStatus"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"count(*)\":1,\"group\":{\"equipmentinfo.deviceStatus\":\"DEVICE_STATUS_CRITICAL\"}},{\"count(*)\":3,\"group\":{\"equipmentinfo.deviceStatus\":\"DEVICE_STATUS_OFFLINE\"}},{\"count(*)\":13,\"group\":{\"equipmentinfo.deviceStatus\":\"DEVICE_STATUS_ONLINE\"}},{\"count(*)\":2,\"group\":{\"equipmentinfo.deviceStatus\":\"DEVICE_STATUS_WARNING\"}}],\"model\":\"NetworkDevice\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2034,
+            "completion_tokens": 153
+          },
+          "chars": 613
+        },
+        {
+          "reasoning": "We need to answer: \"How many network devices are down?\" DeviceStatus values: OFFLINE and perhaps CRITICAL? \"Down\" likely means offline or critical? Typically offline means down. Critical could also be down but maybe separate. The user asked in Spanish: \"¿Cuántos dispositivos de red están caídos?\" \"Caídos\" = down, likely offline. So count of status OFFLINE = 3. Might also include CRITICAL? Could ask clarification but we can assume offline. Provide answer: 3 devices are offline. Also can give breakdown.",
+          "text": "Hay **3** dispositivos de red con el estado `DEVICE_STATUS_OFFLINE`, que es el que normalmente se considera “caído”. (Los demás están en estado `ONLINE`, `WARNING` o `CRITICAL`).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2175,
+            "completion_tokens": 172
+          },
+          "chars": 704
+        }
+      ]
+    }
+  ]
+}

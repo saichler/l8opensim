@@ -1,0 +1,44 @@
+{
+  "id": "edge_cases/bad-field/v0/s1",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:47:47Z",
+  "turns": [
+    {
+      "user_message": "Show me devices where the colour is blue.",
+      "steps": [
+        {
+          "reasoning": "We need to list devices where colour is blue. Which model? Likely NetworkDevice has a field like deviceInfo.colour or something. We need to inspect model fields. Use describe_model for NetworkDevice.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1796,
+            "completion_tokens": 71
+          },
+          "chars": 238
+        },
+        {
+          "reasoning": "We need to show devices where colour is blue. Look at fields: there is no colour field. Maybe colour is stored in equipmentinfo.location? Not likely. Could be a custom field not listed. Since we don't have colour field, we cannot query. We should ask clarification.",
+          "text": "I’m not seeing a “colour” (or similar) field in the NetworkDevice model – the available fields are things like vendor, model, IP address, location, status, uptime, etc. Could you let me know which field stores the colour information you’d like to filter on? Once I know the correct field name, I can retrieve the matching devices for you.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2033,
+            "completion_tokens": 142
+          },
+          "chars": 615
+        }
+      ]
+    }
+  ]
+}

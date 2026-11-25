@@ -1,0 +1,24 @@
+{
+  "id": "explore_models/help/v0/s0",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:51:55Z",
+  "turns": [
+    {
+      "user_message": "What can you help me with?",
+      "steps": [
+        {
+          "reasoning": "We need to respond as the assistant describing capabilities, following guidelines. No tool use needed.",
+          "text": "I’m Tanto, the assistant for the Probler datacenter management system. I can help you work with the data that lives in Probler, such as:\n\n* **Viewing information** – run queries to list network devices, GPU servers, Kubernetes clusters, nodes, pods, deployments, services, alarms, events, and polling targets. I can also give you aggregate summaries (counts, totals, averages, status breakdowns, etc.) so you get a quick overview without scrolling through every record.\n\n* **Exporting data** – generate CSV files with any set of fields you need, so you can download full lists of devices, alarms, or other records for further analysis in Excel, scripts, or BI tools.\n\n* **Creating new records** – add a new network device, GPU server, Kubernetes object, alarm, event, or polling target.\n\n* **Updating existing records** – change fields such as device status, IP address, GPU utilization, pod labels, alarm severity, etc.\n\n* **Analyzing trends** – combine aggregates and filters to answer questions like “how many servers are above {{int:64:96}} % GPU utilization?” or “what’s the total uptime of all switches in rack {{int:9:15}}?”.\n\n* **Reporting** – I can generate a short text or markdown report that summarizes findings, then attach it as a file for you to keep.\n\nAll actions are performed with the same permissions you have, so I can only see or modify the data you’re allowed to access. If you need anything specific— a list of devices, a status summary, a new record, or an export—just let me know!",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 353
+          },
+          "chars": 1620
+        }
+      ]
+    }
+  ]
+}

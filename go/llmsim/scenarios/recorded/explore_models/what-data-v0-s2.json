@@ -1,0 +1,42 @@
+{
+  "id": "explore_models/what-data/v0/s2",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:48:42Z",
+  "turns": [
+    {
+      "user_message": "What data can you show me?",
+      "steps": [
+        {
+          "reasoning": "We need to respond: user asks \"What data can you show me?\" We should explain available models and maybe fields. Use list_modules to get models. Then describe each model fields? Could list models. We'll call list_modules.",
+          "tool_calls": [
+            {
+              "name": "list_modules",
+              "arguments": {}
+            }
+          ],
+          "tool_results": [
+            "{\"models\":[{\"area\":\"Inventory\",\"model\":\"NetworkDevice\",\"primaryKey\":\"id\",\"service\":\"NetDev\"},{\"area\":\"Inventory\",\"model\":\"GpuDevice\",\"primaryKey\":\"id\",\"service\":\"GpuDev\"},{\"area\":\"Kubernetes\",\"model\":\"K8SCluster\",\"primaryKey\":\"name\",\"service\":\"K8sClstr\"},{\"area\":\"Kubernetes\",\"model\":\"K8SNode\",\"primaryKey\":\"name\",\"service\":\"K8sNode\"},{\"area\":\"Kubernetes\",\"model\":\"K8SPod\",\"primaryKey\":\"key\",\"service\":\"K8sPod\"},{\"area\":\"Kubernetes\",\"model\":\"K8SDeployment\",\"primaryKey\":\"key\",\"service\":\"K8sDeploy\"},{\"area\":\"Alarms\",\"model\":\"Alarm\",\"primaryKey\":\"alarmId\",\"service\":\"Alarm\"},{\"area\":\"Alarms\",\"model\":\"EventRecord\",\"primaryKey\":\"eventId\",\"service\":\"Events\"},{\"area\":\"Collection\",\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\",\"service\":\"Targets\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 66
+          },
+          "chars": 234
+        },
+        {
+          "reasoning": "We need to answer user: \"What data can you show me?\" So we can list models and maybe describe fields. Provide summary of available data categories. Use list_modules result. Could also describe each model fields using describe_model. Probably give overview: network devices, GPU devices, K8s clusters/nodes/pods/deployments, alarms/events, polling targets. Mention we can show details like status, vendor, etc. Offer to run queries. Provide that we can export CSV, create reports, etc. Provide answer.",
+          "text": "Here’s a quick overview of the data that Probler stores and that I can query for you:\n\n| Area | Model | Primary key | Typical content |\n|------|-------|-------------|-----------------|\n| **Inventory** | **NetworkDevice** | `id` | Vendor, model, status, uptime, IP address, interfaces, physical inventory, etc. |\n| **Inventory** | **GpuDevice** | `id` | One record per server (not per GPU). Includes `deviceInfo.gpuCount`, GPU model, utilization, memory usage, temperatures, driver \u0026 CUDA versions. |\n| **Kubernetes** | **K8SCluster** | `name` | Cluster name, version, control‑plane status, overall health, etc. |\n| **Kubernetes** | **K8SNode** | `name` | Node hostname, status, CPU / memory capacity, pod count, kubelet version, etc. |\n| **Kubernetes** | **K8SPod** | `key` | Pod name, namespace, node it runs on, status, restarts, CPU / memory usage, etc. |\n| **Kubernetes** | **K8SDeployment** | `key` | Deployment name, namespace, replica counts, rollout status, image versions, etc. |\n| **Alarms** | **Alarm** | `alarmId` | Alarm type, severity, source device, timestamp, description, current state (active/cleared). |\n| **Alarms** | **EventRecord** | `eventId` | Event timestamp, source, type, message, associated alarm (if any). |\n| **Collection** | **L8PTarget** | `targetId` | Polling target definition – IP/hostname, protocol, schedule, last collected time, status. |\n\n**What I can do with these models**\n\n* **List or count records** – e.g., “how many network devices are online?”  \n* **Aggregate information** – totals, averages, min/max (e.g., total GPU memory, average pod CPU usage).  \n* **Filter by any field** – vendor, status, namespace, severity, etc.  \n* **Export results** – as a CSV file you can download.  \n* **Create custom text/markdown reports** – summarising the data you need.  \n* **Create, update, or (with explicit confirmation) delete records** – if you ask me to modify something.\n\nLet me know which area you’d like to explore or what specific question you have, and I’ll run the appropriate query for you.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2039,
+            "completion_tokens": 646
+          },
+          "chars": 2566
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "qa_chat/latency/v0/s0",
+  "flavor": "qa_chat",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:04:54Z",
+  "turns": [
+    {
+      "user_message": "Why is p99 latency more important than the average?",
+      "steps": [
+        {
+          "reasoning": "We need to answer conceptual question: why p99 latency more important than average. No need for tools. Just provide explanation.",
+          "text": "**Because the 99th‑percentile (p99) latency tells you how the system behaves for the slowest‑performing 1 % of requests, it captures the “tail” experience that users actually notice, whereas the average (mean) can be misleading.**  \n\n### 1. Averages hide outliers  \n* The mean adds up all latency values and divides by the total number of requests.  \n* A few very slow requests can be “washed out” by many fast ones, producing a low average that suggests the service is performing well even though some users are waiting much longer.  \n\n### 2. User perception is driven by the worst‑case experience  \n* Most users will notice when a request takes noticeably longer than usual (e.g., “Why did that page take 5 s while everything else is \u003c{{int:160:240}} ms?”).  \n* Those “slow‑tail” requests are exactly what the p99 metric measures: {{int:79:119}} % of requests are faster than this value, and 1 % are slower.  \n\n### 3. SLA / SLO compliance often targets the tail  \n* Service‑level agreements (SLAs) and service‑level objectives (SLOs) commonly specify that *X* % of requests must complete within *Y* ms (e.g., “{{int:79:119}} % of API calls under {{int:240:360}} ms”).  \n* Monitoring p99 directly tells you whether you’re meeting those commitments, whereas the average provides no guarantee.  \n\n### 4. System capacity and bottlenecks show up in the tail  \n* High p99 values often indicate resource contention, GC pauses, network spikes, or other intermittent problems that don’t affect the bulk of traffic.  \n* By focusing on p99 you can identify and fix these bottlenecks before they grow into larger reliability issues.  \n\n### 5. Helps prevent “performance creep”  \n* If you only chase a lower average, you might keep adding optimisations that benefit the majority but ignore rare, costly cases.  \n* Over time those rare cases can dominate user‑experience complaints and cause outages, especially under load spikes.  \n\n### 6. Real‑world examples  \n| Scenario | Average latency | p99 latency | What users see |\n|----------|----------------|------------|----------------|\n| {{int:8:12}} 000 requests: 9 {{int:720:1080}} at {{int:80:120}} ms, {{int:80:120}} at 2 s | (9 {{int:720:1080}} × {{int:80:120}} ms + {{int:80:120}} × 2 000 ms) / {{int:8:12}} 000 ≈ {{int:240:360}} ms | 2 000 ms | Most users see ~{{int:80:120}} ms, but 1 % experience 2 s delays – a noticeable slowdown. |\n| Same workload after optimisation: 9 {{int:760:1140}} at {{int:76:114}} ms, {{int:40:60}} at 1.5 s | Avg ≈ {{int:216:324}} ms (slightly better) | 1 {{int:400:600}} ms (still high) | The average improvement hides the fact that the tail is still unacceptable. |\n\n### Bottom line\n- **Average latency is useful for a quick, high‑level health check.**  \n- **p99 latency is the metric that tells you whether *all* users get a satisfactory experience and whether you meet your performance commitments.**  \n\nTherefore, when you’re building or operating a service where reliability and user experience matter, monitoring and improving the 99th‑percentile latency is generally more important than chasing a lower mean latency.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1798,
+            "completion_tokens": 751
+          },
+          "chars": 3145
+        }
+      ]
+    }
+  ]
+}

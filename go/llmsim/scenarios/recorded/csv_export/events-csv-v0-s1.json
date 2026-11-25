@@ -1,0 +1,44 @@
+{
+  "id": "csv_export/events-csv/v0/s1",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "flawed",
+  "recorded_at": "2026-11-24T19:25:42Z",
+  "turns": [
+    {
+      "user_message": "Export the events of the last week to CSV.",
+      "steps": [
+        {
+          "reasoning": "User wants events of the last week. Need to know fields of EventRecord. Use describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "EventRecord"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"eventId\",\"type\":\"string\"},{\"path\":\"category\",\"type\":\"string\"},{\"path\":\"eventType\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"sourceId\",\"type\":\"string\"},{\"path\":\"sourceName\",\"type\":\"string\"},{\"path\":\"sourceType\",\"type\":\"string\"},{\"path\":\"message\",\"type\":\"string\"},{\"path\":\"occurredAt\",\"type\":\"int\"}],\"model\":\"EventRecord\",\"primaryKey\":\"eventId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1797,
+            "completion_tokens": 49
+          },
+          "chars": 128
+        },
+        {
+          "reasoning": "We need to export events from last week. Need to filter by occurredAt timestamp. We need to know what timestamp unit is int probably epoch seconds. We need to compute last week range: from now - 7 days. But we don't have current time. Could ask user, but maybe we can approximate using relative? L8Query may not support date functions. Could we filter with a condition like occurredAt\u003e=... we need to compute timestamp. Since we don't have current time, we could ask user to provide the timestamp range. However likely system expects we compute using current time. But we can't fetch current time. Maybe we can query without where and let user filter? But request is \"Export the events of the last week to CSV.\" We need to apply a where clause. We could get current time via some system variable? Not provided.\n\nWe could ask clarification: need timestamp range. Probably better ask user for the start date.",
+          "text": "I’m ready to export the events, but I need to know the exact time range you’d like to use for “the last week.” Could you tell me the start / end timestamps (or dates) you want the export to cover? Once I have that, I’ll generate the CSV for you.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1944,
+            "completion_tokens": 261
+          },
+          "chars": 1165
+        }
+      ]
+    }
+  ]
+}

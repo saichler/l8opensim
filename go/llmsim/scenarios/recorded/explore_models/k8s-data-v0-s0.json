@@ -1,0 +1,122 @@
+{
+  "id": "explore_models/k8s-data/v0/s0",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:49:45Z",
+  "turns": [
+    {
+      "user_message": "What kind of Kubernetes data do you have?",
+      "steps": [
+        {
+          "reasoning": "We need to list what Kubernetes data models we have: K8SCluster, K8SNode, K8SPod, K8SDeployment, maybe services etc but models listed earlier: K8SCluster, K8SNode, K8SPod, K8SDeployment, plus maybe K8SService? Not listed. We'll list models and fields.\n\nWe need to call list_modules to see models. Then describe each relevant model. Then answer user.\n\nWe should ask to list modules.",
+          "tool_calls": [
+            {
+              "name": "list_modules",
+              "arguments": {}
+            }
+          ],
+          "tool_results": [
+            "{\"models\":[{\"area\":\"Inventory\",\"model\":\"NetworkDevice\",\"primaryKey\":\"id\",\"service\":\"NetDev\"},{\"area\":\"Inventory\",\"model\":\"GpuDevice\",\"primaryKey\":\"id\",\"service\":\"GpuDev\"},{\"area\":\"Kubernetes\",\"model\":\"K8SCluster\",\"primaryKey\":\"name\",\"service\":\"K8sClstr\"},{\"area\":\"Kubernetes\",\"model\":\"K8SNode\",\"primaryKey\":\"name\",\"service\":\"K8sNode\"},{\"area\":\"Kubernetes\",\"model\":\"K8SPod\",\"primaryKey\":\"key\",\"service\":\"K8sPod\"},{\"area\":\"Kubernetes\",\"model\":\"K8SDeployment\",\"primaryKey\":\"key\",\"service\":\"K8sDeploy\"},{\"area\":\"Alarms\",\"model\":\"Alarm\",\"primaryKey\":\"alarmId\",\"service\":\"Alarm\"},{\"area\":\"Alarms\",\"model\":\"EventRecord\",\"primaryKey\":\"eventId\",\"service\":\"Events\"},{\"area\":\"Collection\",\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\",\"service\":\"Targets\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1796,
+            "completion_tokens": 122
+          },
+          "chars": 395
+        },
+        {
+          "reasoning": "The user asks: \"What kind of Kubernetes data do you have?\" They want a description of what kinds of data are stored for Kubernetes. We need to list models and maybe fields? Could describe the models: K8SCluster, K8SNode, K8SPod, K8SDeployment. Should maybe provide overview of fields? Could describe each model's fields by calling describe_model for each. Let's do that.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SCluster"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"k8sVersion\",\"type\":\"string\"},{\"path\":\"platform\",\"type\":\"string\"},{\"path\":\"summary.totalNodes\",\"type\":\"int\"},{\"path\":\"summary.readyNodes\",\"type\":\"int\"},{\"path\":\"summary.totalPods\",\"type\":\"int\"},{\"path\":\"summary.runningPods\",\"type\":\"int\"},{\"path\":\"summary.failedPods\",\"type\":\"int\"},{\"path\":\"summary.pendingPods\",\"type\":\"int\"},{\"path\":\"summary.totalDeployments\",\"type\":\"int\"},{\"path\":\"summary.availableDeployments\",\"type\":\"int\"},{\"path\":\"summary.totalNamespaces\",\"type\":\"int\"},{\"path\":\"summary.warningEvents\",\"type\":\"int\"}],\"model\":\"K8SCluster\",\"primaryKey\":\"name\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2041,
+            "completion_tokens": 113
+          },
+          "chars": 406
+        },
+        {
+          "reasoning": "We need to answer user: \"What kind of Kubernetes data do you have?\" Provide overview of models and fields. We have K8SCluster, K8SNode, K8SPod, K8SDeployment. Should describe each model's fields. Need to call describe_model for each.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SNode"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"roles\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"version\",\"type\":\"string\"},{\"path\":\"internalIp\",\"type\":\"string\"},{\"path\":\"osImage\",\"type\":\"string\"},{\"path\":\"kernelVersion\",\"type\":\"string\"},{\"path\":\"containerRuntime\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SNode\",\"primaryKey\":\"name\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2249,
+            "completion_tokens": 87
+          },
+          "chars": 266
+        },
+        {
+          "reasoning": "User asks: \"What kind of Kubernetes data do you have?\" They likely want a description of available models and fields. We have K8SCluster and K8SNode; also K8SPod, K8SDeployment likely. Should describe each model's fields. Need to describe_model for K8SPod and K8SDeployment as well.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SPod"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"key\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"namespace\",\"type\":\"string\"},{\"path\":\"ready.count\",\"type\":\"int\"},{\"path\":\"ready.outof\",\"type\":\"int\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"restarts.count\",\"type\":\"int\"},{\"path\":\"restarts.ago\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"ip\",\"type\":\"string\"},{\"path\":\"node\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SPod\",\"primaryKey\":\"key\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2407,
+            "completion_tokens": 99
+          },
+          "chars": 314
+        },
+        {
+          "reasoning": "User asks: \"What kind of Kubernetes data do you have?\" They likely want a description of available models and fields. We have K8SCluster, K8SNode, K8SPod, also K8SDeployment (not described yet). Should describe each model's fields. We can also describe K8SDeployment.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SDeployment"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"key\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"namespace\",\"type\":\"string\"},{\"path\":\"ready\",\"type\":\"string\"},{\"path\":\"upToDate\",\"type\":\"string\"},{\"path\":\"available\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SDeployment\",\"primaryKey\":\"key\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2589,
+            "completion_tokens": 94
+          },
+          "chars": 306
+        },
+        {
+          "reasoning": "The user asks: \"What kind of Kubernetes data do you have?\" They want an overview of the Kubernetes data models available. We have described models: K8SCluster, K8SNode, K8SPod, K8SDeployment. We should respond summarizing what data fields each contains. Could also mention what kind of information each model stores: cluster summary, node status, pod details, deployment status. Provide a concise answer. No need to query data.",
+          "text": "Here’s an overview of the Kubernetes‑related data that’s stored in Probler:\n\n| Model | Primary key | What it represents | Key fields (most useful) |\n|-------|-------------|--------------------|--------------------------|\n| **K8SCluster** | `name` | A whole Kubernetes cluster | `k8sVersion`, `platform`, and a **summary** block that aggregates counts of nodes, pods, deployments, namespaces and warning events (e.g. `summary.totalNodes`, `summary.readyNodes`, `summary.totalPods`, `summary.runningPods`, `summary.failedPods`, `summary.totalDeployments`, `summary.availableDeployments`, `summary.totalNamespaces`, `summary.warningEvents`). |\n| **K8SNode** | `name` | An individual worker or control‑plane node in a cluster | `status` (Ready/NotReady), `roles` (master, worker, etc.), `age`, `version`, networking info (`internalIp`), OS details (`osImage`, `kernelVersion`), `containerRuntime`, and the `clusterName` it belongs to. |\n| **K8SPod** | `key` | A single pod (the smallest deployable unit) | `name`, `namespace`, readiness (`ready.count` / `ready.outof`), overall `status`, restart information (`restarts.count`, `restarts.ago`), `age`, pod IP (`ip`), the node it’s running on (`node`), and its `clusterName`. |\n| **K8SDeployment** | `key` | A higher‑level controller that manages a set of pods | `name`, `namespace`, rollout status fields (`ready`, `upToDate`, `available`), `age`, and the `clusterName`. |\n\n**In short:** you can query overall cluster health and inventory, per‑node details (status, role, OS, runtime), per‑pod metrics (readiness, restarts, IP, node placement), and deployment rollout status. All of these are available for reporting, filtering, or aggregation through the L8Query interface.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2725,
+            "completion_tokens": 536
+          },
+          "chars": 2162
+        }
+      ]
+    }
+  ]
+}

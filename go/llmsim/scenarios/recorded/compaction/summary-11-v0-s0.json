@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-11/v0/s0",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:18:33Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user asked about GPU temperatures earlier; the hottest server was gpu-node-07.\n\nNext part of the conversation:\nUser: Is gpu-node-07 still the hottest?\n\nAssistant: Yes, it has the highest health warning level among GPU servers.\n\nUser: Create a report file about it.\n\nAssistant: Attached gpu_node_07_report.md.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary replacing current. Keep facts: user asked about GPU temperatures earlier; hottest server was gpu-node-07. Then user asks if still hottest, assistant confirms. User wants a report file about it, assistant attached gpu_node_07_report.md.\n\nWe need to include that a report file was created (maybe ID? but we have filename). Keep placeholder tokens none. Keep open questions none. So summary: mention gpu-node-07 remains hottest GPU server, health warning level highest, report file gpu_node_07_report.md created.\n\nRemove greeting. Provide plain text.\n\n",
+          "text": "The user previously identified gpu-node-07 as the hottest GPU server. The assistant confirmed that gpu-node-07 still has the highest health warning level among GPU servers. A report file named gpu_node_07_report.md was created and attached.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 292,
+            "completion_tokens": 176
+          },
+          "chars": 820
+        }
+      ]
+    }
+  ]
+}

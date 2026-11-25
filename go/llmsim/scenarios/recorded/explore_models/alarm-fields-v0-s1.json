@@ -1,0 +1,44 @@
+{
+  "id": "explore_models/alarm-fields/v0/s1",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:49:29Z",
+  "turns": [
+    {
+      "user_message": "What information do you have about alarms?",
+      "steps": [
+        {
+          "reasoning": "We need to answer what information we have about alarms. We should list fields of Alarm model. Use describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "Alarm"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"alarmId\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"description\",\"type\":\"string\"},{\"path\":\"state\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"nodeId\",\"type\":\"string\"},{\"path\":\"nodeName\",\"type\":\"string\"},{\"path\":\"location\",\"type\":\"string\"},{\"path\":\"firstOccurrence\",\"type\":\"int\"},{\"path\":\"lastOccurrence\",\"type\":\"int\"},{\"path\":\"occurrenceCount\",\"type\":\"int\"},{\"path\":\"isRootCause\",\"type\":\"bool\"},{\"path\":\"acknowledgedBy\",\"type\":\"string\"}],\"model\":\"Alarm\",\"primaryKey\":\"alarmId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 51
+          },
+          "chars": 145
+        },
+        {
+          "reasoning": "We need to answer user: \"What information do you have about alarms?\" Provide description of fields. Could also provide some sample data? Likely just explain fields. Could also ask if they'd like summary counts. Probably just explain model fields. Let's answer describing fields and maybe suggest queries.",
+          "text": "Here’s the schema for the **Alarm** records in Probler:\n\n| Field | Type | Description |\n|-------|------|-------------|\n| **alarmId** | string (primary key) | Unique identifier for the alarm. |\n| **name** | string | Short name or title of the alarm. |\n| **description** | string | Detailed description of what triggered the alarm. |\n| **state** | string | Current state (e.g., *active*, *cleared*, *acknowledged*). |\n| **severity** | string | Severity level (e.g., *critical*, *major*, *minor*, *warning*). |\n| **nodeId** | string | Identifier of the node (device, server, etc.) where the alarm originated. |\n| **nodeName** | string | Human‑readable name of the node. |\n| **location** | string | Physical or logical location of the node (rack, data‑center, etc.). |\n| **firstOccurrence** | int (epoch seconds) | Timestamp of the first time this alarm was raised. |\n| **lastOccurrence** | int (epoch seconds) | Timestamp of the most recent occurrence. |\n| **occurrenceCount** | int | How many times this alarm has occurred. |\n| **isRootCause** | bool | Indicates whether this alarm is the root‑cause alarm in a cascade. |\n| **acknowledgedBy** | string | Username (or system) that acknowledged the alarm, if any. |\n\nThese fields let you query, filter, and aggregate alarm data—for example, counting active critical alarms, summarizing alarms per location, or listing the most recent alarms. Let me know if you’d like any specific reports or aggregates based on this model!",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1985,
+            "completion_tokens": 426
+          },
+          "chars": 1785
+        }
+      ]
+    }
+  ]
+}

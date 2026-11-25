@@ -1,0 +1,24 @@
+{
+  "id": "code_app/tip-calc/v0/s2",
+  "flavor": "code_app",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T18:42:07Z",
+  "turns": [
+    {
+      "user_message": "Write a simple HTML+JS tip calculator in one file.",
+      "steps": [
+        {
+          "reasoning": "We need to respond with a simple HTML+JS tip calculator in one file. According to instructions, we can just provide code; no data access needed. We must not fabricate data; not relevant. Just give code.\n\nWe should provide the HTML file content, maybe as a code block. Provide a single HTML file with a form, input for bill amount, select tip percent, calculate button, display tip and total. Use JS.\n\nWe can attach a file? Could just give code snippet. Since it's just code, we can just present it. No tool needed.",
+          "text": "Below is a complete, self‑contained HTML file that implements a simple tip calculator.  \nSave the content as `tip_calculator.html` and open it in any web browser.\n\n```html\n\u003c!DOCTYPE html\u003e\n\u003chtml lang=\"en\"\u003e\n\u003chead\u003e\n  \u003cmeta charset=\"UTF-8\"\u003e\n  \u003ctitle\u003eTip Calculator\u003c/title\u003e\n  \u003cstyle\u003e\n    body {font-family: Arial, sans-serif; max-width: 400px; margin: 2rem auto;}\n    label, input, select, button {display: block; width: 100%; margin-top: 0.5rem;}\n    button {margin-top: 1rem;}\n    .result {margin-top: 1.5rem; font-weight: bold;}\n  \u003c/style\u003e\n\u003c/head\u003e\n\u003cbody\u003e\n  \u003ch1\u003eTip Calculator\u003c/h1\u003e\n\n  \u003clabel for=\"bill\"\u003eBill Amount ($):\u003c/label\u003e\n  \u003cinput type=\"number\" id=\"bill\" placeholder=\"e.g. 50.00\" step=\"0.01\" min=\"0\"\u003e\n\n  \u003clabel for=\"tipPercent\"\u003eTip Percentage:\u003c/label\u003e\n  \u003cselect id=\"tipPercent\"\u003e\n    \u003coption value=\"10\"\u003e10 %\u003c/option\u003e\n    \u003coption value=\"12\"\u003e12 %\u003c/option\u003e\n    \u003coption value=\"15\" selected\u003e15 %\u003c/option\u003e\n    \u003coption value=\"18\"\u003e18 %\u003c/option\u003e\n    \u003coption value=\"20\"\u003e20 %\u003c/option\u003e\n    \u003coption value=\"custom\"\u003eCustom…\u003c/option\u003e\n  \u003c/select\u003e\n\n  \u003cinput type=\"number\" id=\"customTip\" placeholder=\"Enter custom %\"\n         step=\"0.1\" min=\"0\" style=\"display:none; margin-top:0.5rem;\"\u003e\n\n  \u003cbutton id=\"calcBtn\"\u003eCalculate\u003c/button\u003e\n\n  \u003cdiv class=\"result\" id=\"output\"\u003e\u003c/div\u003e\n\n  \u003cscript\u003e\n    const tipSelect = document.getElementById('tipPercent');\n    const customInput = document.getElementById('customTip');\n    const calcBtn = document.getElementById('calcBtn');\n    const output = document.getElementById('output');\n\n    // Show / hide custom tip input\n    tipSelect.addEventListener('change', () =\u003e {\n      if (tipSelect.value === 'custom') {\n        customInput.style.display = 'block';\n        customInput.focus();\n      } else {\n        customInput.style.display = 'none';\n      }\n    });\n\n    calcBtn.addEventListener('click', () =\u003e {\n      const bill = parseFloat(document.getElementById('bill').value);\n      if (isNaN(bill) || bill \u003c 0) {\n        output.textContent = 'Please enter a valid bill amount.';\n        return;\n      }\n\n      let tipPercent;\n      if (tipSelect.value === 'custom') {\n        tipPercent = parseFloat(customInput.value);\n        if (isNaN(tipPercent) || tipPercent \u003c 0) {\n          output.textContent = 'Please enter a valid custom tip percentage.';\n          return;\n        }\n      } else {\n        tipPercent = parseFloat(tipSelect.value);\n      }\n\n      const tip = (bill * tipPercent) / 100;\n      const total = bill + tip;\n\n      output.innerHTML = `\n        Tip (${tipPercent}%): $${tip.toFixed(2)}\u003cbr\u003e\n        Total: $${total.toFixed(2)}\n      `;\n    });\n  \u003c/script\u003e\n\u003c/body\u003e\n\u003c/html\u003e\n```\n\n**How it works**\n\n1. **Inputs** – The user enters the bill amount and selects a tip percentage (or chooses “Custom…” to type their own).\n2. **Calculation** – When *Calculate* is clicked, JavaScript validates the inputs, computes the tip (`bill * percent / {{int:80:120}}`) and adds it to the bill.\n3. **Result** – The tip and total amounts are displayed below the button, formatted to two decimal places.\n\nFeel free to edit the style or add more percentages as needed. Enjoy!",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1799,
+            "completion_tokens": 952
+          },
+          "chars": 3617
+        }
+      ]
+    }
+  ]
+}

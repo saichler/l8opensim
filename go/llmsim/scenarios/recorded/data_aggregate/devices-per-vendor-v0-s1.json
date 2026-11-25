@@ -1,0 +1,63 @@
+{
+  "id": "data_aggregate/devices-per-vendor/v0/s1",
+  "flavor": "data_aggregate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:33:31Z",
+  "turns": [
+    {
+      "user_message": "How many network devices do we have per vendor?",
+      "steps": [
+        {
+          "reasoning": "We need to query NetworkDevice model, group by vendor, count. First need to describe model to see vendor field name.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1797,
+            "completion_tokens": 54
+          },
+          "chars": 155
+        },
+        {
+          "reasoning": "We need count per vendor. Use aggregate: select equipmentinfo.vendor, count(*) from NetworkDevice group-by equipmentinfo.vendor.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select equipmentinfo.vendor, count(*) from NetworkDevice group-by equipmentinfo.vendor"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"count(*)\":2,\"group\":{\"equipmentinfo.vendor\":\"Arista\"}},{\"count(*)\":1,\"group\":{\"equipmentinfo.vendor\":\"Cisco\"}},{\"count(*)\":2,\"group\":{\"equipmentinfo.vendor\":\"Dell\"}},{\"count(*)\":3,\"group\":{\"equipmentinfo.vendor\":\"Huawei\"}},{\"count(*)\":2,\"group\":{\"equipmentinfo.vendor\":\"Juniper\"}},{\"count(*)\":5,\"group\":{\"equipmentinfo.vendor\":\"Nokia\"}},{\"count(*)\":4,\"group\":{\"equipmentinfo.vendor\":\"Palo Alto\"}}],\"model\":\"NetworkDevice\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2034,
+            "completion_tokens": 64
+          },
+          "chars": 233
+        },
+        {
+          "text": "Here’s the count of network devices broken down by vendor:\n\n| Vendor      | Device Count |\n|-------------|--------------|\n| Arista      | 2 |\n| Cisco       | 1 |\n| Dell        | 2 |\n| Huawei      | 3 |\n| Juniper     | 2 |\n| Nokia       | 5 |\n| Palo Alto   | 4 |\n\nLet me know if you need any additional details or a CSV export of this summary.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2211,
+            "completion_tokens": 97
+          },
+          "chars": 344
+        }
+      ]
+    }
+  ]
+}

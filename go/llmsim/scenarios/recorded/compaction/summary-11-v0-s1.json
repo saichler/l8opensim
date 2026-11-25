@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-11/v0/s1",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:18:33Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user asked about GPU temperatures earlier; the hottest server was gpu-node-07.\n\nNext part of the conversation:\nUser: Is gpu-node-07 still the hottest?\n\nAssistant: Yes, it has the highest health warning level among GPU servers.\n\nUser: Create a report file about it.\n\nAssistant: Attached gpu_node_07_report.md.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary that replaces current one. Include facts, decisions, entities, IDs, preferences, open questions, L8Query results that user cares about.\n\nCurrent summary: \"The user asked about GPU temperatures earlier; the hottest server was gpu-node-07.\"\n\nNow we add that user asked if still hottest, assistant confirmed, user wants report file, assistant attached gpu_node_07_report.md.\n\nSo new summary should capture that gpu-node-07 is still the hottest GPU server, highest health warning level, a report file gpu_node_07_report.md was created/attached.\n\nNo other entities.\n\nThus final summary:\n\n- gpu-node-07 remains the hottest GPU server (highest health warning level).\n- User requested a report; assistant generated and attached gpu_node_07_report.md.\n\nThat's it.",
+          "text": "- gpu-node-07 remains the hottest GPU server, having the highest health warning level among GPU servers.  \n- User requested a report on this server; assistant created and attached the file **gpu_node_07_report.md**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 292,
+            "completion_tokens": 218
+          },
+          "chars": 1000
+        }
+      ]
+    }
+  ]
+}

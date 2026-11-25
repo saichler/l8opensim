@@ -1,0 +1,71 @@
+{
+  "id": "csv_export/vendor-csv/v0/s2",
+  "flavor": "csv_export",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:26:24Z",
+  "params": {
+    "vendor": [
+      "Cisco",
+      "Juniper",
+      "Arista"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Export the Cisco devices to Excel.",
+      "steps": [
+        {
+          "reasoning": "We need to export {{p:vendor}} devices to Excel. Excel expects .xlsx, but we have export_csv only. Possibly we can export CSV and user can open in Excel. We'll export records of NetworkDevice where vendor is {{p:vendor}}. Need to know field name for vendor. Use describe_model for NetworkDevice.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 88
+          },
+          "chars": 320
+        },
+        {
+          "reasoning": "User wants \"Export the {{p:vendor}} devices to Excel.\" We need to filter NetworkDevice where equipmentinfo.vendor = \"{{p:vendor}}\". Export as CSV (Excel can open). Use export_csv with appropriate columns maybe all fields. Provide file name .xlsx? The tool expects .csv, but we can name .xlsx? It says export_csv returns CSV, not Excel format. Could name .csv; user said Excel, but we can provide CSV that Excel can open. So use export_csv with query \"select * from NetworkDevice where equipmentinfo.vendor='{{p:vendor}}'\". Need to check syntax: where conditions use field=VALUE, likely no quotes? Example earlier used departmentId=D001. So value likely no quotes. So vendor={{p:vendor}}. Use query: select * from NetworkDevice where equipmentinfo.vendor={{p:vendor}}. Export file name maybe {{p:vendor:lower}}_devices.csv. Then inform user.\n\n",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "{{p:vendor:lower}}_devices.csv",
+                "query": "select * from NetworkDevice where equipmentinfo.vendor={{p:vendor}}"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"id\",\"equipmentinfo.vendor\",\"equipmentinfo.model\",\"equipmentinfo.series\",\"equipmentinfo.sysName\",\"equipmentinfo.ipAddress\",\"equipmentinfo.serialNumber\",\"equipmentinfo.version\",\"equipmentinfo.firmwareVersion\",\"equipmentinfo.location\",\"equipmentinfo.deviceType\",\"equipmentinfo.deviceStatus\",\"equipmentinfo.uptime\",\"equipmentinfo.lastSeen\",\"equipmentinfo.interfaceCount\"],\"file_name\":\"cisco_devices.csv\",\"rows\":1}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2031,
+            "completion_tokens": 223
+          },
+          "chars": 908
+        },
+        {
+          "text": "The {{p:vendor}} devices have been exported.  \n\n**Attached file:** `{{p:vendor:lower}}_devices.csv` (Excel‑compatible CSV) with the matching records.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2174,
+            "completion_tokens": 33
+          },
+          "chars": 131
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "id": "csv_analyze/sales-totals/v0/s2",
+  "flavor": "csv_analyze",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:18:55Z",
+  "csv": [
+    {
+      "header": [
+        "region",
+        "total_units",
+        "total_revenue"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "North",
+            "South",
+            "East",
+            "West"
+          ]
+        },
+        {
+          "kind": "int",
+          "min": 215,
+          "max": 400
+        },
+        {
+          "kind": "int",
+          "min": 43000,
+          "max": 79200
+        }
+      ],
+      "rows": 4
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Here is our sales data:\n```csv\nregion,month,units,revenue\nNorth,Jan,120,24000\nNorth,Feb,95,19000\nSouth,Jan,200,41000\nSouth,Feb,15,2900\nEast,Jan,130,26500\nEast,Feb,140,28000\nWest,Jan,90,18200\nWest,Feb,310,61000\n```\nWhat are the totals per region?",
+      "steps": [
+        {
+          "reasoning": "We have a CSV attached in user message. It's not a system model; it's user-provided data. We need to compute totals per region: sum of units and revenue per region. Since this is not in the database, we need to process the CSV ourselves. We can parse manually.\n\nData:\nNorth: Jan units {{int:96:144}} rev {{int:19200:28800}}; Feb units {{int:76:114}} rev {{int:15200:22800}}. Totals: units {{int:172:258}}, revenue {{int:34400:51600}}.\nSouth: Jan {{int:160:240}} units rev {{int:32800:49200}}; Feb {{int:12:18}} units rev {{int:2320:3480}}. Totals: units {{int:172:258}}, revenue {{int:35120:52680}}.\nEast: Jan {{int:104:156}} rev {{int:21200:31800}}; Feb {{int:112:168}} rev {{int:22400:33600}}. Units {{int:216:324}}, revenue {{int:43600:65400}}.\nWest: Jan {{int:72:108}} rev {{int:14560:21840}}; Feb {{int:248:372}} rev {{int:48800:73200}}. Units {{int:320:480}}, revenue {{int:63360:95040}}.\n\nWe should present a table. Also maybe give a CSV file. We can create a CSV file with region, total_units, total_revenue.\n\nWe'll create a file using create_file.\n\n",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "region,total_units,total_revenue\n{{csv:0}}",
+                "file_name": "region_totals.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":94,\"file_name\":\"region_totals.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1885,
+            "completion_tokens": 287
+          },
+          "chars": 904
+        },
+        {
+          "reasoning": "The user gave a CSV with sales data and asked for totals per region. I responded by creating a file region_totals.csv with totals. That seems correct. Need to output brief statement.",
+          "text": "Attached **region_totals.csv** with the total units and total revenue for each region.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1978,
+            "completion_tokens": 66
+          },
+          "chars": 268
+        }
+      ]
+    }
+  ]
+}

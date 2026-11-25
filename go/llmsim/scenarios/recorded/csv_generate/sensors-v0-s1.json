@@ -1,0 +1,124 @@
+{
+  "id": "csv_generate/sensors/v0/s1",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:28:15Z",
+  "csv": [
+    {
+      "header": [
+        "timestamp",
+        "sensor_id",
+        "temperature",
+        "humidity"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "2023-09-01T00:00:00Z",
+            "2023-09-01T00:01:00Z",
+            "2023-09-01T00:02:00Z",
+            "2023-09-01T00:03:00Z",
+            "2023-09-01T00:04:00Z",
+            "2023-09-01T00:05:00Z",
+            "2023-09-01T00:06:00Z",
+            "2023-09-01T00:07:00Z",
+            "2023-09-01T00:08:00Z",
+            "2023-09-01T00:09:00Z",
+            "2023-09-01T00:10:00Z",
+            "2023-09-01T00:11:00Z",
+            "2023-09-01T00:12:00Z",
+            "2023-09-01T00:13:00Z",
+            "2023-09-01T00:14:00Z",
+            "2023-09-01T00:15:00Z",
+            "2023-09-01T00:16:00Z",
+            "2023-09-01T00:17:00Z",
+            "2023-09-01T00:18:00Z",
+            "2023-09-01T00:19:00Z",
+            "2023-09-01T00:20:00Z",
+            "2023-09-01T00:21:00Z",
+            "2023-09-01T00:22:00Z",
+            "2023-09-01T00:23:00Z",
+            "2023-09-01T00:24:00Z",
+            "2023-09-01T00:25:00Z",
+            "2023-09-01T00:26:00Z",
+            "2023-09-01T00:27:00Z",
+            "2023-09-01T00:28:00Z",
+            "2023-09-01T00:29:00Z",
+            "2023-09-01T00:30:00Z",
+            "2023-09-01T00:31:00Z",
+            "2023-09-01T00:32:00Z",
+            "2023-09-01T00:33:00Z",
+            "2023-09-01T00:34:00Z",
+            "2023-09-01T00:35:00Z",
+            "2023-09-01T00:36:00Z",
+            "2023-09-01T00:37:00Z",
+            "2023-09-01T00:38:00Z",
+            "2023-09-01T00:39:00Z"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "S1",
+            "S2",
+            "S3",
+            "S4",
+            "S5"
+          ]
+        },
+        {
+          "kind": "float",
+          "min": 21.5,
+          "max": 23.5,
+          "decimals": 1
+        },
+        {
+          "kind": "float",
+          "min": 43.8,
+          "max": 46.7,
+          "decimals": 1
+        }
+      ],
+      "rows": 40
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Make a CSV with 40 rows of fictitious temperature sensor readings: timestamp, sensor id, temperature, humidity. It is synthetic test data for a demo, not records from the system: attach it as sensor_readings.csv.",
+      "steps": [
+        {
+          "reasoning": "The user wants a CSV with {{int:32:48}} rows of fictitious temperature sensor readings: timestamp, sensor id, temperature, humidity. It's synthetic test data, not from system. We should generate synthetic data ourselves. Since we cannot use the system's data for this because it's not records, we need to create a CSV file ourselves using create_file. We'll generate {{int:32:48}} rows with appropriate headers and sample data.\n\nWe need to output a file named sensor_readings.csv. Provide the content as text. Should we include header row? Yes. Provide {{int:32:48}} rows of data. We need to make plausible timestamps, sensor ids, temperature (e.g., degrees C), humidity (%). Let's generate timestamps maybe ISO format, incremental.\n\nWe'll produce something like:\n\ntimestamp,sensor_id,temperature,humidity\n2023-09-01T00:00:00Z,S1,22.5,45.0\n...\n\nBut we need {{int:32:48}} rows. Let's produce simple sequential times each minute.\n\nWe'll create sensor ids S1 to S5 repeated.\n\nWe'll generate random values within ranges.\n\nWe'll output file using create_file.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "timestamp,sensor_id,temperature,humidity\n{{csv:0}}",
+                "file_name": "sensor_readings.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1400,\"file_name\":\"sensor_readings.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1833,
+            "completion_tokens": 1228
+          },
+          "chars": 2509
+        },
+        {
+          "text": "Attached `sensor_readings.csv` containing {{int:32:48}} rows of synthetic temperature sensor data (timestamp, sensor_id, temperature, humidity).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2861,
+            "completion_tokens": 30
+          },
+          "chars": 133
+        }
+      ]
+    }
+  ]
+}

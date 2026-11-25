@@ -1,0 +1,150 @@
+{
+  "id": "csv_generate/products/v0/s1",
+  "flavor": "csv_generate",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T21:30:00Z",
+  "csv": [
+    {
+      "header": [
+        "sku",
+        "name",
+        "category",
+        "price",
+        "stock"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "PROD-001",
+            "PROD-002",
+            "PROD-003",
+            "PROD-004",
+            "PROD-005",
+            "PROD-006",
+            "PROD-007",
+            "PROD-008",
+            "PROD-009",
+            "PROD-010",
+            "PROD-011",
+            "PROD-012",
+            "PROD-013",
+            "PROD-014",
+            "PROD-015",
+            "PROD-016",
+            "PROD-017",
+            "PROD-018",
+            "PROD-019",
+            "PROD-020",
+            "PROD-021",
+            "PROD-022",
+            "PROD-023",
+            "PROD-024",
+            "PROD-025",
+            "PROD-026",
+            "PROD-027",
+            "PROD-028",
+            "PROD-029",
+            "PROD-030"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Wireless Bluetooth Headphones",
+            "Organic Cotton T-Shirt",
+            "Stainless Steel Water Bottle",
+            "Python Programming Book",
+            "Resistance Bands Set",
+            "4K UHD Smart TV",
+            "Leather Wallet",
+            "Non-Stick Frying Pan",
+            "History of Ancient Rome",
+            "Yoga Mat",
+            "Gaming Mouse",
+            "Denim Jeans",
+            "Air Fryer",
+            "Data Science Handbook",
+            "Dumbbell Set 20kg",
+            "Wireless Charger",
+            "Running Shoes",
+            "Bed Sheet Set Queen",
+            "Novel Collection Box Set",
+            "Tennis Racket",
+            "USB-C Hub",
+            "Winter Jacket",
+            "Robot Vacuum Cleaner",
+            "Machine Learning Guide",
+            "Kettlebell 16kg",
+            "Smartphone Case",
+            "Formal Dress Shirt",
+            "Kitchen Knife Set",
+            "Science Fiction Anthology",
+            "Adjustable Bench"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Electronics",
+            "Clothing",
+            "Home",
+            "Books",
+            "Sports"
+          ]
+        },
+        {
+          "kind": "float",
+          "min": 18.99,
+          "max": 499,
+          "decimals": 2
+        },
+        {
+          "kind": "int",
+          "min": 40,
+          "max": 500
+        }
+      ],
+      "rows": 30
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Create a sample CSV of 30 products with sku, name, category, price and stock. It is synthetic test data for a demo, not records from the system: attach it as products.csv.",
+      "steps": [
+        {
+          "reasoning": "Create a sample CSV of {{int:24:36}} products with sku, name, category, price and stock. It is synthetic test data for a demo, not records from the system: attach it as products.csv.\n\nWe need to create a file with synthetic test data. Use create_file with file_name products.csv and content. Must be CSV with sku, name, category, price and stock. {{int:24:36}} products.\n\nNo need to query. Just create file. Should we ensure CSV format correct. Use create_file.\n\nThe user wants attach it as products.csv. So create_file.\n\nPotentially we could also generate via export_csv? No, synthetic test data not from system. So create_file.\n\nMake {{int:24:36}} rows. Provide header.\n\nMake synthetic.\n\nWe must ensure file name products.csv.\n\nCreate content.\n\nPossibly use create_file.\n\nNo constraints about content.\n\nLet's produce {{int:24:36}} products.\n\nWe should ensure price is numeric. Stock integer.\n\nLet's generate.\n\nSKU format maybe PROD-001 etc.\n\nCategories: Electronics, Clothing, Home, Books, Sports.\n\nLet's create.\n\nWe can just generate quick.\n\nWe'll output file.\n\nProbably need to ensure no extra explanation? Could say attached.\n\nWe'll call create_file.\n\n",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "sku,name,category,price,stock\n{{csv:0}}",
+                "file_name": "products.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":1385,\"file_name\":\"products.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2464,
+            "completion_tokens": 851
+          },
+          "chars": 2581
+        },
+        {
+          "reasoning": "Create a sample CSV of {{int:24:36}} products with sku, name, category, price and stock. It is synthetic test data for a demo, not records from the system: attach it as products.csv.\n\nWe need to create file products.csv with {{int:24:36}} rows. Already created file. The tool succeeded. Need to respond with brief what file contains. Possibly confirm attached.\n\nWe should ensure format correct. User asked create sample CSV of {{int:24:36}} products... attach it as products.csv. We did create_file. Good.\n\nMaybe also need to ensure synthetic test data, not records from system. Yes.\n\nRespond with attached products.csv with {{int:24:36}} products.\n\nNo need for query.\n\n",
+          "text": "Attached products.csv with {{int:24:36}} synthetic products.\n\nThe file contains the columns `sku,name,category,price,stock` with {{int:24:36}} demo rows, e.g. PROD-001 Wireless Bluetooth Headphones, PROD-002 Organic Cotton T-Shirt, etc.\n",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 3106,
+            "completion_tokens": 198
+          },
+          "chars": 841
+        }
+      ]
+    }
+  ]
+}

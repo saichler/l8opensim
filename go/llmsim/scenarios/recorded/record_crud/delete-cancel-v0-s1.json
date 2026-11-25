@@ -1,0 +1,59 @@
+{
+  "id": "record_crud/delete-cancel/v0/s1",
+  "flavor": "record_crud",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:16:46Z",
+  "turns": [
+    {
+      "user_message": "Delete all events of type login.",
+      "steps": [
+        {
+          "reasoning": "We need to delete records from EventRecord where type = login. But need user explicit confirmation. The user said \"Delete all events of type login.\" That is explicit confirmation. So we can proceed.\n\nWe need to know field name for event type. Use describe_model for EventRecord.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "EventRecord"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"eventId\",\"type\":\"string\"},{\"path\":\"category\",\"type\":\"string\"},{\"path\":\"eventType\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"sourceId\",\"type\":\"string\"},{\"path\":\"sourceName\",\"type\":\"string\"},{\"path\":\"sourceType\",\"type\":\"string\"},{\"path\":\"message\",\"type\":\"string\"},{\"path\":\"occurredAt\",\"type\":\"int\"}],\"model\":\"EventRecord\",\"primaryKey\":\"eventId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 82
+          },
+          "chars": 315
+        },
+        {
+          "reasoning": "The user wants to delete all events of type login. Need confirmation before deletion? Rule: Never delete records without the user's explicit confirmation in this conversation. The user directly asks \"Delete all events of type login.\" That's a command, but we must ask for confirmation before proceeding. So we should ask: \"Do you confirm deleting all EventRecord where eventType='login'?\"",
+          "text": "I can delete those records, but I need your explicit confirmation before proceeding.  \n\nDo you want me to delete **all EventRecord entries where `eventType` = “login”**?",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1941,
+            "completion_tokens": 126
+          },
+          "chars": 567
+        }
+      ]
+    },
+    {
+      "user_message": "No, cancel that.",
+      "steps": [
+        {
+          "reasoning": "User wants to cancel deletion. No action needed.",
+          "text": "Understood—no records have been changed. Let me know if there’s anything else you’d like to do.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1850,
+            "completion_tokens": 43
+          },
+          "chars": 149
+        }
+      ]
+    }
+  ]
+}

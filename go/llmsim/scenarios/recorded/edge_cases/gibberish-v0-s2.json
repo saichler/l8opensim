@@ -1,0 +1,24 @@
+{
+  "id": "edge_cases/gibberish/v0/s2",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:47:25Z",
+  "turns": [
+    {
+      "user_message": "asdkj qwe zzzz ??",
+      "steps": [
+        {
+          "reasoning": "The user message is gibberish: \"asdkj qwe zzzz ??\". They likely typed something accidental. The assistant should ask for clarification.",
+          "text": "I’m not sure what you’d like help with. Could you please clarify your request?",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 59
+          },
+          "chars": 217
+        }
+      ]
+    }
+  ]
+}

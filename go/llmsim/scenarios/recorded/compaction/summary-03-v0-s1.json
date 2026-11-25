@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-03/v0/s1",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:17:05Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user, [NAME_AB12CD], manages the prod-east cluster.\n\nNext part of the conversation:\nUser: Which pods are failing in prod-east?\n\nAssistant: 3 pods are failing: billing-7f9c, search-1a2b and worker-9d8e.\n\nUser: Why is billing failing?\n\nAssistant: Its restarts count is 18 and the status is FAILED; the logs are not available to me.\n\nUser: Ok, remind me tomorrow to check it.\n\nAssistant: I can't set reminders, but you can ask me again tomorrow.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary merging current summary and new info. Keep facts: user [NAME_AB12CD] manages prod-east cluster. Pods failing: billing-7f9c, search-1a2b, worker-9d8e. Billing pod has restarts count {{int:14:22}}, status FAILED, logs not available. User wants reminder tomorrow to check it (note assistant can't set reminders). So we note open question: maybe need to check later. Summarize.",
+          "text": "The user, [NAME_AB12CD], manages the prod-east cluster. Currently three pods are failing in prod-east: billing-7f9c, search-1a2b, and worker-9d8e. The billing-7f9c pod has a restart count of {{int:14:22}} and a status of FAILED; its logs are not available. The user asked to be reminded tomorrow to check the billing pod, but the assistant cannot set reminders.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 340,
+            "completion_tokens": 201
+          },
+          "chars": 743
+        }
+      ]
+    }
+  ]
+}

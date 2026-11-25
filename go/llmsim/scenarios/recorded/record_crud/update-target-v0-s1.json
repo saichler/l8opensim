@@ -1,0 +1,125 @@
+{
+  "id": "record_crud/update-target/v0/s1",
+  "flavor": "record_crud",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:18:37Z",
+  "turns": [
+    {
+      "user_message": "Update polling target tgt-005 to use the ssh-default links.",
+      "steps": [
+        {
+          "reasoning": "The user wants to update a polling target record with id tgt-005 to use the ssh-default links. We need to update a record in model L8PTarget. Need to know fields. Let's describe L8PTarget.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "L8PTarget"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"targetId\",\"type\":\"string\"},{\"path\":\"linksId\",\"type\":\"string\"},{\"path\":\"state\",\"type\":\"string\"},{\"path\":\"inventoryType\",\"type\":\"string\"}],\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1800,
+            "completion_tokens": 77
+          },
+          "chars": 223
+        },
+        {
+          "reasoning": "We need to update polling target with targetId tgt-005 to use ssh-default links. Likely set linksId to some value representing ssh-default. We need to know what value to set. Possibly there is a link set ID named \"ssh-default\". Could be a string like \"ssh-default\". We'll assume set linksId to \"ssh-default\". Use update_record with model L8PTarget, data containing targetId and linksId.\n\nWe should confirm existing record? Not necessary; we can update. Use update_record.",
+          "tool_calls": [
+            {
+              "name": "update_record",
+              "arguments": {
+                "data": {
+                  "linksId": "ssh-default",
+                  "targetId": "tgt-005"
+                },
+                "model": "L8PTarget"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"action\":\"update\",\"model\":\"L8PTarget\",\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1897,
+            "completion_tokens": 163
+          },
+          "chars": 559
+        },
+        {
+          "text": "The polling target **tgt-005** has been updated to use the **ssh‑default** links.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1969,
+            "completion_tokens": 26
+          },
+          "chars": 83
+        }
+      ]
+    },
+    {
+      "user_message": "Yes.",
+      "steps": [
+        {
+          "reasoning": "The user says \"Yes.\" Probably confirming they want to proceed. We need to actually perform the update. We need to know fields of L8PTarget model. Use describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "L8PTarget"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"targetId\",\"type\":\"string\"},{\"path\":\"linksId\",\"type\":\"string\"},{\"path\":\"state\",\"type\":\"string\"},{\"path\":\"inventoryType\",\"type\":\"string\"}],\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1834,
+            "completion_tokens": 68
+          },
+          "chars": 200
+        },
+        {
+          "reasoning": "We need to update L8PTarget record with targetId = tgt-005, set linksId to ssh-default. Use update_record.",
+          "tool_calls": [
+            {
+              "name": "update_record",
+              "arguments": {
+                "data": {
+                  "linksId": "ssh-default",
+                  "targetId": "tgt-005"
+                },
+                "model": "L8PTarget"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"action\":\"update\",\"model\":\"L8PTarget\",\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1931,
+            "completion_tokens": 86
+          },
+          "chars": 194
+        },
+        {
+          "text": "Polling target **tgt-005** has been successfully updated to use the **ssh-default** links.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2003,
+            "completion_tokens": 25
+          },
+          "chars": 90
+        }
+      ]
+    }
+  ]
+}

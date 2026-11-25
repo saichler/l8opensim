@@ -1,0 +1,217 @@
+{
+  "id": "record_crud/bulk-update/v0/s2",
+  "flavor": "record_crud",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:17:31Z",
+  "turns": [
+    {
+      "user_message": "Set the status of all Arista devices to maintenance.",
+      "steps": [
+        {
+          "reasoning": "We need to set status field of NetworkDevice (likely) for devices where vendor is Arista. Need to know model fields. First describe_model NetworkDevice.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1798,
+            "completion_tokens": 61
+          },
+          "chars": 191
+        },
+        {
+          "reasoning": "We need to update status of all Arista devices to maintenance. The status field likely is equipmentinfo.deviceStatus. Need to select records where equipmentinfo.vendor = 'Arista' (maybe vendor field). Then update each record's equipmentinfo.deviceStatus to 'maintenance'.\n\nWe need to fetch ids of those devices first. Use select id from NetworkDevice where equipmentinfo.vendor='Arista'.\n\nThen for each id, call update_record with data containing id and equipmentinfo.deviceStatus='maintenance'. But the model's nested path? The update_record likely expects full field names, maybe using dot path? Usually you provide nested object: equipmentinfo: {deviceStatus: 'maintenance'}.\n\nWe'll first query ids.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select id from NetworkDevice where equipmentinfo.vendor='Arista'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":2,\"model\":\"NetworkDevice\",\"records\":[{\"id\":\"nd-010\"},{\"id\":\"nd-013\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2035,
+            "completion_tokens": 181
+          },
+          "chars": 785
+        },
+        {
+          "reasoning": "We need to set status of all Arista devices to maintenance. The field for status is equipmentinfo.deviceStatus. We have IDs nd-010 and nd-013. Need to update each record with deviceStatus='maintenance'. Use update_record for each.",
+          "tool_calls": [
+            {
+              "name": "update_record",
+              "arguments": {
+                "data": {
+                  "equipmentinfo.deviceStatus": "maintenance",
+                  "id": "nd-010"
+                },
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"action\":\"update\",\"model\":\"NetworkDevice\",\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2111,
+            "completion_tokens": 106
+          },
+          "chars": 334
+        },
+        {
+          "reasoning": "We need to update all Arista devices status to maintenance. We fetched ids: nd-010 and nd-013. Updated nd-010. Need to update nd-013 similarly.\n\n",
+          "tool_calls": [
+            {
+              "name": "update_record",
+              "arguments": {
+                "data": {
+                  "equipmentinfo.deviceStatus": "maintenance",
+                  "id": "nd-013"
+                },
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"action\":\"update\",\"model\":\"NetworkDevice\",\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2178,
+            "completion_tokens": 77
+          },
+          "chars": 249
+        },
+        {
+          "text": "The status of both Arista devices has been updated to **maintenance**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2245,
+            "completion_tokens": 19
+          },
+          "chars": 70
+        }
+      ]
+    },
+    {
+      "user_message": "Yes, go ahead.",
+      "steps": [
+        {
+          "reasoning": "User wants to set status of all Arista devices to maintenance. We need to update records of NetworkDevice where vendor is Arista. First we need to describe the model to know field names: probably field deviceInfo.vendor or similar. Let's describe NetworkDevice.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1828,
+            "completion_tokens": 81
+          },
+          "chars": 300
+        },
+        {
+          "reasoning": "We need to set status of all Arista devices to maintenance. The field for status likely equipmentinfo.deviceStatus. Need to update records where equipmentinfo.vendor = 'Arista'. First we should fetch ids of those devices. Use select id from NetworkDevice where equipmentinfo.vendor='Arista' limit maybe {{int:80:120}}. Then update each record with equipmentinfo.deviceStatus='maintenance'. Use update_record for each. Let's query ids.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select id from NetworkDevice where equipmentinfo.vendor='Arista'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":2,\"model\":\"NetworkDevice\",\"records\":[{\"id\":\"nd-010\"},{\"id\":\"nd-013\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2065,
+            "completion_tokens": 123
+          },
+          "chars": 506
+        },
+        {
+          "reasoning": "We have IDs nd-010 and nd-013. Need to update status field equipmentinfo.deviceStatus? The field name is equipmentinfo.deviceStatus. Update both records. Use update_record with data containing id and equipmentinfo.deviceStatus? Probably need nested object. Provide full record with nested fields. Use update_record for each.",
+          "tool_calls": [
+            {
+              "name": "update_record",
+              "arguments": {
+                "data": {
+                  "equipmentinfo": {
+                    "deviceStatus": "maintenance"
+                  },
+                  "id": "nd-010"
+                },
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"action\":\"update\",\"model\":\"NetworkDevice\",\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2141,
+            "completion_tokens": 126
+          },
+          "chars": 432
+        },
+        {
+          "reasoning": "We need to also update the other Arista device nd-013.",
+          "tool_calls": [
+            {
+              "name": "update_record",
+              "arguments": {
+                "data": {
+                  "equipmentinfo": {
+                    "deviceStatus": "maintenance"
+                  },
+                  "id": "nd-013"
+                },
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"action\":\"update\",\"model\":\"NetworkDevice\",\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2211,
+            "completion_tokens": 56
+          },
+          "chars": 162
+        },
+        {
+          "text": "The status of the two Arista devices (IDs **nd-010** and **nd-013**) has been set to **maintenance**.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2281,
+            "completion_tokens": 33
+          },
+          "chars": 101
+        }
+      ]
+    }
+  ]
+}

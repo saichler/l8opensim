@@ -1,0 +1,64 @@
+{
+  "id": "data_query/critical-alarms/v0/s2",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:38:29Z",
+  "turns": [
+    {
+      "user_message": "List the active critical alarms.",
+      "steps": [
+        {
+          "reasoning": "We need to list active critical alarms. Need to know Alarm model fields. Use describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "Alarm"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"alarmId\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"description\",\"type\":\"string\"},{\"path\":\"state\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"nodeId\",\"type\":\"string\"},{\"path\":\"nodeName\",\"type\":\"string\"},{\"path\":\"location\",\"type\":\"string\"},{\"path\":\"firstOccurrence\",\"type\":\"int\"},{\"path\":\"lastOccurrence\",\"type\":\"int\"},{\"path\":\"occurrenceCount\",\"type\":\"int\"},{\"path\":\"isRootCause\",\"type\":\"bool\"},{\"path\":\"acknowledgedBy\",\"type\":\"string\"}],\"model\":\"Alarm\",\"primaryKey\":\"alarmId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1793,
+            "completion_tokens": 47
+          },
+          "chars": 123
+        },
+        {
+          "reasoning": "We need to list active critical alarms. Fields: state, severity. Likely active means state = \"ACTIVE\" or similar. We need to query Alarm where state = \"ACTIVE\" and severity = \"CRITICAL\". Use select * from Alarm where state=ACTIVE and severity=CRITICAL. Use limit? Could be many, but we can export CSV. Better to export all matching records. Use export_csv without limit. We'll need to know the exact token for state value? Not given. Probably values are strings. We'll query with state='ACTIVE' and severity='CRITICAL'. Use select * from Alarm where state=\"ACTIVE\" and severity=\"CRITICAL\". Might need proper syntax: where state=ACTIVE? The example shows departmentId=D001 without quotes. Likely no quotes needed. So: where state=ACTIVE and severity=CRITICAL.\n\nLet's export CSV with columns maybe all fields. We'll export to file \"active_critical_alarms.csv\".",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "file_name": "active_critical_alarms.csv",
+                "query": "select * from Alarm where state=ACTIVE and severity=CRITICAL"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"alarmId\",\"name\",\"description\",\"state\",\"severity\",\"nodeId\",\"nodeName\",\"location\",\"firstOccurrence\",\"lastOccurrence\",\"occurrenceCount\",\"isRootCause\",\"acknowledgedBy\"],\"file_name\":\"active_critical_alarms.csv\",\"rows\":5}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1983,
+            "completion_tokens": 247
+          },
+          "chars": 981
+        },
+        {
+          "text": "The active critical alarms have been exported.\n\n**Attached:** `active_critical_alarms.csv` (5 alarms)",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2104,
+            "completion_tokens": 28
+          },
+          "chars": 101
+        }
+      ]
+    }
+  ]
+}

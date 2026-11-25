@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-07/v0/s2",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:17:54Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user prefers answers as tables.\n\nNext part of the conversation:\nUser: How many alarms per site?\n\nAssistant: | Site | Alarms |\n|---|---|\n| Austin | 7 |\n| Dallas | 5 |\n| Seattle | 4 |\n\nUser: Which alarm is the most frequent?\n\nAssistant: 'Link Flapping' with 42 occurrences.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary replacing the current one. Current summary: \"The user prefers answers as tables.\"\n\nWe need to keep facts, decisions, entities, IDs, preferences, constraints, open questions, and any L8Query that produced result user cares about.\n\nFrom conversation:\n\nUser asks \"How many alarms per site?\" Assistant gave a table: Site: {{city:1}} 7, {{city:2}} 5, {{city:3}} 4.\n\nUser asks \"Which alarm is the most frequent?\" Assistant responded: \"'Link Flapping' with {{int:33:51}} occurrences.\"\n\nWe need to include that the user asked for per-site alarm counts, the result table, and that the most frequent alarm is Link Flapping with {{int:33:51}} occurrences.\n\nAlso keep preference: answers as tables (though the second answer wasn't a table; but preference remains).\n\nProbably include that user asked for alarm counts per site and most frequent alarm.\n\nThus new summary:\n\n- User prefers answers as tables.\n- Alarm counts per site: {{city:1}} 7, {{city:2}} 5, {{city:3}} 4.\n- Most frequent alarm: Link Flapping, {{int:33:51}} occurrences.\n\nNo IDs.\n\nWrite plain text.\n\n",
+          "text": "The user prefers answers as tables. Alarm counts per site: {{city:1}} — 7, {{city:2}} — 5, {{city:3}} — 4. The most frequent alarm is “Link Flapping” with {{int:33:51}} occurrences.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 297,
+            "completion_tokens": 279
+          },
+          "chars": 1210
+        }
+      ]
+    }
+  ]
+}

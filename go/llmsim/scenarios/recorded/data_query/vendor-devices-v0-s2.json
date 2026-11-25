@@ -1,0 +1,76 @@
+{
+  "id": "data_query/vendor-devices/v0/s2",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:38:45Z",
+  "params": {
+    "vendor": [
+      "Cisco",
+      "Juniper",
+      "Arista",
+      "Nokia"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "List all Cisco devices with their IP addresses and status.",
+      "steps": [
+        {
+          "reasoning": "We need to list {{p:vendor}} devices: model NetworkDevice presumably. Need fields: probably deviceInfo.vendor or something, deviceInfo.ipAddress, status. We need to first describe_model to see fields.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1798,
+            "completion_tokens": 64
+          },
+          "chars": 232
+        },
+        {
+          "reasoning": "We need to list all {{p:vendor}} devices with their IP addresses and status. From fields: equipmentinfo.vendor, equipmentinfo.ipAddress, equipmentinfo.deviceStatus. So query: select equipmentinfo.vendor, equipmentinfo.ipAddress, equipmentinfo.deviceStatus from NetworkDevice where equipmentinfo.vendor='{{p:vendor}}' . But L8Query syntax: select * ...? We can select fields. Use where condition. Let's do export_csv to give CSV. Use columns list. Provide file name network_devices_{{p:vendor:lower}}.csv.",
+          "tool_calls": [
+            {
+              "name": "export_csv",
+              "arguments": {
+                "columns": [
+                  "equipmentinfo.ipAddress",
+                  "equipmentinfo.deviceStatus"
+                ],
+                "file_name": "{{p:vendor:lower}}_devices.csv",
+                "query": "select * from NetworkDevice where equipmentinfo.vendor='{{p:vendor}}'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"columns\":[\"equipmentinfo.ipAddress\",\"equipmentinfo.deviceStatus\"],\"file_name\":\"cisco_devices.csv\",\"rows\":1}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2035,
+            "completion_tokens": 164
+          },
+          "chars": 660
+        },
+        {
+          "text": "I’ve exported a CSV file containing all {{p:vendor}} devices with their IP addresses and status.\n\n**Attached:** `{{p:vendor:lower}}_devices.csv` (1 record)",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2135,
+            "completion_tokens": 34
+          },
+          "chars": 137
+        }
+      ]
+    }
+  ]
+}

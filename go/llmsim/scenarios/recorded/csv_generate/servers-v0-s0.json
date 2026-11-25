@@ -1,0 +1,136 @@
+{
+  "id": "csv_generate/servers/v0/s0",
+  "flavor": "csv_generate",
+  "model": "gpt-oss-120b",
+  "quality": "flawed",
+  "recorded_at": "2026-11-24T19:29:16Z",
+  "csv": [
+    {
+      "header": [
+        "hostname",
+        "ip",
+        "cpu_cores",
+        "memory_gb",
+        "os",
+        "location"
+      ],
+      "columns": [
+        {
+          "kind": "choice",
+          "values": [
+            "server01",
+            "server02",
+            "server03",
+            "server04",
+            "server05",
+            "server06",
+            "server07",
+            "server08",
+            "server09",
+            "server10",
+            "server11",
+            "server12",
+            "server13",
+            "server14",
+            "server15",
+            "server16",
+            "server17",
+            "server18",
+            "server19",
+            "server20"
+          ]
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "10.0.0.1",
+            "10.0.0.2",
+            "10.0.0.3",
+            "10.0.0.4",
+            "10.0.0.5",
+            "10.0.0.6",
+            "10.0.0.7",
+            "10.0.0.8",
+            "10.0.0.9",
+            "10.0.0.10",
+            "10.0.0.11",
+            "10.0.0.12",
+            "10.0.0.13",
+            "10.0.0.14",
+            "10.0.0.15",
+            "10.0.0.16",
+            "10.0.0.17",
+            "10.0.0.18",
+            "10.0.0.19",
+            "10.0.0.20"
+          ]
+        },
+        {
+          "kind": "int",
+          "min": 4,
+          "max": 64
+        },
+        {
+          "kind": "int",
+          "min": 16,
+          "max": 512
+        },
+        {
+          "kind": "choice",
+          "values": [
+            "Ubuntu 20.04",
+            "CentOS 7",
+            "Windows Server 2019",
+            "Ubuntu 22.04",
+            "Red Hat Enterprise Linux 8",
+            "Ubuntu 18.04",
+            "CentOS 8",
+            "Windows Server 2022",
+            "Red Hat Enterprise Linux 7"
+          ]
+        },
+        {
+          "kind": "city"
+        }
+      ],
+      "rows": 20
+    }
+  ],
+  "turns": [
+    {
+      "user_message": "Create a CSV of 20 fictitious servers with hostname, ip, cpu cores, memory GB, os and location. It is synthetic test data for a demo, not records from the system: attach it as servers.csv.",
+      "steps": [
+        {
+          "reasoning": "The user wants to create a CSV of {{int:16:24}} fictitious servers with specified fields: hostname, ip, cpu cores, memory GB, os, location. This is synthetic test data, not from the system. So we should not query the system. We need to generate synthetic data ourselves and attach as a file.\n\nWe should use create_file tool to make a CSV file named servers.csv. It must contain header row with fields: hostname, ip, cpu_cores, memory_gb, os, location (or similar). Provide {{int:16:24}} rows of synthetic data.\n\nWe must ensure we follow the instruction: \"Create a CSV of {{int:16:24}} fictitious servers with hostname, ip, cpu cores, memory GB, os and location. It is synthetic test data for a demo, not records from the system: attach it as servers.csv.\"\n\nSo we generate data manually. Use plausible hostnames like server01, server02 etc. IPs like 10.0.0.1 etc. CPU cores maybe random between 4 and {{int:51:77}}. Memory GB random 16-512. OS like Ubuntu 20.04, CentOS 7, Windows Server 2019 etc. Location maybe datacenter names like \"DC1\", \"DC2\", \"NYC\", \"{{city:1}}\". Ensure {{int:16:24}} rows.\n\nWe'll then call create_file with content string containing CSV.\n\nAfter creating file, we will respond: \"Attached servers.csv with {{int:16:24}} synthetic server records.\"",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "hostname,ip,cpu_cores,memory_gb,os,location\n{{csv:0}}",
+                "file_name": "servers.csv"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":965,\"file_name\":\"servers.csv\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1832,
+            "completion_tokens": 816
+          },
+          "chars": 2233
+        },
+        {
+          "text": "Here is the CSV file you requested. It contains {{int:16:24}} synthetic server records with the fields hostname, IP address, CPU cores, memory (GB), operating system, and location.\n\n**Attached:** `servers.csv`",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2374,
+            "completion_tokens": 47
+          },
+          "chars": 198
+        }
+      ]
+    }
+  ]
+}

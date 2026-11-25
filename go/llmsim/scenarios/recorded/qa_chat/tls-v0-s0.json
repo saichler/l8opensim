@@ -1,0 +1,24 @@
+{
+  "id": "qa_chat/tls/v0/s0",
+  "flavor": "qa_chat",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:02:57Z",
+  "turns": [
+    {
+      "user_message": "Explain how TLS certificates work in simple terms.",
+      "steps": [
+        {
+          "reasoning": "The user asks a non-data question: explain TLS certificates in simple terms. According to guidelines, we can answer directly, no tool needed.",
+          "text": "### TLS Certificates in Simple Terms\n\n1. **What TLS Is**  \n   TLS (Transport Layer Security) is the protocol that secures the connection between your browser (or any client) and a server. It encrypts the data so nobody can eavesdrop or tamper with it.\n\n2. **Why You Need a Certificate**  \n   - **Identity:** The certificate tells the client *who* the server really is (e.g., “this is example.com”).  \n   - **Trust:** It lets the client verify that the server is trustworthy, because the certificate is signed by a trusted third‑party (a **Certificate Authority**, or CA).  \n   - **Encryption Setup:** The public key inside the certificate is used during the TLS handshake to set up the encrypted channel.\n\n3. **Key Parts of a TLS Certificate**  \n   - **Domain name(s):** The hostname(s) the certificate is valid for (e.g., `example.com` and `www.example.com`).  \n   - **Public key:** Part of an asymmetric key pair. The server keeps the matching private key secret.  \n   - **Issuer:** The CA that signed the certificate.  \n   - **Validity period:** Start and end dates; after the end date the certificate is no longer trusted.  \n   - **Signature:** A cryptographic proof from the CA that the certificate’s contents haven’t been altered.\n\n4. **How It Works (The TLS Handshake)**  \n\n   1. **Client Hello** – Your browser says, “I want to talk securely, here are the TLS versions and ciphers I support.”  \n   2. **Server Hello + Certificate** – The server replies with its chosen TLS version/cipher *and* sends its TLS certificate.  \n   3. **Certificate Validation** – The browser checks:  \n      - Is the certificate signed by a CA it trusts?  \n      - Is the certificate still within its validity dates?  \n      - Does the certificate’s domain match the site you’re visiting?  \n   4. **Key Exchange** – Using the server’s public key (from the certificate), the client encrypts a “premaster secret” and sends it to the server. Only the server can decrypt it with its private key.  \n   5. **Generate Session Keys** – Both sides derive the same symmetric encryption keys from the premaster secret.  \n   6. **Secure Communication** – All subsequent data is encrypted with these symmetric keys, which are fast and strong.\n\n5. **What Happens If Validation Fails?**  \n   If any check fails (e.g., the certificate is expired, not signed by a trusted CA, or the domain doesn’t match), the browser shows a warning like “Your connection is not private.” The user can then choose to proceed (not recommended) or abort.\n\n6. **Types of Certificates**  \n   - **Domain‑validated (DV):** Proves control over a domain; quick and cheap.  \n   - **Organization‑validated (OV):** Also verifies the organization’s legal identity.  \n   - **Extended Validation (EV):** Performs the most thorough checks; browsers used to show a green address bar (most now just show the organization name).  \n   - **Wildcard:** Secures a domain and all its first‑level subdomains (`*.example.com`).  \n   - **Multi‑domain (SAN) certificates:** Secure several distinct domain names in a single certificate.\n\n7. **Renewal \u0026 Revocation**  \n   - **Renewal:** Before a certificate expires, a new one must be obtained and installed on the server.  \n   - **Revocation:** If a private key is compromised, the CA can revoke the certificate. Browsers check revocation status via OCSP or CRLs.\n\n---\n\n**Bottom line:** A TLS certificate is a digital “passport” that proves a server’s identity and supplies a public key. During the TLS handshake, the client verifies that passport, uses the public key to set up a secret session key, and then both sides talk securely.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1796,
+            "completion_tokens": 866
+          },
+          "chars": 3811
+        }
+      ]
+    }
+  ]
+}

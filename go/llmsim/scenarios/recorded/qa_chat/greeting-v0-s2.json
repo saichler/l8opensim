@@ -1,0 +1,54 @@
+{
+  "id": "qa_chat/greeting/v0/s2",
+  "flavor": "qa_chat",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:06:34Z",
+  "turns": [
+    {
+      "user_message": "Hi Tanto!",
+      "steps": [
+        {
+          "reasoning": "We need to greet the user. No request yet. So respond friendly.",
+          "text": "Hello! How can I help you today?",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1790,
+            "completion_tokens": 34
+          },
+          "chars": 95
+        }
+      ]
+    },
+    {
+      "user_message": "What can you do?",
+      "steps": [
+        {
+          "reasoning": "The user asks what can I do. I should explain capabilities: query data, create/update records, export CSV, create reports, etc. Use appropriate tone.",
+          "text": "I’m Tanto, the assistant for the Probler datacenter‑management system. With the permissions you have, I can help you:\n\n* **Explore the data** – list the available models (network devices, GPU servers, Kubernetes clusters, alarms, events, polling targets, etc.) and see the fields each model contains.  \n* **Run queries** – retrieve specific records or aggregate information (counts, sums, averages, min/max) using L8Query syntax. I can filter, sort and group results as needed.  \n* **Export data** – generate a CSV file with any set of records you request, so you can download and open it in a spreadsheet.  \n* **Create or update records** – add new devices, alarms, clusters, etc., or modify existing ones (e.g., change a device’s status or update a GPU’s driver version).  \n* **Generate reports** – produce a text/markdown/JSON file summarising information, calculations or insights and attach it for you to download.  \n\nAll actions respect the permissions of your user account, and I never fabricate data—everything I return comes directly from the system. Let me know what you’d like to do!",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1814,
+            "completion_tokens": 283
+          },
+          "chars": 1265
+        }
+      ]
+    },
+    {
+      "user_message": "Thanks, bye.",
+      "steps": [
+        {
+          "reasoning": "User says thanks, bye. We should respond politely and end.",
+          "text": "You’re welcome! If you need anything else later, just let me know. Have a great day!",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2069,
+            "completion_tokens": 44
+          },
+          "chars": 144
+        }
+      ]
+    }
+  ]
+}

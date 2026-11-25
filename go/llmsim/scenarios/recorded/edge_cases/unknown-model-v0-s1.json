@@ -1,0 +1,42 @@
+{
+  "id": "edge_cases/unknown-model/v0/s1",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:46:38Z",
+  "turns": [
+    {
+      "user_message": "How many invoices did we bill last month?",
+      "steps": [
+        {
+          "reasoning": "We need to answer: \"How many invoices did we bill last month?\" The system includes models: NetworkDevice, GpuDevice, K8SCluster, K8SNode, K8SPod, K8SDeployment, Alarm, EventRecord, L8PTarget. No Invoice model. Maybe there is an Invoice model not listed? The list_modules can show. Let's list modules.",
+          "tool_calls": [
+            {
+              "name": "list_modules",
+              "arguments": {}
+            }
+          ],
+          "tool_results": [
+            "{\"models\":[{\"area\":\"Inventory\",\"model\":\"NetworkDevice\",\"primaryKey\":\"id\",\"service\":\"NetDev\"},{\"area\":\"Inventory\",\"model\":\"GpuDevice\",\"primaryKey\":\"id\",\"service\":\"GpuDev\"},{\"area\":\"Kubernetes\",\"model\":\"K8SCluster\",\"primaryKey\":\"name\",\"service\":\"K8sClstr\"},{\"area\":\"Kubernetes\",\"model\":\"K8SNode\",\"primaryKey\":\"name\",\"service\":\"K8sNode\"},{\"area\":\"Kubernetes\",\"model\":\"K8SPod\",\"primaryKey\":\"key\",\"service\":\"K8sPod\"},{\"area\":\"Kubernetes\",\"model\":\"K8SDeployment\",\"primaryKey\":\"key\",\"service\":\"K8sDeploy\"},{\"area\":\"Alarms\",\"model\":\"Alarm\",\"primaryKey\":\"alarmId\",\"service\":\"Alarm\"},{\"area\":\"Alarms\",\"model\":\"EventRecord\",\"primaryKey\":\"eventId\",\"service\":\"Events\"},{\"area\":\"Collection\",\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\",\"service\":\"Targets\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1796,
+            "completion_tokens": 100
+          },
+          "chars": 314
+        },
+        {
+          "reasoning": "We need to answer: \"How many invoices did we bill last month?\" There's no Invoice model listed. The available models: NetworkDevice, GpuDevice, K8SCluster, K8SNode, K8SPod, K8SDeployment, Alarm, EventRecord, L8PTarget. None are invoices. Possibly invoices are in EventRecord? Or perhaps it's missing; we need to ask user for clarification? According to rules, we cannot fabricate. So we must say we don't have an Invoice model, cannot answer.\n\nThus respond: I don't see an invoice model; need more info.",
+          "text": "I’m not seeing a model for invoices in the data set you have access to (the available models are NetworkDevice, GpuDevice, K8SCluster, K8SNode, K8SPod, K8SDeployment, Alarm, EventRecord, and L8PTarget). Could you let me know which model stores the invoice records or provide more details so I can retrieve the count you need?",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2041,
+            "completion_tokens": 215
+          },
+          "chars": 830
+        }
+      ]
+    }
+  ]
+}

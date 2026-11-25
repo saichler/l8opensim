@@ -1,0 +1,63 @@
+{
+  "id": "data_aggregate/avg-interfaces/v0/s0",
+  "flavor": "data_aggregate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:34:28Z",
+  "turns": [
+    {
+      "user_message": "What is the average number of interfaces per device, per vendor?",
+      "steps": [
+        {
+          "reasoning": "We need average number of interfaces per device, per vendor. Model likely NetworkDevice. Need to know field names: vendor and interfaces count. Let's describe model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1800,
+            "completion_tokens": 61
+          },
+          "chars": 204
+        },
+        {
+          "reasoning": "We need average number of interfaces per device, per vendor. So group by equipmentinfo.vendor, compute avg(equipmentinfo.interfaceCount). Use query: select equipmentinfo.vendor, avg(equipmentinfo.interfaceCount) from NetworkDevice group-by equipmentinfo.vendor. Use count? Just avg.\n\nLet's run.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select equipmentinfo.vendor, avg(equipmentinfo.interfaceCount) from NetworkDevice group-by equipmentinfo.vendor"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"avg(equipmentinfo.interfaceCount)\":73,\"group\":{\"equipmentinfo.vendor\":\"Arista\"}},{\"avg(equipmentinfo.interfaceCount)\":81,\"group\":{\"equipmentinfo.vendor\":\"Cisco\"}},{\"avg(equipmentinfo.interfaceCount)\":48,\"group\":{\"equipmentinfo.vendor\":\"Dell\"}},{\"avg(equipmentinfo.interfaceCount)\":47.33,\"group\":{\"equipmentinfo.vendor\":\"Huawei\"}},{\"avg(equipmentinfo.interfaceCount)\":28,\"group\":{\"equipmentinfo.vendor\":\"Juniper\"}},{\"avg(equipmentinfo.interfaceCount)\":43.4,\"group\":{\"equipmentinfo.vendor\":\"Nokia\"}},{\"avg(equipmentinfo.interfaceCount)\":58,\"group\":{\"equipmentinfo.vendor\":\"Palo Alto\"}}],\"model\":\"NetworkDevice\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2037,
+            "completion_tokens": 104
+          },
+          "chars": 424
+        },
+        {
+          "text": "**Average number of interfaces per network device, grouped by vendor**\n\n| Vendor       | Average Interfaces |\n|--------------|--------------------|\n| Arista       | {{int:58:88}} |\n| Cisco        | {{int:64:98}} |\n| Dell         | {{int:38:58}} |\n| Huawei       | 47.33 |\n| Juniper      | {{int:22:34}} |\n| Nokia        | 43.4 |\n| Palo Alto    | {{int:46:70}} |\n\nThese values represent the mean count of interfaces reported for each device from the respective vendor.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2258,
+            "completion_tokens": 103
+          },
+          "chars": 412
+        }
+      ]
+    }
+  ]
+}

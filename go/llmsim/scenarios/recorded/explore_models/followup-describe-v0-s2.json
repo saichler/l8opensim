@@ -1,0 +1,75 @@
+{
+  "id": "explore_models/followup-describe/v0/s2",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:53:28Z",
+  "turns": [
+    {
+      "user_message": "List the models you can use.",
+      "steps": [
+        {
+          "reasoning": "We need to list models. Use list_modules function.",
+          "tool_calls": [
+            {
+              "name": "list_modules",
+              "arguments": {}
+            }
+          ],
+          "tool_results": [
+            "{\"models\":[{\"area\":\"Inventory\",\"model\":\"NetworkDevice\",\"primaryKey\":\"id\",\"service\":\"NetDev\"},{\"area\":\"Inventory\",\"model\":\"GpuDevice\",\"primaryKey\":\"id\",\"service\":\"GpuDev\"},{\"area\":\"Kubernetes\",\"model\":\"K8SCluster\",\"primaryKey\":\"name\",\"service\":\"K8sClstr\"},{\"area\":\"Kubernetes\",\"model\":\"K8SNode\",\"primaryKey\":\"name\",\"service\":\"K8sNode\"},{\"area\":\"Kubernetes\",\"model\":\"K8SPod\",\"primaryKey\":\"key\",\"service\":\"K8sPod\"},{\"area\":\"Kubernetes\",\"model\":\"K8SDeployment\",\"primaryKey\":\"key\",\"service\":\"K8sDeploy\"},{\"area\":\"Alarms\",\"model\":\"Alarm\",\"primaryKey\":\"alarmId\",\"service\":\"Alarm\"},{\"area\":\"Alarms\",\"model\":\"EventRecord\",\"primaryKey\":\"eventId\",\"service\":\"Events\"},{\"area\":\"Collection\",\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\",\"service\":\"Targets\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 31
+          },
+          "chars": 64
+        },
+        {
+          "text": "Here are the available models you can query or modify:\n\n- **NetworkDevice** (Inventory)\n- **GpuDevice** (Inventory)\n- **K8SCluster** (Kubernetes)\n- **K8SNode** (Kubernetes)\n- **K8SPod** (Kubernetes)\n- **K8SDeployment** (Kubernetes)\n- **Alarm** (Alarms)\n- **EventRecord** (Alarms)\n- **L8PTarget** (Collection)",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2039,
+            "completion_tokens": 102
+          },
+          "chars": 308
+        }
+      ]
+    },
+    {
+      "user_message": "Describe the K8SNode model.",
+      "steps": [
+        {
+          "reasoning": "We need to describe the K8SNode model: list its fields. Use describe_model tool.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SNode"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"roles\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"version\",\"type\":\"string\"},{\"path\":\"internalIp\",\"type\":\"string\"},{\"path\":\"osImage\",\"type\":\"string\"},{\"path\":\"kernelVersion\",\"type\":\"string\"},{\"path\":\"containerRuntime\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SNode\",\"primaryKey\":\"name\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1910,
+            "completion_tokens": 51
+          },
+          "chars": 113
+        },
+        {
+          "text": "The **K8SNode** model has the following fields:\n\n| Field            | Type   |\n|------------------|--------|\n| **name**         | string (primary key) |\n| **status**       | string |\n| **roles**        | string |\n| **age**          | string |\n| **version**      | string |\n| **internalIp**   | string |\n| **osImage**      | string |\n| **kernelVersion**| string |\n| **containerRuntime** | string |\n| **clusterName**  | string |\n\nThese fields capture basic node information such as its identifier, operational status, assigned roles, age, Kubernetes version, internal IP address, operating system details, kernel version, container runtime, and the cluster it belongs to.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2068,
+            "completion_tokens": 160
+          },
+          "chars": 669
+        }
+      ]
+    }
+  ]
+}

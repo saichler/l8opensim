@@ -1,0 +1,63 @@
+{
+  "id": "data_aggregate/status-breakdown/v0/s2",
+  "flavor": "data_aggregate",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:33:57Z",
+  "turns": [
+    {
+      "user_message": "Give me a breakdown of device status across the network.",
+      "steps": [
+        {
+          "reasoning": "We need to provide breakdown of device status across the network. Likely refers to NetworkDevice model. Need count per status. Use describe_model to get field names.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1798,
+            "completion_tokens": 62
+          },
+          "chars": 204
+        },
+        {
+          "reasoning": "We need breakdown of device status across the network. Likely we need count per equipmentinfo.deviceStatus. Use aggregate query count(*) group-by equipmentinfo.deviceStatus.\n\nLet's run query.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select count(*), equipmentinfo.deviceStatus from NetworkDevice group-by equipmentinfo.deviceStatus"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"count(*)\":1,\"group\":{\"equipmentinfo.deviceStatus\":\"DEVICE_STATUS_CRITICAL\"}},{\"count(*)\":3,\"group\":{\"equipmentinfo.deviceStatus\":\"DEVICE_STATUS_OFFLINE\"}},{\"count(*)\":13,\"group\":{\"equipmentinfo.deviceStatus\":\"DEVICE_STATUS_ONLINE\"}},{\"count(*)\":2,\"group\":{\"equipmentinfo.deviceStatus\":\"DEVICE_STATUS_WARNING\"}}],\"model\":\"NetworkDevice\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2035,
+            "completion_tokens": 78
+          },
+          "chars": 308
+        },
+        {
+          "text": "**Device status breakdown**\n\n| Device Status | Count |\n|---------------|-------|\n| DEVICE_STATUS_CRITICAL | 1 |\n| DEVICE_STATUS_OFFLINE | 3 |\n| DEVICE_STATUS_ONLINE | {{int:10:16}} |\n| DEVICE_STATUS_WARNING | 2 |\n\nThis shows how many network devices are in each status category.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2176,
+            "completion_tokens": 67
+          },
+          "chars": 267
+        }
+      ]
+    }
+  ]
+}

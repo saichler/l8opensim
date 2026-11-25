@@ -1,0 +1,221 @@
+{
+  "id": "record_crud/bulk-update/v0/s0",
+  "flavor": "record_crud",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:16:59Z",
+  "turns": [
+    {
+      "user_message": "Set the status of all Arista devices to maintenance.",
+      "steps": [
+        {
+          "reasoning": "The user wants to set status of all Arista devices to maintenance. Need to update NetworkDevice records where vendor is Arista (likely a field). We need to know model fields for NetworkDevice. Use describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1798,
+            "completion_tokens": 73
+          },
+          "chars": 251
+        },
+        {
+          "reasoning": "We need to set status of all Arista devices to maintenance. The status field is equipmentinfo.deviceStatus. Need to update records where equipmentinfo.vendor = 'Arista'? Probably vendor field.\n\nWe need to find all records with vendor Arista, then update each. Use update_record but need primary key id. First get ids: select id from NetworkDevice where equipmentinfo.vendor='Arista' limit {{int:80:120}}? Could be many but limit? There's no limit requirement for updates, we need to update all. We can fetch all ids (maybe up to {{int:80:120}}). Use select id from NetworkDevice where equipmentinfo.vendor='Arista' limit {{int:80:120}}. Then for each id call update_record with deviceStatus = 'maintenance'.\n\nLet's run query to get ids.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select id from NetworkDevice where equipmentinfo.vendor='Arista'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":2,\"model\":\"NetworkDevice\",\"records\":[{\"id\":\"nd-010\"},{\"id\":\"nd-013\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2035,
+            "completion_tokens": 191
+          },
+          "chars": 786
+        },
+        {
+          "reasoning": "We need to set status of all Arista devices to maintenance. The status field is equipmentinfo.deviceStatus. So we need to update each record's deviceStatus to \"maintenance\". We have two IDs: nd-010, nd-013. We must perform updates. Use update_record for each.",
+          "tool_calls": [
+            {
+              "name": "update_record",
+              "arguments": {
+                "data": {
+                  "equipmentinfo": {
+                    "deviceStatus": "maintenance"
+                  },
+                  "id": "nd-010"
+                },
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"action\":\"update\",\"model\":\"NetworkDevice\",\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2111,
+            "completion_tokens": 121
+          },
+          "chars": 367
+        },
+        {
+          "reasoning": "We need to set status of all Arista devices to maintenance. We have two IDs from query. Need to update both. Already updated nd-010. Need also nd-013.",
+          "tool_calls": [
+            {
+              "name": "update_record",
+              "arguments": {
+                "data": {
+                  "equipmentinfo": {
+                    "deviceStatus": "maintenance"
+                  },
+                  "id": "nd-013"
+                },
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"action\":\"update\",\"model\":\"NetworkDevice\",\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2181,
+            "completion_tokens": 79
+          },
+          "chars": 258
+        },
+        {
+          "text": "All Arista devices have been updated to **maintenance** status.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2251,
+            "completion_tokens": 17
+          },
+          "chars": 63
+        }
+      ]
+    },
+    {
+      "user_message": "Yes, go ahead.",
+      "steps": [
+        {
+          "reasoning": "We need to update status of all Arista devices. We need to find the model: likely NetworkDevice. We need to filter where vendor is Arista. Need to know field name for vendor. Let's describe model NetworkDevice.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1826,
+            "completion_tokens": 75
+          },
+          "chars": 249
+        },
+        {
+          "reasoning": "We need to set status of all Arista devices to maintenance. The field for status appears to be equipmentinfo.deviceStatus. We need to update records where equipmentinfo.vendor = \"Arista\". First we need to select IDs of those devices, then update each. Since we may have many, we can retrieve IDs then loop updating. Use query to get ids.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select id from NetworkDevice where equipmentinfo.vendor='Arista'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":2,\"model\":\"NetworkDevice\",\"records\":[{\"id\":\"nd-010\"},{\"id\":\"nd-013\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2063,
+            "completion_tokens": 110
+          },
+          "chars": 420
+        },
+        {
+          "reasoning": "We have IDs nd-010 and nd-013. Need to update their equipmentinfo.deviceStatus to 'maintenance'. Use update_record for each.",
+          "tool_calls": [
+            {
+              "name": "update_record",
+              "arguments": {
+                "data": {
+                  "equipmentinfo": {
+                    "deviceStatus": "maintenance"
+                  },
+                  "id": "nd-010"
+                },
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"action\":\"update\",\"model\":\"NetworkDevice\",\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2139,
+            "completion_tokens": 90
+          },
+          "chars": 232
+        },
+        {
+          "reasoning": "Now need to update second record.",
+          "tool_calls": [
+            {
+              "name": "update_record",
+              "arguments": {
+                "data": {
+                  "equipmentinfo": {
+                    "deviceStatus": "maintenance"
+                  },
+                  "id": "nd-013"
+                },
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"action\":\"update\",\"model\":\"NetworkDevice\",\"ok\":true}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2209,
+            "completion_tokens": 49
+          },
+          "chars": 141
+        },
+        {
+          "text": "All Arista devices have now been set to **maintenance** status.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2279,
+            "completion_tokens": 18
+          },
+          "chars": 63
+        }
+      ]
+    }
+  ]
+}

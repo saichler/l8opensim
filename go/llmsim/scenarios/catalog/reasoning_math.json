@@ -1,0 +1,96 @@
+{
+  "flavor": "reasoning_math",
+  "mode": "tanto",
+  "validators": [],
+  "expect_tools": [],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "bandwidth",
+      "params": {},
+      "turns": [
+        "Step by step: how long would it take to copy 4 TB over a 10 Gbps link at 70% efficiency?"
+      ]
+    },
+    {
+      "id": "capacity",
+      "params": {},
+      "turns": [
+        "We have 8 GPU servers with 8 GPUs each, each job needs 3 GPUs and jobs can't span servers. How many jobs can run at once? Explain step by step."
+      ]
+    },
+    {
+      "id": "probability",
+      "params": {},
+      "turns": [
+        "If each of 3 independent links has 99.9% availability, what is the probability that all are up? And at least one?"
+      ]
+    },
+    {
+      "id": "raid-capacity",
+      "params": {},
+      "turns": [
+        "Calculate how much usable space a RAID 6 array of 12 disks of 8 TB has, step by step."
+      ]
+    },
+    {
+      "id": "subnet",
+      "params": {},
+      "turns": [
+        "Step by step: how many /26 subnets fit in a /22, and how many hosts each?"
+      ]
+    },
+    {
+      "id": "train",
+      "params": {},
+      "turns": [
+        "If a train leaves at 9:00 going 80 km/h and another leaves at 10:00 from the same station going 120 km/h, when does the second catch up?"
+      ]
+    },
+    {
+      "id": "puzzle",
+      "params": {},
+      "turns": [
+        "Puzzle: you have 3 switches outside a room with 3 bulbs, you can enter once. How do you know which switch controls which bulb?"
+      ]
+    },
+    {
+      "id": "power",
+      "params": {},
+      "turns": [
+        "A rack has 20 servers drawing 450 W each and PDUs of 7.2 kW. How many PDUs are needed with N+1 redundancy? Step by step."
+      ]
+    },
+    {
+      "id": "growth",
+      "params": {},
+      "turns": [
+        "Storage grows 4% per month from 120 TB. When will we pass 200 TB? Show the calculation."
+      ]
+    },
+    {
+      "id": "sla",
+      "params": {},
+      "turns": [
+        "What is the maximum downtime per month for 99.95% availability? Step by step."
+      ]
+    },
+    {
+      "id": "queue",
+      "params": {},
+      "turns": [
+        "Requests arrive at 900 per second and each takes 20 ms on one worker. How many workers do we need to keep utilization under 70%?"
+      ]
+    },
+    {
+      "id": "followup",
+      "params": {},
+      "turns": [
+        "Step by step: how many 2U servers fit in a 42U rack leaving 4U for switches?",
+        "And how many racks for 150 servers?"
+      ]
+    }
+  ]
+}

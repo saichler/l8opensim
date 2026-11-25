@@ -1,0 +1,24 @@
+{
+  "id": "writing/blog/v0/s2",
+  "flavor": "writing",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:55:54Z",
+  "turns": [
+    {
+      "user_message": "Write a short blog post on why we moved our GPU monitoring to DCGM.",
+      "steps": [
+        {
+          "reasoning": "We need to write a short blog post. No data needed. Just produce text. No tool calls needed. We'll output blog post.",
+          "text": "**Why We Switched Our GPU Monitoring to NVIDIA DCGM**\n\nIn today’s data‑center environments, GPUs have become as critical as CPUs for workloads ranging from AI training to high‑performance computing. As we expanded our GPU fleet, the limitations of our legacy monitoring stack became apparent, prompting a move to NVIDIA’s Data Center GPU Manager (DCGM). Here’s a quick look at why DCGM made the most sense for us.\n\n---\n\n### 1. **Deep, GPU‑Specific Telemetry**\n\nTraditional monitoring tools treat GPUs like generic hardware components, exposing only basic metrics (temperature, utilization, memory usage). DCGM, however, provides a rich set of GPU‑centric telemetry:\n\n- **Fine‑grained utilization** (SM, memory, encoder/decoder)\n- **Power and energy consumption**\n- **PCIe bandwidth and error counters**\n- **NVLink health and topology**\n\nThese insights let us pinpoint performance bottlenecks and spot early signs of hardware degradation before they impact production workloads.\n\n---\n\n### 2. **Built‑in Health‑Checking \u0026 Automated Remediation**\n\nDCGM includes proactive health checks that evaluate GPU health against NVIDIA‑defined thresholds. When a metric crosses a warning or critical level, DCGM can trigger alerts or even execute predefined remediation scripts (e.g., resetting a misbehaving GPU). This automation reduces mean‑time‑to‑detect (MTTD) and mean‑time‑to‑resolve (MTTR) incidents.\n\n---\n\n### 3. **Scalable, Centralized Management**\n\nOur GPU clusters span multiple racks and geographic locations. DCGM’s **host‑engine architecture** lets us run a lightweight DCGM‑exporter on each host, feeding metrics into our existing Prometheus/Grafana stack. Because the exporter follows a standard format, scaling to hundreds of GPUs is as simple as deploying another daemon—no custom code changes required.\n\n---\n\n### 4. **Vendor Support \u0026 Future‑Proofing**\n\nNVIDIA actively maintains DCGM, adding support for new GPU architectures (e.g., H100, Hopper) and features (such as MIG). By aligning with the vendor’s tooling, we get direct access to firmware‑level data and timely bug fixes—something our third‑party solution struggled to provide.\n\n---\n\n### 5. **Security \u0026 Compliance**\n\nDCGM communicates over secure gRPC channels and respects role‑based access controls. This aligns with our internal security policies and simplifies compliance audits, as we can trace who accessed GPU metrics and when.\n\n---\n\n### 6. **Ease of Integration**\n\nDCMM (DCGM‑Monitoring Module) ships with ready‑made exporters for popular observability stacks and supports custom metric collection via its API. This allowed us to integrate GPU monitoring into our existing dashboards within a single sprint, without reinventing the wheel.\n\n---\n\n## The Bottom Line\n\nSwitching to NVIDIA DCGM gave us **deeper visibility**, **proactive health management**, and a **scalable architecture** that fits naturally into our observability pipeline. The result? Faster issue detection, reduced downtime, and confidence that our GPU resources are running at peak efficiency.\n\nIf you’re grappling with GPU monitoring challenges, give DCGM a try—you’ll likely find the same benefits we did.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1803,
+            "completion_tokens": 689
+          },
+          "chars": 3331
+        }
+      ]
+    }
+  ]
+}

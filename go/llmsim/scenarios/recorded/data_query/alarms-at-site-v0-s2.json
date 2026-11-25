@@ -1,0 +1,91 @@
+{
+  "id": "data_query/alarms-at-site/v0/s2",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:41:44Z",
+  "params": {
+    "site": [
+      "Austin",
+      "Dallas",
+      "Houston",
+      "Seattle",
+      "Denver",
+      "Chicago"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Show the alarms for devices in Austin.",
+      "steps": [
+        {
+          "reasoning": "We need to get alarms for devices in {{p:site}}. Likely Alarm model has fields linking to device, maybe deviceId, location? Need to explore models. First list modules.",
+          "tool_calls": [
+            {
+              "name": "list_modules",
+              "arguments": {}
+            }
+          ],
+          "tool_results": [
+            "{\"models\":[{\"area\":\"Inventory\",\"model\":\"NetworkDevice\",\"primaryKey\":\"id\",\"service\":\"NetDev\"},{\"area\":\"Inventory\",\"model\":\"GpuDevice\",\"primaryKey\":\"id\",\"service\":\"GpuDev\"},{\"area\":\"Kubernetes\",\"model\":\"K8SCluster\",\"primaryKey\":\"name\",\"service\":\"K8sClstr\"},{\"area\":\"Kubernetes\",\"model\":\"K8SNode\",\"primaryKey\":\"name\",\"service\":\"K8sNode\"},{\"area\":\"Kubernetes\",\"model\":\"K8SPod\",\"primaryKey\":\"key\",\"service\":\"K8sPod\"},{\"area\":\"Kubernetes\",\"model\":\"K8SDeployment\",\"primaryKey\":\"key\",\"service\":\"K8sDeploy\"},{\"area\":\"Alarms\",\"model\":\"Alarm\",\"primaryKey\":\"alarmId\",\"service\":\"Alarm\"},{\"area\":\"Alarms\",\"model\":\"EventRecord\",\"primaryKey\":\"eventId\",\"service\":\"Events\"},{\"area\":\"Collection\",\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\",\"service\":\"Targets\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 55
+          },
+          "chars": 177
+        },
+        {
+          "reasoning": "We need to show alarms for devices in {{p:site}}. We need to query Alarm model, likely has fields linking to devices, maybe deviceId, location etc. Need to describe Alarm model to know fields.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "Alarm"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"alarmId\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"description\",\"type\":\"string\"},{\"path\":\"state\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"nodeId\",\"type\":\"string\"},{\"path\":\"nodeName\",\"type\":\"string\"},{\"path\":\"location\",\"type\":\"string\"},{\"path\":\"firstOccurrence\",\"type\":\"int\"},{\"path\":\"lastOccurrence\",\"type\":\"int\"},{\"path\":\"occurrenceCount\",\"type\":\"int\"},{\"path\":\"isRootCause\",\"type\":\"bool\"},{\"path\":\"acknowledgedBy\",\"type\":\"string\"}],\"model\":\"Alarm\",\"primaryKey\":\"alarmId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2040,
+            "completion_tokens": 64
+          },
+          "chars": 219
+        },
+        {
+          "reasoning": "We need to \"Show the alarms for devices in {{p:site}}.\"\n\nWe have Alarm model with fields including location, nodeId, nodeName, etc. Likely location field holds location string like \"{{p:site}}\". So we need to query Alarm where location = {{p:site}}.\n\nWe need to list alarms. Use select * from Alarm where location=\"{{p:site}}\". Since select * requires limit or id filter, but we can add limit {{int:80:120}} (max). Provide up to {{int:80:120}} records.\n\nWe'll query.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select * from Alarm where location='{{p:site}}' limit 100"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":5,\"model\":\"Alarm\",\"records\":[{\"acknowledgedBy\":\"operator1\",\"alarmId\":\"alm-002\",\"description\":\"Repeated state changes detected\",\"firstOccurrence\":1794997671225,\"isRootCause\":false,\"lastOccurrence\":1795303371225,\"location\":\"Austin\",\"name\":\"High CPU\",\"nodeId\":\"nd-002\",\"nodeName\":\"core-rtr-02\",\"occurrenceCount\":25,\"severity\":\"SEVERITY_MINOR\",\"state\":\"ALARM_STATE_CLEARED\"},{\"acknowledgedBy\":\"operator1\",\"alarmId\":\"alm-007\",\"description\":\"Redundancy lost\",\"firstOccurrence\":1795441131225,\"isRootCause\":false,\"lastOccurrence\":1795492491225,\"location\":\"Austin\",\"name\":\"Node Not Ready\",\"nodeId\":\"nd-007\",\"nodeName\":\"core-rtr-07\",\"occurrenceCount\":13,\"severity\":\"SEVERITY_MAJOR\",\"state\":\"ALARM_STATE_ACTIVE\"},{\"acknowledgedBy\":\"\",\"alarmId\":\"alm-020\",\"description\":\"Repeated state changes detected\",\"firstOccurrence\":1795325211225,\"isRootCause\":false,\"lastOccurrence\":1795264011225,\"location\":\"Austin\",\"name\":\"Fan Failure\",\"nodeId\":\"nd-020\",\"nodeName\":\"core-rtr-20\",\"occurrenceCount\":27,\"severity\":\"SEVERITY_MAJOR\",\"state\":\"ALARM_STATE_ACKNOWLEDGED\"},{\"acknowledgedBy\":\"admin\",\"alarmId\":\"alm-027\",\"description\":\"Repeated state changes detected\",\"firstOccurrence\":1795410831225,\"isRootCause\":true,\"lastOccurrence\":1795483671225,\"location\":\"Austin\",\"name\":\"Link Flapping\",\"nodeId\":\"nd-027\",\"nodeName\":\"core-rtr-27\",\"occurrenceCount\":14,\"severity\":\"SEVERITY_WARNING\",\"state\":\"ALARM_STATE_ACTIVE\"},{\"acknowledgedBy\":\"\",\"alarmId\":\"alm-028\",\"description\":\"Redundancy lost\",\"firstOccurrence\":1795032171225,\"isRootCause\":false,\"lastOccurrence\":1795274391225,\"location\":\"Austin\",\"name\":\"Interface Down\",\"nodeId\":\"nd-028\",\"nodeName\":\"core-rtr-28\",\"occurrenceCount\":34,\"severity\":\"SEVERITY_WARNING\",\"state\":\"ALARM_STATE_CLEARED\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2230,
+            "completion_tokens": 136
+          },
+          "chars": 500
+        },
+        {
+          "text": "Here are the alarms for devices located in {{p:site}}:\n\n| Alarm ID | Name            | Description                     | State               | Severity        | Node ID | Node Name   | First Occurrence | Last Occurrence | Occurrence Count | Acknowledged By |\n|----------|-----------------|---------------------------------|---------------------|-----------------|---------|-------------|------------------|-----------------|------------------|-----------------|\n| alm-002  | High CPU        | Repeated state changes detected| ALARM_STATE_CLEARED | SEVERITY_MINOR  | nd-002  | core-rtr-02| 1794997671225    | 1795303371225   | {{int:20:30}}               | operator1       |\n| alm-007  | Node Not Ready  | Redundancy lost                 | ALARM_STATE_ACTIVE  | SEVERITY_MAJOR  | nd-007  | core-rtr-07| 1795441131225    | 1795492491225   | {{int:10:16}}               | operator1       |\n| alm-020  | Fan Failure     | Repeated state changes detected| ALARM_STATE_ACKNOWLEDGED| SEVERITY_MAJOR| nd-020 | core-rtr-20| 1795325211225    | 1795264011225   | {{int:21:33}}               | (none)          |\n| alm-027  | Link Flapping   | Repeated state changes detected| ALARM_STATE_ACTIVE  | SEVERITY_WARNING| nd-027 | core-rtr-27| 1795410831225    | 1795483671225   | {{int:11:17}}               | admin           |\n| alm-028  | Interface Down  | Redundancy lost                 | ALARM_STATE_CLEARED | SEVERITY_WARNING| nd-028 | core-rtr-28| 1795032171225    | 1795274391225   | {{int:27:41}}               | (none)          |\n\nThese records are the five alarms associated with devices whose location is set to “{{p:site}}.”",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2757,
+            "completion_tokens": 414
+          },
+          "chars": 1561
+        }
+      ]
+    }
+  ]
+}

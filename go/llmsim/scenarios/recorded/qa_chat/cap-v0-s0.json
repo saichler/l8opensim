@@ -1,0 +1,37 @@
+{
+  "id": "qa_chat/cap/v0/s0",
+  "flavor": "qa_chat",
+  "model": "muse-glimmer-30b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T22:33:26Z",
+  "turns": [
+    {
+      "user_message": "Tell me about the CAP theorem.",
+      "steps": [
+        {
+          "text": "The CAP theorem is a fundamental principle in distributed systems design. It states that in the presence of a network partition, a distributed data store can only guarantee **two** of the following three properties:\n\n* **C**onsistency – every read receives the most recent write or an error.\n* **A**vailability – every request receives a response, without guarantee that it contains the most recent write.\n* **P**artition tolerance – the system continues to operate despite arbitrary message loss or network failures between nodes.\n\n**Key takeaways**\n\n* **Partition tolerance is mandatory** in real-world distributed systems because networks can and do fail. The practical choice is therefore between consistency and availability.\n* **CP systems** (e.g., traditional relational databases, MongoDB with majority writes) favor consistency over availability during partitions, potentially rejecting or blocking requests.\n* **AP systems** (e.g., DynamoDB, Cassandra) favor availability over strict consistency, allowing reads/writes during partitions and accepting eventual consistency.\n\nThe theorem guides architects in choosing trade-offs based on application requirements such as financial transactions vs. high-availability content delivery.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2431,
+            "completion_tokens": 228
+          },
+          "chars": 1247
+        }
+      ]
+    },
+    {
+      "user_message": "Which one does etcd choose?",
+      "steps": [
+        {
+          "text": "etcd chooses **CP** (Consistency + Partition tolerance) over Availability.\n\n* **Consistency:** etcd implements the Raft consensus algorithm, which guarantees strong consistency — a successful write is committed by a majority of the cluster and subsequent reads reflect that write.\n* **Partition tolerance:** etcd is designed for distributed deployment; it continues to operate as long as a majority quorum is reachable.\n* **Availability trade-off:** during a network partition, if a majority quorum cannot be reached, etcd will stop accepting writes (and may become unavailable for reads from minority partitions) to preserve consistency. It prioritizes not serving stale or divergent data over always being available.\n\nThis makes etcd suitable for use cases like Kubernetes control plane storage, service discovery, and configuration management, where correctness and a single source of truth are more critical than always-available writes.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2672,
+            "completion_tokens": 174
+          },
+          "chars": 943
+        }
+      ]
+    }
+  ]
+}

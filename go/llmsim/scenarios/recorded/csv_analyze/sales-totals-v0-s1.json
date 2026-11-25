@@ -1,0 +1,24 @@
+{
+  "id": "csv_analyze/sales-totals/v0/s1",
+  "flavor": "csv_analyze",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:18:53Z",
+  "turns": [
+    {
+      "user_message": "Here is our sales data:\n```csv\nregion,month,units,revenue\nNorth,Jan,120,24000\nNorth,Feb,95,19000\nSouth,Jan,200,41000\nSouth,Feb,15,2900\nEast,Jan,130,26500\nEast,Feb,140,28000\nWest,Jan,90,18200\nWest,Feb,310,61000\n```\nWhat are the totals per region?",
+      "steps": [
+        {
+          "reasoning": "User gave sales data CSV as part of message, not from system. We have to compute totals per region: sum of units and sum of revenue per region.\n\nWe need to parse the CSV manually (we can just compute). Data:\n\nNorth: Jan {{int:96:144}} units, {{int:19200:28800}} revenue; Feb {{int:76:114}} units, {{int:15200:22800}} revenue =\u003e total units {{int:172:258}}, revenue {{int:34400:51600}}.\n\nSouth: Jan {{int:160:240}} units, {{int:32800:49200}}; Feb {{int:12:18}} units, {{int:2320:3480}} =\u003e units {{int:172:258}}, revenue {{int:35120:52680}}.\n\nEast: Jan {{int:104:156}} units, {{int:21200:31800}}; Feb {{int:112:168}} units, {{int:22400:33600}} =\u003e units {{int:216:324}}, revenue {{int:43600:65400}}.\n\nWest: Jan {{int:72:108}} units, {{int:14560:21840}}; Feb {{int:248:372}} units, {{int:48800:73200}} =\u003e units {{int:320:480}}, revenue {{int:63360:95040}}.\n\nThus totals per region:\n\nNorth: units {{int:172:258}}, revenue {{int:34400:51600}}\nSouth: units {{int:172:258}}, revenue {{int:35120:52680}}\nEast: units {{int:216:324}}, revenue {{int:43600:65400}}\nWest: units {{int:320:480}}, revenue {{int:63360:95040}}\n\nWe need to present answer. No tools needed because not in system. Just respond with totals per region.\n\n",
+          "text": "Here are the totals for each region:\n\n| Region | Units (total) | Revenue (total) |\n|--------|---------------|-----------------|\n| North  | {{int:172:258}}           | 43,000 |\n| South  | {{int:172:258}}           | 43,900 |\n| East   | {{int:216:324}}           | 54,500 |\n| West   | {{int:320:480}}           | 79,200 |\n\nThese figures sum the `units` and `revenue` columns for each region across both months.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1885,
+            "completion_tokens": 347
+          },
+          "chars": 1161
+        }
+      ]
+    }
+  ]
+}

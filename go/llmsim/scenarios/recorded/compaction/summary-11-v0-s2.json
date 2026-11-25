@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-11/v0/s2",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:18:39Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\nThe user asked about GPU temperatures earlier; the hottest server was gpu-node-07.\n\nNext part of the conversation:\nUser: Is gpu-node-07 still the hottest?\n\nAssistant: Yes, it has the highest health warning level among GPU servers.\n\nUser: Create a report file about it.\n\nAssistant: Attached gpu_node_07_report.md.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary, incorporating facts, decisions, entities, etc. Current summary: \"The user asked about GPU temperatures earlier; the hottest server was gpu-node-07.\"\n\nNow new conversation: User asks if still hottest. Assistant says yes, it has highest health warning level among GPU servers. User wants report file; assistant attaches gpu_node_07_report.md.\n\nSo summary should include: gpu-node-07 is still the hottest GPU server, highest health warning level among GPU servers. Report file created: gpu_node_07_report.md (maybe mention it's attached). Keep placeholders? No placeholders needed. Keep facts. No greetings.\n\nThus new summary: \"gpu-node-07 remains the hottest GPU server, having the highest health warning level among GPU servers. Assistant generated a report file gpu_node_07_report.md for it.\"\n\nMake sure to drop earlier mention of earlier conversation? Keep that it was hottest earlier, now still hottest.\n\nLet's produce concise summary.",
+          "text": "gpu-node-07 remains the hottest GPU server, having the highest health warning level among GPU servers. Assistant generated and attached the report file gpu_node_07_report.md.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 292,
+            "completion_tokens": 237
+          },
+          "chars": 1143
+        }
+      ]
+    }
+  ]
+}

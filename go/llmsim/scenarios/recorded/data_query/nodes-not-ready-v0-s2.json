@@ -1,0 +1,64 @@
+{
+  "id": "data_query/nodes-not-ready/v0/s2",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:39:52Z",
+  "turns": [
+    {
+      "user_message": "Are any Kubernetes nodes not ready?",
+      "steps": [
+        {
+          "reasoning": "We need to answer: \"Are any Kubernetes nodes not ready?\" We need to query K8SNode model, check status. First we need to see fields. Use describe_model for K8SNode.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SNode"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"roles\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"version\",\"type\":\"string\"},{\"path\":\"internalIp\",\"type\":\"string\"},{\"path\":\"osImage\",\"type\":\"string\"},{\"path\":\"kernelVersion\",\"type\":\"string\"},{\"path\":\"containerRuntime\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SNode\",\"primaryKey\":\"name\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 73
+          },
+          "chars": 196
+        },
+        {
+          "reasoning": "We need to answer: Are any Kubernetes nodes not ready? Likely status field indicates node status; probably values like \"Ready\", \"NotReady\", etc. We need to query K8SNode where status != 'Ready' maybe. Use count(*) where status != 'Ready'. Since we only have status field string; we can count nodes not ready. Use query: select count(*) from K8SNode where status!='Ready'. However syntax: where \u003cconditions\u003e. Need to see how to write inequality. Might be =, !=? Not specified but typical. We'll attempt.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select count(*) from K8SNode where status!='Ready'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"count(*)\":0}],\"model\":\"K8SNode\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1952,
+            "completion_tokens": 157
+          },
+          "chars": 571
+        },
+        {
+          "reasoning": "The result shows count(*) = 0. So no nodes not ready. Need to answer accordingly.",
+          "text": "All Kubernetes nodes are in the **Ready** state—there are no nodes with a status other than “Ready.”",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2018,
+            "completion_tokens": 53
+          },
+          "chars": 187
+        }
+      ]
+    }
+  ]
+}

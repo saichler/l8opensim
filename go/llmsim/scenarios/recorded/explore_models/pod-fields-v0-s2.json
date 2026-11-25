@@ -1,0 +1,44 @@
+{
+  "id": "explore_models/pod-fields/v0/s2",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:51:51Z",
+  "turns": [
+    {
+      "user_message": "Which fields can I filter pods by?",
+      "steps": [
+        {
+          "reasoning": "The user asks: \"Which fields can I filter pods by?\" Need to list filterable fields for K8SPod model. Must use describe_model to get fields. Then answer listing field names. Use describe_model for K8SPod.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SPod"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"key\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"namespace\",\"type\":\"string\"},{\"path\":\"ready.count\",\"type\":\"int\"},{\"path\":\"ready.outof\",\"type\":\"int\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"restarts.count\",\"type\":\"int\"},{\"path\":\"restarts.ago\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"ip\",\"type\":\"string\"},{\"path\":\"node\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SPod\",\"primaryKey\":\"key\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 80
+          },
+          "chars": 235
+        },
+        {
+          "reasoning": "We need to answer which fields can be filtered on for pods. Provide list of fields from model. The fields are as above: key, name, namespace, ready.count, ready.outof, status, restarts.count, restarts.ago, age, ip, node, clusterName. Also note that filters can use these fields in where clause. Provide answer.",
+          "text": "You can filter **K8S Pods** using any of the fields defined on the `K8SPod` model:\n\n| Field | Type |\n|-------|------|\n| `key` | string (primary key) |\n| `name` | string |\n| `namespace` | string |\n| `ready.count` | int |\n| `ready.outof` | int |\n| `status` | string |\n| `restarts.count` | int |\n| `restarts.ago` | string |\n| `age` | string |\n| `ip` | string |\n| `node` | string |\n| `clusterName` | string |\n\nWhen building an L8Query you can reference any of these field paths in the `where` clause, e.g.:\n\n```\nselect * from K8SPod where status='Running' and namespace='prod' limit 20\n```\n\nFeel free to let me know what specific filter you’d like to apply, and I can run the query for you.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1977,
+            "completion_tokens": 290
+          },
+          "chars": 1000
+        }
+      ]
+    }
+  ]
+}

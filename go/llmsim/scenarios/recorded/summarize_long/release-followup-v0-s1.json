@@ -1,0 +1,39 @@
+{
+  "id": "summarize_long/release-followup/v0/s1",
+  "flavor": "summarize_long",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:34:00Z",
+  "turns": [
+    {
+      "user_message": "Summarize this document:\n\nRelease 4.2 of the platform introduces a new scheduler that reduces job start latency by 35 percent, support for ARM64 worker nodes, and a redesigned dashboard. The storage layer now supports snapshots every 15 minutes with retention policies per namespace. Breaking changes: the v1beta1 API is removed and clients must migrate to v1; the default log level changed from debug to info. Known issues: the dashboard may show stale metrics for up to two minutes after a node restart, and snapshot restore is not yet supported for volumes larger than 2 TB. Upgrade path: upgrade the control plane first, then drain and upgrade workers one at a time. The team recommends testing the migration to the v1 API in a staging environment before upgrading production clusters. Security fixes include patches for two medium-severity vulnerabilities in the API gateway and an updated TLS configuration that disables TLS 1.0 and 1.1 by default.",
+      "steps": [
+        {
+          "reasoning": "We need to summarize the document. No tool needed. Just produce concise summary.",
+          "text": "**Release 4.2 Summary**\n\n- **New Features**\n  - Scheduler redesign → job start latency ↓ {{int:28:42}} %\n  - ARM64 worker node support\n  - Redesigned dashboard UI\n  - Storage layer: snapshots every {{int:12:18}} min with per‑namespace retention policies\n\n- **Breaking Changes**\n  - `v1beta1` API removed → must migrate to `v1`\n  - Default log level changed from **debug** to **info**\n\n- **Known Issues**\n  - Dashboard may display stale metrics for up to 2 minutes after a node restart\n  - Snapshot restore not supported for volumes \u003e 2 TB\n\n- **Upgrade Path**\n  1. Upgrade control plane first  \n  2. Drain and upgrade worker nodes one‑by‑one  \n  - Recommended: test `v1` API migration in a staging environment before production upgrade\n\n- **Security Fixes**\n  - Patches for two medium‑severity vulnerabilities in the API gateway\n  - TLS configuration updated → TLS 1.0 and 1.1 disabled by default\n\n---  \n\n*Key takeaways:* the release brings performance, architecture, and security improvements, but requires API migration and careful upgrade sequencing.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1979,
+            "completion_tokens": 277
+          },
+          "chars": 1144
+        }
+      ]
+    },
+    {
+      "user_message": "Now summarize only the breaking changes in one sentence.",
+      "steps": [
+        {
+          "reasoning": "User wants a one-sentence summary of breaking changes. From the document: v1beta1 API removed, must migrate to v1; default log level changed from debug to info. So one sentence: \"The release removes the v1beta1 API, requiring migration to v1, and changes the default log level from debug to info.\"",
+          "text": "The release removes the v1beta1 API—requiring migration to v1—and changes the default log level from debug to info.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2250,
+            "completion_tokens": 112
+          },
+          "chars": 428
+        }
+      ]
+    }
+  ]
+}

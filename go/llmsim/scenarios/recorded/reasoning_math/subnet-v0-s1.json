@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/subnet/v0/s1",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:10:23Z",
+  "turns": [
+    {
+      "user_message": "Step by step: how many /26 subnets fit in a /22, and how many hosts each?",
+      "steps": [
+        {
+          "reasoning": "We need to answer the question: step by step calculation: how many /26 subnets fit in a /22, and how many hosts each? This is a networking question, not requiring data queries. So just explain.\n\nWe need to give step-by-step answer: a /22 network has 2^(32-22) = 2^{{int:8:12}} = {{int:819:1229}} IP addresses. A /26 network has 2^(32-26) = 2^6 = {{int:51:77}} IP addresses. Number of subnets = 1024/64 = {{int:12:20}} subnets. Each /26 provides {{int:51:77}} addresses, but usable hosts = {{int:51:77}} - 2 (network and broadcast) = {{int:49:75}} hosts.\n\nThus answer: {{int:12:20}} subnets, each with {{int:49:75}} usable hosts (or {{int:51:77}} total IPs). Provide step-by-step explanation.\n\nLet's answer.",
+          "text": "**Step‑by‑step calculation**\n\n| Step | What we do | Result |\n|------|------------|--------|\n| 1️⃣ | Determine the size of a /22 network.  \u003cbr\u003eNumber of addresses = 2^({{int:25:39}} − {{int:17:27}}) = 2^{{int:8:12}} = **{{int:819:1229}}** IPs. | {{int:819:1229}} addresses total |\n| 2️⃣ | Determine the size of a /26 network.  \u003cbr\u003eNumber of addresses = 2^({{int:25:39}} − {{int:20:32}}) = 2^6 = **{{int:51:77}}** IPs. | {{int:51:77}} addresses per /26 |\n| 3️⃣ | Find how many /26 blocks fit into the /22 block.  \u003cbr\u003e{{int:819:1229}} ÷ {{int:51:77}} = **{{int:12:20}}**. | **{{int:12:20}} subnets** |\n| 4️⃣ | Calculate usable hosts per /26.  \u003cbr\u003eEvery subnet reserves the first address (network) and the last address (broadcast).\u003cbr\u003eUsable hosts = {{int:51:77}} − 2 = **{{int:49:75}}**. | **{{int:49:75}} usable hosts** per /26 ({{int:51:77}} total IPs) |\n\n**Answer**\n\n- **Number of /26 subnets that fit inside a /22:** **{{int:12:20}}**  \n- **Usable hosts per /26 subnet:** **{{int:49:75}}** ({{int:51:77}} total IP addresses, minus network and broadcast).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1809,
+            "completion_tokens": 463
+          },
+          "chars": 1468
+        }
+      ]
+    }
+  ]
+}

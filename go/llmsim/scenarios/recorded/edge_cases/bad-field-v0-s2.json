@@ -1,0 +1,44 @@
+{
+  "id": "edge_cases/bad-field/v0/s2",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:47:56Z",
+  "turns": [
+    {
+      "user_message": "Show me devices where the colour is blue.",
+      "steps": [
+        {
+          "reasoning": "The user wants \"devices where the colour is blue\". We need to determine which model includes a colour field. Probably NetworkDevice has a field like deviceInfo.colour or maybe a field in GpuDevice? Let's inspect models.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "NetworkDevice"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"id\",\"type\":\"string\"},{\"path\":\"equipmentinfo.vendor\",\"type\":\"string\"},{\"path\":\"equipmentinfo.model\",\"type\":\"string\"},{\"path\":\"equipmentinfo.series\",\"type\":\"string\"},{\"path\":\"equipmentinfo.sysName\",\"type\":\"string\"},{\"path\":\"equipmentinfo.ipAddress\",\"type\":\"string\"},{\"path\":\"equipmentinfo.serialNumber\",\"type\":\"string\"},{\"path\":\"equipmentinfo.version\",\"type\":\"string\"},{\"path\":\"equipmentinfo.firmwareVersion\",\"type\":\"string\"},{\"path\":\"equipmentinfo.location\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceType\",\"type\":\"string\"},{\"path\":\"equipmentinfo.deviceStatus\",\"type\":\"string\"},{\"path\":\"equipmentinfo.uptime\",\"type\":\"string\"},{\"path\":\"equipmentinfo.lastSeen\",\"type\":\"string\"},{\"path\":\"equipmentinfo.interfaceCount\",\"type\":\"int\"}],\"model\":\"NetworkDevice\",\"primaryKey\":\"id\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1796,
+            "completion_tokens": 75
+          },
+          "chars": 258
+        },
+        {
+          "reasoning": "We need to show devices where colour is blue. But looking at fields, there is no colour field. Maybe it's in another model? Could be in equipmentinfo? No colour. Could be a custom field not listed. The user asks for devices with colour blue; we must respond that no colour field exists in NetworkDevice. Ask clarification or suggest checking another model? Probably say can't find colour attribute.",
+          "text": "I’m not seeing a “colour” (or similar) field in the **NetworkDevice** model. The available fields for a network device are things like vendor, model, IP address, serial number, status, uptime, location, etc., but none that store a colour value.\n\nIf the colour information is kept in a different field or in another model (for example, a custom tag or an inventory record), could you let me know where it’s stored? Then I can query the appropriate data for you.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2033,
+            "completion_tokens": 194
+          },
+          "chars": 868
+        }
+      ]
+    }
+  ]
+}

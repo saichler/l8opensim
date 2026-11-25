@@ -1,0 +1,63 @@
+{
+  "id": "data_query/critical-alarms/v0/s1",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:38:22Z",
+  "turns": [
+    {
+      "user_message": "List the active critical alarms.",
+      "steps": [
+        {
+          "reasoning": "We need to list active critical alarms. Need to know Alarm model fields. Use describe_model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "Alarm"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"alarmId\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"description\",\"type\":\"string\"},{\"path\":\"state\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"nodeId\",\"type\":\"string\"},{\"path\":\"nodeName\",\"type\":\"string\"},{\"path\":\"location\",\"type\":\"string\"},{\"path\":\"firstOccurrence\",\"type\":\"int\"},{\"path\":\"lastOccurrence\",\"type\":\"int\"},{\"path\":\"occurrenceCount\",\"type\":\"int\"},{\"path\":\"isRootCause\",\"type\":\"bool\"},{\"path\":\"acknowledgedBy\",\"type\":\"string\"}],\"model\":\"Alarm\",\"primaryKey\":\"alarmId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1793,
+            "completion_tokens": 47
+          },
+          "chars": 123
+        },
+        {
+          "reasoning": "We need list active critical alarms. Fields include state, severity. Likely state = \"Active\" and severity = \"Critical\". We'll query count? They want list, so probably select * with filters and maybe limit. Use select * from Alarm where state=Active and severity=Critical limit {{int:80:120}}. Let's do that.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select * from Alarm where state=Active and severity=Critical limit 100"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"count\":5,\"model\":\"Alarm\",\"records\":[{\"acknowledgedBy\":\"\",\"alarmId\":\"alm-005\",\"description\":\"Threshold exceeded for 5 minutes\",\"firstOccurrence\":1795085691225,\"isRootCause\":false,\"lastOccurrence\":1795327371225,\"location\":\"Chicago\",\"name\":\"Node Not Ready\",\"nodeId\":\"nd-005\",\"nodeName\":\"core-rtr-05\",\"occurrenceCount\":19,\"severity\":\"SEVERITY_CRITICAL\",\"state\":\"ALARM_STATE_ACTIVE\"},{\"acknowledgedBy\":\"\",\"alarmId\":\"alm-011\",\"description\":\"Redundancy lost\",\"firstOccurrence\":1795436691225,\"isRootCause\":true,\"lastOccurrence\":1795028631225,\"location\":\"Houston\",\"name\":\"Memory Utilization High\",\"nodeId\":\"nd-011\",\"nodeName\":\"core-rtr-11\",\"occurrenceCount\":5,\"severity\":\"SEVERITY_CRITICAL\",\"state\":\"ALARM_STATE_ACTIVE\"},{\"acknowledgedBy\":\"operator1\",\"alarmId\":\"alm-015\",\"description\":\"Redundancy lost\",\"firstOccurrence\":1795207611225,\"isRootCause\":false,\"lastOccurrence\":1795471491225,\"location\":\"Seattle\",\"name\":\"Memory Utilization High\",\"nodeId\":\"nd-015\",\"nodeName\":\"core-rtr-15\",\"occurrenceCount\":7,\"severity\":\"SEVERITY_CRITICAL\",\"state\":\"ALARM_STATE_ACTIVE\"},{\"acknowledgedBy\":\"\",\"alarmId\":\"alm-019\",\"description\":\"Peer unreachable\",\"firstOccurrence\":1795511451225,\"isRootCause\":false,\"lastOccurrence\":1795453971225,\"location\":\"Seattle\",\"name\":\"Link Flapping\",\"nodeId\":\"nd-019\",\"nodeName\":\"core-rtr-19\",\"occurrenceCount\":30,\"severity\":\"SEVERITY_CRITICAL\",\"state\":\"ALARM_STATE_ACTIVE\"},{\"acknowledgedBy\":\"\",\"alarmId\":\"alm-029\",\"description\":\"Peer unreachable\",\"firstOccurrence\":1794981351225,\"isRootCause\":false,\"lastOccurrence\":1795095771225,\"location\":\"Chicago\",\"name\":\"BGP Session Down\",\"nodeId\":\"nd-029\",\"nodeName\":\"core-rtr-29\",\"occurrenceCount\":11,\"severity\":\"SEVERITY_CRITICAL\",\"state\":\"ALARM_STATE_ACTIVE\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1983,
+            "completion_tokens": 108
+          },
+          "chars": 385
+        },
+        {
+          "text": "Here are the active critical alarms (5 records).",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2512,
+            "completion_tokens": 14
+          },
+          "chars": 48
+        }
+      ]
+    }
+  ]
+}

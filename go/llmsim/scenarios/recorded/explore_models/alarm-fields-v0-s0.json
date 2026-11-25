@@ -1,0 +1,64 @@
+{
+  "id": "explore_models/alarm-fields/v0/s0",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:49:25Z",
+  "turns": [
+    {
+      "user_message": "What information do you have about alarms?",
+      "steps": [
+        {
+          "reasoning": "We need to answer about what information we have about alarms. Should first describe model fields. Use describe_model for Alarm.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "Alarm"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"alarmId\",\"type\":\"string\"},{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"description\",\"type\":\"string\"},{\"path\":\"state\",\"type\":\"string\"},{\"path\":\"severity\",\"type\":\"string\"},{\"path\":\"nodeId\",\"type\":\"string\"},{\"path\":\"nodeName\",\"type\":\"string\"},{\"path\":\"location\",\"type\":\"string\"},{\"path\":\"firstOccurrence\",\"type\":\"int\"},{\"path\":\"lastOccurrence\",\"type\":\"int\"},{\"path\":\"occurrenceCount\",\"type\":\"int\"},{\"path\":\"isRootCause\",\"type\":\"bool\"},{\"path\":\"acknowledgedBy\",\"type\":\"string\"}],\"model\":\"Alarm\",\"primaryKey\":\"alarmId\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1795,
+            "completion_tokens": 48
+          },
+          "chars": 159
+        },
+        {
+          "reasoning": "We need to answer user: \"What information do you have about alarms?\" Provide description of fields. Could also give count of alarms. Probably give summary: fields and maybe some aggregates like total number, count by severity, state. Let's first get count.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select count(*) from Alarm"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"count(*)\":30}],\"model\":\"Alarm\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1985,
+            "completion_tokens": 80
+          },
+          "chars": 301
+        },
+        {
+          "reasoning": "We need to answer user: \"What information do you have about alarms?\" We have field list and count {{int:24:36}}. Provide description of fields and count. Could also give sample? But we shouldn't fabricate. We can provide summary: total alarms, fields available. Maybe ask if they want more detail. Provide answer.",
+          "text": "I can work with the **Alarm** records in Probler.  \nHere’s a summary of what the model contains and how many alarms are currently stored:\n\n| Field | Type | Description |\n|-------|------|-------------|\n| **alarmId** | string | Unique identifier for the alarm (primary key) |\n| **name** | string | Short name or title of the alarm |\n| **description** | string | Detailed description of the condition that triggered the alarm |\n| **state** | string | Current state (e.g., `active`, `cleared`, `acknowledged`) |\n| **severity** | string | Severity level (e.g., `critical`, `major`, `minor`, `warning`) |\n| **nodeId** | string | Identifier of the node (device, server, etc.) where the alarm originated |\n| **nodeName** | string | Human‑readable name of that node |\n| **location** | string | Physical or logical location of the node |\n| **firstOccurrence** | int | Unix‑epoch timestamp of when the alarm first occurred |\n| **lastOccurrence** | int | Unix‑epoch timestamp of the most recent occurrence |\n| **occurrenceCount** | int | How many times this alarm has been raised |\n| **isRootCause** | bool | Whether this alarm is considered the root‑cause of other alarms |\n| **acknowledgedBy** | string | User ID of the person who acknowledged the alarm (if any) |\n\n**Total alarms in the system:** **{{int:24:36}}** (as of the latest query).\n\nIf you need any specific view—such as a count by severity, a list of active alarms, or a CSV export of particular fields—just let me know and I can run the appropriate query or generate a file for you.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2040,
+            "completion_tokens": 447
+          },
+          "chars": 1853
+        }
+      ]
+    }
+  ]
+}

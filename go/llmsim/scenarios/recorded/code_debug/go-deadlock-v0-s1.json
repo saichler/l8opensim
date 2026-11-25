@@ -1,0 +1,24 @@
+{
+  "id": "code_debug/go-deadlock/v0/s1",
+  "flavor": "code_debug",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T18:56:28Z",
+  "turns": [
+    {
+      "user_message": "fatal error: all goroutines are asleep - deadlock!\n```go\nfunc main() {\n    ch := make(chan int)\n    ch \u003c- 1\n    fmt.Println(\u003c-ch)\n}\n```\nWhy?",
+      "steps": [
+        {
+          "reasoning": "The user posted Go code causing deadlock. Need to explain why deadlock occurs: sending on unbuffered channel with no receiver leads to deadlock, goroutine (main) blocked. Also mention that main is only goroutine. Explain that need to receive before send, or use buffer, or use go routine.\n\nWe just need to answer, no tool usage.",
+          "text": "The program deadlocks because the **only** goroutine that exists (the `main` goroutine) tries to **send** a value on an unbuffered channel before any goroutine is ready to receive from that channel.\n\n```go\nch := make(chan int)   // unbuffered channel\nch \u003c- 1                // block here until a receiver is ready\nfmt.Println(\u003c-ch)      // never reached\n```\n\nIn Go, an unbuffered channel’s send operation (`ch \u003c- 1`) blocks until another goroutine performs a corresponding receive (`\u003c-ch`). Since `main` is the only goroutine running, it blocks on the send and never gets to the `fmt.Println` line, where the receive would have happened. Because there’s no other goroutine that can make the receive, the runtime detects that all goroutines are stuck and reports the fatal error:\n\n```\nfatal error: all goroutines are asleep - deadlock!\n```\n\n### How to fix it\n\n1. **Receive before sending** (or send in a separate goroutine):\n\n   ```go\n   func main() {\n       ch := make(chan int)\n       go func() {\n           ch \u003c- 1          // this runs in its own goroutine\n       }()\n       fmt.Println(\u003c-ch)   // now a receiver is ready, so the send can proceed\n   }\n   ```\n\n2. **Use a buffered channel** so the send can succeed without an immediate receiver:\n\n   ```go\n   func main() {\n       ch := make(chan int, 1) // buffer size 1\n       ch \u003c- 1                 // succeeds because there’s room in the buffer\n       fmt.Println(\u003c-ch)       // receive the value\n   }\n   ```\n\n3. **Swap the order** if you only need a single value:\n\n   ```go\n   func main() {\n       ch := make(chan int)\n       go func() {\n           fmt.Println(\u003c-ch) // receive first\n       }()\n       ch \u003c- 1              // then send\n   }\n   ```\n\nThe key point is that a send on an unbuffered channel must have a concurrent receiver; otherwise the program will deadlock.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1831,
+            "completion_tokens": 534
+          },
+          "chars": 2163
+        }
+      ]
+    }
+  ]
+}

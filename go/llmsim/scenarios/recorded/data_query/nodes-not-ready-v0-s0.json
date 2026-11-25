@@ -1,0 +1,64 @@
+{
+  "id": "data_query/nodes-not-ready/v0/s0",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:39:30Z",
+  "turns": [
+    {
+      "user_message": "Are any Kubernetes nodes not ready?",
+      "steps": [
+        {
+          "reasoning": "We need to check K8SNode model for readiness status. First describe_model for K8SNode.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SNode"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"roles\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"version\",\"type\":\"string\"},{\"path\":\"internalIp\",\"type\":\"string\"},{\"path\":\"osImage\",\"type\":\"string\"},{\"path\":\"kernelVersion\",\"type\":\"string\"},{\"path\":\"containerRuntime\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SNode\",\"primaryKey\":\"name\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 53
+          },
+          "chars": 119
+        },
+        {
+          "reasoning": "We need to answer: Are any Kubernetes nodes not ready? So we need to query K8SNode where status != \"Ready\". Use aggregate count. Let's do count of nodes where status != Ready.",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select count(*) from K8SNode where status!='Ready'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"count(*)\":0}],\"model\":\"K8SNode\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1952,
+            "completion_tokens": 78
+          },
+          "chars": 244
+        },
+        {
+          "reasoning": "We need to answer user: Are any Kubernetes nodes not ready? Query shows count(*) where status!='Ready' is 0. So none not ready. Provide answer.",
+          "text": "There are no Kubernetes nodes whose status is anything other than **Ready**. All nodes are currently in the Ready state.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2018,
+            "completion_tokens": 68
+          },
+          "chars": 263
+        }
+      ]
+    }
+  ]
+}

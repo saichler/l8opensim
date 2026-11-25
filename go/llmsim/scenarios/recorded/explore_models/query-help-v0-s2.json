@@ -1,0 +1,24 @@
+{
+  "id": "explore_models/query-help/v0/s2",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:53:06Z",
+  "turns": [
+    {
+      "user_message": "How do I ask you for counts and totals?",
+      "steps": [
+        {
+          "reasoning": "The user asks: \"How do I ask you for counts and totals?\" They want instruction on how to request counts and totals. I should explain that they can ask like \"How many GPU servers are there?\" and I will use count(*) etc. Provide examples of query syntax they can ask, but I should not use the tools now. Just explain.",
+          "text": "You can ask me for any kind of summary—how many records match a condition, the total of a numeric field, averages, minima/maxima, or grouped totals.  \nThe easiest way is to phrase the request in plain English, and I’ll translate it into an **L8Query** that uses the appropriate aggregate functions.\n\n### Typical phrasing\n\n| What you can ask for | How I’ll translate it |\n|----------------------|-----------------------|\n| **“How many …?”** (e.g., “How many GPU servers are active?”) | `select count(*) from GpuDevice where status='ACTIVE'` |\n| **“What’s the total …?”** (e.g., “What’s the total RAM across all servers?”) | `select sum(deviceInfo.memory.amount) from GpuDevice`  *(note: money‑type fields use the `.amount` sub‑field)* |\n| **“What’s the average …?”** (e.g., “Average GPU utilization?”) | `select avg(utilization.percent) from GpuDevice` |\n| **“What’s the minimum/maximum …?”** (e.g., “Oldest device uptime?”) | `select min(uptime.seconds) from NetworkDevice` |\n| **“Give me a breakdown by X.”** (e.g., “Count of alarms by severity”) | `select severity, count(*) from Alarm group-by severity` |\n| **“Sum of … grouped by ….”** (e.g., “Total storage used per Kubernetes cluster”) | `select clusterId, sum(storage.used.amount) from K8SCluster group-by clusterId` |\n\n### How to specify the model and fields\n\n1. **Identify the model** you’re interested in (e.g., `GpuDevice`, `NetworkDevice`, `Alarm`, `K8SCluster`, etc.).  \n2. **Mention any filter condition** you care about (status, location, date range, etc.).  \n3. **State the aggregate** you need: `count(*)`, `sum(field)`, `avg(field)`, `min(field)`, `max(field)`.  \n4. If you want results **grouped**, tell me the field to group by.\n\n### Example requests you can make\n\n- “How many network devices are currently *down*?”  \n- “What’s the total amount of **money** spent on purchases this month?”  \n- “Give me the average CPU temperature of all GPU servers.”  \n- “Show me the count of alarms per severity level.”  \n- “What’s the sum of storage used across all Kubernetes clusters?”\n\nJust write the question in natural language; I’ll handle the rest, run the query, and return the number (or a small table) for you. If you need the raw rows, let me know and I can export them as a CSV file.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1797,
+            "completion_tokens": 671
+          },
+          "chars": 2683
+        }
+      ]
+    }
+  ]
+}

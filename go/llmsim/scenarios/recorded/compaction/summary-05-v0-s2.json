@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-05/v0/s2",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:17:34Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\n\nNext part of the conversation:\nUser: Hi\n\nAssistant: Hello! How can I help?\n\nUser: Show me Cisco devices\n\nAssistant: There are 4 Cisco devices: core-rtr-01, core-rtr-10, core-rtr-14 and core-rtr-19, all online.\n\nUser: and Juniper?\n\nAssistant: 3 Juniper devices: core-rtr-02, core-rtr-11 and core-rtr-15; core-rtr-11 is in warning state.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary that replaces current. Keep facts: user wants to see Cisco devices, got list: core-rtr-01, core-rtr-10, core-rtr-14, core-rtr-19, all online. Then asked Juniper, got 3 devices: core-rtr-02, core-rtr-11, core-rtr-15; core-rtr-11 is in warning state. No further decisions, no IDs beyond names. No placeholders. So summary should list these facts. No greetings. Should drop the initial greeting. So final summary: Cisco devices list, Juniper devices list with warning status.",
+          "text": "Cisco devices: core-rtr-01, core-rtr-10, core-rtr-14, core-rtr-19 (all online).  \nJuniper devices: core-rtr-02, core-rtr-11, core-rtr-15; core-rtr-11 is in warning state.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 328,
+            "completion_tokens": 205
+          },
+          "chars": 673
+        }
+      ]
+    }
+  ]
+}

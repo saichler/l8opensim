@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-05/v0/s1",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:17:28Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\n\nNext part of the conversation:\nUser: Hi\n\nAssistant: Hello! How can I help?\n\nUser: Show me Cisco devices\n\nAssistant: There are 4 Cisco devices: core-rtr-01, core-rtr-10, core-rtr-14 and core-rtr-19, all online.\n\nUser: and Juniper?\n\nAssistant: 3 Juniper devices: core-rtr-02, core-rtr-11 and core-rtr-15; core-rtr-11 is in warning state.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to update summary: include facts from conversation: Cisco devices list, Juniper devices list with warning state.\n\nNo greetings. Keep facts: there are 4 Cisco devices: core-rtr-01, core-rtr-10, core-rtr-14, core-rtr-19, all online. Juniper: core-rtr-02, core-rtr-11, core-rtr-15; core-rtr-11 in warning state.\n\nNo other constraints. Provide new summary replacing current.",
+          "text": "Cisco devices (4): core-rtr-01, core-rtr-10, core-rtr-14, core-rtr-19 – all online.  \nJuniper devices (3): core-rtr-02, core-rtr-11, core-rtr-15 – core-rtr-11 is in warning state.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 328,
+            "completion_tokens": 180
+          },
+          "chars": 561
+        }
+      ]
+    }
+  ]
+}

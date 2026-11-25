@@ -1,0 +1,24 @@
+{
+  "id": "edge_cases/empty-ish/v0/s2",
+  "flavor": "edge_cases",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:47:45Z",
+  "turns": [
+    {
+      "user_message": "...",
+      "steps": [
+        {
+          "reasoning": "The user just sent \"...\". Likely they expect assistance but haven't specified a request. We need to ask clarification.",
+          "text": "It looks like your message may have been cut off. How can I help you today? Feel free to let me know what data you’d like to view, create, update, or analyze.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1788,
+            "completion_tokens": 72
+          },
+          "chars": 278
+        }
+      ]
+    }
+  ]
+}

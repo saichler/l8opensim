@@ -1,0 +1,24 @@
+{
+  "id": "writing/apology/v0/s2",
+  "flavor": "writing",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:53:36Z",
+  "turns": [
+    {
+      "user_message": "Write a polite email apologizing to a customer for a delayed hardware replacement.",
+      "steps": [
+        {
+          "reasoning": "The user just wants a polite email apologizing for delayed hardware replacement. No data needed. I can just write email text.",
+          "text": "Subject: Apology for Delay in Your Hardware Replacement  \n\nDear [Customer Name],\n\nI hope you are doing well. I am writing to sincerely apologize for the delay in delivering the replacement hardware you requested. We understand how important timely service is to your operations, and we regret any inconvenience this has caused.\n\nThe delay was due to an unexpected shortage in our inventory, which has now been resolved. Your replacement hardware has been prioritized and will be shipped to you by **[expected shipping date]**. We will provide you with the tracking information as soon as it is available.\n\nWe value your business and appreciate your patience throughout this process. If there is anything else we can do to assist you or if you have any further concerns, please do not hesitate to let us know.\n\nThank you for giving us the opportunity to make this right.\n\nWarm regards,\n\n[Your Name]  \n[Your Title]  \n[Your Company]  \n[Phone Number]  \n[Email Address]  ",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1802,
+            "completion_tokens": 229
+          },
+          "chars": 1091
+        }
+      ]
+    }
+  ]
+}

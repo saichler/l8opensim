@@ -1,0 +1,102 @@
+{
+  "flavor": "writing",
+  "mode": "tanto",
+  "validators": [],
+  "expect_tools": [],
+  "samples_per_variant": 3,
+  "variants_per_message": 1,
+  "muse_fraction": 0.1,
+  "messages": [
+    {
+      "id": "maintenance-email",
+      "params": {
+        "site": [
+          "Austin",
+          "Dallas",
+          "Seattle"
+        ]
+      },
+      "turns": [
+        "Write an email to the team announcing a network maintenance window in {{site}} this Saturday from 22:00 to 02:00."
+      ]
+    },
+    {
+      "id": "release-notes",
+      "params": {},
+      "turns": [
+        "Draft release notes for version 2.3 of our monitoring app: new GPU dashboard, faster alarm search, and a fix for CSV exports."
+      ]
+    },
+    {
+      "id": "status-update",
+      "params": {},
+      "turns": [
+        "Write a short weekly status update: migrated 3 clusters to Kubernetes 1.30, closed 14 tickets, one open incident with BGP in Dallas."
+      ]
+    },
+    {
+      "id": "incident-summary",
+      "params": {},
+      "turns": [
+        "Write an incident summary for customers about a 25-minute outage of the login service caused by an expired certificate."
+      ]
+    },
+    {
+      "id": "announcement",
+      "params": {},
+      "turns": [
+        "Draft an announcement introducing Tanto, our new AI assistant for the datacenter team."
+      ]
+    },
+    {
+      "id": "apology",
+      "params": {},
+      "turns": [
+        "Write a polite email apologizing to a customer for a delayed hardware replacement."
+      ]
+    },
+    {
+      "id": "job-post",
+      "params": {},
+      "turns": [
+        "Write a job post for a senior network engineer."
+      ]
+    },
+    {
+      "id": "runbook",
+      "params": {},
+      "turns": [
+        "Write a short runbook section for restarting a stuck polling target."
+      ]
+    },
+    {
+      "id": "blog",
+      "params": {},
+      "turns": [
+        "Write a short blog post on why we moved our GPU monitoring to DCGM."
+      ]
+    },
+    {
+      "id": "slack",
+      "params": {},
+      "turns": [
+        "Write a friendly Slack message reminding everyone to update their on-call availability."
+      ]
+    },
+    {
+      "id": "proposal",
+      "params": {},
+      "turns": [
+        "Write a one-page proposal to replace our aging core routers in two sites."
+      ]
+    },
+    {
+      "id": "email-followup",
+      "params": {},
+      "turns": [
+        "Write an email asking the vendor for a quote for 4 new switches.",
+        "Make it shorter and more formal."
+      ]
+    }
+  ]
+}

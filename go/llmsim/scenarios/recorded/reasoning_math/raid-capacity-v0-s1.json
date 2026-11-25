@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/raid-capacity/v0/s1",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:09:58Z",
+  "turns": [
+    {
+      "user_message": "Calculate how much usable space a RAID 6 array of 12 disks of 8 TB has, step by step.",
+      "steps": [
+        {
+          "reasoning": "The user wants a calculation, not data from the system. We can answer directly with explanation. No need to use tools. Provide step-by-step calculation.\n\nRAID 6 uses double parity, usable capacity = (N - 2) * size per disk. For {{int:9:15}} disks of 8 TB each =\u003e (12-2)={{int:8:12}} * 8TB = {{int:64:96}} TB usable. Also note that raw capacity = {{int:76:116}} TB. Also consider binary vs decimal TB? Provide steps.",
+          "text": "**Step‑by‑step calculation of usable space for a RAID 6 array with {{int:9:15}} × 8 TB disks**\n\n| Step | What we do | Reasoning / Formula |\n|------|------------|----------------------|\n| 1 | Identify the total number of disks (N) | N = {{int:9:15}} |\n| 2 | Identify the capacity of each disk | Each disk = 8 TB |\n| 3 | Compute the raw (un‑protected) capacity | Raw = N × disk size = {{int:9:15}} × 8 TB = **{{int:76:116}} TB** |\n| 4 | Determine RAID 6’s overhead | RAID 6 stores **two parity blocks** regardless of the number of disks. Those two “disks” of capacity are reserved for fault tolerance. |\n| 5 | Subtract the parity overhead | Usable disks = N − 2 = {{int:9:15}} − 2 = **{{int:8:12}}** disks worth of data |\n| 6 | Multiply the usable disk count by the per‑disk capacity | Usable capacity = (N − 2) × disk size = {{int:8:12}} × 8 TB = **{{int:64:96}} TB** |\n| 7 | (Optional) Express the result in other units | {{int:64:96}} TB = {{int:64:96}} × 1,024 GB = **81,920 GB** (if you use binary TB) or {{int:64:96}} × 1,000 GB = **80,000 GB** (decimal). |\n\n**Result**\n\n- **Raw capacity:** {{int:76:116}} TB  \n- **RAID 6 usable capacity:** **{{int:64:96}} TB** (≈ 81.9 TiB)\n\nSo, a RAID 6 array built from twelve 8 TB disks provides about **{{int:64:96}} terabytes of usable storage** after accounting for the double‑parity protection.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1811,
+            "completion_tokens": 500
+          },
+          "chars": 1684
+        }
+      ]
+    }
+  ]
+}

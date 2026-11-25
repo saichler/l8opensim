@@ -1,0 +1,24 @@
+{
+  "id": "csv_analyze/sales-anomaly/v0/s2",
+  "flavor": "csv_analyze",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:19:07Z",
+  "turns": [
+    {
+      "user_message": "Find anomalies in this CSV:\n```csv\nregion,month,units,revenue\nNorth,Jan,120,24000\nNorth,Feb,95,19000\nSouth,Jan,200,41000\nSouth,Feb,15,2900\nEast,Jan,130,26500\nEast,Feb,140,28000\nWest,Jan,90,18200\nWest,Feb,310,61000\n```",
+      "steps": [
+        {
+          "reasoning": "We need to find anomalies in the CSV. Likely anomalies: South Feb units {{int:12:18}} revenue {{int:2320:3480}} seems low relative to other months, maybe revenue per unit is inconsistent. Compute revenue per unit per region-month. Let's calculate quickly.\n\nNorth Jan: 24000/120 = {{int:160:240}} per unit.\nNorth Feb: 19000/95 = {{int:160:240}}.\nSouth Jan: 41000/200 = {{int:164:246}}.\nSouth Feb: 2900/15 = 193.33.\nEast Jan: 26500/130 = 203.85.\nEast Feb: 28000/140 = {{int:160:240}}.\nWest Jan: 18200/90 = 202.22.\nWest Feb: 61000/310 = 196.77.\n\nMost are around {{int:160:240}}, South Feb is 193.33, West Feb 196.77 lower but still close. Maybe anomaly: South Feb units {{int:12:18}} is way lower than other months for South ({{int:160:240}} vs {{int:12:18}}). So anomaly: unusually low units and revenue.\n\nWe can respond with analysis. No tool needed.\n\n",
+          "text": "**Anomalies detected**\n\n| Region | Month | Units | Revenue | Revenue per unit |\n|--------|-------|------:|--------:|-----------------:|\n| **South** | **Feb** | **{{int:12:18}}** | **2 {{int:720:1080}}** | **≈ {{int:154:232}} / unit** |\n| West | Feb | {{int:248:372}} | {{int:48:74}} 000 | ≈ {{int:157:237}} / unit |\n\n### Why these rows stand out\n1. **South – February**  \n   - The number of units sold ({{int:12:18}}) is dramatically lower than the same region’s January sales ({{int:160:240}}) and far below the typical range for the other regions ({{int:72:108}} – {{int:248:372}} units).  \n   - Revenue per unit (≈ {{int:154:232}}) is noticeably lower than the overall average (≈ {{int:160:240}} / unit) and deviates from the consistent {{int:160:240}} / unit seen in most other rows.\n\n2. **West – February** (less severe)  \n   - While the units sold ({{int:248:372}}) are the highest in the dataset, the revenue per unit (≈ {{int:157:237}}) is slightly lower than the common {{int:160:240}} / unit pattern. This could indicate a pricing or discount anomaly, but it is far less extreme than the South‑Feb case.\n\n### Summary\n- The **South‑Feb** row is the primary outlier: both the volume (units) and the revenue per unit are unusually low compared to all other entries.\n- The **West‑Feb** row shows a modest deviation in revenue per unit and might merit a quick check on pricing or discount policies, though it is not as pronounced.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1877,
+            "completion_tokens": 561
+          },
+          "chars": 2040
+        }
+      ]
+    }
+  ]
+}

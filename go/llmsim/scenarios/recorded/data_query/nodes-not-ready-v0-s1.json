@@ -1,0 +1,82 @@
+{
+  "id": "data_query/nodes-not-ready/v0/s1",
+  "flavor": "data_query",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:39:38Z",
+  "turns": [
+    {
+      "user_message": "Are any Kubernetes nodes not ready?",
+      "steps": [
+        {
+          "reasoning": "We need to answer: Are any Kubernetes nodes not ready? Use K8SNode model. Need to check status. First, list modules and describe K8SNode to know fields.",
+          "tool_calls": [
+            {
+              "name": "list_modules",
+              "arguments": {}
+            }
+          ],
+          "tool_results": [
+            "{\"models\":[{\"area\":\"Inventory\",\"model\":\"NetworkDevice\",\"primaryKey\":\"id\",\"service\":\"NetDev\"},{\"area\":\"Inventory\",\"model\":\"GpuDevice\",\"primaryKey\":\"id\",\"service\":\"GpuDev\"},{\"area\":\"Kubernetes\",\"model\":\"K8SCluster\",\"primaryKey\":\"name\",\"service\":\"K8sClstr\"},{\"area\":\"Kubernetes\",\"model\":\"K8SNode\",\"primaryKey\":\"name\",\"service\":\"K8sNode\"},{\"area\":\"Kubernetes\",\"model\":\"K8SPod\",\"primaryKey\":\"key\",\"service\":\"K8sPod\"},{\"area\":\"Kubernetes\",\"model\":\"K8SDeployment\",\"primaryKey\":\"key\",\"service\":\"K8sDeploy\"},{\"area\":\"Alarms\",\"model\":\"Alarm\",\"primaryKey\":\"alarmId\",\"service\":\"Alarm\"},{\"area\":\"Alarms\",\"model\":\"EventRecord\",\"primaryKey\":\"eventId\",\"service\":\"Events\"},{\"area\":\"Collection\",\"model\":\"L8PTarget\",\"primaryKey\":\"targetId\",\"service\":\"Targets\"}]}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 58
+          },
+          "chars": 166
+        },
+        {
+          "reasoning": "We need to answer: \"Are any Kubernetes nodes not ready?\" Need to query K8SNode model, find nodes where status not ready. Need to know field names; describe model.",
+          "tool_calls": [
+            {
+              "name": "describe_model",
+              "arguments": {
+                "model": "K8SNode"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"fields\":[{\"path\":\"name\",\"type\":\"string\"},{\"path\":\"status\",\"type\":\"string\"},{\"path\":\"roles\",\"type\":\"string\"},{\"path\":\"age\",\"type\":\"string\"},{\"path\":\"version\",\"type\":\"string\"},{\"path\":\"internalIp\",\"type\":\"string\"},{\"path\":\"osImage\",\"type\":\"string\"},{\"path\":\"kernelVersion\",\"type\":\"string\"},{\"path\":\"containerRuntime\",\"type\":\"string\"},{\"path\":\"clusterName\",\"type\":\"string\"}],\"model\":\"K8SNode\",\"primaryKey\":\"name\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2039,
+            "completion_tokens": 65
+          },
+          "chars": 195
+        },
+        {
+          "reasoning": "We need to answer: \"Are any Kubernetes nodes not ready?\" So we need to check nodes where status is not \"Ready\". Likely status field indicates readiness; maybe values like \"Ready\", \"NotReady\", etc. We need to query K8SNode where status != \"Ready\". Use count to see if any.\n\nWe need to use aggregate: select count(*) from K8SNode where status!='Ready'. L8Query syntax: where status!=Ready? Not sure about syntax. Usually conditions like status='Ready'. For inequality maybe status!='Ready' or status\u003c\u003eReady. We'll try status!='Ready'.\n\nWe'll use count(*).",
+          "tool_calls": [
+            {
+              "name": "l8query",
+              "arguments": {
+                "query": "select count(*) from K8SNode where status!='Ready'"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"aggregates\":[{\"count(*)\":0}],\"model\":\"K8SNode\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2197,
+            "completion_tokens": 167
+          },
+          "chars": 622
+        },
+        {
+          "reasoning": "We need to answer the user: \"Are any Kubernetes nodes not ready?\" The query shows count(*) of nodes where status != 'Ready' is 0. So no nodes not ready. We can answer accordingly.",
+          "text": "No – all Kubernetes nodes are in the “Ready” state.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 2263,
+            "completion_tokens": 66
+          },
+          "chars": 236
+        }
+      ]
+    }
+  ]
+}

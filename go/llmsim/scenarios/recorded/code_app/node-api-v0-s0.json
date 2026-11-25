@@ -1,0 +1,68 @@
+{
+  "id": "code_app/node-api/v0/s0",
+  "flavor": "code_app",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T18:48:14Z",
+  "params": {
+    "entity": [
+      "tasks",
+      "books",
+      "contacts",
+      "products",
+      "notes"
+    ]
+  },
+  "turns": [
+    {
+      "user_message": "Write a simple Express.js API for tasks with an in-memory store.",
+      "steps": [
+        {
+          "reasoning": "The user wants code: \"Write a simple Express.js API for {{p:entity}} with an in-memory store.\" This is a code generation request. No data queries needed. I should comply. Provide code snippet, maybe with endpoints: GET /{{p:entity}}, POST /{{p:entity}}, GET /{{p:entity}}/:id, PUT /{{p:entity}}/:id, DELETE /{{p:entity}}/:id. Use in-memory array. Provide simple Express server.\n\nWill respond with a code block.",
+          "text": "Here’s a minimal **Express .js** API for managing a list of {{p:entity}} using an in‑memory store.  \nIt supports the usual CRUD operations:\n\n| Method | Path | Description |\n|--------|------|-------------|\n| `GET`    | `/{{p:entity}}`            | Return all {{p:entity}} |\n| `GET`    | `/{{p:entity}}/:id`        | Return a single task |\n| `POST`   | `/{{p:entity}}`            | Create a new task |\n| `PUT`    | `/{{p:entity}}/:id`        | Update an existing task |\n| `DELETE` | `/{{p:entity}}/:id`        | Delete a task |\n\n```js\n// server.js\nconst express = require('express');\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\n// Middleware to parse JSON bodies\napp.use(express.json());\n\n// In‑memory store\nlet {{p:entity}} = [];           // Array of task objects\nlet nextId = 1;           // Simple auto‑incrementing ID\n\n// ----- Helper -----\nfunction findTask(id) {\n  return {{p:entity}}.find(t =\u003e t.id === id);\n}\n\n// ----- Routes -----\n\n// GET /{{p:entity}} – list all {{p:entity}}\napp.get('/{{p:entity}}', (req, res) =\u003e {\n  res.json({{p:entity}});\n});\n\n// GET /{{p:entity}}/:id – get a single task\napp.get('/{{p:entity}}/:id', (req, res) =\u003e {\n  const id = parseInt(req.params.id, 10);\n  const task = findTask(id);\n  if (!task) {\n    return res.status(404).json({ error: 'Task not found' });\n  }\n  res.json(task);\n});\n\n// POST /{{p:entity}} – create a new task\napp.post('/{{p:entity}}', (req, res) =\u003e {\n  const { title, description, completed = false } = req.body;\n\n  if (!title) {\n    return res.status(400).json({ error: 'Title is required' });\n  }\n\n  const newTask = {\n    id: nextId++,\n    title,\n    description: description || '',\n    completed: Boolean(completed),\n    createdAt: new Date().toISOString(),\n    updatedAt: new Date().toISOString(),\n  };\n\n  {{p:entity}}.push(newTask);\n  res.status(201).json(newTask);\n});\n\n// PUT /{{p:entity}}/:id – update an existing task\napp.put('/{{p:entity}}/:id', (req, res) =\u003e {\n  const id = parseInt(req.params.id, 10);\n  const task = findTask(id);\n  if (!task) {\n    return res.status(404).json({ error: 'Task not found' });\n  }\n\n  const { title, description, completed } = req.body;\n\n  if (title !== undefined) task.title = title;\n  if (description !== undefined) task.description = description;\n  if (completed !== undefined) task.completed = Boolean(completed);\n  task.updatedAt = new Date().toISOString();\n\n  res.json(task);\n});\n\n// DELETE /{{p:entity}}/:id – remove a task\napp.delete('/{{p:entity}}/:id', (req, res) =\u003e {\n  const id = parseInt(req.params.id, 10);\n  const index = {{p:entity}}.findIndex(t =\u003e t.id === id);\n  if (index === -1) {\n    return res.status(404).json({ error: 'Task not found' });\n  }\n\n  const deleted = {{p:entity}}.splice(index, 1)[0];\n  res.json({ message: 'Task deleted', task: deleted });\n});\n\n// ----- Start server -----\napp.listen(PORT, () =\u003e {\n  console.log(`Task API listening on http://localhost:${PORT}`);\n});\n```\n\n### How to run it\n\n1. **Create a project folder** and initialise npm:\n\n   ```bash\n   mkdir task-api \u0026\u0026 cd task-api\n   npm init -y\n   ```\n\n2. **Install Express**:\n\n   ```bash\n   npm install express\n   ```\n\n3. **Save the code** above into a file named `server.js`.\n\n4. **Start the server**:\n\n   ```bash\n   node server.js\n   ```\n\n5. The API will be reachable at `http://localhost:3000`. You can test it with `curl`, Postman, or any HTTP client, e.g.:\n\n   ```bash\n   # Create a task\n   curl -X POST -H \"Content-Type: application/json\" \\\n        -d '{\"title\":\"Buy groceries\",\"description\":\"Milk, eggs, bread\"}' \\\n        http://localhost:3000/{{p:entity}}\n\n   # List all {{p:entity}}\n   curl http://localhost:3000/{{p:entity}}\n   ```\n\nSince the store is **in‑memory**, all data is lost when the server restarts—perfect for quick demos or prototyping. Feel free to expand it (validation, pagination, etc.) as needed!",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1801,
+            "completion_tokens": 1077
+          },
+          "chars": 4037
+        }
+      ]
+    },
+    {
+      "user_message": "Add a Dockerfile for it.",
+      "steps": [
+        {
+          "reasoning": "We need to provide a Dockerfile for the Express app. Provide Dockerfile content, maybe with node base image, copy files, npm install, expose port, CMD. Also maybe .dockerignore. Provide as text file attached via create_file. Use create_file tool.",
+          "tool_calls": [
+            {
+              "name": "create_file",
+              "arguments": {
+                "content": "# Dockerfile for the in‑memory task API\n# Use an official lightweight Node runtime as a parent image\nFROM node:20-alpine\n\n# Set working directory inside the container\nWORKDIR /app\n\n# Copy only package files first (if you have a package.json)\n# In this minimal example we install only Express directly.\n# If you later add a package.json, the same Dockerfile works.\nCOPY package*.json ./\n\n# Install dependencies (Express). If no package.json exists, install directly.\nRUN if [ -f package.json ]; then npm ci --only=production; else npm install express@latest --production; fi\n\n# Copy the rest of the application source code\nCOPY . .\n\n# Expose the port the app runs on (default {{int:2400:3600}})\nEXPOSE {{int:2400:3600}}\n\n# Define environment variable for production (optional)\nENV NODE_ENV=production\n\n# Start the server\nCMD [\"node\", \"server.js\"]\n",
+                "file_name": "Dockerfile"
+              }
+            }
+          ],
+          "tool_results": [
+            "{\"attached\":true,\"bytes\":822,\"file_name\":\"Dockerfile\"}"
+          ],
+          "finish_reason": "tool_calls",
+          "usage": {
+            "prompt_tokens": 2798,
+            "completion_tokens": 302
+          },
+          "chars": 1148
+        },
+        {
+          "text": "Here’s a **Dockerfile** you can place next to `server.js` (and `package.json` if you add one later). Build the image with `docker build -t task-api .` and run it with `docker run -p 3000:3000 task-api`.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 3064,
+            "completion_tokens": 63
+          },
+          "chars": 204
+        }
+      ]
+    }
+  ]
+}

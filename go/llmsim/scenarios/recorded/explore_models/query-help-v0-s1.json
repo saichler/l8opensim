@@ -1,0 +1,24 @@
+{
+  "id": "explore_models/query-help/v0/s1",
+  "flavor": "explore_models",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:52:15Z",
+  "turns": [
+    {
+      "user_message": "How do I ask you for counts and totals?",
+      "steps": [
+        {
+          "reasoning": "The user asks: \"How do I ask you for counts and totals?\" They want instructions on how to request counts and totals. We need to explain how to phrase queries: use L8Query with aggregates like count(*), sum(field.amount) etc. Also mention we need to use describe_model first to know field names. Provide examples. Should not use tools. Just explain.",
+          "text": "Sure! When you want a **count** or a **total** (or any other aggregate) you should ask me to run an **L8Query** that uses aggregate functions instead of pulling individual rows.  \n\n### General pattern  \n\n```\nselect \u003caggregate‑list\u003e from \u003cModel\u003e\n    [where \u003cconditions\u003e]\n    [group‑by \u003cfield1\u003e, \u003cfield2\u003e, …]\n    [sort‑by \u003cfield\u003e [descending]]\n```\n\n* **`\u003caggregate‑list\u003e`** can be one or more of the following:\n  * `count(*)` – number of matching records  \n  * `sum(\u003cfield\u003e)` – sum of a numeric field  \n  * `avg(\u003cfield\u003e)` – average of a numeric field  \n  * `min(\u003cfield\u003e)` – smallest value  \n  * `max(\u003cfield\u003e)` – largest value  \n\n* If you need a **total of a money field**, remember that money is stored as an object with an `amount` (cents) and a `currencyCode`. You should aggregate on the **`.amount`** sub‑field, e.g.:\n\n  ```text\n  sum(totalAmount.amount)\n  ```\n\n* **`group‑by`** lets you break the totals down by another column (e.g. status, vendor, etc.).  \n\n### How to ask me\n\nJust phrase your request in plain English and I’ll translate it into the appropriate L8Query. Here are some common examples:\n\n| What you want | How to ask me |\n|---------------|---------------|\n| **Total number of GPU servers** | “Give me the count of GpuDevice records.” |\n| **How many network devices are in each status** | “Show a count of NetworkDevice grouped by status.” |\n| **Total amount of storage across all clusters** | “What’s the sum of the `storageCapacity.amount` field for K8SCluster?” |\n| **Average CPU utilization for all GPU servers** | “What’s the average of `deviceInfo.cpuUtilization` in GpuDevice?” |\n| **Total cost of all alarms (money field)** | “Give me the sum of `cost.amount` for Alarm records.” |\n| **Number of pods per namespace** | “Count K8SPod records grouped by `namespace`.” |\n\n### Steps I’ll take behind the scenes\n\n1. **(Optional) Look up the model’s fields** – I may call `describe_model` so I use the correct field names.  \n2. **Run the L8Query** – using the `functions.l8query` tool with the aggregates you need.  \n3. **Return the result** – I’ll present the numbers directly (e.g. “There are {{int:33:51}} GPU servers” or “Total storage = 3 {{int:160:240}} TB”).  \n\n### Things to keep in mind\n\n* **No need for `SELECT *`** when you only want aggregates; just specify the aggregate functions.  \n* **Limit** is not used with aggregates; the query returns a single row (or one row per group).  \n* **Money tokens** (e.g. `[MONEY_AB12CD]`) are preserved exactly as they appear; I’ll report them unchanged.  \n\nFeel free to ask for any count, sum, average, min, max, or grouped total, and I’ll handle the query for you!",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1797,
+            "completion_tokens": 779
+          },
+          "chars": 3048
+        }
+      ]
+    }
+  ]
+}

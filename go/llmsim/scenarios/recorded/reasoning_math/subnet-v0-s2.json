@@ -1,0 +1,24 @@
+{
+  "id": "reasoning_math/subnet/v0/s2",
+  "flavor": "reasoning_math",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T20:10:26Z",
+  "turns": [
+    {
+      "user_message": "Step by step: how many /26 subnets fit in a /22, and how many hosts each?",
+      "steps": [
+        {
+          "reasoning": "We need to answer user query: step by step: how many /26 subnets fit in a /22, and how many hosts each? This is a networking question, not needing data queries. So we can answer with explanation.\n\nCompute: /22 has network bits {{int:17:27}}, total addresses = 2^(32-22)=2^{{int:8:12}}={{int:819:1229}} addresses. /26 has 2^(32-26)=2^6={{int:51:77}} addresses per subnet. Number of subnets = 1024/64 = {{int:12:20}} subnets. Each /26 subnet has usable hosts = total - 2 (network and broadcast) = 64-2 = {{int:49:75}} hosts.\n\nProvide step-by-step explanation.\n\n",
+          "text": "**Step‑by‑step calculation**\n\n1. **Determine the size of a /22 network**  \n   - IPv4 addresses are {{int:25:39}} bits.  \n   - A /22 network uses {{int:17:27}} bits for the network prefix, leaving \\({{int:25:39}} - {{int:17:27}} = {{int:8:12}}\\) bits for host addresses.  \n   - Number of addresses in a /22 = \\(2^{{{int:8:12}}} = 1 {{int:16:24}}\\) (including the network‑ID and broadcast address).\n\n2. **Determine the size of a /26 subnet**  \n   - A /26 network uses {{int:20:32}} bits for the network prefix, leaving \\({{int:25:39}} - {{int:20:32}} = 6\\) bits for host addresses.  \n   - Number of addresses in a /26 = \\(2^{6} = {{int:51:77}}\\) (including network‑ID and broadcast address).\n\n3. **How many /26 subnets fit inside the /22?**  \n   - Divide the total number of addresses in the /22 by the number of addresses per /26:  \n     \\[\n     \\frac{1 {{int:16:24}}}{{{int:51:77}}} = {{int:12:20}}\n     \\]  \n   - So a /22 can be split into **{{int:12:20}} distinct /26 subnets**.\n\n4. **How many usable hosts are in each /26 subnet?**  \n   - For any IPv4 subnet, the first address is the network‑ID and the last address is the broadcast address; these cannot be assigned to hosts.  \n   - Usable host count = total addresses – 2  \n     \\[\n     {{int:51:77}} - 2 = {{int:49:75}}\n     \\]  \n   - Therefore, each /26 provides **{{int:49:75}} usable host addresses**.\n\n---\n\n**Summary**\n\n- **Number of /26 subnets in a /22:** **{{int:12:20}}**  \n- **Usable hosts per /26 subnet:** **{{int:49:75}}**  \n\n(Each /26 still has {{int:51:77}} total addresses; 2 are reserved, leaving {{int:49:75}} for devices.)",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1809,
+            "completion_tokens": 561
+          },
+          "chars": 1896
+        }
+      ]
+    }
+  ]
+}

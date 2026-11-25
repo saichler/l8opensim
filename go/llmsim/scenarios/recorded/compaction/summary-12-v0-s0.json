@@ -1,0 +1,24 @@
+{
+  "id": "compaction/summary-12/v0/s0",
+  "flavor": "compaction",
+  "model": "gpt-oss-120b",
+  "quality": "ok",
+  "recorded_at": "2026-11-24T19:18:40Z",
+  "turns": [
+    {
+      "user_message": "Current summary:\n\nNext part of the conversation:\nUser: @web what is the latest Kubernetes release?\n\nAssistant: Kubernetes v1.31 is the latest release according to kubernetes.io.\n\nUser: Are our clusters up to date?\n\nAssistant: Only staging runs v1.31.1; prod-east and prod-west are behind.\n\n",
+      "steps": [
+        {
+          "reasoning": "We need to produce new summary that replaces current one. The current summary is empty? Actually \"Current summary:\" is blank. We need to produce summary containing facts: user asked about latest Kubernetes release; assistant responded v1.31 latest. Then user asked if clusters up to date; assistant said only staging runs v1.31.1; prod-east and prod-west are behind. So summary should include these facts. Also maybe mention that staging runs v1.31.1 (which is presumably newer than v1.31). Keep entities: clusters \"staging\", \"prod-east\", \"prod-west\". No IDs. No L8Query. So final summary should list these facts.",
+          "text": "- Latest Kubernetes release is v1.31 (per kubernetes.io).  \n- Cluster versions:  \n  - **staging** runs v1.31.1 (up‑to‑date).  \n  - **prod-east** is behind the latest release.  \n  - **prod-west** is behind the latest release.",
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 288,
+            "completion_tokens": 217
+          },
+          "chars": 841
+        }
+      ]
+    }
+  ]
+}
