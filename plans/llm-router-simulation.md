@@ -540,7 +540,7 @@ active profile (for example `sk-sim-tanto-1`). Wrong or missing key → 401, unl
 ```bash
 curl http://<host>:9080/v1/chat/completions -H "Authorization: Bearer sk-sim-tanto-1" \
   -H "Content-Type: application/json" \
-  -d '{"model":"gpt-oss-120b","messages":[{"role":"user","content":"Write a simple TODO REST API in Go"}]}'
+  -d '{"model":"gpt-oss-120b","messages":[{"role":"user","content":"Write a Go program that counts lines, words and characters in files, like wc."}]}'
 
 curl http://<host>:9080/v1/messages -H "x-api-key: sk-sim-tanto-2" -H "anthropic-version: 2023-06-01" \
   -H "Content-Type: application/json" \
